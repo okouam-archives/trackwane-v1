@@ -1,0 +1,13 @@
+Devices list | <%= link_to('pdf format', { :action => 'pdf'}) %>
+<table>
+  <tr>
+    <th> Compte </th>
+    <th> Equipement </th>
+  </tr>
+<% @devices.each do |device| %>
+  <tr>
+    <th> <%= device.accountID %></th>
+    <th> <%= device.deviceID %></th>
+  </tr>
+<% end %>
+</table>

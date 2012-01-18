@@ -1,0 +1,22 @@
+development: &development
+  adapter: jdbcmysql
+  database: gts
+  host: localhost
+  pool: 5
+  username: root
+  password: diampro7
+  timeout: 5000
+  encoding: utf8
+  min_messages: warning
+
+test:
+  <<: *development
+  database: gts
+
+production:
+  <<: *development
+  host: galileo.codeifier.com
+  database: gts
+  username: deployment
+  password: FireDrake[1981]
+  
