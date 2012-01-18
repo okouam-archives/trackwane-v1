@@ -4,6 +4,7 @@ Gowane::Application.routes.draw do
   match '/device' => 'device#index'
   match '/device/index' => 'device#index'
   match '/device/pdf' => 'device#pdf'
+  match '/device/xls' => 'device#xls'
   
 
   # The priority is based upon order of creation:

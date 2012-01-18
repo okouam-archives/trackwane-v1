@@ -5,14 +5,22 @@ include ExcelHelper
 class DeviceController < ApplicationController
 	 
 	  def index
+       @devices = Device.find :all        
+	  end
+	  
+	  def xls
 	    @devices = Device.find :all
+	    filename = params[:controller] + ".xls"
+       send_data toXls(@devices), :filename => filename,:type => "application/vnd.ms-" + "excel"
 	  end
 	  
 	  layout "pdf"
 	  
 	  def pdf
 	    @devices = Device.find :all
-	    render_pdf("device.pdf")
+	    @filename = params[:controller] + ".pdf"
+	    #render_pdf("device.pdf")
+	    render_pdf(@filename)
 	  end
 	 
 	  private
