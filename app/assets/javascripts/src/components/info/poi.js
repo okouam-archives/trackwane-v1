@@ -1,7 +1,7 @@
 Gowane.Components.Info.Poi =
 {
   xtype: 'form',
-  collapsible: true,
+  collapsible: false,
   title: "24h Chrono",
   bodyStyle: 'padding: 5px',
   width: '100%',

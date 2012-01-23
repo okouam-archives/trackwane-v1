@@ -33,18 +33,18 @@
     <orderEntry type="library" scope="PROVIDED" name="activeresource (v3.1.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jruby-rack (v1.1.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass-rails (v3.1.5, RVM: jruby-1.6.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rgeo (v0.3.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jruby-jars (v1.6.5.1, RVM: jruby-1.6.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rgeo (v0.3.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activemodel (v3.1.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionpack (v3.1.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v3.1.3, RVM: jruby-1.6.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="jruby-openssl (v0.7.4, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v1.3.3, RVM: jruby-1.6.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jruby-openssl (v0.7.4, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jquery-rails (v1.0.19, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v0.3.31, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.10, RVM: jruby-1.6.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="database_cleaner (v0.7.1, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v1.3.6, RVM: jruby-1.6.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="database_cleaner (v0.7.1, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.14.6, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="polyglot (v0.3.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="warbler (v1.3.2, RVM: jruby-1.6.4) [gem]" level="application" />
@@ -53,12 +53,12 @@
     <orderEntry type="library" scope="PROVIDED" name="json (v1.6.5, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionmailer (v3.1.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jdbc-mysql (v5.1.13, RVM: jruby-1.6.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sprockets (v2.0.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass (v3.1.12, RVM: jruby-1.6.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sprockets (v2.0.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="execjs (v1.2.13, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.0.21, RVM: jruby-1.6.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="haml (v3.1.4, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.0.0, RVM: jruby-1.6.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="haml (v3.1.4, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v2.2.1, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hike (v1.2.1, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="trinidad (v1.3.2, RVM: jruby-1.6.4) [gem]" level="application" />
@@ -70,8 +70,8 @@
     <orderEntry type="library" scope="PROVIDED" name="activerecord-jdbcmysql-adapter (v1.2.1, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-mount (v0.8.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bouncy-castle-java (v1.5.0146.1, RVM: jruby-1.6.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rails (v3.1.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubyzip (v0.9.5, RVM: jruby-1.6.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rails (v3.1.3, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v0.6.1, RVM: jruby-1.6.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rgeo-geojson (v0.2.2, RVM: jruby-1.6.4) [gem]" level="application" />
   </component>

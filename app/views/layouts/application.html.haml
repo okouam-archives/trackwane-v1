@@ -12,32 +12,29 @@
       %ul
         %li.root
           %a{:href => "#"} Cartes
-          %ul.submenu{:style=>"width: 600px"}
+          %ul.submenu{:style=>"width: 500px"}
             %li= link_to "Temps Réel", "/map/realtime"
             %li.odd= link_to "Historique", "/map/historical"
-            %li= link_to "Geofences", "/map/geofences"
-            %li.odd= link_to "Points of Interest", "/map/pois"
+            %li.odd= link_to "Geofences", "/map/geofences"
+            %li= link_to "Points of Interest", "/map/pois"
         %li.root
           %a{:href => "#"} Rapports
           %ul.submenu{:style=>"width: 500px"}
             %li
               %a{:href=>"#"} Rapport GPS
-            %li
+            %li.odd
               %a{:href=>"#"} Rapport de distance
-            %li
+            %li.odd
               %a{:href=>"#"} Trip Report
             %li
-              %a{:href=>"#"} Rapport d'arrêt
-            %li
+              = link_to "Rapport d'arrêt", "/reports/stop"
+            %li.odd
               %a{:href=>"#"} Rapport de vitesse
         %li.root
           %a{:href => "#"} Administration
           %ul.submenu{:style=>"width: 500px"}
             %li= link_to "Accounts", accounts_path
-            %li= link_to "Devices", devices_path
-            %li= link_to "Drivers", drivers_path
-            %li
-              %a{:href=>"#"} Preferences
+            %li.odd= link_to "Devices", devices_path
     #account-info
       Logout
     .clear

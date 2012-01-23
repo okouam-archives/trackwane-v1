@@ -12,7 +12,7 @@ class MapController < ApplicationController
 
   end
 
-  def poi
+  def pois
 
   end
 

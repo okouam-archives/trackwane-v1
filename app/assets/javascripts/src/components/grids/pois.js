@@ -28,7 +28,7 @@ Gowane.Components.Grids.Pois =
 {
   xtype: 'grid',
   flex: 1,
-  collapsible: true,
+  collapsible: false,
   stripeRows: true,
   title: "Points of Interest",
   selModel: selModel,

@@ -7,17 +7,27 @@
           region: 'north', height : 28, contentEl: "header", id: "ext-header"
         },
         {
-          region : 'center',
+          region : 'east', width: 400, split: true,
           layout: {
             type: 'vbox',
             align: 'stretch'
           },
           layoutConfig: {pack: 'start'}, items: [
-            Gowane.Components.Grids.Accounts
+            Gowane.Components.Info.ReportBuilder, Gowane.Components.Lists.Devices
           ]
+        },
+        {
+          region: 'center',
+          layout: {
+            type: 'vbox',
+            align: 'stretch'
+          },
+          layoutConfig: {pack: 'start'},
+          items: [Gowane.Components.Lists.StopReport, Gowane.Components.Charts.StopReport]
         }
       ]
     });
     $("#ext-header .x-panel-bwrap").css("overflow", "visible");
     $("#ext-header .x-panel-bwrap .x-panel-body").css("overflow", "visible");
+    new Gowane.Views.Map({el: "#map"});
   });

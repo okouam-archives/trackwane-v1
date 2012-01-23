@@ -2,12 +2,14 @@ Gowane::Application.routes.draw do
 
   match 'map/realtime' => 'map#realtime'
   match 'map/historical' => 'map#historical'
-  match 'map/poi' => 'map#poi'
+  match 'map/pois' => 'map#pois'
   match 'map/geofences' => 'map#geofences'
 
-  resources :accounts, :drivers, :reports
+  match 'reports/stop' => 'reports#stop'
 
-  resource :devices do
+  resources :accounts, :drivers
+
+  resources :devices do
     collection do
       get :pdf, :xls
     end

@@ -5,14 +5,14 @@
     new Ext.Viewport({
       layout : 'border',
         items : [
-        {height : 30, region : 'north', contentEl: "header", id: "ext-header"},
+        {height : 28, region : 'north', contentEl: "header", id: "ext-header"},
         {region : 'west', width: 900, contentEl: "map", split: true},
         {
           xtype: 'panel',
           region: 'center',
           layout: 'vbox',
           layoutConfig: {pack: 'start'},
-          items: [Gowane.Components.Grids.Devices, Gowane.Components.Info.Device]
+          items: [Gowane.Components.Lists.Devices, Gowane.Components.Info.Device]
         }
       ]
     });

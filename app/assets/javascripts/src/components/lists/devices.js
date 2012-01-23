@@ -15,7 +15,6 @@ var store = new Ext.data.ArrayStore({
 var colModel = new Ext.grid.ColumnModel({
   columns: [
     {header : 'ID', sortable : true, dataIndex : 'id', width: 45},
-    {header : 'Account', sortable : true, dataIndex : 'id', width: 45},
     {header : 'Description', dataIndex : 'description'}
   ],
   defaults: {
@@ -31,20 +30,16 @@ var selModel = new Ext.grid.CheckboxSelectionModel({
   singleSelect : true
 });
 
-Gowane.Components.Grids.Devices = new Ext.grid.EditorGridPanel({
+Gowane.Components.Lists.Devices =
+{
   xtype: 'grid',
   autoExpandColumn: 1,
-  clicksToEdit: 1,
   flex: 1,
   collapsible: false,
   stripeRows: true,
-  title: "Devices",
+  title: "Véhicules",
   selModel: selModel,
   colModel: colModel,
   store: store,
-  view: gridView,
-  tbar: [
-    {text: 'Add device'},
-    {text: 'Remove device'}
-  ]
-});
+  view: gridView
+};
