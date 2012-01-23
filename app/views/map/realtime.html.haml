@@ -1,0 +1,22 @@
+#map{:style=>"height: 100%; width: 100%; border-top: 1px solid #edf1f2"}
+
+:javascript
+  $(function() {
+    new Ext.Viewport({
+      layout : 'border',
+        items : [
+        {height : 30, region : 'north', contentEl: "header", id: "ext-header"},
+        {region : 'west', width: 900, contentEl: "map", split: true},
+        {
+          xtype: 'panel',
+          region: 'center',
+          layout: 'vbox',
+          layoutConfig: {pack: 'start'},
+          items: [Gowane.Components.Grids.Devices, Gowane.Components.Info.Device]
+        }
+      ]
+    });
+    $("#ext-header .x-panel-bwrap").css("overflow", "visible");
+    $("#ext-header .x-panel-bwrap .x-panel-body").css("overflow", "visible");
+    new Gowane.Views.Map({el: "#map"});
+  });

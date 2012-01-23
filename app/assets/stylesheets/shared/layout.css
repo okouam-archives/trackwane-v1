@@ -1,0 +1,22 @@
+body {font-family: Arial, serif; font-size: 12px; color: #434343}
+.clear {clear: both}
+
+#header {width: 100%; background-color: #2D2D2D}
+#header .logo {color: white; float: left; margin-right: 100px; margin-top: 7px; margin-left: 10px}
+#header li {float: left}
+#header .root {padding: 7px 5px; margin-left: 20px}
+#header a {text-decoration: none}
+#header .root > a {color: white}
+#header ul > li {color: white; font-weight: bold}
+#header ul li {position: relative}
+#header ul ul {position: absolute; top: 28px; z-index: 9999999999; left: -40px}
+#header ul li:hover ul {display: block}
+#header ul li:hover ul li:hover {background-color: #E5E5E5}
+#header ul li:hover {background-color: white}
+#header ul li:hover a {color: #434343}
+#header ul li ul {display: none}
+#header ul ul li {background-color: white; float: left; display: block; width: 130px;
+  padding: 10px 5px; border: 1px solid #cad6d9; border-top-width: 0}
+#header ul ul li.odd {border-left-width: 0}
+#header ul ul li a {color: #434343; font-size: 11px; margin-left: 10px}
+#account-info {float: right; color: white; margin-right: 20px; margin-top: 7px}

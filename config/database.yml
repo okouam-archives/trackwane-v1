@@ -3,8 +3,8 @@ development: &development
   database: gts
   host: localhost
   pool: 5
-  username: root
-  password: diampro7
+  username: gts
+  password: gts
   timeout: 5000
   encoding: utf8
   min_messages: warning

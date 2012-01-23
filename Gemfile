@@ -9,9 +9,11 @@ gem 'json'
 gem 'jquery-rails'
 gem 'rgeo-activerecord'
 gem 'rgeo-geojson'
+gem 'trinidad'
 gem 'database_cleaner'
 gem 'flying_saucer'
 gem 'warbler'
+gem 'haml'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'

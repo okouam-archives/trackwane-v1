@@ -1,11 +1,19 @@
 Gowane::Application.routes.draw do
 
-  match '/' => 'device#index'
-  match '/device' => 'device#index'
-  match '/device/index' => 'device#index'
-  match '/device/pdf' => 'device#pdf'
-  match '/device/xls' => 'device#xls'
-  
+  match 'map/realtime' => 'map#realtime'
+  match 'map/historical' => 'map#historical'
+  match 'map/poi' => 'map#poi'
+  match 'map/geofences' => 'map#geofences'
+
+  resources :accounts, :drivers, :reports
+
+  resource :devices do
+    collection do
+      get :pdf, :xls
+    end
+  end
+
+  root :to => 'devices#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
