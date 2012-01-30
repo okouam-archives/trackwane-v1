@@ -7,7 +7,7 @@ Gowane::Application.routes.draw do
 
   match 'reports/stop' => 'reports#stop'
 
-  resources :accounts, :drivers
+  resources :accounts, :drivers, :user_sessions, :users, :places
 
   resources :devices do
     collection do

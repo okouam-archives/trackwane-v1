@@ -1,3 +1,3 @@
-class Account
+class Account < ActiveRecord::Base
 
 end

@@ -1,19 +1,15 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
-gem 'jruby-openssl'
-gem 'jruby-rack'
-gem 'warbler'
-gem 'activerecord-jdbcmysql-adapter'
+gem 'pg'
 gem 'json'
+gem 'authlogic'
 gem 'jquery-rails'
 gem 'rgeo-activerecord'
 gem 'rgeo-geojson'
-gem 'trinidad'
 gem 'database_cleaner'
-gem 'flying_saucer'
-gem 'warbler'
 gem 'haml'
+gem 'faker'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'

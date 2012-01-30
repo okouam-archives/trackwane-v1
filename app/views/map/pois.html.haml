@@ -2,21 +2,24 @@
 
 :javascript
   $(function() {
-    new Ext.Viewport({
-      layout : 'border',
-        items : [
-        {height : 28, region : 'north', contentEl: "header", id: "ext-header"},
-        {region : 'west', width: 900, contentEl: "map", split: true},
-        {
-          xtype: 'panel',
-          region: 'center',
-          layout: 'vbox',
-          layoutConfig: {pack: 'start'},
-          items: [Gowane.Components.Grids.Pois, Gowane.Components.Info.Poi]
-        }
-      ]
+    Ext.application({
+      name: 'Gowane',
+      autoCreateViewport: false,
+      controllers: ['Gowane.controllers.Places'],
+      models: ['Gowane.models.Place'],
+      stores: ['Gowane.stores.Places'],
+      launch: function() {
+        new Ext.Viewport({
+          layout : 'border',
+          width: '100%',
+            items : [
+            {height : 28, region : 'north', contentEl: "header", id: "ext-header"},
+            {region : 'west', width: 900, contentEl: "map", split: true},
+            {xtype: 'sharedsidecolumn', region: 'center', items: [{xtype: 'availableplaces', width: '100%'}]}
+          ]
+        });
+        new Gowane.Views.Map({el: "#map"});
+      }
     });
-    $("#ext-header .x-panel-bwrap").css("overflow", "visible");
-    $("#ext-header .x-panel-bwrap .x-panel-body").css("overflow", "visible");
-    new Gowane.Views.Map({el: "#map"});
+
   });

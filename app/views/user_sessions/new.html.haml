@@ -1,0 +1,27 @@
+!!!
+%head
+  %title Gowane
+  = stylesheet_link_tag    "application"
+  = javascript_include_tag "application"
+  = csrf_meta_tags
+%body
+  #header{style: "height: 200px"}
+    .logo
+      Gowane
+    #menu
+    .clear
+  = form_for @user_session do |f|
+    %div
+      - if f.object.errors.any?
+        %ul
+          - f.object.errors.full_messages.each do |msg|
+            %li.error_message= msg
+      %div
+        = f.label :login
+        = f.text_field :login
+      %div
+        = f.label :password
+        = f.password_field :password
+      = f.submit "Login", :class => "submit"
+  .clear
+

@@ -1,5 +1,4 @@
 //= require ./lib/jquery-1.7.1.min
-//= require ./lib/ext-jquery-adapter-debug
 //= require ./lib/ext-all-debug.js
 //= require ./lib/OpenLayers
 //= require ./lib/underscore-min
