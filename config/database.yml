@@ -1,6 +1,6 @@
 development: &development
   adapter: postgresql
-  database: gts_development
+  database: gowane_development
   host: localhost
   pool: 5
   username: o1
@@ -11,12 +11,12 @@ development: &development
 
 test:
   <<: *development
-  database: gts_test
+  database: gowane_test
 
 production:
   <<: *development
   host: galileo.codeifier.com
-  database: gts_production
+  database: gowane_production
   username: deployment
   password: FireDrake[1981]
   
