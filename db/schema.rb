@@ -39,19 +39,11 @@ ActiveRecord::Schema.define(:version => 20120129203337) do
     t.datetime "updated_at"
   end
 
-  create_table "geometry_columns", :id => false, :force => true do |t|
-    t.string  "f_table_catalog",   :limit => 256, :null => false
-    t.string  "f_table_schema",    :limit => 256, :null => false
-    t.string  "f_table_name",      :limit => 256, :null => false
-    t.string  "f_geometry_column", :limit => 256, :null => false
-    t.integer "coord_dimension",                  :null => false
-    t.integer "srid",                             :null => false
-    t.string  "type",              :limit => 30,  :null => false
-  end
-
   create_table "places", :force => true do |t|
     t.string   "name"
     t.string   "category"
+    t.decimal  "longitude"
+    t.decimal  "latitude"
     t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -66,14 +58,6 @@ ActiveRecord::Schema.define(:version => 20120129203337) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
-
-  create_table "spatial_ref_sys", :id => false, :force => true do |t|
-    t.integer "srid",                      :null => false
-    t.string  "auth_name", :limit => 256
-    t.integer "auth_srid"
-    t.string  "srtext",    :limit => 2048
-    t.string  "proj4text", :limit => 2048
-  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                               :null => false

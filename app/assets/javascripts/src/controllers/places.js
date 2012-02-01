@@ -8,7 +8,7 @@ Ext.define('Gowane.controllers.Places', {
 
   init: function() {
     this.control({
-      'availabledevices': {
+      'availableplaces': {
         selectionchange: this.onPlaceSelect
       }
     })
@@ -16,31 +16,29 @@ Ext.define('Gowane.controllers.Places', {
 
   onLaunch: function() {
     var store = this.getGowaneStoresPlacesStore();
-    store.load();
+    store.load(function() {
+      this.showPlacesOnMap();
+    }.bind(this));
   },
 
   onPlaceSelect: function(item, selected) {
     var sidecolumn = this.getSideColumn();
-    if (!this.isShowingEditors(sidecolumn))
-      this.createEditorContainer(sidecolumn);
-    this.showEditorFor(selected[0]);
+    this.showEditorFor(selected[0], sidecolumn);
+    this.highlightPlaceOnMap(selected[0]);
   },
 
-  showEditorFor: function(device) {
-    this.tabs.add({xtype: 'placeeditor', title: device.data.display_name});
+  highlightPlaceOnMap: function(selected) {
+    console.debug("highlight place on map");
   },
 
-  createEditorContainer: function(column) {
-    return column.items.items.length > 1;
+  showPlacesOnMap: function() {
+    console.debug("show places on map");
   },
 
-  createDeviceUpdatesContainer: function(column) {
-    this.tabs = Ext.create('Ext.tab.Panel', {
-      width: '100%',
-      height: 400,
-      closable: true
-    });
-    column.add(this.tabs);
+  showEditorFor: function(place, sidecolumn) {
+    if (sidecolumn.items.length > 2)
+      sidecolumn.remove(sidecolumn.items.items[2]);
+    sidecolumn.add({xtype: 'placeeditor', title: place.data.name});
   }
 });
 

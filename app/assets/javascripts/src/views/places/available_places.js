@@ -5,10 +5,24 @@ Ext.define('Gowane.views.places.AvailablePlaces', {
   collapsible: false,
   stripeRows: true,
   title: "Points of Interest",
-  align: 'stretchmax',
   store: "Gowane.stores.Places",
+  dockedItems: [{
+    xtype: 'pagingtoolbar',
+    store: "Gowane.stores.Places",
+    dock: 'bottom',
+    displayInfo: true
+  }],
   columns: [
-    {header : 'Name', sortable : true, dataIndex : 'name', flex: 1},
-    {header : 'Category', sortable : true, dataIndex : 'category', flex: 1}
+    { header : 'Name', sortable : true, dataIndex : 'name', flex: 1},
+    { header : 'Category', sortable : true, dataIndex : 'category', flex: 1},
+    { xtype: 'actioncolumn', width: 30, align: 'center',
+      items: [{
+        icon: '/assets/delete.gif',
+        tooltip: 'Delete POI',
+        handler: function(grid, rowIndex, colIndex) {
+          alert("hello");
+        }
+      }]
+    }
   ]
 });

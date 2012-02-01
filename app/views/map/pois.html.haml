@@ -1,5 +1,3 @@
-#map{:style=>"height: 100%; width: 100%; border-top: 1px solid #edf1f2"}
-
 :javascript
   $(function() {
     Ext.application({
@@ -11,14 +9,17 @@
       launch: function() {
         new Ext.Viewport({
           layout : 'border',
-          width: '100%',
             items : [
-            {height : 28, region : 'north', contentEl: "header", id: "ext-header"},
-            {region : 'west', width: 900, contentEl: "map", split: true},
-            {xtype: 'sharedsidecolumn', region: 'center', items: [{xtype: 'availableplaces', width: '100%'}]}
+            { height : 28, region : 'north', contentEl: "header", id: "ext-header"},
+            { region : 'west', width: 900, xtype: 'placesmap', split: true},
+            { xtype: 'sharedsidecolumn', region: 'center', layout: 'vbox', layoutConfig: {align: 'stretch'},
+              items: [
+                {width: 300, height: 100, html: '<p>Hello World</>', title: "Point of Interest Manager"},
+                {xtype: 'availableplaces', width: 300}
+              ]
+            }
           ]
         });
-        new Gowane.Views.Map({el: "#map"});
       }
     });
 
