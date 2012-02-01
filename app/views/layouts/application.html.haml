@@ -5,37 +5,4 @@
   = javascript_include_tag "application"
   = csrf_meta_tags
 %body
-  #header
-    .logo
-      Gowane
-    #menu
-      %ul
-        %li.root
-          %a{:href => "#"} Cartes
-          %ul.submenu{:style=>"width: 500px"}
-            %li= link_to "Temps Réel", "/map/realtime"
-            %li.odd= link_to "Historique", "/map/historical"
-            %li.odd= link_to "Geofences", "/map/geofences"
-            %li= link_to "Points of Interest", "/map/pois"
-        %li.root
-          %a{:href => "#"} Rapports
-          %ul.submenu{:style=>"width: 500px"}
-            %li
-              %a{:href=>"#"} Rapport GPS
-            %li.odd
-              %a{:href=>"#"} Rapport de distance
-            %li.odd
-              %a{:href=>"#"} Trip Report
-            %li
-              = link_to "Rapport d'arrêt", "/reports/stop"
-            %li.odd
-              %a{:href=>"#"} Rapport de vitesse
-        %li.root
-          %a{:href => "#"} Administration
-          %ul.submenu{:style=>"width: 500px"}
-            %li= link_to "Accounts", accounts_path
-            %li.odd= link_to "Devices", devices_path
-    #account-info
-      Logout
-    .clear
   = yield

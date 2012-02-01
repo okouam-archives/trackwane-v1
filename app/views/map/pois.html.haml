@@ -4,17 +4,31 @@
       name: 'Gowane',
       autoCreateViewport: false,
       controllers: ['Gowane.controllers.Places'],
-      models: ['Gowane.models.Place'],
-      stores: ['Gowane.stores.Places'],
       launch: function() {
+        Ext.create('Gowane.stores.Places', {
+          storeId: "PlaceStore"
+        });
         new Ext.Viewport({
           layout : 'border',
             items : [
-            { height : 28, region : 'north', contentEl: "header", id: "ext-header"},
+            { region : 'north', border: false, tbar: [
+              {text: 'Cartes', menu: [
+                { text: 'Realtime',
+                  handler: function() {
+                    window.location = "/map/realtime";
+                  }
+                },
+                { text: 'Points of Interest'},
+                { text: 'Geofences'},
+                { text: 'Historial'}
+              ]},
+              {text: 'Rapports', menu: []},
+              {text: 'Administration', menu: []},
+            ]},
             { region : 'west', width: 900, xtype: 'placesmap', split: true},
             { xtype: 'sharedsidecolumn', region: 'center', layout: 'vbox', layoutConfig: {align: 'stretch'},
               items: [
-                {width: 300, height: 100, html: '<p>Hello World</>', title: "Point of Interest Manager"},
+                {width: 300, height: 100, html: '<p>Here you can manage your points of interest. These will be used to display more information about the movement of your vehicules.</>', title: "Help"},
                 {xtype: 'availableplaces', width: 300}
               ]
             }

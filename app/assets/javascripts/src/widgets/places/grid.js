@@ -1,11 +1,11 @@
-Ext.define('Gowane.views.places.AvailablePlaces', {
+Ext.define('Gowane.Widgets.Places.Grid', {
   extend: 'Ext.grid.Panel',
   alias: 'widget.availableplaces',
   flex: 1,
   collapsible: false,
   stripeRows: true,
+  store: 'PlaceStore',
   title: "Points of Interest",
-  store: "Gowane.stores.Places",
   dockedItems: [{
     xtype: 'pagingtoolbar',
     store: "Gowane.stores.Places",
@@ -20,7 +20,9 @@ Ext.define('Gowane.views.places.AvailablePlaces', {
         icon: '/assets/delete.gif',
         tooltip: 'Delete POI',
         handler: function(grid, rowIndex, colIndex) {
-          alert("hello");
+          if (confirm("Are you sure you want to delete this POI")) {
+            console.debug("Deleting POI");
+          }
         }
       }]
     }

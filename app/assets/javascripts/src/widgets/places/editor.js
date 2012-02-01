@@ -1,4 +1,4 @@
-Ext.define('Gowane.views.places.Editor', {
+Ext.define('Gowane.Widges.Places.Editor', {
   extend: 'Ext.form.Panel',
   alias: 'widget.placeeditor',
   collapsible: false,

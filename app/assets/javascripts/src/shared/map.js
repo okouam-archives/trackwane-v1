@@ -1,11 +1,17 @@
-Gowane.Views.Map = Backbone.View.extend({
+Ext.define('Gowane.Shared.Map', {
 
-  el: "#map",
+  extend: 'Ext.panel.Panel',
 
-  initialize: function() {
+  initComponent: function() {
+    this.layout = 'fit';
+    this.callParent(arguments);
+  },
+
+  afterRender: function() {
     OpenLayers.ImgPath = '/assets/OpenLayers/';
     OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
-    this.map = new OpenLayers.Map(this.el, {
+    console.debug(this);
+    this.map = new OpenLayers.Map(this.body.dom, {
       theme: null,
       maxResolution: 0.02197265625,
       numZoomLevels: 14,
@@ -38,11 +44,8 @@ Gowane.Views.Map = Backbone.View.extend({
     });
   },
 
-  createLayer: function(name) {
+  createFeatureLayer: function(name) {
     var layer = new OpenLayers.Layer.Vector(name);
-    var style = new OpenLayers.Style({externalGraphic: '${thumbnail}', 'pointRadius': 9});
-    var style_map = new OpenLayers.StyleMap({'default': style, 'select': style});
-    layer.styleMap = style_map;
     this.map.addLayer(layer);
     return layer;
   }

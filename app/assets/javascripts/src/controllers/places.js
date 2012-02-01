@@ -1,10 +1,10 @@
 Ext.define('Gowane.controllers.Places', {
   extend: 'Ext.app.Controller',
   stores: ['Gowane.stores.Places'],
-  refs: [{
-    selector: 'viewport sharedsidecolumn',
-    ref: 'sideColumn'
-  }],
+  refs: [
+    { selector: 'viewport sharedsidecolumn', ref: 'sidebar'},
+    { selector: 'viewport placesmap', ref: 'map'}
+  ],
 
   init: function() {
     this.control({
@@ -15,30 +15,20 @@ Ext.define('Gowane.controllers.Places', {
   },
 
   onLaunch: function() {
-    var store = this.getGowaneStoresPlacesStore();
-    store.load(function() {
-      this.showPlacesOnMap();
-    }.bind(this));
+    Ext.data.StoreManager.lookup('PlaceStore').load();
   },
 
-  onPlaceSelect: function(item, selected) {
-    var sidecolumn = this.getSideColumn();
-    this.showEditorFor(selected[0], sidecolumn);
-    this.highlightPlaceOnMap(selected[0]);
+  onPlaceSelect: function(item, selection) {
+    var sidebar = this.getSidebar();
+    var poi = selection[0];
+    this.showEditorFor(poi, sidebar);
+    this.getMap().highlightFeature(poi);
   },
 
-  highlightPlaceOnMap: function(selected) {
-    console.debug("highlight place on map");
-  },
-
-  showPlacesOnMap: function() {
-    console.debug("show places on map");
-  },
-
-  showEditorFor: function(place, sidecolumn) {
-    if (sidecolumn.items.length > 2)
-      sidecolumn.remove(sidecolumn.items.items[2]);
-    sidecolumn.add({xtype: 'placeeditor', title: place.data.name});
+  showEditorFor: function(poi, sidebar) {
+    if (sidebar.items.length > 2)
+      sidebar.remove(sidebar.items.items[2]);
+    sidebar.add({xtype: 'placeeditor', title: poi.data.name});
   }
 });
 
