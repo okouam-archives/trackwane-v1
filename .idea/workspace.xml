@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b1961ba-6faf-4767-84cb-48a48f62492f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/places/map.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/map.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/views/places/available_places.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/places/grid.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/views/places/editor.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/places/editor.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/views/places/map.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/shared/map.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/views/realtime/available_devices.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/realtime/available_devices.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/views/realtime/device_update.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/realtime/device_update.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/views/shared/header.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/shared/header.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/views/shared/side_column.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/shared/side_column.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/application.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/controllers/places.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/controllers/places.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/models/place.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/models/place.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/stores/places.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/stores/places.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/map/pois.html.haml" afterPath="$PROJECT_DIR$/app/views/map/pois.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/seeds.rb" afterPath="$PROJECT_DIR$/db/seeds.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/deploy.rb" afterPath="$PROJECT_DIR$/config/deploy.rb" />
     </list>
     <ignored path="Gowane.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,10 +52,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pois.html.haml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="pois.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/map/pois.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="47" selection-start="845" selection-end="845" vertical-scroll-proportion="0.5319149">
+            <state line="25" column="47" selection-start="845" selection-end="845" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="production.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/deploy/production.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="45" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="staging.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/deploy/staging.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="deploy.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/deploy.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="64" selection-start="941" selection-end="941" vertical-scroll-proportion="0.66810346">
               <folding />
             </state>
           </provider>
@@ -109,7 +120,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/models/place.js" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/src/views/places/editor.js" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/src/views/shared/basic_map.js" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/src/views/places/map.js" />
@@ -125,6 +135,7 @@
         <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/places/map.js" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
         <option value="$PROJECT_DIR$/app/views/map/pois.html.haml" />
+        <option value="$PROJECT_DIR$/config/deploy.rb" />
       </list>
     </option>
   </component>
@@ -200,6 +211,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gowane" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gowane" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="deploy" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -840,27 +869,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/deploy/production.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="45" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/stores/devices.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="10" selection-start="4" selection-end="10" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/stores/places.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/shared/side_column.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -947,7 +955,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/map/pois.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="47" selection-start="845" selection-end="845" vertical-scroll-proportion="0.5319149">
+        <state line="25" column="47" selection-start="845" selection-end="845" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/deploy/production.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="45" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/deploy/staging.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/deploy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="64" selection-start="941" selection-end="941" vertical-scroll-proportion="0.66810346">
           <folding />
         </state>
       </provider>

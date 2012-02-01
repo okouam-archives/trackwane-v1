@@ -1,7 +1,7 @@
 require 'capistrano/ext/multistage'
 require File.dirname(__FILE__) + '/boot'
 
-set :application, "geocms"
+set :application, "gowane"
 set :repository,  "git@github.com:0-One/Gowane.git"
 set :scm, :git
 set :branch, :master
@@ -43,5 +43,5 @@ after 'deploy:update_code', 'bundler:bundle_new_release'
 
 after 'bundler:bundle_new_release' do
   run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
-  run "cd #{release_path}; RAILS_ENV=production rake geocms:assets"
+  run "cd #{release_path}; RAILS_ENV=production rake gowane:assets"
 end
