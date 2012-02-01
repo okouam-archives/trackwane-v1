@@ -10,6 +10,7 @@ gem 'rgeo-geojson'
 gem 'database_cleaner'
 gem 'haml'
 gem 'faker'
+gem 'capistrano'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'

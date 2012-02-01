@@ -4,6 +4,8 @@ Ext.define('Gowane.views.places.Map', {
 
   alias: 'widget.placesmap',
 
+  store: "Gowane.stores.Places",
+
   initComponent: function() {
     this.layout = 'fit';
     this.callParent(arguments);
