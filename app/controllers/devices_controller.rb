@@ -10,6 +10,12 @@ class DevicesController < ApplicationController
       format.json {render json: {success: true, results: @devices}}
     end
   end
+
+  def poll
+    device = Device.find_by_imei_number(params[:imei])
+    render :json => device.events.last
+  end
+
   #
   #def xls
   #  @devices = Device.all

@@ -37,6 +37,11 @@ ActiveRecord::Schema.define(:version => 20120129203337) do
     t.string   "raw_data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "imei_number", :limit => 300
+    t.decimal  "heading"
+    t.date     "date"
+    t.datetime "time"
+    t.boolean  "gps_signal"
   end
 
   create_table "places", :force => true do |t|

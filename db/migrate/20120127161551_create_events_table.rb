@@ -11,8 +11,6 @@ class CreateEventsTable < ActiveRecord::Migration
       t.decimal :heading
       t.boolean :gps_signal
       t.datetime :date
-      t.datetime :time
-      t.timestamps
     end
   end
 end

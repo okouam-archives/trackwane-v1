@@ -11,7 +11,7 @@ Gowane::Application.routes.draw do
 
   resources :devices do
     collection do
-      get :pdf, :xls
+      get :pdf, :xls, :poll
     end
   end
 
