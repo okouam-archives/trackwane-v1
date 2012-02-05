@@ -1,10 +1,10 @@
 Ext.define('Gowane.controllers.Realtime', {
   extend: 'Ext.app.Controller',
   stores: ['Gowane.stores.Devices'],
-  refs: [{
-    selector: 'viewport sharedsidecolumn',
-    ref: 'sideColumn'
-  }],
+  refs: [
+    {selector: 'viewport sharedsidecolumn', ref: 'sidebar'},
+    {selector: 'viewport devicesmap', ref: 'map'}
+  ],
 
   init: function() {
     this.control({
@@ -22,8 +22,8 @@ Ext.define('Gowane.controllers.Realtime', {
   poll: function() {
     if (this.current_device) {
       $.ajax({ url: "/devices/poll?imei=" + this.current_device, success: function(data){
-          //do something
-      }, dataType: "json"});
+        this.getMap().showDevice(data);
+      }.bind(this), dataType: "json"});
     }
   },
 

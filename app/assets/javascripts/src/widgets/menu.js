@@ -14,6 +14,11 @@ Ext.define('Gowane.Widgets.Menu', {
           window.location = "/map/pois";
         }
       },
+      { text: 'Historial',
+        handler: function() {
+          window.location = "/map/historical";
+        }
+      },
       { text: 'Geofences',
         handler: function() {
           window.location = "/map/geofences";

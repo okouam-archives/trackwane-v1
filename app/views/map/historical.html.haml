@@ -1,0 +1,23 @@
+:javascript
+  $(function() {
+    Ext.application({
+      name: 'Gowane',
+      autoCreateViewport: false,
+      controllers: ['Gowane.controllers.Historial'],
+      launch: function() {
+        Ext.create('Gowane.stores.Devices', {
+          storeId: "DeviceStore"
+        });
+        new Ext.Viewport({
+          layout : 'border',
+          items : [
+            { xtype: 'menu', region : 'north'},
+            { region : 'west', width: 900, xtype: 'devicesmap', split: true},
+            { xtype: 'sharedsidecolumn', region: 'center', layout: 'fit', layoutConfig: {align: 'stretch'},
+              items: [{xtype: 'availabledevices', width: 300}]
+            }
+          ]
+        });
+      }
+    });
+  });
