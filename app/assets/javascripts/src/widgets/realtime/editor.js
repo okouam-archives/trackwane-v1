@@ -1,4 +1,4 @@
-Ext.define('Gowane.views.realtime.DeviceUpdate', {
+Ext.define('Gowane.Widgets.Devices.Editor', {
   extend: 'Ext.form.Panel',
   alias: 'widget.realtimedeviceupdate',
   collapsible: false,

@@ -14,17 +14,6 @@ Ext.define('Gowane.Widgets.Places.Grid', {
   }],
   columns: [
     { header : 'Name', sortable : true, dataIndex : 'name', flex: 1},
-    { header : 'Category', sortable : true, dataIndex : 'category', flex: 1},
-    { xtype: 'actioncolumn', width: 30, align: 'center',
-      items: [{
-        icon: '/assets/delete.gif',
-        tooltip: 'Delete POI',
-        handler: function(grid, rowIndex, colIndex) {
-          if (confirm("Are you sure you want to delete this POI")) {
-            console.debug("Deleting POI");
-          }
-        }
-      }]
-    }
+    { header : 'Category', sortable : true, dataIndex : 'category', flex: 1}
   ]
 });

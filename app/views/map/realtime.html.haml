@@ -1,30 +1,23 @@
-#map{:style=>"height: 100%; width: 100%; border-top: 1px solid #edf1f2"}
-
 :javascript
   $(function() {
     Ext.application({
       name: 'Gowane',
       autoCreateViewport: false,
       controllers: ['Gowane.controllers.Realtime'],
-      models: ['Gowane.models.Device'],
-      stores: ['Gowane.stores.Devices'],
-      views: [
-        'Gowane.views.realtime.DeviceUpdate',
-        'Gowane.views.realtime.SideColumn'
-      ],
       launch: function() {
+        Ext.create('Gowane.stores.Devices', {
+          storeId: "DeviceStore"
+        });
         new Ext.Viewport({
           layout : 'border',
-          width: '100%',
           items : [
-            {xtype: 'header', region : 'north'},
-            {region : 'west', width: 900, contentEl: "map", split: true},
-            {xtype: 'sharedsidecolumn', region: 'center', items: [{xtype: 'availabledevices', width: '100%'}]}
+            { xtype: 'menu', region : 'north'},
+            { region : 'west', width: 900, xtype: 'devicesmap', split: true},
+            { xtype: 'sharedsidecolumn', region: 'center', layout: 'fit', layoutConfig: {align: 'stretch'},
+              items: [{xtype: 'availabledevices', width: 300}]
+            }
           ]
         });
-        $("#ext-header .x-panel-bwrap").css("overflow", "visible");
-        $("#ext-header .x-panel-bwrap .x-panel-body").css("overflow", "visible");
-        new Gowane.Views.Map({el: "#map"});
       }
     });
 

@@ -1,6 +1,6 @@
-Ext.define('Gowane.controllers.Realtime', {
+Ext.define('Gowane.controllers.Geofences', {
   extend: 'Ext.app.Controller',
-  stores: ['Gowane.stores.Devices'],
+  stores: ['Gowane.stores.Geofences'],
   refs: [{
     selector: 'viewport sharedsidecolumn',
     ref: 'sideColumn'
@@ -10,7 +10,7 @@ Ext.define('Gowane.controllers.Realtime', {
   },
 
   onLaunch: function() {
-    Ext.data.StoreManager.lookup('DeviceStore').load();
+    Ext.data.StoreManager.lookup('GeofenceStore').load();
   }
 });
 

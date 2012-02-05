@@ -15,7 +15,7 @@ Gowane::Application.routes.draw do
     end
   end
 
-  root :to => 'devices#index'
+  root :to => 'map#pois'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

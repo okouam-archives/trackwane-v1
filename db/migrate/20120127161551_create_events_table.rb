@@ -7,7 +7,6 @@ class CreateEventsTable < ActiveRecord::Migration
       t.decimal :longitude
       t.decimal :speed
       t.string :address
-      t.string :raw_data
       t.timestamps
     end
   end

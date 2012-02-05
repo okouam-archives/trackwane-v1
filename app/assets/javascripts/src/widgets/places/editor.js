@@ -1,6 +1,6 @@
-Ext.define('Gowane.Widges.Places.Editor', {
+Ext.define('Gowane.Widgets.Places.Editor', {
   extend: 'Ext.form.Panel',
-  alias: 'widget.placeeditor',
+  alias: 'widget.placeseditor',
   collapsible: false,
   closable: true,
   bodyStyle: 'padding: 5px',

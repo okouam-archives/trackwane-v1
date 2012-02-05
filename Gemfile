@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.3'
 gem 'pg'
 gem 'json'
+gem 'stomp'
 gem 'authlogic'
 gem 'jquery-rails'
 gem 'rgeo-activerecord'
@@ -11,6 +12,8 @@ gem 'database_cleaner'
 gem 'haml'
 gem 'faker'
 gem 'capistrano'
+gem 'rspec'
+gem 'rspec-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
@@ -22,4 +25,3 @@ group :production do
   gem 'therubyracer', '>= 0.9.2'
   gem 'yui-compressor'
 end
-
