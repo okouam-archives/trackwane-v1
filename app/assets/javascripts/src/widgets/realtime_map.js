@@ -1,8 +1,8 @@
-Ext.define('Gowane.Widgets.Devices.Map', {
+Ext.define('Gowane.Widgets.RealtimeMap', {
 
   extend: 'Gowane.Shared.Map',
 
-  alias: 'widget.devicesmap',
+  alias: 'widget.realtime_map',
 
   initComponent: function() {
     this.layout = 'fit';

@@ -11,72 +11,79 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120129203337) do
+ActiveRecord::Schema.define(:version => 20120211111900) do
 
   create_table "accounts", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.column "name", :string
+    t.column "email", :string
+    t.column "contact", :string
+    t.column "telephone", :string
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
   create_table "devices", :force => true do |t|
-    t.integer  "account_id"
-    t.string   "imei_number"
-    t.string   "display_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.column "account_id", :integer
+    t.column "imei_number", :string
+    t.column "display_name", :string
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
   create_table "events", :force => true do |t|
-    t.integer  "device_id"
-    t.integer  "status_code"
-    t.decimal  "latitude"
-    t.decimal  "longitude"
-    t.decimal  "speed"
-    t.string   "address"
-    t.string   "raw_data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "imei_number", :limit => 300
-    t.decimal  "heading"
-    t.date     "date"
-    t.datetime "time"
-    t.boolean  "gps_signal"
+    t.column "device_id", :integer
+    t.column "status_code", :integer
+    t.column "latitude", :decimal
+    t.column "longitude", :decimal
+    t.column "speed", :decimal
+    t.column "address", :string
+    t.column "imei_number", :string
+    t.column "heading", :decimal
+    t.column "gps_signal", :boolean
+    t.column "date", :datetime
+  end
+
+  create_table "geofences", :force => true do |t|
+    t.column "name", :string
+    t.column "account_id", :integer
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+    t.column "shape", :geometry
   end
 
   create_table "places", :force => true do |t|
-    t.string   "name"
-    t.string   "category"
-    t.decimal  "longitude"
-    t.decimal  "latitude"
-    t.integer  "account_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.column "name", :string
+    t.column "category", :string
+    t.column "longitude", :decimal
+    t.column "latitude", :decimal
+    t.column "account_id", :integer
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.column "session_id", :string, :null => false
+    t.column "data", :text
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-    t.string   "login",                               :null => false
-    t.string   "email",                               :null => false
-    t.integer  "account_id"
-    t.string   "crypted_password",                    :null => false
-    t.string   "password_salt",                       :null => false
-    t.string   "persistence_token",                   :null => false
-    t.datetime "last_login_at"
-    t.string   "last_login_ip"
-    t.string   "role"
-    t.boolean  "is_active",         :default => true, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.column "login", :string, :null => false
+    t.column "email", :string, :null => false
+    t.column "account_id", :integer
+    t.column "crypted_password", :string, :null => false
+    t.column "password_salt", :string, :null => false
+    t.column "persistence_token", :string, :null => false
+    t.column "last_login_at", :datetime
+    t.column "last_login_ip", :string
+    t.column "role", :string
+    t.column "is_active", :boolean, :default => true, :null => false
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
 end

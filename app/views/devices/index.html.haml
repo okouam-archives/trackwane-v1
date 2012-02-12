@@ -1,23 +1,47 @@
+#help_text
+  %h1
+    Introduction
+  %p
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra bibendum orci, a sodales elit tempor at. Aenean convallis malesuada felis dignissim aliquam. Morbi imperdiet orci ut elit ultricies molestie. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In consectetur, turpis vitae tincidunt euismod, est purus convallis risus, eu lacinia libero diam eget risus. Sed in dui lacus, et porta risus. Etiam convallis massa justo, ut dictum nulla. Vestibulum egestas augue in risus condimentum sit amet laoreet ante tincidunt. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam semper, lacus sit amet laoreet sollicitudin, arcu metus faucibus massa, in suscipit ligula tellus eget nibh. Suspendisse potenti. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla facilisi.
+  %br
+  %h2 Creer un nouveau vehicule
+
+  %p
+    Nulla sit amet lacus at metus dapibus hendrerit nec at orci. Proin eu diam magna, id egestas ante. Morbi lacinia scelerisque augue, blandit hendrerit tellus auctor et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat, lacus a lobortis vehicula, turpis justo feugiat lorem, non malesuada dui urna nec augue. In pretium mollis dui at ultricies. Phasellus sollicitudin, metus vitae rutrum volutpat, urna mauris mattis elit, et fringilla lorem nibh ac metus. Donec vestibulum eleifend felis sit amet ultricies. Mauris at ipsum sapien. Nunc risus felis, suscipit vel suscipit sed, fringilla vel diam. Donec a lectus eu magna faucibus pulvinar. Donec congue erat quis tellus facilisis aliquam. Vivamus sodales vestibulum lacinia. Suspendisse ultricies nunc non lectus elementum et molestie libero mollis.
+
+  %br
+  %h2 Supprimer un vehicule
+  %p
+    Nam eu purus ipsum. Integer turpis enim, adipiscing eu scelerisque vel, aliquet consequat sem. Ut ultricies varius tortor, id ornare arcu commodo non. In eu tellus felis, eget faucibus ipsum. Quisque odio nisi, consectetur non blandit quis, pulvinar sit amet tellus. Suspendisse potenti. Curabitur vestibulum, est quis blandit rhoncus, nisi nibh molestie sapien, eu egestas sem nibh nec erat. Cras commodo pharetra quam. Fusce in tortor nunc, eget tincidunt lacus. Cras feugiat dignissim justo ut posuere. Duis pulvinar pharetra lacus sed imperdiet. Mauris commodo erat eu sapien pretium sit amet mollis lorem dictum. Sed et justo sed arcu venenatis aliquet.
+  %br
+  %h2 Modifier un vehicule
+
+  %p
+    Nam eu purus ipsum. Integer turpis enim, adipiscing eu scelerisque vel, aliquet consequat sem. Ut ultricies varius tortor, id ornare arcu commodo non. In eu tellus felis, eget faucibus ipsum. Quisque odio nisi, consectetur non blandit quis, pulvinar sit amet tellus. Suspendisse potenti. Curabitur vestibulum, est quis blandit rhoncus, nisi nibh molestie sapien, eu egestas sem nibh nec erat. Cras commodo pharetra quam. Fusce in tortor nunc, eget tincidunt lacus. Cras feugiat dignissim justo ut posuere. Duis pulvinar pharetra lacus sed imperdiet. Mauris commodo erat eu sapien pretium sit amet mollis lorem dictum. Sed et justo sed arcu venenatis aliquet.
+
+
 :javascript
   $(function() {
-    new Ext.Viewport({
-      layout : 'border',
-        items : [
-        {
-          region: 'north', height : 28, contentEl: "header", id: "ext-header"
-        },
-        {
-          region : 'center',
-          layout: {
-            type: 'vbox',
-            align: 'stretch'
-          },
-          layoutConfig: {pack: 'start'}, items: [
-            Gowane.Components.Grids.Devices
+    Ext.application({
+      name: 'Gowane',
+      autoCreateViewport: false,
+      controllers: ['Gowane.controllers.Devices'],
+      launch: function() {
+        Ext.create('Gowane.stores.Devices', {
+          storeId: "DeviceStore"
+        });
+        new Ext.Viewport({
+          layout : 'border',
+          items : [
+            { xtype: 'menu', region : 'north'},
+            { region : 'west', width: 900, xtype: 'full_device_list', split: true},
+            { xtype: 'sharedsidecolumn', region: 'center', layout: 'fit', layoutConfig: {align: 'stretch'},
+              items: [{xtype: 'panel', contentEl: 'help_text', width: 300, border: 0, bodyStyle: {
+                margin: '10px'
+              }}]
+            }
           ]
-        }
-      ]
+        });
+      }
     });
-    $("#ext-header .x-panel-bwrap").css("overflow", "visible");
-    $("#ext-header .x-panel-bwrap .x-panel-body").css("overflow", "visible");
   });

@@ -7,10 +7,9 @@ Ext.define('Gowane.Shared.Map', {
     this.callParent(arguments);
   },
 
-  afterRender: function() {
+  renderMap: function() {
     OpenLayers.ImgPath = '/assets/OpenLayers/';
     OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
-    console.debug(this);
     this.map = new OpenLayers.Map(this.body.dom, {
       theme: null,
       maxResolution: 0.02197265625,

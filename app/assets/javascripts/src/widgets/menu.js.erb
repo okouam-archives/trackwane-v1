@@ -1,0 +1,66 @@
+Ext.define('Gowane.Widgets.Menu', {
+  extend: 'Ext.panel.Panel',
+  alias: 'widget.menu',
+  border: false,
+  tbar: [
+    {text: 'Cartes', menu: [
+      { text: 'Temps Reel',
+        handler: function() {
+          window.location = "/map/realtime";
+        }
+      },
+      { text: "POIs",
+        handler: function() {
+          window.location = "/map/pois";
+        }
+      },
+      { text: 'Historique',
+        handler: function() {
+          window.location = "/map/historical";
+        }
+      },
+      { text: 'Perimetres',
+        handler: function() {
+          window.location = "/map/geofences";
+        }
+      }
+    ]},
+    {text: 'Rapports', menu: [
+      { text: 'Rapport GPS',
+        handler: function() {
+          window.location = "/map/geofences";
+        }
+      },
+      { text: 'Rapport de distance',
+        handler: function() {
+          window.location = "/map/geofences";
+        }
+      },
+      { text: "Rapport d'arret",
+        handler: function() {
+          window.location = "/map/geofences";
+        }
+      }
+    ]},
+    {text: 'Administration', menu: [
+      { text: 'Utilisateurs',
+        handler: function() {
+          window.location = "/users";
+        }
+      },
+      { text: 'Vehicules',
+        handler: function() {
+          window.location = "/devices";
+        }
+      },
+      { text: 'Alarmes',
+        handler: function() {
+          window.location = "/alarms";
+        }
+      }
+    ]},
+    {text: 'Logout', handler: function() {
+      window.location = "/user_session/destroy";
+    }}
+  ]
+});

@@ -4,16 +4,19 @@ Gowane::Application.routes.draw do
   match 'map/historical' => 'map#historical'
   match 'map/pois' => 'map#pois'
   match 'map/geofences' => 'map#geofences'
-
   match 'reports/stop' => 'reports#stop'
 
-  resources :accounts, :drivers, :user_sessions, :users, :places
+  resources :accounts, :drivers, :user_sessions, :users, :places, :geofences, :alarms
 
   resources :devices do
     collection do
       get :pdf, :xls, :poll
     end
+    member do
+      get :events
+    end
   end
+
 
   root :to => 'map#pois'
 

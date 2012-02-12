@@ -1,6 +1,6 @@
-Ext.define('Gowane.Widgets.Places.Grid', {
+Ext.define('Gowane.Widgets.SummaryPlaceList', {
   extend: 'Ext.grid.Panel',
-  alias: 'widget.availableplaces',
+  alias: 'widget.summary_place_list',
   flex: 1,
   collapsible: false,
   stripeRows: true,

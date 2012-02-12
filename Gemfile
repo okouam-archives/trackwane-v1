@@ -13,6 +13,7 @@ gem 'haml'
 gem 'faker'
 gem 'capistrano'
 gem 'rspec'
+gem 'postgis_adapter', :git => 'https://github.com/dougcole/postgis_adapter.git'
 gem 'rspec-rails'
 
 group :assets do

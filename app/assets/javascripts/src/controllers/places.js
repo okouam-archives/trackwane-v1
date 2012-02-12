@@ -15,6 +15,7 @@ Ext.define('Gowane.controllers.Places', {
   },
 
   onLaunch: function() {
+    this.getMap().renderMap();
     Ext.data.StoreManager.lookup('PlaceStore').load();
   },
 

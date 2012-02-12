@@ -4,24 +4,29 @@
   = stylesheet_link_tag    "application"
   = javascript_include_tag "application"
   = csrf_meta_tags
-%body
-  #header{style: "height: 200px"}
-    .logo
-      Gowane
-    #menu
-    .clear
+%body{style: "margin: auto; text-align: center"}
   = form_for @user_session do |f|
-    %div
-      - if f.object.errors.any?
-        %ul
-          - f.object.errors.full_messages.each do |msg|
-            %li.error_message= msg
-      %div
-        = f.label :login
-        = f.text_field :login
-      %div
-        = f.label :password
-        = f.password_field :password
-      = f.submit "Login", :class => "submit"
-  .clear
+    %div.wrapper
+      %img.logo{src: "/assets/logo.png"}
+      %div.form
+        - if f.object.errors.any?
+          %ul
+            - f.object.errors.full_messages.each do |msg|
+              %li.error_message= msg
+        %div
+          = f.label :login, :style => "width: 70px; display: inline-block"
+          = f.text_field :login, :style=>"width: 184px; padding: 5px; border: 1px solid #ccc"
+        %div{style: "margin-top: 10px"}
+          = f.label :password, :style => "width: 70px; display: inline-block"
+          = f.password_field :password, :style=>"width: 184px; padding: 5px; border: 1px solid #ccc"
+        = f.submit "Login", :class => "submit", :style=>"margin-top: 10px; float: right"
+      %span.logo_text
+        Fleet Tracking
+    .clear
 
+:css
+  body {color: #434343}
+  .logo {float: left; margin-right: 30px; height: 50px; margin-top: 20px}
+  .logo_text {float: left; padding-top: 10px; font-weight: bold}
+  .wrapper {margin: auto; margin-top: 100px; width: 415px}
+  .form {float: right; text-align: left; border: 1px solid #E5E5E5; background: none repeat scroll 0 0 #F5F5F5; padding: 14px 19px 8px 21px; width: 300px}

@@ -8,6 +8,7 @@ development: &development
   timeout: 5000
   encoding: utf8
   min_messages: warning
+  template: template_postgis
 
 test:
   <<: *development

@@ -46,3 +46,6 @@ module Gowane
     config.assets.version = '1.0'
   end
 end
+
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8

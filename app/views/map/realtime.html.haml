@@ -12,9 +12,9 @@
           layout : 'border',
           items : [
             { xtype: 'menu', region : 'north'},
-            { region : 'west', width: 900, xtype: 'devicesmap', split: true},
+            { region : 'west', width: 900, xtype: 'realtime_map', split: true},
             { xtype: 'sharedsidecolumn', region: 'center', layout: 'fit', layoutConfig: {align: 'stretch'},
-              items: [{xtype: 'availabledevices', width: 300}]
+              items: [{xtype: 'summary_device_list', width: 300}]
             }
           ]
         });
