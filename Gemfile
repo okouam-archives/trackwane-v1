@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', :git => "git://github.com/rails/rails.git", :tag => "v3.1.2"
 gem 'pg'
 gem 'json'
 gem 'stomp'

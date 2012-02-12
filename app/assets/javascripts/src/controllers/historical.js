@@ -1,6 +1,6 @@
 Ext.define('Gowane.controllers.Historical', {
   extend: 'Ext.app.Controller',
-  stores: ['Gowane.stores.Devices'],
+  stores: ['Gowane.stores.Devices', 'Gowane.stores.Groups'],
   refs: [
     {selector: 'viewport sharedsidecolumn', ref: 'sidebar'},
     {selector: 'viewport historical_map', ref: 'map'}
@@ -17,6 +17,7 @@ Ext.define('Gowane.controllers.Historical', {
   onLaunch: function() {
     this.getMap().renderMap();
     Ext.data.StoreManager.lookup('DeviceStore').load();
+    Ext.data.StoreManager.lookup('GroupStore').load();
   },
 
   onDeviceSelect: function(item, selection) {

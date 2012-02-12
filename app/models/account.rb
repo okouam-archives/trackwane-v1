@@ -4,4 +4,5 @@ class Account < ActiveRecord::Base
   has_many :places
   has_many :alarms
   has_many :users
+  has_many :groups
 end

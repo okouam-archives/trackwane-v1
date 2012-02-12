@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120211111900) do
+ActiveRecord::Schema.define(:version => 20120212081051) do
 
   create_table "accounts", :force => true do |t|
     t.column "name", :string
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20120211111900) do
     t.column "account_id", :integer
     t.column "imei_number", :string
     t.column "display_name", :string
+    t.column "group_id", :integer
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
@@ -49,6 +50,14 @@ ActiveRecord::Schema.define(:version => 20120211111900) do
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
     t.column "shape", :geometry
+  end
+
+  create_table "groups", :force => true do |t|
+    t.column "name", :string
+    t.column "device_count", :integer
+    t.column "account_id", :integer
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
   create_table "places", :force => true do |t|

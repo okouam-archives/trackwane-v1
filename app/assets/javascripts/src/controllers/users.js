@@ -67,10 +67,10 @@ Ext.define('Gowane.controllers.Users', {
     var form = Ext.create('Ext.form.Panel', {
       height: 140,  width: 299, bodyPadding: 10, defaultType: 'textfield',
       items: [
-        {fieldLabel: 'Sociéte', name: 'email'},
+        {fieldLabel: 'Société', name: 'email'},
         {fieldLabel: 'Contact', name: 'email'},
-        {fieldLabel: 'Email', name: 'name'},
-        {fieldLabel: 'Telephone', name: 'email'}
+        {fieldLabel: 'Adresse Electronique', name: 'name'},
+        {fieldLabel: 'Téléphone', name: 'email'}
       ]
     });
     return new Ext.Window({

@@ -4,6 +4,7 @@ class CreateDevicesTable < ActiveRecord::Migration
         t.references :account
         t.string :imei_number
         t.string :display_name
+        t.references :group
         t.timestamps
       end
   end

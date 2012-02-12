@@ -5,7 +5,7 @@ Ext.define('Gowane.Widgets.SummaryDeviceList', {
   collapsible: false,
   stripeRows: true,
   store: 'DeviceStore',
-  title: "Vehicules",
+  title: "Véhicules",
   dockedItems: [{
     xtype: 'pagingtoolbar',
     store: "Gowane.stores.Devices",

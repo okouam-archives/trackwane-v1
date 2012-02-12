@@ -4,4 +4,12 @@ class ReportsController < ApplicationController
 
   end
 
+  def gps
+
+  end
+
+  def distance
+
+  end
+
 end

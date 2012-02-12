@@ -14,9 +14,9 @@ Ext.define('Gowane.Widgets.AccountList', {
   }],
   columns: [
     {header : 'ID', sortable : true, dataIndex : 'id', width: 40},
-    {header : 'Societe', sortable : true, dataIndex : 'name', flex: 1},
+    {header : 'Société', sortable : true, dataIndex : 'name', flex: 1},
     {header : 'Contact', sortable : true, dataIndex : 'contact', flex: 1},
-    {header : 'Email', sortable : true, dataIndex : 'email', flex: 1},
-    {header : 'Telephone', sortable : true, dataIndex : 'telephone', flex: 1}
+    {header : 'Addresse Electronique', sortable : true, dataIndex : 'email', flex: 1},
+    {header : 'Téléphone', sortable : true, dataIndex : 'telephone', flex: 1}
   ]
 });

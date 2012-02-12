@@ -1,6 +1,6 @@
 Ext.define('Gowane.controllers.Realtime', {
   extend: 'Ext.app.Controller',
-  stores: ['Gowane.stores.Devices'],
+  stores: ['Gowane.stores.Devices', 'Gowane.stores.Groups'],
   refs: [
     {selector: 'viewport sharedsidecolumn', ref: 'sidebar'},
     {selector: 'viewport realtime_map', ref: 'map'}
@@ -16,6 +16,7 @@ Ext.define('Gowane.controllers.Realtime', {
 
   onLaunch: function() {
     Ext.data.StoreManager.lookup('DeviceStore').load();
+    Ext.data.StoreManager.lookup('GroupStore').load();
     this.getMap().renderMap();
     setInterval(this.poll.bind(this), 3000)
   },
