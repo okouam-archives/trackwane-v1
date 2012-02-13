@@ -10,6 +10,7 @@ class CreateEventsTable < ActiveRecord::Migration
       t.string :imei_number
       t.decimal :heading
       t.boolean :gps_signal
+      t.references :alarm
       t.datetime :date
     end
   end

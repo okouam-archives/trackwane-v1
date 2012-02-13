@@ -22,6 +22,12 @@ Ext.define('Gowane.models.DistanceEvent', {
   proxy: {type: 'rest', url: '/events.json?type=distance', reader: {type: 'json', root: 'results'}}
 });
 
+Ext.define('Gowane.models.Alarm', {
+  extend: 'Ext.data.Model',
+  fields: ['id', 'category', 'name', 'action', 'rule', 'recipient'],
+  proxy: {type: 'rest', url: '/alarms.json', reader: {type: 'json', root: 'results'}}
+});
+
 Ext.define('Gowane.models.Device', {
   extend: 'Ext.data.Model',
   fields: ['account_id', 'imei_number', 'display_name', 'id'],

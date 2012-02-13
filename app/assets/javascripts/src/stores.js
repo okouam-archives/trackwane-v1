@@ -33,3 +33,7 @@ Ext.define('Gowane.stores.Devices', {
 Ext.define('Gowane.stores.Users', {
   model: 'Gowane.models.User',         extend: 'Ext.data.Store',        requires: 'Gowane.models.User'
 });
+
+Ext.define('Gowane.stores.Alarms', {
+  model: 'Gowane.models.Alarm',         extend: 'Ext.data.Store',        requires: 'Gowane.models.Alarm'
+});

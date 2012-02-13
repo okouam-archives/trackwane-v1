@@ -3,7 +3,7 @@ Ext.define('Gowane.Widgets.Menu', {
   alias: 'widget.menu',
   border: false,
   tbar: [
-    {text: 'Cartes', menu: [
+    {text: 'Suivi', menu: [
       {text: 'Temps réel',
         handler: function() {
           window.location = "/map/realtime";
@@ -35,16 +35,13 @@ Ext.define('Gowane.Widgets.Menu', {
     {text: 'Alarmes', handler: function() {
       window.location = "/alarms";
     }},
-    {text: 'Périmetres', handler: function() {
-      window.location = "/maps/geofences";
-    }},
     {text: "Points d'intéret", handler: function() {
-      window.location = "/maps/poi";
+      window.location = "/places";
     }},
     {text: 'Administration', menu: [
       { text: 'Clients',
         handler: function() {
-          window.location = "/users";
+          window.location = "/accounts";
         }
       },
       { text: 'Utilisateurs',
@@ -60,16 +57,6 @@ Ext.define('Gowane.Widgets.Menu', {
       { text: 'Groupes',
         handler: function() {
           window.location = "/groups";
-        }
-      },
-      { text: 'Alarmes',
-        handler: function() {
-          window.location = "/alarms";
-        }
-      },
-      { text: 'Reports',
-        handler: function() {
-          window.location = "/reports/manage";
         }
       }
     ]},

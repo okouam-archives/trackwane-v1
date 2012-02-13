@@ -2,8 +2,6 @@ Gowane::Application.routes.draw do
 
   match 'map/realtime' => 'map#realtime'
   match 'map/historical' => 'map#historical'
-  match 'map/pois' => 'map#pois'
-  match 'map/geofences' => 'map#geofences'
 
   resources :reports do
     collection do
@@ -24,6 +22,6 @@ Gowane::Application.routes.draw do
     end
   end
 
-  root :to => 'map#pois'
+  root :to => 'map#realtime'
 
 end

@@ -4,6 +4,7 @@ class PlacesController < ApplicationController
   def index
     @places = current_user.account.places
     respond_to do |format|
+      format.html
       format.json {render json: {success: true, results: @places}}
     end
   end

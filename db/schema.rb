@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120212081051) do
+ActiveRecord::Schema.define(:version => 20120213023428) do
 
   create_table "accounts", :force => true do |t|
     t.column "name", :string
     t.column "email", :string
     t.column "contact", :string
     t.column "telephone", :string
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+  end
+
+  create_table "alarms", :force => true do |t|
+    t.column "name", :string
+    t.column "category", :integer
+    t.column "account_id", :integer
+    t.column "rule", :string
+    t.column "recipient", :string
+    t.column "action", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
@@ -41,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20120212081051) do
     t.column "imei_number", :string
     t.column "heading", :decimal
     t.column "gps_signal", :boolean
+    t.column "alarm_id", :integer
     t.column "date", :datetime
   end
 

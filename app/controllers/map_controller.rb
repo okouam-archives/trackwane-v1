@@ -5,15 +5,7 @@ class MapController < ApplicationController
 
   end
 
-  def geofences
-
-  end
-
   def historical
-
-  end
-
-  def pois
 
   end
 
