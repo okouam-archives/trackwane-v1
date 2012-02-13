@@ -18,7 +18,6 @@ Ext.define('Gowane.Widgets.HistoricalMap', {
     });
     var route = new OpenLayers.Geometry.LineString(points);
     var feature = new OpenLayers.Feature.Vector(route);
-    console.debug("Drawing the route", feature);
     this.layer.destroyFeatures();
     this.layer.addFeatures([feature]);
     this.layer.map.zoomToExtent(this.layer.getDataExtent());
