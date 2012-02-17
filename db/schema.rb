@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(:version => 20120213023428) do
 
   create_table "geofences", :force => true do |t|
     t.column "name", :string
+    t.column "coordinates", :string
     t.column "account_id", :integer
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
-    t.column "shape", :geometry
   end
 
   create_table "groups", :force => true do |t|
@@ -101,8 +101,8 @@ ActiveRecord::Schema.define(:version => 20120213023428) do
     t.column "persistence_token", :string, :null => false
     t.column "last_login_at", :datetime
     t.column "last_login_ip", :string
-    t.column "role", :string
-    t.column "is_active", :boolean, :default => true, :null => false
+    t.column "role", :string, :default => "administrator", :null => false
+    t.column "status", :string, :default => "active", :null => false
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end

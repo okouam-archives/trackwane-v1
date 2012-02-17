@@ -1,5 +1,3 @@
-# coding: utf-8
-
 class GeofencesController < ApplicationController
   before_filter :require_user
 
@@ -8,6 +6,20 @@ class GeofencesController < ApplicationController
     respond_to do |format|
       format.json {render json: {success: true, results: @geofences}}
     end
+  end
+
+  def create
+    geofence = Geofence.new(params.slice(Device.column_names))
+    geofence.account = current_user.account
+    if geofence.save
+       render json: {success: true, results: [geofence.as_json]}
+    else
+      render json: {success: false}
+    end
+  end
+
+  def destroy
+    Geofence.find(params[:id])
   end
 
 end

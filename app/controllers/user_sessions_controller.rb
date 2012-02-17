@@ -9,7 +9,7 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      if @user_session.user.is_active
+      if @user_session.user.status == "active"
         redirect_to '/map/realtime'
       else
         @user_session.errors.add(:base, "Invalid credentials")
