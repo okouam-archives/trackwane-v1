@@ -9,8 +9,8 @@ class CreateUsersTable < ActiveRecord::Migration
         t.string :persistence_token, :null => false
         t.datetime :last_login_at
         t.string :last_login_ip
-        t.string :role
-        t.boolean :is_active, :default => true, :null => false
+        t.string :role, :default => 'administrator', :null => false
+        t.string :status, :default => 'active', :null => false
         t.timestamps
       end
   end

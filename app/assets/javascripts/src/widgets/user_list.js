@@ -1,14 +1,14 @@
 $(function() {
 
- var add_button =  Ext.create('Ext.Button', {
+ var add_user =  Ext.create('Ext.Button', {
     text: "New User"
   });
 
-  var delete_button = Ext.create('Ext.Button', {
+  var delete_user = Ext.create('Ext.Button', {
     text: "Delete User"
   });
 
-  var edit_button = Ext.create('Ext.Button', {
+  var edit_user = Ext.create('Ext.Button', {
     text: "Edit User"
   });
 
@@ -16,7 +16,7 @@ $(function() {
     xtype: 'pagingtoolbar', store: "UserStore", dock: 'bottom', displayInfo: true
   };
 
-  var toolbar = {xtype: 'toolbar', items:[add_button, delete_button, edit_button]};
+  var toolbar = {xtype: 'toolbar', items:[add_user, delete_user, edit_user]};
 
   Ext.define('Gowane.Widgets.UserList', {
     extend: 'Ext.grid.Panel',

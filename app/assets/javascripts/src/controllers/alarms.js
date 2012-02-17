@@ -2,13 +2,16 @@ Ext.define('Gowane.controllers.Alarms', {
   extend: 'Ext.app.Controller',
   stores: ['Gowane.stores.Geofences', 'Gowane.stores.Alarms'],
   refs: [
-    {selector: 'viewport geofences_map', ref: 'map'}
+    {selector: 'viewport geofence_map', ref: 'map'}
   ],
 
   init: function() {
     this.control({
-      'full_alarm_list button[text="New Alarm"]': {
-        click: this.createAlarm
+      'full_alarm_list button[text="New Speed Alarm"]': {
+        click: this.createSpeedAlarm
+      },
+      'full_alarm_list button[text="New Geofence Alarm"]': {
+        click: this.createGeofenceAlarm
       },
       'full_alarm_list button[text="Delete Alarm"]': {
         click: this.deleteAlarm
@@ -38,7 +41,12 @@ Ext.define('Gowane.controllers.Alarms', {
     }
   },
 
-  createAlarm: function(e) {
+  createSpeedAlarm: function(e) {
+    var window = this.createFloatingWindow();
+    window.showAt(e.getXY());
+  },
+
+  createGeofenceAlarm: function(e) {
     var window = this.createFloatingWindow();
     window.showAt(e.getXY());
   },
