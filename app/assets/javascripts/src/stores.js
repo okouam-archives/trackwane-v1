@@ -27,13 +27,13 @@ Ext.define('Gowane.stores.Places', {
 });
 
 Ext.define('Gowane.stores.Devices', {
-  model: 'Gowane.models.Device',         extend: 'Ext.data.Store',           requires: 'Gowane.models.Device'
+  model: 'Gowane.models.Device', extend: 'Ext.data.Store', groupField: 'group_name', requires: 'Gowane.models.Device'
 });
 
 Ext.define('Gowane.stores.Users', {
-  model: 'Gowane.models.User',         extend: 'Ext.data.Store',        requires: 'Gowane.models.User'
+  model: 'Gowane.models.User', extend: 'Ext.data.Store', requires: 'Gowane.models.User'
 });
 
 Ext.define('Gowane.stores.Alarms', {
-  model: 'Gowane.models.Alarm',         extend: 'Ext.data.Store',        requires: 'Gowane.models.Alarm'
+  model: 'Gowane.models.Alarm', extend: 'Ext.data.Store', requires: 'Gowane.models.Alarm'
 });

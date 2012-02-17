@@ -29,15 +29,14 @@ Ext.define('Gowane.Widgets.SummaryPlaceList', {
   stripeRows: true,
   store: 'PlaceStore',
   title: "Points of Interest",
-  dockedItems: [{
-    xtype: 'pagingtoolbar',
-  //  store: "Gowane.stores.Places",
-store: 'PlaceStore',
-    dock: 'bottom',
-    displayInfo: true
-  },{ xtype: 'toolbar',
-	items:[Label_Cbo,Group_SelectionCBO]
-	}],
+  dockedItems: [
+    {xtype: 'pagingtoolbar',
+      store: 'PlaceStore',
+      dock: 'bottom',
+      displayInfo: true
+    },
+    { xtype: 'toolbar', items:[Label_Cbo,Group_SelectionCBO]}
+  ],
   columns: [
     { header : 'Name', sortable : true, dataIndex : 'name', flex: 1},
     { header : 'Category', sortable : true, dataIndex : 'category', flex: 1}

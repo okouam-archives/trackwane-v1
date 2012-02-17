@@ -5,53 +5,85 @@ Ext.define('Gowane.controllers.Users', {
   init: function() {
     this.control({
       'account_list': {
-        selectionchange: this.onAccountSelect,
-        beforeitemcontextmenu: this.onAccountItemContextMenu,
-        containercontextmenu: this.onAccountContextMenu
+        selectionchange: this.onAccountSelect
+      },
+      'user_list': {
+        selectionchange: this.onUserSelect
+      },
+      'user_list button[text="New User"]': {
+        click: this.createUser
+      },
+      'user_list button[text="Delete User"]': {
+        click: this.deleteUser
+      },
+      'device_list button[text="Edit User"]': {
+        click: this.editUser
       }
     })
   },
 
+  onUserSelect: function(item, selection) {
+    if (selection.length > 0) {
+      this.selected_user = selection[0];
+    }
+  },
+
+  saveUser: function() {
+    var component = Ext.getCmp("user_editor");
+    var form = component.query('form')[0].form;
+    if (form.isValid()) {
+      var record = form.getRecord();
+      if (!record) {
+        record = Ext.getStore('UserStore').add(form.getFieldValues())[0];
+        record.set("account_id", this.selected_account.get("id"));
+      } else {
+        form.updateRecord(record);
+      }
+      record.save();
+      component.close();
+    }
+  },
+
+  closeUserEditor: function() {
+    var component = Ext.getCmp("user_editor");
+    component.close();
+  },
+
   onLaunch: function() {
     Ext.data.StoreManager.lookup('AccountStore').load();
-    this.accountItemContextMenu = Ext.create('Ext.menu.Menu', {
-      items: [
-        {text: 'Edit Client', handler: function(item, e) {
-          var window = this.createEditClientWindow(this.selected_account);
-          window.showAt(e.getXY());
-        }.bind(this)},
-        {text: 'Delete Client', handler: function() {
-          if (confirm("Are you sure you want to delete this client?")) {
-            var store = this.selected_account.store;
-            store.remove(this.selected_account);
-            store.sync();
-          }
-        }.bind(this)},
-        {text: 'Add Client', handler: function(item, e) {
-          var window = this.createNewClientWindow();
-          window.showAt(e.getXY());
-        }.bind(this)}
-      ]
-    })
-    this.accountContextMenu = Ext.create('Ext.menu.Menu', {
-      items: [
-        {text: 'Add Client', handler: function(item, e) {
-          var window = this.createNewClientWindow();
-          window.showAt(e.getXY());
-        }.bind(this)}
-      ]
-    })
   },
 
-  onAccountContextMenu: function(view, e) {
-    e.stopEvent();
-    this.accountContextMenu.showAt(e.getXY());
+  deleteUser: function() {
+    if (!this.selected_user) {
+      alert("Please select a user to remove.");
+    } else {
+      if (confirm("Are you sure you want to delete this user?")) {
+        var store = this.selected_user.store;
+        store.remove(this.selected_user);
+        store.sync();
+      }
+    }
   },
 
-  onAccountItemContextMenu: function(view, record, item, index, e) {
-    e.stopEvent();
-    view.getSelectionModel().select(index, false);
-    this.accountItemContextMenu.showAt(e.getXY());
+  editUser: function() {
+    if (!this.selected_user) {
+      alert("Please select a user to edit.")
+    } else {
+      var form = this.createUserForm();
+      form.loadRecord(this.selected_user);
+      var window = this.createFloatingWindow("Edit User", [form]);
+      window.show();
+    }
+  },
+
+  createUser: function() {
+    if (!this.selected_account) {
+      alert("Please select a client before adding a new user.")
+    } else {
+      var form = this.createUserForm();
+      var window = this.createFloatingWindow("New User", [form]);
+      window.show();
+    }
   },
 
   onAccountSelect: function(item, selection) {
@@ -63,9 +95,15 @@ Ext.define('Gowane.controllers.Users', {
     }
   },
 
-  createNewClientWindow: function() {
-    var form = Ext.create('Ext.form.Panel', {
-      height: 140,  width: 299, bodyPadding: 10, defaultType: 'textfield',
+  createUserForm: function() {
+    return Ext.create('Ext.form.Panel', {
+      collapsible: false,
+      closable: false,
+      bodyStyle: 'padding: 5px',
+      flex: 1,
+      align: 'stretchmax',
+      width: '100%',
+      defaultType: 'textfield',
       items: [
         {fieldLabel: 'Société', name: 'email'},
         {fieldLabel: 'Contact', name: 'email'},
@@ -73,31 +111,18 @@ Ext.define('Gowane.controllers.Users', {
         {fieldLabel: 'Téléphone', name: 'email'}
       ]
     });
+  },
+
+  createFloatingWindow: function(title, contents) {
     return new Ext.Window({
       width: 310,
-      id: "new-client-window",
-      title: "Add New Client",
+      id: "user_editor",
+      title: title,
       height: 203,
       closable: false,
-      items: [form],
-      fbar: [
-        { text: 'Cancel',
-          handler: function () {
-            Ext.getCmp('new-client-window').close();
-          }
-        },
-        { text: 'Save',
-          handler: function () {
-            var record = form.getRecord();
-            if (form.isValid()) {
-              form.updateRecord(record);
-              record.save();
-            }
-          }
-        }
-      ]
+      items: contents,
+      fbar: [{text: 'Cancel', handler: this.closeUserEditor.bind(this)}, {text: 'Save', handler: this.saveUser.bind(this)}]
     });
   }
-
 });
 

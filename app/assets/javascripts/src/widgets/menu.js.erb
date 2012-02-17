@@ -31,13 +31,16 @@ Ext.define('Gowane.Widgets.Menu', {
           window.location = "/reports/stop";
         }
       }
-    ]},'-',
+    ]},
+    '-',
     {text: 'Alarmes', handler: function() {
       window.location = "/alarms";
-    }},'-',
+    }},
+    '-',
     {text: "Points d'intéret", handler: function() {
       window.location = "/places";
-    }},'-',
+    }},
+    '-',
     {text: 'Administration', menu: [
       { text: 'Clients',
         handler: function() {
@@ -53,18 +56,14 @@ Ext.define('Gowane.Widgets.Menu', {
         handler: function() {
           window.location = "/devices";
         }
-      },
-      { text: 'Groupes',
-        handler: function() {
-          window.location = "/groups";
-        }
       }
-    ]},'-',
-      { text: 'Help',
-        handler: function() {
-          alert('Function doesn\'t ready');
-        }
-      },'-',
+    ]},
+    '-',
+    { text: 'Help', handler: function() {
+        alert('Function doesn\'t ready');
+      }
+    },
+    '-',
     {text: 'Logout', handler: function() {
       window.location = "/user_session/destroy";
     }}
