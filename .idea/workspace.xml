@@ -2,11 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b1961ba-6faf-4767-84cb-48a48f62492f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/controllers/alarms.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/controllers/alarms.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/models.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/models.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/shared/header.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/shared/header.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/shared/map.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/shared/map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/shared/side_column.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/shared/side_column.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/stores.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/stores.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/account_list.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/account_list.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_alarm_list.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_alarm_list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/user_list.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/user_list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/alarms/index.html.haml" afterPath="$PROJECT_DIR$/app/views/alarms/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20120127162204_create_users_table.rb" afterPath="$PROJECT_DIR$/db/migrate/20120127162204_create_users_table.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_geofence_list.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_geofence_list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/date_selection.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/date_selection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/full_device_list.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/full_device_list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/historical_map.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/historical_map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/menu.js.erb" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/menu.js.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/realtime_map.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/realtime_map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/report_builder.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/report_builder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/summary_device_list.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/summary_device_list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/summary_group_list.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/src/widgets/summary_group_list.js" />
     </list>
     <ignored path="Gowane.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,19 +40,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/alarms/index.html.haml">
+      <file leaf-file-name="stores.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/stores.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="46" selection-start="914" selection-end="914" vertical-scroll-proportion="0.0">
+            <state line="42" column="3" selection-start="1500" selection-end="1500" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="alarms.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/controllers/alarms.js">
+      <file leaf-file-name="application.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="23" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="geofence_map.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/geofence_map.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="full_geofence_list.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_geofence_list.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -50,16 +79,52 @@
       <file leaf-file-name="full_alarm_list.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_alarm_list.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="66" selection-start="991" selection-end="991" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_list.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/user_list.js">
+      <file leaf-file-name="alarm_editor.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/alarm_editor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="74" selection-start="418" selection-end="418" vertical-scroll-proportion="0.39244187">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/shared/header.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="22" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="map.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/shared/map.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="3" selection-start="1160" selection-end="1160" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="side_column.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/shared/side_column.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="5" selection-start="189" selection-end="189" vertical-scroll-proportion="0.15765765">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="geofence_editor.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/geofence_editor.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -79,22 +144,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/db/seeds.rb" />
-        <option value="$PROJECT_DIR$/app/models/device.rb" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/full_device_list.js" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/menu.js.erb" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/controllers/controller_base.js" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/device_editor.js" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/controllers/devices.js" />
-        <option value="$PROJECT_DIR$/app/controllers/devices_controller.rb" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/controllers/users.js" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/stores.js" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/models.js" />
-        <option value="$PROJECT_DIR$/db/migrate/20120127162204_create_users_table.rb" />
-        <option value="$PROJECT_DIR$/app/views/alarms/index.html.haml" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/controllers/alarms.js" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_alarm_list.js" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/user_list.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_geofence_list.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/account_list.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/date_selection.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/full_device_list.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/historical_map.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/menu.js.erb" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/realtime_map.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/report_builder.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/summary_device_list.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/widgets/summary_group_list.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/models.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/stores.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/shared/header.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/shared/map.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/src/shared/side_column.js" />
       </list>
     </option>
   </component>
@@ -414,6 +479,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="alarms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gowane" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gowane" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shared" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -885,114 +980,114 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/devices/index.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/report_builder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="15" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/summary_device_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="14" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/summary_group_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="14" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/summary_place_list.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/controllers/controller_base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/controllers/distance_events.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/controllers/devices.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="659" selection-end="790" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/controllers/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="25" selection-start="699" selection-end="699" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/stores.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="51" selection-start="1195" selection-end="1195" vertical-scroll-proportion="0.6976744">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/models.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="52" selection-start="2175" selection-end="2175" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20120127162204_create_users_table.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="56" selection-start="593" selection-end="593" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20120129203337_create_places_table.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20120211111900_create_geofences.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20120212081051_create_groups_table.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20120127161540_create_devices_table.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="49" selection-start="259" selection-end="259" vertical-scroll-proportion="0.23982558">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/alarms/index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="46" selection-start="914" selection-end="914" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/controllers/alarms.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="23" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_alarm_list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="66" selection-start="991" selection-end="991" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/user_list.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="74" selection-start="418" selection-end="418" vertical-scroll-proportion="0.39244187">
+        <state line="20" column="20" selection-start="443" selection-end="443" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/models.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="14" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/stores.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="3" selection-start="1500" selection-end="1500" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/geofence_editor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/geofence_map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_geofence_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/full_alarm_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/widgets/alarms/alarm_editor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/shared/header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="22" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/shared/map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="3" selection-start="1160" selection-end="1160" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/src/shared/side_column.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="5" selection-start="189" selection-end="189" vertical-scroll-proportion="0.15765765">
           <folding />
         </state>
       </provider>

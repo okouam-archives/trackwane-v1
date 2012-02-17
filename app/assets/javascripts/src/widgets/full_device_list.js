@@ -1,24 +1,14 @@
 $(function() {
 
-  var add_button =  Ext.create('Ext.Button', {
-    text: "New Device"
-  });
+  var add_button =  Ext.create('Ext.Button', {text: "New Device"});
 
-  var delete_button = Ext.create('Ext.Button', {
-    text: "Delete Device"
-  });
+  var delete_button = Ext.create('Ext.Button', {text: "Delete Device"});
 
-  var edit_button = Ext.create('Ext.Button', {
-    text: "Edit Device"
-  });
+  var edit_button = Ext.create('Ext.Button', {text: "Edit Device"});
 
-  var groupingFeature = Ext.create('Ext.grid.feature.Grouping',{
-    groupHeaderTpl: '{name}'
-  });
+  var groupingFeature = Ext.create('Ext.grid.feature.Grouping',{groupHeaderTpl: '{name}'});
 
-  var pager = {
-    xtype: 'pagingtoolbar', store: "DeviceStore", dock: 'bottom', displayInfo: true
-  };
+  var pager = {xtype: 'pagingtoolbar', store: "DeviceStore", dock: 'bottom', displayInfo: true};
 
   var toolbar = {xtype: 'toolbar', items:[add_button, edit_button, delete_button]};
 

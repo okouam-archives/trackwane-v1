@@ -1,25 +1,29 @@
-Ext.define('Gowane.Widgets.HistoricalMap', {
+$(function() {
 
-  extend: 'Gowane.Shared.Map',
+  Ext.define('Gowane.Widgets.HistoricalMap', {
 
-  alias: 'widget.historical_map',
+    extend: 'Gowane.Shared.Map',
 
-  initComponent: function() {
-    this.layout = 'fit';
-    this.callParent(arguments);
-  },
+    alias: 'widget.historical_map',
 
-  displayRoute: function(events) {
-    if (!this.layer) {
-      this.layer = this.createFeatureLayer("Devices");
+    initComponent: function() {
+      this.layout = 'fit';
+      this.callParent(arguments);
+    },
+
+    displayRoute: function(events) {
+      if (!this.layer) {
+        this.layer = this.createFeatureLayer("Devices");
+      }
+      var points = _.map(events, function(event) {
+        return new OpenLayers.Geometry.Point(event.longitude, event.latitude);
+      });
+      var route = new OpenLayers.Geometry.LineString(points);
+      var feature = new OpenLayers.Feature.Vector(route);
+      this.layer.destroyFeatures();
+      this.layer.addFeatures([feature]);
+      this.layer.map.zoomToExtent(this.layer.getDataExtent());
     }
-    var points = _.map(events, function(event) {
-      return new OpenLayers.Geometry.Point(event.longitude, event.latitude);
-    });
-    var route = new OpenLayers.Geometry.LineString(points);
-    var feature = new OpenLayers.Feature.Vector(route);
-    this.layer.destroyFeatures();
-    this.layer.addFeatures([feature]);
-    this.layer.map.zoomToExtent(this.layer.getDataExtent());
-  }
+  });
+
 });

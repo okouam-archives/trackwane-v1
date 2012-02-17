@@ -1,28 +1,12 @@
 $(function() {
 
-  var add_speed_alarm =  Ext.create('Ext.Button', {
-    text: "New Speed Alarm", handler: function() {
+  var add_speed_alarm =  Ext.create('Ext.Button', {text: "New Speed Alarm"});
 
-    }
-  });
+  var add_geofence_alarm =  Ext.create('Ext.Button', {text: "New Geofence Alarm"});
 
-  var add_geofence_alarm =  Ext.create('Ext.Button', {
-    text: "New Geofence Alarm", handler: function() {
+  var delete_alarm = Ext.create('Ext.Button', {text: "Delete Alarm"});
 
-    }
-  });
-
-  var delete_alarm = Ext.create('Ext.Button', {
-    text: "Delete Alarm", handler: function() {
-
-    }
-  });
-
-  var edit_alarm =  Ext.create('Ext.Button', {
-    text: "Edit Alarm", handler: function() {
-
-    }
-  });
+  var edit_alarm =  Ext.create('Ext.Button', {text: "Edit Alarm"});
 
   Ext.define('Gowane.Widgets.Alarms.FullAlarmList', {
     extend: 'Ext.grid.Panel',

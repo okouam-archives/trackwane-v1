@@ -1,42 +1,48 @@
-Ext.define('Gowane.Shared.Map', {
+$(function() {
 
-  extend: 'Ext.panel.Panel',
+  Ext.define('Gowane.Shared.Map', {
 
-  initComponent: function() {
-    this.layout = 'fit';
-    this.callParent(arguments);
-  },
+    extend: 'Ext.panel.Panel',
 
-  renderMap: function() {
-    OpenLayers.ImgPath = '/assets/OpenLayers/';
-    OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
-    this.map = new OpenLayers.Map(this.body.dom, {
-      theme: null, controls: []
-    });
-    var gmap = new OpenLayers.Layer.Google("Streets");
-    this.map.addLayer(gmap);
-    this.addCommonControls();
-    this.map.zoomTo(5);
-  },
+    initComponent: function() {
+      this.layout = 'fit';
+      this.callParent(arguments);
+    },
 
-  addCommonControls: function() {
-    var panZoom = new OpenLayers.Control.PanZoomBar();
-    panZoom.zoomWorldIcon = false;
-    var controls = [
-      new OpenLayers.Control.ScaleLine(),
-      new OpenLayers.Control.DragPan(),
-      new OpenLayers.Control.Navigation(),
-      panZoom
-    ];
-    this.map.addControls(controls);
-    $.each(controls, function (index, item) {
-      item.activate();
-    });
-  },
+    renderMap: function() {
+      OpenLayers.ImgPath = '/assets/OpenLayers/';
+      OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+      this.map = new OpenLayers.Map(this.body.dom, {
+        theme: null, controls: []
+      });
+      var gmap = new OpenLayers.Layer.Google("Streets");
+      this.map.addLayer(gmap);
+      this.addCommonControls();
+      this.map.zoomTo(5);
+    },
 
-  createFeatureLayer: function(name) {
-    var layer = new OpenLayers.Layer.Vector(name);
-    this.map.addLayer(layer);
-    return layer;
-  }
+    addCommonControls: function() {
+      var panZoom = new OpenLayers.Control.PanZoomBar();
+      panZoom.zoomWorldIcon = false;
+      var controls = [
+        new OpenLayers.Control.ScaleLine(),
+        new OpenLayers.Control.DragPan(),
+        new OpenLayers.Control.Navigation(),
+        panZoom
+      ];
+      this.map.addControls(controls);
+      $.each(controls, function (index, item) {
+        item.activate();
+      });
+    },
+
+    createFeatureLayer: function(name) {
+      var layer = new OpenLayers.Layer.Vector(name);
+      this.map.addLayer(layer);
+      return layer;
+    }
+  });
+
+
 });
+

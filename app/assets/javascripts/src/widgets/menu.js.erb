@@ -1,71 +1,75 @@
-Ext.define('Gowane.Widgets.Menu', {
-  extend: 'Ext.panel.Panel',
-  alias: 'widget.menu',
-  border: false,
-  tbar: [
-    {text: 'Suivi', menu: [
-      {text: 'Temps réel',
-        handler: function() {
-          window.location = "/map/realtime";
+$(function() {
+
+  Ext.define('Gowane.Widgets.Menu', {
+    extend: 'Ext.panel.Panel',
+    alias: 'widget.menu',
+    border: false,
+    tbar: [
+      {text: 'Suivi', menu: [
+        {text: 'Temps réel',
+          handler: function() {
+            window.location = "/map/realtime";
+          }
+        },
+        {text: 'Historique',
+          handler: function() {
+            window.location = "/map/historical";
+          }
+        }
+      ]},'-',
+      {text: 'Rapports', menu: [
+        {text: 'Rapport GPS',
+          handler: function() {
+            window.location = "/reports/gps";
+          }
+        },
+        {text: 'Rapport de distance',
+          handler: function() {
+            window.location = "/reports/distance";
+          }
+        },
+        {text: "Rapport d'arret",
+          handler: function() {
+            window.location = "/reports/stop";
+          }
+        }
+      ]},
+      '-',
+      {text: 'Alarmes', handler: function() {
+        window.location = "/alarms";
+      }},
+      '-',
+      {text: "Points d'intéret", handler: function() {
+        window.location = "/places";
+      }},
+      '-',
+      {text: 'Administration', menu: [
+        { text: 'Clients',
+          handler: function() {
+            window.location = "/accounts";
+          }
+        },
+        { text: 'Utilisateurs',
+          handler: function() {
+            window.location = "/users";
+          }
+        },
+        { text: 'Véhicules',
+          handler: function() {
+            window.location = "/devices";
+          }
+        }
+      ]},
+      '-',
+      { text: 'Help', handler: function() {
+          alert('Function doesn\'t ready');
         }
       },
-      {text: 'Historique',
-        handler: function() {
-          window.location = "/map/historical";
-        }
-      }
-    ]},'-',
-    {text: 'Rapports', menu: [
-      {text: 'Rapport GPS',
-        handler: function() {
-          window.location = "/reports/gps";
-        }
-      },
-      {text: 'Rapport de distance',
-        handler: function() {
-          window.location = "/reports/distance";
-        }
-      },
-      {text: "Rapport d'arret",
-        handler: function() {
-          window.location = "/reports/stop";
-        }
-      }
-    ]},
-    '-',
-    {text: 'Alarmes', handler: function() {
-      window.location = "/alarms";
-    }},
-    '-',
-    {text: "Points d'intéret", handler: function() {
-      window.location = "/places";
-    }},
-    '-',
-    {text: 'Administration', menu: [
-      { text: 'Clients',
-        handler: function() {
-          window.location = "/accounts";
-        }
-      },
-      { text: 'Utilisateurs',
-        handler: function() {
-          window.location = "/users";
-        }
-      },
-      { text: 'Véhicules',
-        handler: function() {
-          window.location = "/devices";
-        }
-      }
-    ]},
-    '-',
-    { text: 'Help', handler: function() {
-        alert('Function doesn\'t ready');
-      }
-    },
-    '-',
-    {text: 'Logout', handler: function() {
-      window.location = "/user_session/destroy";
-    }}
-  ]
+      '-',
+      {text: 'Logout', handler: function() {
+        window.location = "/user_session/destroy";
+      }}
+    ]
+  });
+
 });
