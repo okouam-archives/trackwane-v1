@@ -11,6 +11,9 @@
         Ext.create('Gowane.stores.Groups', {
           storeId: "GroupStore"
         });
+        Ext.create('Gowane.stores.GpsEvents', {
+          storeId: "GpsEventStore"
+        });
         new Ext.Viewport({
           layout : 'border', items : [
             {xtype: 'menu', region : 'north'},
@@ -22,7 +25,7 @@
                   {xtype: 'summary_device_list'}
                 ]}
               ]},
-              {xtype: 'panel', flex: 1, title: "Historique"}
+              {xtype: 'full_gps_event_list', flex: 1}
             ]}
           ]
         });

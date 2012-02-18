@@ -9,7 +9,7 @@ class GeofencesController < ApplicationController
   end
 
   def create
-    geofence = Geofence.new(params.slice(Device.column_names))
+    geofence = Geofence.new(params.slice(*Geofence.column_names))
     geofence.account = current_user.account
     if geofence.save
        render json: {success: true, results: [geofence.as_json]}
@@ -19,7 +19,8 @@ class GeofencesController < ApplicationController
   end
 
   def destroy
-    Geofence.find(params[:id])
+    Geofence.find(params[:id]).destroy
+    render json: {success: true}
   end
 
 end

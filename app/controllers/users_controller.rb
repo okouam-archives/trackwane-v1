@@ -5,9 +5,36 @@ class UsersController < ApplicationController
       format.html
       format.json do
         account_id = params[:account_id]
+        account_id = current_user.account.id unless account_id
         @users = Account.find(account_id).users
         render json: {success: true, results: @users}
       end
+    end
+  end
+
+  def update
+    user = User.find(params[:id])
+    persist(user, params)
+  end
+
+  def create
+    user = User.new
+    persist(user, params)
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
+    render json: {success: true}
+  end
+
+  private
+
+  def persist(user, params)
+    changes = params.slice(*User.column_names)
+    if user.update_attributes(changes)
+      render json: {success: true, results: [user.as_json()]}
+    else
+      render json: {success: false}
     end
   end
 

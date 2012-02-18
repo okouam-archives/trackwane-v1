@@ -2,31 +2,32 @@ $(function() {
 
   Ext.define('Gowane.models.Account', {
     extend: 'Ext.data.Model',
-    fields: ['id', 'name', 'telephone', 'contact', 'email'],
+    fields: ['id', 'name', 'telephone', 'contact', 'email', 'devices_count', 'alarms_count', 'users_count',
+    'geofences_count', 'places_count'],
     proxy: {type: 'rest', format: 'json', url: '/accounts', reader: {type: 'json', root: 'results'}}
   });
 
   Ext.define('Gowane.models.GpsEvent', {
     extend: 'Ext.data.Model',
     fields: [],
-    proxy: {type: 'rest', format: 'json', url: '/events?type=gps', reader: {type: 'json', root: 'results'}}
+    proxy: {type: 'rest', format: 'json', url: '/events', reader: {type: 'json', root: 'results'}}
   });
 
   Ext.define('Gowane.models.StopEvent', {
     extend: 'Ext.data.Model',
     fields: [],
-    proxy: {type: 'rest', format: 'json', url: '/events?type=stop', reader: {type: 'json', root: 'results'}}
+    proxy: {type: 'rest', format: 'json', url: '/events', reader: {type: 'json', root: 'results'}}
   });
 
   Ext.define('Gowane.models.DistanceEvent', {
     extend: 'Ext.data.Model',
     fields: [],
-    proxy: {type: 'rest', format: 'json', url: '/events?type=distance', reader: {type: 'json', root: 'results'}}
+    proxy: {type: 'rest', format: 'json', url: '/events', reader: {type: 'json', root: 'results'}}
   });
 
   Ext.define('Gowane.models.Alarm', {
     extend: 'Ext.data.Model',
-    fields: ['id', 'category', 'name', 'action', 'rule', 'recipient'],
+    fields: ['id', 'category', 'name', 'medium', 'rule', 'recipient'],
     proxy: {type: 'rest', format: 'json', url: '/alarms', reader: {type: 'json', root: 'results'}}
   });
 

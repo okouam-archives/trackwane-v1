@@ -7,7 +7,7 @@ class DevicesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        results = @devices.as_json(:include => [:group], :computed => ["group_name"])
+        results = @devices.as_json(:computed => ["group_name"])
         render json: {success: true, results: results}
       end
     end
@@ -23,22 +23,23 @@ class DevicesController < ApplicationController
     persist(device, params)
   end
 
-  def events
-    device = Device.find(params[:id])
-    render :json => device.events
-  end
-
   def poll
     device = Device.find(params[:id])
     render :json => device.events.last
+  end
+
+  def destroy
+    Device.find(params[:id]).destroy
+    render json: {success: true}
   end
 
   private
 
   def persist(device, params)
     device.group = find_group(params)
-    if device.update_attributes(params.slice(Device.column_names))
-      render json: {success: true, results: [device.as_json(:include => [:group], :computed => ["group_name"])]}
+    changes = params.slice(*Device.column_names)
+    if device.update_attributes(changes)
+      render json: {success: true, results: [device.as_json(:computed => ["group_name"])]}
     else
       render json: {success: false}
     end

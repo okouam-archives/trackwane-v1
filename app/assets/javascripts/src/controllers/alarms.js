@@ -40,6 +40,7 @@ Ext.define('Gowane.controllers.Alarms', {
   onGeofenceSelect: function(item, selection) {
     if (selection.length > 0) {
       this.selected_geofence = selection[0];
+      this.getMap().showGeofence(selection[0].get("coordinates"));
     }
   },
 
@@ -144,6 +145,7 @@ Ext.define('Gowane.controllers.Alarms', {
     this.getMap().renderMap();
     Ext.data.StoreManager.lookup('GeofenceStore').load();
     Ext.data.StoreManager.lookup('AlarmStore').load();
+    Ext.data.StoreManager.lookup('UserStore').load();
   },
 
   closeGeofenceEditor: function() {
@@ -152,25 +154,33 @@ Ext.define('Gowane.controllers.Alarms', {
   },
 
   createSpeedAlarmForm: function() {
-    return Ext.create('Ext.form.Panel', {
-      collapsible: false,
-      closable: false,
-      bodyStyle: 'padding: 5px',
-      flex: 1,
-      align: 'stretchmax',
-      width: '100%',
-      defaultType: 'textfield',
-      items: [
-        {fieldLabel: 'Name', name: 'name', width: 110, anchor: '-4'},
-        {fieldLabel: 'Maximum Speed', name: 'rule', width: 110, anchor: '-4'},
-        {fieldLabel: 'Action', name: 'action', width: 110, anchor: '-4'},
-        {fieldLabel: 'Recipient', name: 'recipient', width: 110, anchor: '-4'}
-      ]
-    });
+    var ruleSelector = {
+      fieldLabel: 'Maximum Speed',
+      name: 'rule',
+      width: 110,
+      anchor: '-4'
+    };
+    return this.createAlarmForm(ruleSelector);
   },
 
   createGeofenceAlarmForm: function() {
-    var actions = [{id: "email", name: "Email"}, {id: "sms", name: "SMS"}];
+    var ruleSelector =  {
+      fieldLabel: 'Geofence',
+      store: Ext.getStore('GeofenceStore'),
+      width: 110,
+      queryMode: 'local',
+      anchor: '-4',
+      valueField: 'id',
+      name: 'rule',
+      displayField: 'name',
+      xtype: 'combobox',
+      forceSelection: true
+    };
+    return this.createAlarmForm(ruleSelector);
+  },
+
+  createAlarmForm: function(ruleSelector) {
+    var actions = [["email", "Email"], ["sms", "SMS"]];
     return Ext.create('Ext.form.Panel', {
       collapsible: false,
       closable: false,
@@ -180,13 +190,13 @@ Ext.define('Gowane.controllers.Alarms', {
       width: '100%',
       defaultType: 'textfield',
       items: [
+        {xtype: 'hidden', name: 'category', value: 'geofence'},
+        ruleSelector,
         {fieldLabel: 'Name', name: 'name', width: 110, anchor: '-4'},
-        {fieldLabel: 'Geofence', store: Ext.getStore('GeofenceStore'), width: 110, queryMode: 'local', anchor: '-4',
-          valueField: 'id', name: 'rule', displayField: 'name', xtype: 'combobox'},
-        {fieldLabel: 'Action', store: actions, width: 110, queryMode: 'local', anchor: '-4',
-          valueField: 'id', name: 'action', displayField: 'name', xtype: 'combobox'},
-        {fieldLabel: 'Action', store: Ext.getStore('DeviceStore'), width: 110, queryMode: 'local', anchor: '-4',
-          valueField: 'id', name: 'action', displayField: 'name', xtype: 'combobox'}
+        {fieldLabel: 'Medium', store: actions, width: 110, queryMode: 'local', anchor: '-4',
+          valueField: 'id', name: 'medium', displayField: 'name', xtype: 'combobox', forceSelection: true},
+        {fieldLabel: 'Recipient', store: Ext.getStore('UserStore'), width: 110, queryMode: 'local', anchor: '-4',
+          valueField: 'id', name: 'recipient', displayField: 'login', xtype: 'combobox', forceSelection: true}
       ]
     });
   },

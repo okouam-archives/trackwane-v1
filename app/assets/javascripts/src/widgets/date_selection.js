@@ -6,7 +6,6 @@ $(function() {
     bodyPadding: 10,
     defaultType: 'textfield',
     title: "Periode",
-    bbar: [{xtype: 'button', text: "Update"}],
     items: [
       {
         xtype: 'datefield',

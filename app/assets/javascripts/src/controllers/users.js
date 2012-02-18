@@ -105,10 +105,11 @@ Ext.define('Gowane.controllers.Users', {
       width: '100%',
       defaultType: 'textfield',
       items: [
-        {fieldLabel: 'Société', name: 'email'},
-        {fieldLabel: 'Contact', name: 'email'},
-        {fieldLabel: 'Adresse Electronique', name: 'name'},
-        {fieldLabel: 'Téléphone', name: 'email'}
+        {fieldLabel: 'Nom', name: 'login'},
+        {fieldLabel: 'Role', name: 'role'},
+        {fieldLabel: 'Adresse Electronique', name: 'email'},
+        {fieldLabel: 'Mot de Passe', name: 'password'},
+        {fieldLabel: 'Status', name: 'status'}
       ]
     });
   },

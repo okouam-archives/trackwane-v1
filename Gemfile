@@ -15,6 +15,11 @@ gem 'capistrano'
 gem 'rspec'
 gem 'postgis_adapter', :git => 'https://github.com/dougcole/postgis_adapter.git'
 gem 'rspec-rails'
+gem 'silent-postgres'
+
+group :development, :test do
+  gem 'itslog'
+end
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'

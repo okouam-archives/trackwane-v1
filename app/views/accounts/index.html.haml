@@ -1,0 +1,20 @@
+:javascript
+  $(function() {
+    Ext.application({
+      name: 'Gowane',
+      autoCreateViewport: false,
+      controllers: ['Gowane.controllers.Accounts'],
+      launch: function() {
+        Ext.create('Gowane.stores.Accounts', {
+          storeId: "AccountStore"
+        });
+        new Ext.Viewport({
+          layout : 'border',
+          items : [
+            { xtype: 'menu', region : 'north'},
+            { region : 'center', xtype: 'full_account_list', layout: 'fit', layoutConfig: {align: 'stretch'}}
+          ]
+        });
+      }
+    });
+  });

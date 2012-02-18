@@ -11,14 +11,11 @@ Gowane::Application.routes.draw do
     end
   end
 
-  resources :accounts, :drivers, :user_sessions, :users, :places, :geofences, :alarms, :groups
+  resources :accounts, :drivers, :user_sessions, :users, :places, :geofences, :alarms, :groups, :events
 
   resources :devices do
     collection do
       get :poll
-    end
-    member do
-      get :events
     end
   end
 

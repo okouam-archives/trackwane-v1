@@ -104,14 +104,17 @@ Ext.define('Gowane.controllers.Devices', {
     var form = component.query('form')[0].form;
     if (form.isValid()) {
       var record = form.getRecord();
+      var store = Ext.getStore('DeviceStore');
       if (!record) {
-        record = Ext.getStore('DeviceStore').add(form.getFieldValues())[0];
+        record = store.add(form.getFieldValues())[0];
         record.set("account_id", this.selected_account.get("id"));
       } else {
         form.updateRecord(record);
       }
-      record.save();
-      component.close();
+      record.save({callback: function() {
+        record.commit();
+        component.close();
+      }});
     }
   },
 
