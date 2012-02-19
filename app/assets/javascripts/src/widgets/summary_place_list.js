@@ -18,20 +18,15 @@ $(function() {
     displayField: 'category'
   });
 
-  var label_cbo = new Ext.form.Label({
-    text:'Choose a group:'
+  search_box_field.on('change', function() {
+    place_store.clearFilter();
+    place_store.filter([{property: 'name', value: search_box_field.getValue()}]);
   });
 
-  var label_field = new Ext.form.Label({
-    text:'Filtrer :'
+  group_selection_cbo.on('select', function() {
+    place_store.clearFilter();
+    place_store.filter([{property: 'category', value: group_selection_cbo.getValue()}]);
   });
-
-  var search_box_field = new Ext.form.field.Text({
-    width: 100
-  });
-
-  search_box_field.on('change', filterPlaces);
-  group_selection_cbo.on('select', filterGroups);
 
   var b;
   var tab = new Array();
@@ -43,7 +38,7 @@ $(function() {
       anyMatch: false,
       caseSensitive: false,
       fn: function(record) {
-        var exist=0;
+        var exist = 0;
         for (k in tab){
           if (tab[k] == record.get('category')) exist = 1;
         }
@@ -72,23 +67,20 @@ $(function() {
         dock: 'bottom',
         displayInfo: true
       },
-      { xtype: 'toolbar', items:[label_field, search_box_field, label_cbo, group_selection_cbo]}
+      { xtype: 'toolbar',
+        items: [
+          {text: 'Filtrer:', xtype: 'label'},
+          {xtype: 'textfield',  width: 100},
+          {xtype: 'label', text: 'Choose a group:'},
+          group_selection_cbo
+        ]
+      }
     ],
     columns: [
       { header: 'Name', sortable: true, dataIndex: 'name', flex: 1},
       { header: 'Category', sortable: true, dataIndex: 'category', flex: 1}
     ]
   });
-
-  function filterGroups(){
-    place_store.clearFilter();
-    place_store.filter([{property: 'category', value: group_selection_cbo.getValue()}]);
-  }
-
-  function filterPlaces(){
-    place_store.clearFilter();
-    place_store.filter([{property: 'name', value: search_box_field.getValue()}]);
-  }
 
 });
  
