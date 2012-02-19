@@ -11,24 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120213023428) do
+ActiveRecord::Schema.define(:version => 20120218063221) do
 
   create_table "accounts", :force => true do |t|
     t.column "name", :string
     t.column "email", :string
     t.column "contact", :string
     t.column "telephone", :string
+    t.column "devices_count", :integer
+    t.column "alarms_count", :integer
+    t.column "places_count", :integer
+    t.column "users_count", :integer
+    t.column "geofences_count", :integer
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
 
   create_table "alarms", :force => true do |t|
     t.column "name", :string
-    t.column "category", :integer
+    t.column "category", :string
     t.column "account_id", :integer
     t.column "rule", :string
     t.column "recipient", :string
-    t.column "action", :string
+    t.column "medium", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
@@ -91,6 +96,19 @@ ActiveRecord::Schema.define(:version => 20120213023428) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "tracks", :force => true do |t|
+    t.column "device_id", :integer
+    t.column "status_code", :integer
+    t.column "latitude", :decimal
+    t.column "longitude", :decimal
+    t.column "speed", :decimal
+    t.column "address", :string
+    t.column "imei_number", :string
+    t.column "heading", :decimal
+    t.column "alarm_id", :integer
+    t.column "date", :datetime
+  end
 
   create_table "users", :force => true do |t|
     t.column "login", :string, :null => false

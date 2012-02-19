@@ -1,5 +1,6 @@
 Gowane::Application.routes.draw do
 
+  match 'help/:section' => 'help#index'
   match 'map/realtime' => 'map#realtime'
   match 'map/historical' => 'map#historical'
 

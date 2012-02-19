@@ -1,6 +1,6 @@
 class Device < ActiveRecord::Base
   has_many :events
-  belongs_to :account
+  belongs_to :account, :counter_cache => true
   belongs_to :group
 
   def as_json(options)

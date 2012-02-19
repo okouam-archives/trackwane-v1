@@ -1,3 +1,2 @@
-var Gowane = {};
-Gowane.Views = {};
+$.App = {};
 Ext.Loader.setConfig({enabled: true});

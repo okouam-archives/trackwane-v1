@@ -60,9 +60,17 @@ $(function() {
           }
         }
       ]},
-      '-',
-      { text: 'Help', handler: function() {
-          alert('Function doesn\'t ready');
+      {xtype:'tbfill'},
+      {xtype:'button',
+        text: 'Help',
+        handler: function() {
+          var help_window = Ext.create('Gowane.Widgets.HelpWindow', {
+            loader: {
+              url: "/help/" + $.App.Help,
+              autoLoad: true
+            }
+          });
+          help_window.show();
         }
       },
       '-',

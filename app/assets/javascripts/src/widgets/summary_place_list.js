@@ -1,45 +1,94 @@
-var Group_SelectionCBO = new Ext.form.ComboBox({
+$(function() {
+
+  var place_store = Ext.create('Gowane.stores.Places', {
+    storeId: "PlaceStore"
+  });
+
+  var category_store = Ext.create('Gowane.stores.Places', {
+    storeId: "CategoryStore", groupField :'category'
+  });
+
+  var group_selection_cbo = new Ext.form.ComboBox({
     typeAhead: true,
     triggerAction: 'all',
-    lazyRender:true,
+    lazyRender: true,
     mode: 'local',
-    width:180,
-    store: new Ext.data.ArrayStore({
-        id: 0,
-        fields: [
-            'myId',
-            'displayText'
-        ],
-        data: [[1, 'item1'], [2, 'item2']]
-    }),
-    valueField: 'myId',
-    displayField: 'displayText'
-});
+    store:'CategoryStore',
+    valueField: 'category',
+    displayField: 'category'
+  });
 
-var Label_Cbo=Ext.form.Label({
-	text:'Choose a group'
-});
+  var label_cbo = new Ext.form.Label({
+    text:'Choose a group:'
+  });
 
-Ext.define('Gowane.Widgets.SummaryPlaceList', {
-  extend: 'Ext.grid.Panel',
-  alias: 'widget.summary_place_list',
-  flex: 1,
-  width:250,
-  collapsible: false,
-  stripeRows: true,
-  store: 'PlaceStore',
-  title: "Points of Interest",
-  dockedItems: [
-    {xtype: 'pagingtoolbar',
-      store: 'PlaceStore',
-      dock: 'bottom',
-      displayInfo: true
-    },
-    { xtype: 'toolbar', items:[Label_Cbo,Group_SelectionCBO]}
-  ],
-  columns: [
-    { header : 'Name', sortable : true, dataIndex : 'name', flex: 1},
-    { header : 'Category', sortable : true, dataIndex : 'category', flex: 1}
-  ]
-});
+  var label_field = new Ext.form.Label({
+    text:'Filtrer :'
+  });
 
+  var search_box_field = new Ext.form.field.Text({
+    width: 100
+  });
+
+  search_box_field.on('change', filterPlaces);
+  group_selection_cbo.on('select', filterGroups);
+
+  var b;
+  var tab = new Array();
+
+  category_store.filter([
+    {
+      property: 'category',
+      value: '',
+      anyMatch: false,
+      caseSensitive: false,
+      fn: function(record) {
+        var exist=0;
+        for (k in tab){
+          if (tab[k] == record.get('category')) exist = 1;
+        }
+        if (b != record.get('category') && exist == 0) {
+          b = record.get('category');
+          tab.push(b);
+          return record.get('category') ;
+        }
+      },
+      scope: this
+    }
+  ]);
+
+  Ext.define('Gowane.Widgets.SummaryPlaceList', {
+    extend: 'Ext.grid.Panel',
+    alias: 'widget.summary_place_list',
+    flex: 1,
+    width: 250,
+    collapsible: false,
+    stripeRows: true,
+    store: 'PlaceStore',
+    title: "Points of Interest",
+    dockedItems: [
+      { xtype: 'pagingtoolbar',
+        store: 'PlaceStore',
+        dock: 'bottom',
+        displayInfo: true
+      },
+      { xtype: 'toolbar', items:[label_field, search_box_field, label_cbo, group_selection_cbo]}
+    ],
+    columns: [
+      { header: 'Name', sortable: true, dataIndex: 'name', flex: 1},
+      { header: 'Category', sortable: true, dataIndex: 'category', flex: 1}
+    ]
+  });
+
+  function filterGroups(){
+    place_store.clearFilter();
+    place_store.filter([{property: 'category', value: group_selection_cbo.getValue()}]);
+  }
+
+  function filterPlaces(){
+    place_store.clearFilter();
+    place_store.filter([{property: 'name', value: search_box_field.getValue()}]);
+  }
+
+});
+ 
