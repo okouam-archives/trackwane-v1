@@ -18,6 +18,10 @@ $(function() {
     displayField: 'category'
   });
 
+  var search_box_field = new Ext.form.field.Text({
+    width: 100
+  });
+
   search_box_field.on('change', function() {
     place_store.clearFilter();
     place_store.filter([{property: 'name', value: search_box_field.getValue()}]);
@@ -70,7 +74,7 @@ $(function() {
       { xtype: 'toolbar',
         items: [
           {text: 'Filtrer:', xtype: 'label'},
-          {xtype: 'textfield',  width: 100},
+          search_box_field,
           {xtype: 'label', text: 'Choose a group:'},
           group_selection_cbo
         ]
