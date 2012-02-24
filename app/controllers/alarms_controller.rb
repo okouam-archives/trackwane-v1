@@ -14,7 +14,7 @@ class AlarmsController < ApplicationController
   def create
     changes = params.slice(*Alarm.column_names)
     alarm = Alarm.new(changes)
-    alarm.account = session[:account].account
+    alarm.account = Account.find(session[:account_id])
     if alarm.save
       render json: {success: true, results: [alarm.as_json]}
     else
