@@ -1,82 +1,45 @@
 $(function() {
 
+  var goto = function (location) {
+    window.location = location;
+  };
+
   Ext.define('Gowane.Widgets.Menu', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.menu',
     border: false,
     tbar: [
       {text: 'Suivi', menu: [
-        {text: 'Temps réel',
-          handler: function() {
-            window.location = "/map/realtime";
-          }
-        },
-        {text: 'Historique',
-          handler: function() {
-            window.location = "/map/historical";
-          }
-        }
+        {text: 'Temps réel', handler: function() { goto("/map/realtime") }},
+        {text: 'Historique', handler: function() { goto("/map/historical")}}
       ]},'-',
       {text: 'Rapports', menu: [
-        {text: 'Rapport GPS',
-          handler: function() {
-            window.location = "/reports/gps";
-          }
-        },
-        {text: 'Rapport de distance',
-          handler: function() {
-            window.location = "/reports/distance";
-          }
-        },
-        {text: "Rapport d'arret",
-          handler: function() {
-            window.location = "/reports/stop";
-          }
-        }
+        {text: 'Rapport GPS', handler: function() { goto("/reports/gps") }},
+        {text: 'Rapport de distance', handler: function() { goto("/reports/distance")}},
+        {text: "Rapport d'arret", handler: function() { goto("/reports/stop")}}
       ]},
       '-',
-      {text: 'Alarmes', handler: function() {
-        window.location = "/alarms";
-      }},
+      {text: 'Alarmes', handler: function() { goto("/alarms") }},
       '-',
-      {text: "Points d'intéret", handler: function() {
-        window.location = "/places";
-      }},
+      {text: "Points d'intéret", handler: function() { goto("/places") }},
       '-',
       {text: 'Administration', menu: [
-        { text: 'Clients',
-          handler: function() {
-            window.location = "/accounts";
-          }
-        },
-        { text: 'Utilisateurs',
-          handler: function() {
-            window.location = "/users";
-          }
-        },
-        { text: 'Véhicules',
-          handler: function() {
-            window.location = "/devices";
-          }
-        }
+        {text: 'Clients', handler: function() { goto("/accounts") }},
+        {text: 'Utilisateurs', handler: function() { goto("/users") }},
+        {text: 'Véhicules', handler: function() { goto("/devices") }}
       ]},
-      {xtype:'tbfill'},
-      {xtype:'button',
+      {xtype: 'tbfill', width: 50, maxWidth: 50, minWidth: 50},
+      {xtype: 'tbtext', text: 'Account: '},
+      {xtype: 'combo'},
+      {xtype: 'tbfill'},
+      {xtype: 'button',
         text: 'Help',
         handler: function() {
-          var help_window = Ext.create('Gowane.Widgets.HelpWindow', {
-            loader: {
-              url: "/help/" + $.App.Help,
-              autoLoad: true
-            }
-          });
-          help_window.show();
+          Ext.create('Gowane.Widgets.HelpWindow', {loader: {url: "/help/" + $.App.Help, autoLoad: true}}).show();
         }
       },
       '-',
-      {text: 'Logout', handler: function() {
-        window.location = "/user_session/destroy";
-      }}
+      { xtype: 'tbtext', html: "<a href='/user_session' data-method='delete'>Logout</a>", cls: 'menulink'}
     ]
   });
 

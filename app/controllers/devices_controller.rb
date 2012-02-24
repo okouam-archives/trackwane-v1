@@ -2,8 +2,8 @@ class DevicesController < ApplicationController
   before_filter :require_user
 
   def index
-    account_id = params[:account_id]
-    @devices = account_id ? Account.find(account_id).devices : current_user.account.devices
+    account_id = session[:account_id]
+    @devices = Account.find(account_id).devices
     respond_to do |format|
       format.html
       format.json do

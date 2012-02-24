@@ -2,7 +2,7 @@ class GeofencesController < ApplicationController
   before_filter :require_user
 
   def index
-    @geofences = current_user.account.geofences
+    @geofences = Account.find(session[:account_id]).geofences
     respond_to do |format|
       format.json {render json: {success: true, results: @geofences}}
     end
@@ -10,7 +10,7 @@ class GeofencesController < ApplicationController
 
   def create
     geofence = Geofence.new(params.slice(*Geofence.column_names))
-    geofence.account = current_user.account
+    geofence.account = session[:account]
     if geofence.save
        render json: {success: true, results: [geofence.as_json]}
     else

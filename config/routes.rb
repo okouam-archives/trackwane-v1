@@ -12,7 +12,8 @@ Gowane::Application.routes.draw do
     end
   end
 
-  resources :accounts, :drivers, :user_sessions, :users, :places, :geofences, :alarms, :groups, :events
+  resource :user_session
+  resources :accounts, :drivers, :users, :places, :geofences, :alarms, :groups, :events
 
   resources :devices do
     collection do

@@ -5,5 +5,6 @@
 //= require ./lib/backbone-min
 //= require ./lib/init
 //= require_tree ./src
+//= require ./lib/rails
 
 

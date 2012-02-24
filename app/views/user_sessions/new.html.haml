@@ -5,7 +5,7 @@
   = javascript_include_tag "application"
   = csrf_meta_tags
 %body{style: "margin: auto; text-align: center"}
-  = form_for @user_session do |f|
+  = form_for @user_session, :url => user_session_path do |f|
     %div.wrapper
       %img.logo{src: "/assets/logo.png"}
       %div.form
