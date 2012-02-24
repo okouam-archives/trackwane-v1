@@ -12,6 +12,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def change_account
+    session[:account_id] = params[:account_id]
+    head :ok
+  end
+
   def update
     user = User.find(params[:id])
     persist(user, params)

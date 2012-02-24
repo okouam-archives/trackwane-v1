@@ -13,7 +13,13 @@ Gowane::Application.routes.draw do
   end
 
   resource :user_session
-  resources :accounts, :drivers, :users, :places, :geofences, :alarms, :groups, :events
+  resources :accounts, :drivers, :places, :geofences, :alarms, :groups, :events
+
+  resources :users do
+    collection do
+      post :change_account
+    end
+  end
 
   resources :devices do
     collection do

@@ -1,4 +1,4 @@
 Ext.define('Gowane.controllers.StopEvents', {
-  extend: 'Ext.app.Controller',
+  extend: 'Gowane.controllers.AbstractController',
   stores: ['Gowane.stores.StopEvents']
 });

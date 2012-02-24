@@ -4,7 +4,9 @@
 //= require ./lib/underscore-min
 //= require ./lib/backbone-min
 //= require ./lib/init
+//= require src/controllers/abstract_controller
 //= require_tree ./src
+//= require_tree ./app
 //= require ./lib/rails
 
 

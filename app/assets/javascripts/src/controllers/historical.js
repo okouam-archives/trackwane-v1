@@ -1,23 +1,44 @@
 Ext.define('Gowane.controllers.Historical', {
-  extend: 'Ext.app.Controller',
+
+  extend: 'Gowane.controllers.AbstractController',
+
   stores: ['Gowane.stores.Devices', 'Gowane.stores.Groups', 'Gowane.stores.GpsEvents'],
+
   refs: [
     {selector: 'viewport sharedsidecolumn', ref: 'sidebar'},
     {selector: 'viewport historical_map', ref: 'map'},
-    {selector: 'date_selection', ref: 'datepicker'}
+    {selector: 'date_selection', ref: 'datepicker'},
+    {selector: 'viewport menu', ref: 'menu'}
   ],
 
+  events: {
+    'summary_device_list': {
+      selectionchange: "onDeviceSelect"
+    }
+  },
+
   init: function() {
-    this.control({
-      'summary_device_list': {
-        selectionchange: this.onDeviceSelect
-      }
-    })
+    this.callParent(arguments);
+    this.createDeviceStore();
+  },
+
+  onAccountChange: function() {
+    this.populateDeviceStore();
+  },
+
+  createDeviceStore: function() {
+    Ext.create('Gowane.stores.Devices', {storeId: "DeviceStore"});
+    Ext.create('Gowane.stores.Groups', {storeId: "GroupStore"});
+    Ext.create('Gowane.stores.GpsEvents', {storeId: "GpsEventStore"});
+  },
+
+  populateDeviceStore: function() {
+    Ext.data.StoreManager.lookup('DeviceStore').load();
   },
 
   onLaunch: function() {
     this.getMap().renderMap();
-    Ext.data.StoreManager.lookup('DeviceStore').load();
+    this.populateDeviceStore();
     var datepicker = this.getDatepicker();
     var fromDay = new Date();
     fromDay.setDate(fromDay.getDate() - 7);

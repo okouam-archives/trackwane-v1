@@ -1,6 +1,9 @@
 Ext.define('Gowane.controllers.Alarms', {
-  extend: 'Ext.app.Controller',
+
+  extend: 'Gowane.controllers.AbstractController',
+
   stores: ['Gowane.stores.Geofences', 'Gowane.stores.Alarms', 'Gowane.stores.Users'],
+
   refs: [
     {selector: 'viewport geofence_map', ref: 'map'}
   ],

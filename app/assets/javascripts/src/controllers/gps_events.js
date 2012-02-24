@@ -1,5 +1,8 @@
 Ext.define('Gowane.controllers.GpsEvents', {
-  extend: 'Ext.app.Controller',
+
+  extend: 'Gowane.controllers.AbstractController',
+
   stores: ['Gowane.stores.GpsEvents']
+
 });
 

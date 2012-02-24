@@ -6,12 +6,6 @@
       autoCreateViewport: false,
       controllers: ['Gowane.controllers.Realtime'],
       launch: function() {
-        Ext.create('Gowane.stores.Devices', {
-          storeId: "DeviceStore"
-        });
-        Ext.create('Gowane.stores.Groups', {
-          storeId: "GroupStore"
-        });
         new Ext.Viewport({
           layout : 'border',
           items : [

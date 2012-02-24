@@ -1,6 +1,6 @@
 Ext.define('Gowane.controllers.Accounts', {
 
-  extend: 'Ext.app.Controller',
+  extend: 'Gowane.controllers.AbstractController',
 
   stores: ['Gowane.stores.Accounts'],
 

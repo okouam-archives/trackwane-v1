@@ -1,22 +1,41 @@
 Ext.define('Gowane.controllers.Realtime', {
-  extend: 'Ext.app.Controller',
+
+  extend: 'Gowane.controllers.AbstractController',
+
   stores: ['Gowane.stores.Devices', 'Gowane.stores.Groups'],
+
   refs: [
     {selector: 'viewport sharedsidecolumn', ref: 'sidebar'},
     {selector: 'viewport realtime_map', ref: 'map'}
   ],
 
+  events: {
+    'summary_device_list': {
+      selectionchange: this.onDeviceSelect
+    }
+  },
+
   init: function() {
-    this.control({
-      'summary_device_list': {
-        selectionchange: this.onDeviceSelect
-      }
-    })
+    this.callParent(arguments);
+    this.createDeviceStore();
+  },
+
+  onAccountChange: function() {
+    this.populateDeviceStore();
+  },
+
+  populateDeviceStore: function() {
+    Ext.data.StoreManager.lookup('DeviceStore').load();
+    Ext.data.StoreManager.lookup('GroupStore').load();
+  },
+
+  createDeviceStore: function() {
+    Ext.create('Gowane.stores.Devices', {storeId: "DeviceStore"});
+    Ext.create('Gowane.stores.Groups', {storeId: "GroupStore"});
   },
 
   onLaunch: function() {
-    Ext.data.StoreManager.lookup('DeviceStore').load();
-    Ext.data.StoreManager.lookup('GroupStore').load();
+    this.populateDeviceStore();
     this.getMap().renderMap();
     setInterval(this.poll.bind(this), 3000)
   },
@@ -32,5 +51,6 @@ Ext.define('Gowane.controllers.Realtime', {
   onDeviceSelect: function(item, selection) {
     this.current_device = selection[0].data.id;
   }
+
 });
 

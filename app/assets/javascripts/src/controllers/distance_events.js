@@ -1,4 +1,6 @@
 Ext.define('Gowane.controllers.DistanceEvents', {
-  extend: 'Ext.app.Controller',
+
+  extend: 'Gowane.controllers.AbstractController',
+
   stores: ['Gowane.stores.DistanceEvents']
 });
