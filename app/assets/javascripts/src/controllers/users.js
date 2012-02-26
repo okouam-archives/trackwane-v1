@@ -6,9 +6,6 @@ Ext.define('Gowane.controllers.Users', {
 
   init: function() {
     this.control({
-      'account_list': {
-        selectionchange: this.onAccountSelect
-      },
       'user_list': {
         selectionchange: this.onUserSelect
       },
@@ -52,7 +49,7 @@ Ext.define('Gowane.controllers.Users', {
   },
 
   onLaunch: function() {
-    Ext.data.StoreManager.lookup('AccountStore').load();
+    Ext.data.StoreManager.lookup('UserStore').load();
   },
 
   deleteUser: function() {
@@ -85,15 +82,6 @@ Ext.define('Gowane.controllers.Users', {
       var form = this.createUserForm();
       var window = this.createFloatingWindow("New User", [form]);
       window.show();
-    }
-  },
-
-  onAccountSelect: function(item, selection) {
-    if (selection.length > 0) {
-      this.selected_account = selection[0];
-      Ext.data.StoreManager.lookup('UserStore').load({
-        params: {account_id: this.selected_account.data.id}
-      });
     }
   },
 

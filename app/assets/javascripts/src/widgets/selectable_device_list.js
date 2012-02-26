@@ -2,13 +2,18 @@ $(function() {
 
   var groupingFeature = Ext.create('Ext.grid.feature.Grouping',{groupHeaderTpl: '{name}', enableNoGroups: false});
 
-  Ext.define('Gowane.Widgets.SummaryDeviceList', {
+  var sm = Ext.create('Ext.selection.CheckboxModel',{
+    checkOnly:true
+  });
+
+  Ext.define('Gowane.Widgets.SelectableDeviceList', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.summary_device_list',
+    alias: 'widget.selectable_device_list',
     flex: 1,
     features: [groupingFeature],
     collapsible: false,
     stripeRows: true,
+    selModel: sm,
     store: 'DeviceStore',
     title: "Véhicules",
     dockedItems: [{

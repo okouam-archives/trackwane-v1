@@ -8,30 +8,33 @@ Ext.define('Gowane.controllers.Alarms', {
     {selector: 'viewport geofence_map', ref: 'map'}
   ],
 
+  events: {
+    'full_geofence_list': {
+      selectionchange: "onGeofenceSelect"
+    },
+    'full_alarm_list': {
+      selectionchange: "onAlarmSelect"
+    },
+    'full_alarm_list button[text="New Speed Alarm"]': {
+      click: "createSpeedAlarm"
+    },
+    'full_alarm_list button[text="New Geofence Alarm"]': {
+      click: "createGeofenceAlarm"
+    },
+    'full_alarm_list button[text="Delete Alarm"]': {
+      click: "deleteAlarm"
+    },
+    'full_geofence_list button[text="New Geofence"]': {
+      click: "createGeofence"
+    },
+    'full_geofence_list button[text="Delete Geofence"]': {
+      click: "deleteGeofence"
+    }
+  },
+
   init: function() {
-    this.control({
-      'full_geofence_list': {
-        selectionchange: this.onGeofenceSelect
-      },
-      'full_alarm_list': {
-        selectionchange: this.onAlarmSelect
-      },
-      'full_alarm_list button[text="New Speed Alarm"]': {
-        click: this.createSpeedAlarm
-      },
-      'full_alarm_list button[text="New Geofence Alarm"]': {
-        click: this.createGeofenceAlarm
-      },
-      'full_alarm_list button[text="Delete Alarm"]': {
-        click: this.deleteAlarm
-      },
-      'full_geofence_list button[text="New Geofence"]': {
-        click: this.createGeofence
-      },
-      'full_geofence_list button[text="Delete Geofence"]': {
-        click: this.deleteGeofence
-      }
-    })
+    this.callParent(arguments);
+    this.createStores();
   },
 
   onAlarmSelect: function(item, selection) {
@@ -149,6 +152,18 @@ Ext.define('Gowane.controllers.Alarms', {
     Ext.data.StoreManager.lookup('GeofenceStore').load();
     Ext.data.StoreManager.lookup('AlarmStore').load();
     Ext.data.StoreManager.lookup('UserStore').load();
+  },
+
+  createStores: function() {
+    Ext.create('Gowane.stores.Geofences', {
+      storeId: "GeofenceStore"
+    });
+    Ext.create('Gowane.stores.Alarms', {
+      storeId: "AlarmStore"
+    });
+    Ext.create('Gowane.stores.Users', {
+      storeId: "UserStore"
+    });
   },
 
   closeGeofenceEditor: function() {

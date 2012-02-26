@@ -24,8 +24,8 @@ class DevicesController < ApplicationController
   end
 
   def poll
-    device = Device.find(params[:id])
-    render :json => device.events.last
+    devices = Device.find(params[:ids].split(","))
+    render :json => devices.map{|device| device.events.last}
   end
 
   def destroy

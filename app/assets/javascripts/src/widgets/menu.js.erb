@@ -13,11 +13,7 @@ $(function() {
         {text: 'Temps réel', handler: function() { goto("/map/realtime") }},
         {text: 'Historique', handler: function() { goto("/map/historical")}}
       ]},'-',
-      {text: 'Rapports', menu: [
-        {text: 'Rapport GPS', handler: function() { goto("/reports/gps") }},
-        {text: 'Rapport de distance', handler: function() { goto("/reports/distance")}},
-        {text: "Rapport d'arret", handler: function() { goto("/reports/stop")}}
-      ]},
+      {text: 'Rapports', handler: function() { goto("/reports") }},
       '-',
       {text: 'Alarmes', handler: function() { goto("/alarms") }},
       '-',
@@ -31,6 +27,7 @@ $(function() {
       {xtype: 'tbfill', width: 50, maxWidth: 50, minWidth: 50},
       {xtype: 'tbtext', text: 'Account: '},
       { xtype: 'combo',
+        id: 'account_selector',
         store: "AccountStore",
         valueField: 'id',
         displayField: 'name',

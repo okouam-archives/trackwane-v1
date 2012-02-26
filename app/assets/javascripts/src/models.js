@@ -9,7 +9,8 @@ $(function() {
 
   Ext.define('Gowane.models.GpsEvent', {
     extend: 'Ext.data.Model',
-    fields: [],
+    fields: ['address', 'alarm_id', 'date', 'device_id', 'gps_signal', 'heading', 'id', 'imei_number', 'latitude',
+      'speed', 'longitude', 'status_code'],
     proxy: {type: 'rest', format: 'json', url: '/events', reader: {type: 'json', root: 'results'}}
   });
 
@@ -19,9 +20,15 @@ $(function() {
     proxy: {type: 'rest', format: 'json', url: '/events', reader: {type: 'json', root: 'results'}}
   });
 
+  Ext.define('Gowane.models.SpeedEvent', {
+    extend: 'Ext.data.Model',
+    fields: ['date', 'device', 'speed', 'device_id'],
+    proxy: {type: 'rest', format: 'json', url: '/events', reader: {type: 'json', root: 'results'}}
+  });
+
   Ext.define('Gowane.models.DistanceEvent', {
     extend: 'Ext.data.Model',
-    fields: [],
+    fields: ['date', 'device', 'distance', 'device_id'],
     proxy: {type: 'rest', format: 'json', url: '/events', reader: {type: 'json', root: 'results'}}
   });
 
@@ -53,6 +60,12 @@ $(function() {
     extend: 'Ext.data.Model',
     fields: ['name', 'category', 'longitude', 'latitude'],
     proxy: {type: 'rest', format: 'json', url: '/places', reader: {type: 'json', root: 'results'}}
+  });
+
+  Ext.define('Gowane.models.Report', {
+    extend: 'Ext.data.Model',
+    fields: ['id', 'name', 'devices', 'from', 'to', 'daterange', 'measure'],
+    proxy: {type: 'rest', format: 'json', url: '/reports', reader: {type: 'json', root: 'results'}}
   });
 
   Ext.define('Gowane.models.User', {

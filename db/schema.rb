@@ -11,18 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120218063221) do
+ActiveRecord::Schema.define(:version => 20120226120748) do
 
   create_table "accounts", :force => true do |t|
     t.column "name", :string
     t.column "email", :string
     t.column "contact", :string
     t.column "telephone", :string
-    t.column "devices_count", :integer
-    t.column "alarms_count", :integer
-    t.column "places_count", :integer
-    t.column "users_count", :integer
-    t.column "geofences_count", :integer
+    t.column "devices_count", :integer, :default => 0
+    t.column "alarms_count", :integer, :default => 0
+    t.column "places_count", :integer, :default => 0
+    t.column "users_count", :integer, :default => 0
+    t.column "geofences_count", :integer, :default => 0
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
@@ -58,7 +58,9 @@ ActiveRecord::Schema.define(:version => 20120218063221) do
     t.column "heading", :decimal
     t.column "gps_signal", :boolean
     t.column "alarm_id", :integer
+    t.column "place_id", :integer
     t.column "date", :datetime
+    t.column "distance_delta", :decimal
   end
 
   create_table "geofences", :force => true do |t|
@@ -85,6 +87,24 @@ ActiveRecord::Schema.define(:version => 20120218063221) do
     t.column "account_id", :integer
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
+  end
+
+  create_table "reports", :force => true do |t|
+    t.column "account_id", :integer
+    t.column "measure", :string
+    t.column "name", :string
+    t.column "devices", :string
+    t.column "daterange", :string
+    t.column "to", :datetime
+    t.column "from", :datetime
+  end
+
+  create_table "roads", :force => true do |t|
+    t.column "label", :string
+    t.column "country_id", :integer
+    t.column "the_geom", :geometry, :srid => nil
+    t.column "centroid", :geometry, :srid => nil
+    t.column "route_parameters", :string, :limit => 100
   end
 
   create_table "sessions", :force => true do |t|

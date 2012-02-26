@@ -19,14 +19,14 @@ Ext.define('Gowane.controllers.Historical', {
 
   init: function() {
     this.callParent(arguments);
-    this.createDeviceStore();
+    this.createStores();
   },
 
   onAccountChange: function() {
     this.populateDeviceStore();
   },
 
-  createDeviceStore: function() {
+  createStores: function() {
     Ext.create('Gowane.stores.Devices', {storeId: "DeviceStore"});
     Ext.create('Gowane.stores.Groups', {storeId: "GroupStore"});
     Ext.create('Gowane.stores.GpsEvents', {storeId: "GpsEventStore"});
@@ -51,9 +51,9 @@ Ext.define('Gowane.controllers.Historical', {
   onDeviceSelect: function(item, selection) {
     var device_id = selection[0].data.id;
     Ext.data.StoreManager.lookup('GpsEventStore').load({
-      params: {device_id: device_id, type: 'gps'}, success: function(data) {
+      params: {device_id: device_id, type: 'gps'}, callback: function(data) {
         this.getMap().displayRoute(data);
-      }
+      }.bind(this)
     });
   }
 });

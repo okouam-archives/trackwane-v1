@@ -2,6 +2,11 @@ $(function() {
 
   Ext.define('Gowane.Widgets.RealtimeMap', {
 
+    mixins: {
+      geolocater: 'Gowane.Mixins.Geolocater',
+      tipsy: 'Gowane.Mixins.Tipsy'
+    },
+
     extend: 'Gowane.Shared.Map',
 
     alias: 'widget.realtime_map',
@@ -11,18 +16,32 @@ $(function() {
       this.callParent(arguments);
     },
 
-    showDevice: function(device) {
-      if (!this.layer) {
-        this.layer = this.createFeatureLayer("Devices");
-      }
+    clearDevices: function() {
+      this.setup();
+      this.layer.destroyFeatures();
+      this.device_features.length = 0;
+    },
 
+    setup: function() {
+      if (!this.layer)
+        this.layer = this.createFeatureLayer("Devices");
       if (!this.device_features)
         this.device_features = [];
+    },
 
-      if (this.isDeviceOnMap(device))
-        this.moveDevice(device);
-      else
-        this.addDevice(device);
+    showDevices: function(devices) {
+      this.setup();
+      var device_added = _.reduce(devices, function(is_added, device) {
+        return is_added || this.placeDevice(device);
+      }.bind(this), false);
+      this.layer.destroyFeatures();
+      this.layer.addFeatures(this.device_features);
+      if (device_added)
+        this.layer.map.zoomToExtent(this.layer.getDataExtent());
+    },
+
+    placeDevice: function(device) {
+      return this.isDeviceOnMap(device) ? this.moveDevice(device) : this.addDevice(device);
     },
 
     isDeviceOnMap: function(device) {
@@ -33,20 +52,17 @@ $(function() {
 
     moveDevice: function(device) {
       var feature = _.find(this.device_features, function(item) {
-        return item.data.imei_number == device.imei_number;
+        return item.attributes["imei_number"] == device.imei_number;
       });
-      feature.move(new OpenLayers.LonLat(device.longitude, device.latitude));
+      feature.move(this.projectForGoogleMaps(new OpenLayers.LonLat(device.longitude, device.latitude)));
+      return false;
     },
 
     addDevice: function(device) {
-      this.device_features = [];
-      this.layer.destroyFeatures();
-      var point = new OpenLayers.Geometry.Point(device.longitude, device.latitude);
+      var point = this.projectForGoogleMaps(new OpenLayers.Geometry.Point(device.longitude, device.latitude));
       var feature = new OpenLayers.Feature.Vector(point, {imei_number: device.imei_number});
-      console.debug(feature);
       this.device_features.push(feature);
-      this.layer.addFeatures([feature]);
-      this.layer.map.zoomToExtent(this.layer.getDataExtent());
+      return true;
     }
 
   });

@@ -25,7 +25,7 @@ $(function() {
   });
 
   Ext.define('Gowane.stores.Places', {
-    model: 'Gowane.models.Place',     extend: 'Ext.data.Store',   requires: 'Gowane.models.Place'
+    model: 'Gowane.models.Place', extend: 'Ext.data.Store', groupField: 'category', requires: 'Gowane.models.Place'
   });
 
   Ext.define('Gowane.stores.Devices', {

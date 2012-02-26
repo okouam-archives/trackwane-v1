@@ -1,11 +1,34 @@
 class EventObserver < ActiveRecord::Observer
 
-  def after_save(event)
-    track = event.device.tracks.last
-    new_track = Track.from_event(event)
-    new_track.alarm = AlarmMonitor.check(event)
-    new_track.save! if new_track.in_different_location?(track) || alarm
+  def before_save(event)
+
+    alarms = event.device.account.alarms
+
+    geofence_alarms = alarms.where("category = 'geofence' AND ST_Within(ST_GeomFromKML(rule), ST_Point(#{event.latitude}, #{event.longitude}))")
+
+    event.alarm = geofence_alarms.first if geofence_alarms
+
+    speed_alarms = alarms.where("category = 'speed' AND rule::integer < #{event.speed}")
+    event.alarm = speed_alarms.first if speed_alarms
+
+    previous_event = event.device.events.last
+    event.distance_delta = previous_event ? calculate_distance_covered(event, previous_event) : 0
+
+    event.address = Road.minimum("ST_Distance(ST_Point(#{event.latitude}, #{event.longitude}), the_geom)")
+
   end
 
+  private
+
+  def calculate_distance_covered(event, previous_event)
+    sql = %{
+      SELECT
+        ST_Distance(ST_Point(#{event.latitude}, #{event.longitude}), ST_Point(#{previous_event.latitude}, #{previous_event.longitude}))
+        WHERE label IS NOT NULL
+      FROM
+        roads
+    }
+    ActiveRecord::Base.connection.select_value(sql)
+  end
 
 end

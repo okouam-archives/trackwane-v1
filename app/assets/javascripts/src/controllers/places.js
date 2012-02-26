@@ -72,19 +72,6 @@ Ext.define('Gowane.controllers.Places', {
 
   populateStores: function() {
     Ext.getStore('PlaceStore').load();
-  },
-
-  onPlaceSelect: function(item, selection) {
-    var sidebar = this.getSidebar();
-    var poi = selection[0];
-    this.showEditorFor(poi, sidebar);
-    this.getMap().highlightFeature(poi);
-  },
-
-  showEditorFor: function(poi, sidebar) {
-    if (sidebar.items.length > 2)
-      sidebar.remove(sidebar.items.items[2]);
-    sidebar.add({xtype: 'placeeditor', title: poi.data.name});
   }
 });
 

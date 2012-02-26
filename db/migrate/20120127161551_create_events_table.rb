@@ -11,7 +11,9 @@ class CreateEventsTable < ActiveRecord::Migration
       t.decimal :heading
       t.boolean :gps_signal
       t.references :alarm
+      t.references :place
       t.datetime :date
+      t.decimal :distance_delta
     end
   end
 end

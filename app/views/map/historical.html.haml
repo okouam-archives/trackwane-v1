@@ -7,17 +7,17 @@
       controllers: ['Gowane.controllers.Historical'],
       launch: function() {
         new Ext.Viewport({
-          layout : 'border', items : [
+          layout : 'border',
+          items : [
             {xtype: 'menu', region : 'north'},
-            {xtype: 'panel', region: 'center', layout: {type: 'vbox', pack: 'start', align: 'stretch'}, items: [
-              {xtype: 'panel', flex: 2, layout: {type: 'hbox', pack: 'start', align: 'stretch'}, items: [
-                {flex: 3, xtype: 'historical_map', split: true},
-                {xtype: 'sharedsidecolumn', flex: 1, layout: {type: 'vbox', pack: 'start', align: 'stretch'}, items: [
-                  {xtype: "date_selection"},
-                  {xtype: 'summary_device_list'}
-                ]}
-              ]},
-              {xtype: 'full_gps_event_list', flex: 1}
+            {region : 'west', width: 900, xtype: 'panel', split: true, layout: {type: 'vbox', pack: 'start', align: 'stretch'}, items: [
+              {xtype: 'historical_map', flex: 6},
+              {xtype: 'full_gps_event_list', flex: 2},
+              {xtype: 'slider', height: 20, margin: '2 0 0 0'}
+            ]},
+            {region: 'center', xtype: 'sharedsidecolumn', flex: 1, layout: {type: 'vbox', pack: 'start', align: 'stretch'}, items: [
+              {xtype: "date_selection"},
+              {xtype: 'summary_device_list'}
             ]}
           ]
         });

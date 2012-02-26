@@ -1,12 +1,12 @@
 $(function() {
 
-  Ext.define('Gowane.Widgets.Alarms.FullGpsEventList', {
+  Ext.define('Gowane.Widgets.Alarms.RealtimeEventList', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.full_gps_event_list',
+    alias: 'widget.realtime_event_list',
     flex: 1,
     collapsible: false,
     stripeRows: true,
-    store: 'GpsEventStore',
+    store: 'RealtimeEventStore',
     title: "Store",
     columns: [
       {header : 'ID', sortable : true, dataIndex : 'id', width: 40},

@@ -6,9 +6,6 @@ Ext.define('Gowane.controllers.Devices', {
 
   init: function() {
     this.control({
-      'account_list': {
-        selectionchange: this.onAccountSelect
-      },
       'full_device_list': {
         selectionchange: this.onDeviceSelect
       },
@@ -124,16 +121,8 @@ Ext.define('Gowane.controllers.Devices', {
   },
 
   onLaunch: function() {
-    Ext.data.StoreManager.lookup('AccountStore').load();
-  },
-
-  onAccountSelect: function(item, selection) {
-    if (selection.length > 0) {
-      this.selected_account = selection[0];
-      Ext.data.StoreManager.lookup('DeviceStore').load({
-        params: {account_id: this.selected_account.data.id}
-      });
-    }
+    Ext.data.StoreManager.lookup('DeviceStore').load();
   }
+
 });
 
