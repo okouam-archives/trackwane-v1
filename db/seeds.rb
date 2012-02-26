@@ -13,6 +13,8 @@ Account.create([
 User.create([
   {login: "okouam", password: "com99123", password_confirmation: "com99123", email: "olivier.kouame@gmail.com",
    role: "administrator", account: Account.find_by_name("0-One")},
+  {login: "guest", password: "guest", password_confirmation: "guest", email: "olivier.kouame@gmail.com",
+   role: "administrator", account: Account.find_by_name("0-One")},
   {login: "guest", password: "password", password_confirmation: "com99123", email: Faker::Internet.email,
    role: "administrator", account: Account.find_by_name("Demo Account")},
   {login: "patrick.kouame", password: "password", password_confirmation: "com99123", email: Faker::Internet.email,

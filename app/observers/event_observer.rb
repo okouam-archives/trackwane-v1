@@ -14,7 +14,7 @@ class EventObserver < ActiveRecord::Observer
     previous_event = event.device.events.last
     event.distance_delta = previous_event ? calculate_distance_covered(event, previous_event) : 0
 
-    event.address = Road.minimum("ST_Distance(ST_Point(#{event.latitude}, #{event.longitude}), the_geom)")
+    event.address = Road.minimum("ST_Distance(ST_SetSRID(ST_Point(#{event.latitude}, #{event.longitude}), 4326), the_geom)")
 
   end
 
@@ -24,9 +24,10 @@ class EventObserver < ActiveRecord::Observer
     sql = %{
       SELECT
         ST_Distance(ST_Point(#{event.latitude}, #{event.longitude}), ST_Point(#{previous_event.latitude}, #{previous_event.longitude}))
-        WHERE label IS NOT NULL
       FROM
         roads
+      WHERE
+        label IS NOT NULL
     }
     ActiveRecord::Base.connection.select_value(sql)
   end
