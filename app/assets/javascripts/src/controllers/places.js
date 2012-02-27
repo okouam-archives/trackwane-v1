@@ -33,6 +33,7 @@ Ext.define('Gowane.controllers.Places', {
   },
 
   onLaunch: function() {
+    this.callParent();
     this.populateStores();
     this.getMap().renderMap();
   },

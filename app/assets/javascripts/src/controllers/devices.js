@@ -121,6 +121,7 @@ Ext.define('Gowane.controllers.Devices', {
   },
 
   onLaunch: function() {
+    this.callParent();
     Ext.data.StoreManager.lookup('DeviceStore').load();
   }
 

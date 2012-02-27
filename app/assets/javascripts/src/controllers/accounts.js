@@ -108,6 +108,7 @@ Ext.define('Gowane.controllers.Accounts', {
   },
 
   onLaunch: function() {
+    this.callParent();
     Ext.data.StoreManager.lookup('AccountStore').load();
   },
 

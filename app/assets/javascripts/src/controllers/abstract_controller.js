@@ -3,7 +3,8 @@ Ext.define('Gowane.controllers.AbstractController', {
   extend: 'Ext.app.Controller',
 
   commonRefs: [
-    {selector: 'viewport menu', ref: 'menu'}
+    {selector: 'viewport menu', ref: 'menu'},
+    {selector: 'menu combo', ref: 'accountSelector'}
   ],
 
   commonEvents: {
@@ -25,10 +26,16 @@ Ext.define('Gowane.controllers.AbstractController', {
     this.callParent(arguments);
   },
 
+  onLaunch: function() {
+    this.callParent(arguments);
+    Ext.data.StoreManager.lookup('AccountStore').load();
+    this.getAccountSelector().setValue($.App.account_id);
+  },
+
   changeAccount: function(combo, records) {
     var account_id = records[0].get("id");
     $.post("/users/change_account", {account_id: account_id}, function() {
-        this.onAccountChange();
+      if (this.onAccountChange) this.onAccountChange();
     }.bind(this));
   },
 

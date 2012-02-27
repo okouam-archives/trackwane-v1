@@ -1,6 +1,7 @@
 :javascript
   $(function() {
-    $.App.Help = "devices";
+    $.App.help = "devices";
+    $.App.account_id = #{session[:account_id]};
     Ext.application({
       name: 'Gowane',
       autoCreateViewport: false,

@@ -37,6 +37,7 @@ Ext.define('Gowane.controllers.Historical', {
   },
 
   onLaunch: function() {
+    this.callParent();
     this.getMap().renderMap();
     this.populateDeviceStore();
     var datepicker = this.getDatepicker();

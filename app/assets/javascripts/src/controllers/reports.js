@@ -45,6 +45,10 @@ Ext.define('Gowane.controllers.Reports', {
     }
   },
 
+  onAccountChange: function() {
+    Ext.data.StoreManager.lookup('DeviceStore').load();
+  },
+
   createStores: function() {
     Ext.create('Ext.data.ArrayStore', {fields: ['type', 'name'], storeId: "ReportTypeStore", data: [
       ["distance", "Distance Report"], ["speed", "Speed Report"], ["stop", "Stop Report"], ["alarm", "Alarm Report"]
@@ -53,6 +57,7 @@ Ext.define('Gowane.controllers.Reports', {
   },
 
   onLaunch: function() {
+    this.callParent();
     Ext.data.StoreManager.lookup('DeviceStore').load();
   }
 

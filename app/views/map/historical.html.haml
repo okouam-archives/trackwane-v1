@@ -1,6 +1,7 @@
 :javascript
   $(function() {
-    $.App.Help = "historical";
+    $.App.help = "historical";
+    $.App.account_id = #{session[:account_id]};
     Ext.application({
       name: 'Gowane',
       autoCreateViewport: false,

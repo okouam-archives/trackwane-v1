@@ -32,6 +32,10 @@ Ext.define('Gowane.controllers.Alarms', {
     }
   },
 
+  onAccountChange: function() {
+    Ext.data.StoreManager.lookup('DeviceStore').load();
+  },
+
   init: function() {
     this.callParent(arguments);
     this.createStores();
@@ -148,6 +152,7 @@ Ext.define('Gowane.controllers.Alarms', {
   },
 
   onLaunch: function() {
+    this.callParent();
     this.getMap().renderMap();
     Ext.data.StoreManager.lookup('GeofenceStore').load();
     Ext.data.StoreManager.lookup('AlarmStore').load();

@@ -36,6 +36,7 @@ Ext.define('Gowane.controllers.Realtime', {
   },
 
   onLaunch: function() {
+    this.callParent();
     this.populateDeviceStore();
     this.getMap().renderMap();
     setInterval(this.poll.bind(this), 3000);
