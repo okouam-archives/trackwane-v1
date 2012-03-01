@@ -9,12 +9,14 @@ $(function() {
     items: [
       {
         xtype: 'datefield',
-        fieldLabel: 'From',
-        name: 'fromDay'
+        fieldLabel: 'Debut',
+        name: 'fromDay',
+        id: 'fromDay'
       },
       {
+        id: 'toDay',
         xtype: 'datefield',
-        fieldLabel: 'To',
+        fieldLabel: 'Fin',
         name: 'toDay'
       }
     ]

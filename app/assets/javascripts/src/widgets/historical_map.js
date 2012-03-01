@@ -16,8 +16,24 @@ $(function() {
       this.callParent(arguments);
     },
 
-    selectEvent: function() {
-
+    selectEvent: function(event) {
+      this.hidePopup(true);
+      var feature =_.find(this.layer.features, function(item) {
+        return item.attributes["event_id"] == event.get("id");
+      });
+      var center = this.layer.map.getCenter();
+      var newCenter = new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)
+      var diff_lon = Math.abs(center.lon - newCenter.lon);
+      var diff_lat = Math.abs(center.lat - newCenter.lat);
+      if (diff_lon < 1 && diff_lat < 1) {
+        this.showPopup(feature);
+      } else {
+        this.layer.map.panTo(newCenter);
+        this.layer.map.events.register('moveend', this, function() {
+          this.showPopup(feature);
+          this.layer.map.events.remove('moveend');
+        });
+      }
     },
 
     createPopupControl: function(layer) {
@@ -30,13 +46,19 @@ $(function() {
       });
     },
 
-    hidePopup: function() {
-      this.hideTipsy();
+    hidePopup: function(immediate) {
+      this.hideTipsy(immediate);
       $("body").css("cursor", "auto");
     },
 
+    renderInfo: function(feature) {
+      return "<div style='text-align: left; line-height: 20px'><b>Date:</b> " + feature.date
+              + "<br/><b>Address: </b>" + feature.address
+              + "<br/><b>Speed: </b>" + feature.speed + "</div>";
+    },
+
     showPopup: function(feature) {
-      this.showTipsy(feature);
+      this.showTipsy(feature, this.renderInfo);
       $("body").css("cursor", "pointer");
     },
 
@@ -48,7 +70,7 @@ $(function() {
     displayRoute: function(events) {
       if (!this.layer)
         this.layer = this.createLayerForEvents();
-      var features = [];
+      features = [];
       if (events.length > 0) {
         features = _.map(events, function(event) {
           return this.createFeatureFromEvent(event);
@@ -77,6 +99,7 @@ $(function() {
       var latitude = event.get("latitude");
       var point = this.projectForGoogleMaps(new OpenLayers.Geometry.Point(longitude, latitude));
       var feature = new OpenLayers.Feature.Vector(point);
+      feature.attributes["event_id"] = event.get("id");
       feature.attributes["speed"] = event.get("speed");
       feature.attributes["date"] = event.get("date");
       feature.attributes["address"] = event.get("address");

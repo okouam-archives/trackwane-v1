@@ -1,13 +1,21 @@
 Ext.define('Gowane.Mixins.Tipsy', {
 
-  hideTipsy: function () {
+  hideTipsy: function (immediate) {
     window["cancel.tipsy"] = false;
     $("body").css({cursor: "default"});
-    setTimeout(function() {
-      if (window["cancel.tipsy"] || !window["active.tipsy"]) return;
-      var tip = window["active.tipsy"];
-      tip.remove();
-    }, 100);
+    if (immediate) {
+      this.removeTipsy();
+    } else {
+      setTimeout(function() {
+        this.removeTipsy();
+      }.bind(this), 100);
+    }
+  },
+
+  removeTipsy: function() {
+    if (window["cancel.tipsy"] || !window["active.tipsy"]) return;
+    var tip = window["active.tipsy"];
+    tip.remove();
   },
 
   showTipsy: function(feature, callback){

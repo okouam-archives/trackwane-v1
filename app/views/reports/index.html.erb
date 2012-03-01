@@ -1,0 +1,60 @@
+<script id="introduction-template" type="text/x-handlebars-template">
+  <div class="help">
+    <div style="width: 70%; margin: auto; margin-top: 100px"><h1>Reports</h1>
+    <p>You can <a href="#">run</a> several kinds of reports to track the activity of your vehicles.</p>
+    <p>This mini-guide will show you how
+    to <a href="#">build the report</a> you need by choosing the <a href="#">type of report</a>, as well as how to <a href="#">save</a> reports to
+    run them later and how to set up <a href="#">automatic sending of reports</a> to one or more people.</p>
+    <p>Once you've started creating reports, you can show this mini-guide at any time by clicking on the Help
+    button at the top right of your screen.</p>
+    <p style="text-align: center"><img src="/assets/stock-photo-14572303-sales-problem.jpg" /></p>
+  </div>
+  </div>
+</script>
+
+<style type="text/css">
+  .help p {margin-top: 3px}
+  .help {font-family: Arial; font-size: 12px; color: #434343; line-height: 18px}
+  .help h1 {font-size: 16px; margin-bottom: 5px}
+  .help h2 {font-size: 13px}
+  .help h3, .help h2, .help h1 {margin-top: 10px}
+  .help a {text-decoration: none; color: #6699cc}
+</style>
+
+<script type="text/javascript">
+  $(function() {
+    $.App.help = "distance";
+    $.App.account_id = <%= @account_id %>;
+    Ext.application({
+      name: 'Gowane',
+      autoCreateViewport: false,
+      controllers: ['Gowane.controllers.Reports'],
+      launch: function() {
+        new Ext.Viewport({
+          layout : 'border',
+          items : [
+            { xtype: 'menu', region : 'north'},
+            { region : 'west',
+              width: 900, xtype: 'template_panel', template: "#introduction-template", split: true},
+            { xtype: 'tabpanel', region: 'center',
+              items: [
+                { xtype: 'panel',
+                  flex: 1,
+                  title: 'Report Builder',
+                  layout: {type: 'vbox', pack: 'start', align: 'stretch'},
+                  items: [
+                    {xtype: 'report_builder'},
+                    {xtype: "date_selection"},
+                    {xtype: 'selectable_device_list'}
+                  ]
+                 },
+                 { xtype: 'panel', title: 'Saved Reports'},
+                 { xtype: 'panel', title: 'Automatic Reports'}
+              ]
+            }
+          ]
+        });
+      }
+    });
+  });
+</script>

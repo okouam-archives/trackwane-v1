@@ -1,5 +1,4 @@
 $(function() {
-
   Ext.define('Gowane.Widgets.Alarms.RealtimeEventList', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.realtime_event_list',
@@ -17,5 +16,4 @@ $(function() {
       {header : 'Status', sortable : true, dataIndex : 'status_code', flex: 1}
     ]
   });
-
 });

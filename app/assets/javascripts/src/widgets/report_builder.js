@@ -14,19 +14,16 @@ $(function() {
         store: 'ReportTypeStore',
         valueField: 'type',
         displayField: 'name',
-        fieldLabel: 'Type'
+        fieldLabel: 'Report Type'
       },
-      {
-        xtype: 'datefield',
-        id: 'fromDay',
-        fieldLabel: 'From',
-        name: 'fromDay'
-      },
-      {
-        xtype: 'datefield',
-        id: 'toDay',
-        fieldLabel: 'To',
-        name: 'toDay'
+      { xtype: 'combo',
+        id: 'rangeType',
+        typeAhead: true,
+        queryMode: 'local',
+        store: 'ReportTypeStore',
+        valueField: 'type',
+        displayField: 'name',
+        fieldLabel: 'Range Type'
       }
     ]
   });

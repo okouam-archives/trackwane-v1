@@ -2,7 +2,9 @@ class ReportsController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html
+      format.html do
+        @account_id = session[:account_id]
+      end
       format.json do
         account_id = session[:account_id]
         @reports = Account.find(account_id).reports

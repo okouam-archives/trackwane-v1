@@ -1,18 +1,16 @@
 $(function() {
-
   var goto = function (location) {
     window.location = location;
   };
-
   Ext.define('Gowane.Widgets.Menu', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.menu',
     border: false,
     tbar: [
-      {text: 'Suivi', menu: [
-        {text: 'Temps réel', handler: function() { goto("/map/realtime") }},
-        {text: 'Historique', handler: function() { goto("/map/historical")}}
-      ]},'-',
+      {text: 'Temps réel', handler: function() { goto("/map/realtime") }}
+      ,'-',
+      {text: 'Historique', handler: function() { goto("/map/historical")}}
+      ,'-',
       {text: 'Rapports', handler: function() { goto("/reports") }},
       '-',
       {text: 'Alarmes', handler: function() { goto("/alarms") }},
@@ -45,5 +43,4 @@ $(function() {
       { xtype: 'tbtext', html: "<a href='/user_session' data-method='delete'>Logout</a>", cls: 'menulink'}
     ]
   });
-
 });
