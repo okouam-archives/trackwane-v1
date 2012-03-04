@@ -7,10 +7,8 @@ class CreateEventsTable < ActiveRecord::Migration
       t.decimal :longitude
       t.decimal :speed
       t.string :address
-      t.string :imei_number
       t.decimal :heading
       t.boolean :gps_signal
-      t.references :alarm
       t.references :place
       t.datetime :date
       t.decimal :distance_delta

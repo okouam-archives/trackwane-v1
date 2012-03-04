@@ -11,6 +11,7 @@ gem 'rgeo-geojson'
 gem 'database_cleaner'
 gem 'haml'
 gem 'faker'
+gem 'rest-client'
 gem 'capistrano'
 gem 'rspec'
 gem 'postgis_adapter', :git => 'https://github.com/dougcole/postgis_adapter.git'
@@ -19,6 +20,9 @@ gem 'silent-postgres'
 
 group :development, :test do
   gem 'itslog'
+  gem 'forgery'
+  gem 'factory_girl_rails'
+  gem 'ruby-debug19'
 end
 
 group :assets do

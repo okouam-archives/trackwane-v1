@@ -3,19 +3,29 @@ class EventsController < ApplicationController
 
   def index
     device_id = params[:device_id]
-    events = Device.find(device_id).events
+		device = Device.find(device_id)
+    events = device.events
+		events = events.limit(params[:limit]) if params[:limit]
+		events = events.offset(params[:start]) if params[:start]
     respond_to do |format|
       format.html
       format.json do
-        render json: {success: true, results: events}
+        render json: {success: true, results: events, total: device.events.count}
       end
     end
   end
 
   def create
     data = params[:data]
-    event = Parser.new.read(data)
-    event.device = Device.find_by_imei_number(event.imei_number)
+		if data.delete(:simulated)
+			imei_number = data.delete(:imei_number)
+			event = Event.new(data)
+		else
+			payload = Parser.new.read(data)
+			event = payload.event
+			imei_number = payload.imei_number
+		end
+    event.device = Device.find_by_imei_number(imei_number)
     if event.device
       event.save!
     end

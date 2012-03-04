@@ -23,8 +23,7 @@ Ext.define('Gowane.controllers.Historical', {
       selectionchange: "onDeviceSelect"
     },
     'full_gps_event_list': {
-      selectionchange: "onEventSelect",
-      itemmouseleave: "onEventSelectionExit"
+      selectionchange: "onEventSelect"
     }
   },
 
@@ -57,10 +56,6 @@ Ext.define('Gowane.controllers.Historical', {
     Ext.data.StoreManager.lookup('DeviceStore').load();
   },
 
-  onEventSelectionExit: function() {
-    this.getMap().hidePopup();
-  },
-
   onEventSelect: function(item, selection) {
     var event = selection[0];
     this.getMap().selectEvent(event);
@@ -79,6 +74,24 @@ Ext.define('Gowane.controllers.Historical', {
       toDay: new Date()
     };
     datepicker.getForm().setValues(this.date_range);
+		var store = Ext.data.StoreManager.lookup('GpsEventStore');
+		store.on(
+			{
+				'beforeload': function(store) {
+					var proxy = store.getProxy();
+					proxy.extraParams = {
+						device_id: this.selected_device.get("id"),
+						type: 'gps',
+						from: this.formatDate(this.date_range.fromDay),
+						to: this.formatDate(this.date_range.toDay)
+					};
+				}.bind(this),
+				'load': function(store, records) {
+        	this.getMap().displayRoute(records);
+        	this.resetTimeline(records);
+				}.bind(this)
+			}
+		);
   },
 
   onDeviceSelect: function(item, selection) {
@@ -88,18 +101,12 @@ Ext.define('Gowane.controllers.Historical', {
 
   showDeviceHistory: function() {
     Ext.data.StoreManager.lookup('GpsEventStore').load({
-      params: {
-        device_id: this.selected_device.get("id"),
-        type: 'gps',
-        from: this.formatDate(this.date_range.fromDay),
-        to: this.formatDate(this.date_range.toDay)
-      },
-      callback: function(data) {
+      params: {start: 0, limit: 25},
+      callback: function() {
         this.getEvents().setTitle(this.selected_device.get("display_name") + " (" + this.selected_device.get("group_name") + ")");
-        this.getMap().displayRoute(data);
-        this.resetTimeline(data);
       }.bind(this)
     });
+
   },
 
   formatDate: function(date) {

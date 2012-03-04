@@ -5,7 +5,8 @@ class AlarmsController < ApplicationController
     respond_to do |format|
       format.html
       format.json  do
-        @alarms = Account.find(session[:account_id]).alarms
+				@account = Account.find(session[:account_id])
+        @alarms = @account.geofence_alarms + @account.speed_alarms
         render json: {success: true, results: @alarms}
       end
     end

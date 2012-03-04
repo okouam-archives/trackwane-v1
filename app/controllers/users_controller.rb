@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
 
   def index
+    @account_id = session[:account_id]
     respond_to do |format|
       format.html
       format.json do
-        account_id = params[:account_id]
-        account_id = current_user.account.id unless account_id
-        @users = Account.find(account_id).users
+        @users = Account.find(@account_id).users
         render json: {success: true, results: @users}
       end
     end

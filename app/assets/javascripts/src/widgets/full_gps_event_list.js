@@ -1,5 +1,7 @@
 $(function() {
 
+  var pager = {xtype: 'pagingtoolbar', store: "GpsEventStore", dock: 'bottom', displayInfo: true};
+
   Ext.define('Gowane.Widgets.Alarms.FullGpsEventList', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.full_gps_event_list',
@@ -8,6 +10,7 @@ $(function() {
     stripeRows: true,
     store: 'GpsEventStore',
     title: "Store",
+		dockedItems: [pager],
     columns: [
       {header : 'ID', sortable : true, dataIndex : 'id', width: 40},
       {header : 'Date', sortable : true, dataIndex : 'date', width: 200},

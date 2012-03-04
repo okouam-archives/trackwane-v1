@@ -1,0 +1,39 @@
+#!/usr/bin/ruby
+
+require 'rest_client'
+
+Dir[File.expand_path(File.dirname(__FILE__) + '/../db/simulation/*.rb')].each do |events|
+	puts "Loading device file #{events}"
+	require events
+end
+
+def run(imei_number, data)
+	counter = 0
+	while(1) do
+		data[:events].each do |event|
+			event = event.merge({:date => data[:start_time] + counter * data[:realtime_interval]}) unless event[:datetime]
+			event = event.merge({:gps_signal => 'A'}) unless event[:gps_signal]
+			event = event.merge({:speed => rand(100)}) unless event[:speed]
+			event = event.merge({:heading => rand(360)}) unless event[:heading]
+			event = event.merge({:imei_number => imei_number, :simulated => true})
+			params = {data: event}
+		 	RestClient.post "http://gowane.local/events", params
+			puts "Sent event at lon: #{event[:longitude]} lat: #{event[:latitude]}"
+			counter += 1
+			sleep(data[:event_interval])
+		end
+	end
+end
+
+puts "#{SIMULATION.size} devices to be simulated have been found"
+
+threads = []
+
+SIMULATION.each_pair do |key, value|
+	threads << Thread.start do
+		puts "Launching device with IMEI #{key}"
+		run(key, value)
+	end
+end
+
+threads.each {|t| t.join}

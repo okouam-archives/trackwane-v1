@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120226155342) do
+ActiveRecord::Schema.define(:version => 20120303122737) do
 
   create_table "accounts", :force => true do |t|
     t.column "name", :string
@@ -19,21 +19,9 @@ ActiveRecord::Schema.define(:version => 20120226155342) do
     t.column "contact", :string
     t.column "telephone", :string
     t.column "devices_count", :integer, :default => 0
-    t.column "alarms_count", :integer, :default => 0
     t.column "places_count", :integer, :default => 0
     t.column "users_count", :integer, :default => 0
     t.column "geofences_count", :integer, :default => 0
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-  end
-
-  create_table "alarms", :force => true do |t|
-    t.column "name", :string
-    t.column "category", :string
-    t.column "account_id", :integer
-    t.column "rule", :string
-    t.column "recipient", :string
-    t.column "medium", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
@@ -54,18 +42,33 @@ ActiveRecord::Schema.define(:version => 20120226155342) do
     t.column "longitude", :decimal
     t.column "speed", :decimal
     t.column "address", :string
-    t.column "imei_number", :string
     t.column "heading", :decimal
     t.column "gps_signal", :boolean
-    t.column "alarm_id", :integer
     t.column "place_id", :integer
     t.column "date", :datetime
     t.column "distance_delta", :decimal
   end
 
+  create_table "geofence_alarms", :force => true do |t|
+    t.column "account_id", :integer
+    t.column "category", :string
+    t.column "name", :string
+    t.column "geofence_id", :integer
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+  end
+
+  create_table "geofence_warnings", :force => true do |t|
+    t.column "event_id", :integer
+    t.column "geofence_alarm_id", :integer
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+  end
+
   create_table "geofences", :force => true do |t|
     t.column "name", :string
     t.column "coordinates", :text
+    t.column "category", :string
     t.column "account_id", :integer
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
@@ -80,11 +83,11 @@ ActiveRecord::Schema.define(:version => 20120226155342) do
   end
 
   create_table "places", :force => true do |t|
-    t.column "name", :string
-    t.column "category", :string
-    t.column "longitude", :decimal
-    t.column "latitude", :decimal
-    t.column "account_id", :integer
+    t.column "name", :string, :null => false
+    t.column "category", :string, :null => false
+    t.column "longitude", :decimal, :null => false
+    t.column "latitude", :decimal, :null => false
+    t.column "account_id", :integer, :null => false
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
@@ -103,7 +106,6 @@ ActiveRecord::Schema.define(:version => 20120226155342) do
     t.column "label", :string
     t.column "country_id", :integer
     t.column "the_geom", :geometry, :srid => nil
-    t.column "centroid", :geometry, :srid => nil
     t.column "route_parameters", :string, :limit => 100
   end
 
@@ -116,6 +118,21 @@ ActiveRecord::Schema.define(:version => 20120226155342) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "speed_alarms", :force => true do |t|
+    t.column "account_id", :integer
+    t.column "speed", :decimal
+    t.column "name", :string
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+  end
+
+  create_table "speed_warnings", :force => true do |t|
+    t.column "event_id", :integer
+    t.column "speed_alarm_id", :integer
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+  end
 
   create_table "tracks", :force => true do |t|
     t.column "device_id", :integer

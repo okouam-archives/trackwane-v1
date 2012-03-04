@@ -17,63 +17,59 @@ $(function() {
     },
 
     selectEvent: function(event) {
-      this.hidePopup(true);
       var feature =_.find(this.layer.features, function(item) {
         return item.attributes["event_id"] == event.get("id");
       });
-      var center = this.layer.map.getCenter();
-      var newCenter = new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)
-      var diff_lon = Math.abs(center.lon - newCenter.lon);
-      var diff_lat = Math.abs(center.lat - newCenter.lat);
-      if (diff_lon < 1 && diff_lat < 1) {
-        this.showPopup(feature);
-      } else {
-        this.layer.map.panTo(newCenter);
-        this.layer.map.events.register('moveend', this, function() {
-          this.showPopup(feature);
-          this.layer.map.events.remove('moveend');
-        });
-      }
+      var newCenter = new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y);
+			var selected = this.layer.selectedFeatures;
+			if (selected.length > 0)
+				this.select_control.unselect(selected[0]);
+      this.select_control.select(feature);
+      if (!feature.onScreen())
+				this.layer.map.panTo(newCenter);
     },
 
     createPopupControl: function(layer) {
       return new OpenLayers.Control.SelectFeature(layer, {
-        hover: true,
+        hover: false,
         multiple: false,
-        highlightOnly: true,
-        overFeature: this.showPopup.bind(this),
-        outFeature: this.hidePopup.bind(this)
+				clickout: true,
+				scope: this,
+        highlightOnly: false,
+       	onSelect: this.showPopup.bind(this),
+				onUnselect: function() {
+					$("#historical-popup").remove();
+					this.is_popup_showing = false;
+				}
       });
     },
 
-    hidePopup: function(immediate) {
-      this.hideTipsy(immediate);
-      $("body").css("cursor", "auto");
-    },
-
-    renderInfo: function(feature) {
+    createPopup: function(feature) {
       return "<div style='text-align: left; line-height: 20px'><b>Date:</b> " + feature.date
               + "<br/><b>Address: </b>" + feature.address
-              + "<br/><b>Speed: </b>" + feature.speed + "</div>";
+              + "<br/><b>Speed: </b>" + feature.speed + "<br/><span>Cliquer pour fermer</span></div>";
     },
 
     showPopup: function(feature) {
-      this.showTipsy(feature, this.renderInfo);
-      $("body").css("cursor", "pointer");
-    },
-
-    createPopup: function(attributes) {
-      return "<div style='text-align:left'>" + attributes["date"] + "<br/>" +
-              "Speed: " + attributes["speed"] + "km/h <br/>" +"Boulevard Francois Mitterand" + "</div>";
+			if (!this.is_popup_showing) {
+				$("#historical-map").on('click', "#historical-popup", function(el) {
+					this.select_control.unselect(feature);
+				}.bind(this));
+				$("#historical-map").prepend("<div id='historical-popup'>" + this.createPopup(feature.attributes) + "</div>");
+				this.is_popup_showing = true;
+			} else {
+				$("#historical-popup").html(this.createPopup(feature.attributes));
+			}
     },
 
     displayRoute: function(events) {
+    	this.hideLabels();
       if (!this.layer)
         this.layer = this.createLayerForEvents();
       features = [];
       if (events.length > 0) {
         features = _.map(events, function(event) {
-          return this.createFeatureFromEvent(event);
+					return this.createFeatureFromEvent(event);
         }.bind(this));
       }
       this.layer.destroyFeatures();
@@ -83,14 +79,18 @@ $(function() {
 
     showEvents: function(layer, features) {
       layer.addFeatures(features);
+			this.layer.map.events.register('moveend', this, function() {
+				this.showLabels(features);
+				this.layer.map.events.remove('moveend');
+			}.bind(this));
       layer.map.zoomToExtent(layer.getDataExtent());
     },
 
     createLayerForEvents: function() {
       var layer = this.createFeatureLayer("Devices");
-      var tooltip = this.createPopupControl(layer);
-      this.map.addControls([tooltip]);
-      tooltip.activate();
+      this.select_control = this.createPopupControl(layer);
+      this.map.addControls([this.select_control]);
+      this.select_control.activate();
       return layer;
     },
 
@@ -99,6 +99,9 @@ $(function() {
       var latitude = event.get("latitude");
       var point = this.projectForGoogleMaps(new OpenLayers.Geometry.Point(longitude, latitude));
       var feature = new OpenLayers.Feature.Vector(point);
+			var warnings = event.get("warnings");
+			var warning_count = warnings.speed.length + warnings.geofence.length;
+			feature.attributes["warning"] = warning_count > 0;
       feature.attributes["event_id"] = event.get("id");
       feature.attributes["speed"] = event.get("speed");
       feature.attributes["date"] = event.get("date");

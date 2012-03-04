@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Parser do
 
@@ -7,77 +7,36 @@ describe Parser do
     @parser = Parser.new
   end
 
-  describe "when analyzing longitude data" do
-
-    it "correctly identifies positive coordinates" do
-      pending
-    end
-
-    it "correctly identifies negative coordinates" do
-      pending
-    end
-
-  end
-
-  describe "when analyzing latitude data" do
-
-    it "correctly identifies positive coordinates" do
-      pending
-    end
-
-    it "correctly identifies negative coordinates" do
-      pending
-    end
-
-  end
-
-  describe "when analyzing dates" do
-
-  end
-
-  describe "when analying time" do
-
-  end
-
   describe "when reading data" do
 
-    it "correctly identifies the IMEI" do
-      pending
-    end
-
     it "correctly identifies the longitude" do
-      event = @parser.read(@data)
-      event.longitude.should == -4
+      result = @parser.read(@data)
+      result[:event].longitude.should == -4
     end
 
     it "correctly identifies the latitude" do
-      event = @parser.read(@data)
-      event.latitude.should == 5.4
+      result = @parser.read(@data)
+      result[:event].latitude.should == 5.4
     end
 
     it "correctly identifies the heading" do
-      event = @parser.read(@data)
-      event.heading.should == 40.48
+      result = @parser.read(@data)
+      result[:event].heading.should == 40.48
     end
 
     it "correctly identifies the speed" do
-      event = @parser.read(@data)
-      event.speed.should == 0.07
+      result = @parser.read(@data)
+      result[:event].speed.should == 0.07
     end
 
     it "correctly identifies the date" do
-      event = @parser.read(@data)
-      event.date == "150112"
-    end
-
-    it "correctly identifies the time" do
-      event = @parser.read(@data)
-      event.time == "041914.000"
+      result = @parser.read(@data)
+      result[:event].date == "150112"
     end
 
     it "correctly identifies the timestamp" do
-      event = @parser.read(@data)
-      event.gps_signal.should be_true
+      result = @parser.read(@data)
+      result[:event].gps_signal.should be_true
     end
 
   end

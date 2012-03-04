@@ -6,7 +6,6 @@ class CreateAccountsTable < ActiveRecord::Migration
       t.string :contact
       t.string :telephone
       t.integer :devices_count, :default => 0
-      t.integer :alarms_count, :default => 0
       t.integer :places_count, :default => 0
       t.integer :users_count, :default => 0
       t.integer :geofences_count, :default => 0

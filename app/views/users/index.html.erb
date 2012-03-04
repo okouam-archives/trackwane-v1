@@ -1,0 +1,41 @@
+<script id="introduction-template" type="text/x-handlebars-template">
+  <div class="help">
+    <div style="width: 70%; margin: auto; margin-top: 100px"><h1>User Management</h1>
+    <p>You can <a href="#">run</a> several kinds of reports to track the activity of your vehicles.</p>
+    <p>This mini-guide will show you how
+    to <a href="#">build the report</a> you need by choosing the <a href="#">type of report</a>, as well as how to <a href="#">save</a> reports to
+    run them later and how to set up <a href="#">automatic sending of reports</a> to one or more people.</p>
+    <p>Once you've started creating reports, you can show this mini-guide at any time by clicking on the Help
+    button at the top right of your screen.</p>
+    <p style="text-align: center"><img src="/assets/stock-photo-14572303-sales-problem.jpg" /></p>
+  </div>
+  </div>
+</script>
+
+<script type="text/javascript">
+    $.App.help = "users";
+    $.App.account_id = <%= @account_id %>;
+  $(function() {
+    Ext.application({
+      name: 'Gowane',
+      autoCreateViewport: false,
+      controllers: ['Gowane.controllers.Users'],
+      launch: function() {
+        Ext.create('Gowane.stores.Users', {
+          storeId: "UserStore"
+        });
+        Ext.create('Gowane.stores.Accounts', {
+          storeId: "AccountStore"
+        });
+        new Ext.Viewport({
+          layout : 'border',
+          items : [
+            { xtype: 'menu', region : 'north'},
+            { region : 'west', width: 900, xtype: 'template_panel', template: "#introduction-template", split: true},
+            { region : 'center', xtype: 'user_list', layout: 'fit', layoutConfig: {align: 'stretch'}}
+          ]
+        });
+      }
+    });
+  });
+</script>

@@ -10,8 +10,11 @@ $(function() {
   Ext.define('Gowane.models.GpsEvent', {
     extend: 'Ext.data.Model',
     fields: ['address', 'alarm_id', 'date', 'device_id', 'gps_signal', 'heading', 'id', 'imei_number', 'latitude',
-      'speed', 'longitude', 'status_code'],
-    proxy: {type: 'rest', format: 'json', url: '/events', reader: {type: 'json', root: 'results'}}
+      'speed', 'longitude', 'status_code', 'warnings'],
+    proxy: {
+			extraParams: {},
+			type: 'rest',
+			format: 'json', url: '/events', reader: {type: 'json', root: 'results', totalProperty: 'total'}}
   });
 
   Ext.define('Gowane.models.StopEvent', {

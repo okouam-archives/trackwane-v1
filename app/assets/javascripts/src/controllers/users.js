@@ -4,21 +4,19 @@ Ext.define('Gowane.controllers.Users', {
 
   stores: ['Gowane.stores.Users', 'Gowane.stores.Accounts'],
 
-  init: function() {
-    this.control({
-      'user_list': {
-        selectionchange: this.onUserSelect
-      },
-      'user_list button[text="New User"]': {
-        click: this.createUser
-      },
-      'user_list button[text="Delete User"]': {
-        click: this.deleteUser
-      },
-      'device_list button[text="Edit User"]': {
-        click: this.editUser
-      }
-    })
+  events: {
+    'user_list': {
+      selectionchange: this.onUserSelect
+    },
+    'user_list button[text="New User"]': {
+      click: this.createUser
+    },
+    'user_list button[text="Delete User"]': {
+      click: this.deleteUser
+    },
+    'device_list button[text="Edit User"]': {
+      click: this.editUser
+    }
   },
 
   onUserSelect: function(item, selection) {
@@ -33,7 +31,7 @@ Ext.define('Gowane.controllers.Users', {
     if (form.isValid()) {
       var record = form.getRecord();
       if (!record) {
-        record = Ext.getStore('UserStore').add(form.getFieldValues())[0];
+        record = Ext.getStore('Users').add(form.getFieldValues())[0];
         record.set("account_id", this.selected_account.get("id"));
       } else {
         form.updateRecord(record);
@@ -49,7 +47,15 @@ Ext.define('Gowane.controllers.Users', {
   },
 
   onLaunch: function() {
+    this.refreshUsers();
+  },
+
+  refreshUsers: function() {
     Ext.data.StoreManager.lookup('UserStore').load();
+  },
+
+  onAccountChange: function() {
+    this.refreshUsers();
   },
 
   deleteUser: function() {

@@ -2,8 +2,7 @@ class Parser
 
   def read(data)
     fields = data.split(",")
-    Event.new({
-      :imei_number => fields[1],
+    event = Event.new({
       :longitude => coordinates(fields[6], fields[7]),
       :latitude => coordinates(fields[4], fields[5]),
       :heading => fields[9].to_f,
@@ -11,6 +10,7 @@ class Parser
       :date => merge_timestamp(date(fields[10]),time(fields[2].to_f)),
       :gps_signal => gps_signal(fields[3])
     })
+		{event: event, imei_number: fields[1]}
   end
 
   def coordinates(data, quadrant)

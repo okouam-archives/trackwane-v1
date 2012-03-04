@@ -29,8 +29,7 @@ $(function() {
     columns: [
       {header : 'ID', sortable : true, dataIndex : 'id', width: 30},
       {header : 'Nom', sortable : true, dataIndex : 'login', flex: 1},
-      {header : 'Addresse Electronique', sortable : true, dataIndex : 'email', flex: 1},
-      {header : 'Actif?', sortable : true, dataIndex : 'is_active', flex: 1}
+      {header : 'Addresse Electronique', sortable : true, dataIndex : 'email', flex: 1}
     ]
   });
 
