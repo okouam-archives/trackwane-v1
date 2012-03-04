@@ -17,11 +17,11 @@ gem 'rspec'
 gem 'postgis_adapter', :git => 'https://github.com/dougcole/postgis_adapter.git'
 gem 'rspec-rails'
 gem 'silent-postgres'
+gem 'forgery'
+gem 'factory_girl_rails'
 
 group :development, :test do
   gem 'itslog'
-  gem 'forgery'
-  gem 'factory_girl_rails'
   gem 'ruby-debug19'
 end
 
