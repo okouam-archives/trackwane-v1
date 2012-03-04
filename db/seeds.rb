@@ -76,10 +76,10 @@ Place.create([
 
 # Geofences
 
-inclusion_zone = Geofence.create({name: "Inclusion Zone", category: "inclusion", account: o1_account,
+inclusion_zone = Geofence.create({name: "Inclusion Zone", account: o1_account,
 	 coordinates: "POLYGON((5.348177 -4.024, 5.316387 -4.021769, 5.316387 -3.98778, 5.353647 -3.986063, 5.348177 -4.024))"})
 
-exclusion_zone = Geofence.create({name: "Exclusion Zone", category: "exclusion", account: o1_account,
+exclusion_zone = Geofence.create({name: "Exclusion Zone", account: o1_account,
 	 coordinates: "POLYGON((5.338213 -4.003165, 5.329368 -4.011362, 5.327616 -3.990934, 5.339324 -3.992779, 5.338213 -4.003165))"})
 
 # Geofence Alarms
