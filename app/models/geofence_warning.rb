@@ -3,6 +3,12 @@ class GeofenceWarning < ActiveRecord::Base
   belongs_to :event
   belongs_to :geofence_alarm
 
+	def as_json(options)
+		hash = super(options)
+		hash["alarm_name"] = geofence_alarm.name
+		hash
+	end
+
 	def self.check(alarms, event)
 		triggered_alarms = alarms.find_all do |alarm|
 			zone = alarm.geofence.coordinates
