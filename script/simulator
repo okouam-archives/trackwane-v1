@@ -17,7 +17,7 @@ def run(imei_number, data)
 			event = event.merge({:heading => rand(360)}) unless event[:heading]
 			event = event.merge({:imei_number => imei_number, :simulated => true})
 			params = {data: event}
-		 	RestClient.post "http://gowane.local/events", params
+		 	RestClient.post "http://#{ARGV[0]}/events", params
 			puts "Sent event at lon: #{event[:longitude]} lat: #{event[:latitude]}"
 			counter += 1
 			sleep(data[:event_interval])
