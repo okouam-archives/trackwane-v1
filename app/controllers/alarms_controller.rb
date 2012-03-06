@@ -13,9 +13,14 @@ class AlarmsController < ApplicationController
   end
 
   def create
-    changes = params.slice(*Alarm.column_names)
-    alarm = Alarm.new(changes)
-    alarm.account = Account.find(session[:account_id])
+		if params[:category] == "geofence"
+			changes = params.slice(*GeofenceAlarm.column_names)
+			alarm = GeofenceAlarm.new(changes)
+		else
+			changes = params.slice(*SpeedAlarm.column_names)
+			alarm = SpeedAlarm.new(changes)
+		end
+    alarm.acount = Account.find(session[:account_id])
     if alarm.save
       render json: {success: true, results: [alarm.as_json]}
     else
