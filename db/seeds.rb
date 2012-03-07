@@ -100,3 +100,4 @@ SpeedAlarm.create([
   {name: "Over 90 Alarm", account: o1_account, speed: 90},
   {name: "Over 75 Alarm", account: o1_account, speed: 75}
 ])
+
