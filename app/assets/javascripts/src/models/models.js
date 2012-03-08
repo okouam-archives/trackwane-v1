@@ -35,22 +35,22 @@ $(function() {
     proxy: {type: 'rest', format: 'json', url: '/events', reader: {type: 'json', root: 'results'}}
   });
 
-  Ext.define('Gowane.models.Alarm', {
+  Ext.define('Gowane.models.SpeedAlarm', {
     extend: 'Ext.data.Model',
-    fields: ['id', 'category', 'name', 'medium', 'rule', 'recipient'],
-    proxy: {type: 'rest', format: 'json', url: '/alarms', reader: {type: 'json', root: 'results'}}
+    fields: ['id', 'speed', 'name', 'medium', 'recipient'],
+    proxy: {type: 'rest', format: 'json', url: '/alarms', extraParams: {type: 'speed'}, reader: {type: 'json', root: 'results'}}
+  });
+
+  Ext.define('Gowane.models.GeofenceAlarm', {
+    extend: 'Ext.data.Model',
+    fields: ['id', 'type', 'name', 'medium', 'geofence', 'recipient'],
+    proxy: {type: 'rest', format: 'json', url: '/alarms', extraParams: {type: 'geofence'}, reader: {type: 'json', root: 'results'}}
   });
 
   Ext.define('Gowane.models.Device', {
     extend: 'Ext.data.Model',
     fields: ['account_id', 'imei_number', 'display_name', 'id', 'group_name'],
     proxy: {type: 'rest', format: 'json', url: '/devices', reader: {type: 'json', root: 'results'}}
-  });
-
-  Ext.define('Gowane.models.Geofence', {
-    extend: 'Ext.data.Model',
-    fields: ['name', 'coordinates'],
-    proxy: {type: 'rest', format: 'json', url: '/geofences', reader: {type: 'json', root: 'results'}}
   });
 
   Ext.define('Gowane.models.Group', {

@@ -19,14 +19,10 @@
     Ext.application({
       name: 'Gowane',
       autoCreateViewport: false,
-      controllers: ['Gowane.controllers.Users'],
+      controllers: ['Gowane.controllers.Devices'],
       launch: function() {
-        Ext.create('Gowane.stores.Users', {
-          storeId: "UserStore"
-        });
-        Ext.create('Gowane.stores.Accounts', {
-          storeId: "AccountStore"
-        });
+        Ext.create('Gowane.stores.Devices', {storeId: "DeviceStore"});
+        Ext.create('Gowane.stores.Accounts', {storeId: "AccountStore"});
         new Ext.Viewport({
           layout : 'border',
           items : [
@@ -34,7 +30,7 @@
             {region : 'west', width: 400, xtype: 'panel', id: 'dynamic', split: true, layout: 'fit', items: [
               {xtype: 'template_panel', template: "#introduction-template"}
             ]},
-            {region : 'center', xtype: 'user_list', layout: 'fit', layoutConfig: {align: 'stretch'}}
+            {region : 'center', xtype: 'full_device_list', layout: 'fit', layoutConfig: {align: 'stretch'}}
           ]
         });
       }

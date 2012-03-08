@@ -21,7 +21,7 @@ $(function() {
   });
 
   Ext.define('Gowane.stores.Geofences', {
-    model: 'Gowane.models.Geofence',    extend: 'Ext.data.Store',       requires: 'Gowane.models.Geofence'
+    model: 'Gowane.models.Geofence', extend: 'Ext.data.Store', requires: 'Gowane.models.Geofence'
   });
 
   Ext.define('Gowane.stores.Places', {
@@ -36,8 +36,12 @@ $(function() {
     model: 'Gowane.models.User', extend: 'Ext.data.Store', requires: 'Gowane.models.User'
   });
 
-  Ext.define('Gowane.stores.Alarms', {
-    model: 'Gowane.models.Alarm', extend: 'Ext.data.Store', requires: 'Gowane.models.Alarm'
+  Ext.define('Gowane.stores.GeofenceAlarms', {
+    model: 'Gowane.models.GeofenceAlarm', extend: 'Ext.data.Store', requires: 'Gowane.models.GeofenceAlarm'
+  });
+
+  Ext.define('Gowane.stores.SpeedAlarms', {
+    model: 'Gowane.models.SpeedAlarm', extend: 'Ext.data.Store', requires: 'Gowane.models.SpeedAlarm'
   });
 
 });

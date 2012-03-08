@@ -2,6 +2,10 @@
   $(function() {
     $.App.help = "historical";
     $.App.account_id = #{session[:account_id]};
+    var button_toolbar = {xtype: 'toolbar', items:[
+      {xtype: 'button', enableToggle: true, text: "Show Places", id: "btn_toggle_places"},
+      {id: "btn_toggle_geofences", enableToggle: true, xtype: 'button', text: "Show Geofences"}
+    ]};
     Ext.application({
       name: 'Gowane',
       autoCreateViewport: false,
@@ -12,7 +16,7 @@
           items : [
             {xtype: 'menu', region : 'north'},
             {region : 'west', width: 900, xtype: 'panel', split: true, layout: {type: 'vbox', pack: 'start', align: 'stretch'}, items: [
-              {xtype: 'historical_map', id: 'historical-map', flex: 6},
+              {xtype: 'historical_map', id: 'historical-map', flex: 6, dockedItems: [button_toolbar]},
               {xtype: 'full_gps_event_list', flex: 2},
               {xtype: 'panel', layout: 'hbox', height: 50, items: [
               	{xtype: 'button', icon: "/assets/button_grey_stop.gif", scale: 'large', width: 35, height: 35, margin: '3 3 0 3'},

@@ -34,6 +34,12 @@ Ext.define('Gowane.Shared.Map', {
     });
   },
 
+  createLayer: function(name) {
+    var layer = new OpenLayers.Layer.Vector(name);
+    this.map.addLayer(layer);
+    return layer;
+  },
+
   createFeatureLayer: function(name) {
     var layer = new OpenLayers.Layer.Vector(name);
     this.map.addLayer(layer);

@@ -5,7 +5,7 @@ $(function() {
     extend: 'Gowane.Shared.Map',
 
     mixins: {
-      geolocater: 'Gowane.Mixins.Geolocater',
+      cartography: 'Gowane.Mixins.Cartography',
       tipsy: 'Gowane.Mixins.Tipsy'
     },
 

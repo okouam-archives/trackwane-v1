@@ -11,7 +11,7 @@ def run(imei_number, data)
 	counter = 0
 	while(1) do
 		data[:events].each do |event|
-			event = event.merge({:date => data[:start_time] + counter * data[:realtime_interval]}) unless event[:datetime]
+			event = event.merge({:date => data[:start_time].to_time + counter * data[:realtime_interval]}) unless event[:datetime]
 			event = event.merge({:gps_signal => 'A'}) unless event[:gps_signal]
 			event = event.merge({:speed => rand(100)}) unless event[:speed]
 			event = event.merge({:heading => rand(360)}) unless event[:heading]

@@ -1,7 +1,12 @@
+= render :partial => "shared/popup"
 :javascript
   $(function() {
     $.App.help = "realtime";
     $.App.account_id = #{session[:account_id]};
+    var button_toolbar = {xtype: 'toolbar', items:[
+      {xtype: 'button', enableToggle: true, text: "Show Places", id: "btn_toggle_places"},
+      {id: "btn_toggle_geofences", enableToggle: true, xtype: 'button', text: "Show Geofences"}
+    ]};
     Ext.application({
       name: 'Gowane',
       autoCreateViewport: false,
@@ -11,10 +16,13 @@
           layout : 'border',
           items : [
             { xtype: 'menu', region : 'north'},
-            { region : 'west', width: 900, xtype: 'panel', split: true, layout: {type: 'vbox', pack: 'start', align: 'stretch'}, items: [
-              {xtype: 'realtime_map', flex: 3},
-              {xtype: 'realtime_event_list', flex: 1}
-            ]},
+            { region : 'west', width: 900, xtype: 'panel',
+              split: true,
+              dockedItems: [button_toolbar],
+              layout: {type: 'vbox', pack: 'start', align: 'stretch'},
+              items: [
+                {xtype: 'realtime_map', flex: 3}
+              ]},
             { xtype: 'sharedsidecolumn', region: 'center', layout: {type: 'vbox', pack: 'start', align: 'stretch'},
               items: [{xtype: 'selectable_device_list', width: 300}]
             }

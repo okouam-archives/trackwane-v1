@@ -4,6 +4,11 @@ Ext.define('Gowane.controllers.Historical', {
 
   stores: ['Gowane.stores.Devices', 'Gowane.stores.Groups', 'Gowane.stores.GpsEvents'],
 
+  mixins: {
+    geofence_visualization: 'Gowane.Mixins.Controllers.GeofenceVisualization',
+    place_visualization: 'Gowane.Mixins.Controllers.PlaceVisualization'
+  },
+
   refs: [
     {selector: 'viewport sharedsidecolumn', ref: 'sidebar'},
     {selector: 'viewport historical_map', ref: 'map'},
@@ -13,6 +18,12 @@ Ext.define('Gowane.controllers.Historical', {
   ],
 
   events: {
+    '#btn_toggle_geofences': {
+      toggle: 'onToggleGeofences'
+    },
+    '#btn_toggle_places': {
+      toggle: 'onTogglePlaces'
+    },
     'date_selection #fromDay': {
       select: 'changeFromDay'
     },
@@ -25,6 +36,18 @@ Ext.define('Gowane.controllers.Historical', {
     'full_gps_event_list': {
       selectionchange: "onEventSelect"
     }
+  },
+
+  /* Event Handlers. */
+
+  onToggleGeofences: function() {
+    var map = this.getMap();
+    this.toggleGeofences(map);
+  },
+
+  onTogglePlaces: function() {
+    var map = this.getMap();
+    this.togglePlaces(map);
   },
 
   changeFromDay: function(src, date) {

@@ -4,7 +4,7 @@ SIMULATION ||= {}
 SIMULATION[55676543] = {
 	event_interval: 10,
 	start_time: DateTime.new(2012, 2, 20, 6, 0, 0),
-	realtime_interval: 600000,
+	realtime_interval: 600,
 	events: [
 		{longitude: -4.012917, latitude: 5.304547},
 		{longitude: -4.012381, latitude: 5.306128},

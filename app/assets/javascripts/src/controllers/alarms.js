@@ -2,35 +2,48 @@ Ext.define('Gowane.controllers.Alarms', {
 
   extend: 'Gowane.controllers.AbstractController',
 
-  stores: ['Gowane.stores.Geofences', 'Gowane.stores.Alarms', 'Gowane.stores.Users'],
+  stores: ['Gowane.stores.Geofences', 'Gowane.stores.SpeedAlarms', 'Gowane.stores.GeofenceAlarms', 'Gowane.stores.Users'],
+
+   mixins: {
+    geofence_management: 'Gowane.Mixins.Controllers.GeofenceManagement',
+    alarm_management: 'Gowane.Mixins.Controllers.AlarmManagement'
+  },
 
   refs: [
     {selector: 'viewport geofence_map', ref: 'map'}
   ],
 
   events: {
-    'full_geofence_list': {
+    'geofence_list': {
       selectionchange: "onGeofenceSelect"
     },
-    'full_alarm_list': {
+    'geofence_alarm_list': {
       selectionchange: "onAlarmSelect"
     },
-    'full_alarm_list button[text="New Speed Alarm"]': {
-      click: "createSpeedAlarm"
+    'speed_alarm_list': {
+      selectionchange: "onAlarmSelect"
     },
-    'full_alarm_list button[text="New Geofence Alarm"]': {
-      click: "createGeofenceAlarm"
+    '#btn_create_speed_alarm': {
+      click: "onCreateSpeedAlarm"
     },
-    'full_alarm_list button[text="Delete Alarm"]': {
-      click: "deleteAlarm"
+    '#btn_create_geofence_alarm': {
+      click: "onCreateGeofenceAlarm"
     },
-    'full_geofence_list button[text="New Geofence"]': {
-      click: "createGeofence"
+    '#btn_delete_speed_alarm': {
+      click: "onDeleteAlarm"
     },
-    'full_geofence_list button[text="Delete Geofence"]': {
-      click: "deleteGeofence"
+    '#btn_delete_geofence_alarm': {
+      click: "onDeleteAlarm"
+    },
+    '#btn_create_geofence': {
+      click: "onCreateGeofence"
+    },
+    '#btn_delete_geofence': {
+      click: "onDeleteGeofence"
     }
   },
+
+  /* Event Handlers. */
 
   onAccountChange: function() {
     Ext.data.StoreManager.lookup('DeviceStore').load();
@@ -43,200 +56,105 @@ Ext.define('Gowane.controllers.Alarms', {
 
   onAlarmSelect: function(item, selection) {
     if (selection.length > 0) {
-      this.selected_alarm = selection[0];
+      this.selectAlarm(selection[0]);
     }
   },
 
   onGeofenceSelect: function(item, selection) {
     if (selection.length > 0) {
-      this.selected_geofence = selection[0];
-      this.getMap().showGeofence(selection[0].get("coordinates"));
+      this.selectGeofence(selection[0], this.getMap());
     }
   },
 
-  createGeofence: function() {
-    this.getMap().createDrawingLayer();
-    var form = this.createGeofenceForm();
-    var window = this.createFloatingWindow("New Geofence", [form],
-      this.closeGeofenceEditor.bind(this), this.saveGeofence.bind(this));
-    window.show();
-  },
-
-  saveGeofence: function() {
-    var component = Ext.getCmp("editor");
-    var form = component.query('form')[0].form;
-    if (form.isValid()) {
-      var record = form.getRecord();
-      if (!record) {
-        record = Ext.getStore('GeofenceStore').add(form.getFieldValues())[0];
-        record.set("coordinates", this.getMap().retrieveGeofenceCoordinates());
-      } else {
-        form.updateRecord(record);
-      }
-      record.save();
-    }
-    this.closeGeofenceEditor();
-  },
-
-  deleteGeofence: function() {
+  onDeleteGeofence: function() {
     if (!this.selected_geofence) {
       alert("Please select a geofence to delete.");
     } else {
       if (confirm("Are you sure you want to delete this geofence?")) {
-        var store = this.selected_geofence.store;
-        store.remove(this.selected_geofence);
-        store.sync();
+        this.deleteGeofence(this.selected_geofence);
       }
     }
   },
 
-  createSpeedAlarm: function() {
-    var form = this.createSpeedAlarmForm();
+  onDeleteAlarm: function() {
+    if (!this.selected_alarm) {
+      alert("Please select an alarm to delete.");
+    } else {
+      if (confirm("Are you sure you want to delete this alarm?")) {
+        this.deleteAlarm(this.selected_alarm);
+      }
+    }
+  },
+
+  onCreateGeofence: function() {
+    this.getMap().createDrawingLayer();
+    var form = Ext.widget('geofence_form');
+    var window = this.createFloatingWindow("New Geofence", [form],
+      this.closeGeofenceEditor.bind(this), this.onSaveGeofence.bind(this));
+    window.show();
+  },
+
+  onSaveGeofence: function() {
+    var component = Ext.getCmp("editor");
+    var form = component.query('form')[0].form;
+    var wasSuccess = this.saveGeofence(form, Ext.getStore('GeofenceStore'), this.getMap());
+    if (wasSuccess) this.closeGeofenceEditor();
+  },
+
+  onCreateSpeedAlarm: function() {
+    var form = Ext.widget('speed_alarm_form');
     var window = this.createFloatingWindow("New Speed Alarm", [form],
-      this.closeEditor.bind(this), this.saveSpeedAlarm.bind(this));
+      this.closeEditor.bind(this), this.onSaveSpeedAlarm.bind(this));
     window.show();
   },
 
-  createGeofenceAlarm: function() {
-    var form = this.createGeofenceAlarmForm();
+  onCreateGeofenceAlarm: function() {
+    var form = Ext.widget('geofence_alarm_form');
     var window = this.createFloatingWindow("New Geofence Alarm", [form],
-      this.closeEditor.bind(this), this.saveGeofenceAlarm.bind(this));
+      this.closeEditor.bind(this), this.onSaveGeofenceAlarm.bind(this));
     window.show();
   },
 
-  saveGeofenceAlarm: function() {
+  onSaveGeofenceAlarm: function() {
     var component = Ext.getCmp("editor");
     var form = component.query('form')[0].form;
-    if (form.isValid()) {
-      var record = form.getRecord();
-      if (!record) {
-        record = Ext.getStore('AlarmStore').add(form.getFieldValues())[0];
-      } else {
-        form.updateRecord(record);
-      }
-      record.save();
-    }
+    this.saveGeofenceAlarm(form, Ext.getStore('GeofenceAlarmStore'));
     this.closeEditor();
   },
 
-  saveSpeedAlarm: function() {
+  onSaveSpeedAlarm: function() {
     var component = Ext.getCmp("editor");
     var form = component.query('form')[0].form;
-    if (form.isValid()) {
-      var record = form.getRecord();
-      if (!record) {
-        record = Ext.getStore('AlarmStore').add(form.getFieldValues())[0];
-      } else {
-        form.updateRecord(record);
-      }
-      record.save();
-    }
+    this.saveSpeedAlarm(form, Ext.getStore('SpeedAlarmStore'));
     this.closeEditor();
   },
+
+  /* Private Methods. */
 
   closeEditor: function() {
     var component = Ext.getCmp("editor");
     component.close();
   },
 
-  deleteAlarm: function() {
-    if (!this.selected_alarm) {
-      alert("Please select an alarm to delete.");
-    } else {
-      if (confirm("Are you sure you want to delete this alarm?")) {
-        var store = this.selected_alarm.store;
-        store.remove(this.selected_alarm);
-        store.sync();
-      }
-    }
-  },
-
   onLaunch: function() {
     this.callParent();
     this.getMap().renderMap();
     Ext.data.StoreManager.lookup('GeofenceStore').load();
-    Ext.data.StoreManager.lookup('AlarmStore').load();
+    Ext.data.StoreManager.lookup('GeofenceAlarmStore').load();
+    Ext.data.StoreManager.lookup('SpeedAlarmStore').load();
     Ext.data.StoreManager.lookup('UserStore').load();
   },
 
   createStores: function() {
-    Ext.create('Gowane.stores.Geofences', {
-      storeId: "GeofenceStore"
-    });
-    Ext.create('Gowane.stores.Alarms', {
-      storeId: "AlarmStore"
-    });
-    Ext.create('Gowane.stores.Users', {
-      storeId: "UserStore"
-    });
+    Ext.create('Gowane.stores.Geofences', {storeId: "GeofenceStore"});
+    Ext.create('Gowane.stores.GeofenceAlarms', {storeId: "GeofenceAlarmStore"});
+    Ext.create('Gowane.stores.SpeedAlarms', {storeId: "SpeedAlarmStore"});
+    Ext.create('Gowane.stores.Users', {storeId: "UserStore"});
   },
 
   closeGeofenceEditor: function() {
     this.closeEditor();
-    this.getMap().deleteDrawingLayer();
-  },
-
-  createSpeedAlarmForm: function() {
-    var ruleSelector = {
-      fieldLabel: 'Maximum Speed',
-      name: 'rule',
-      width: 110,
-      anchor: '-4'
-    };
-    return this.createAlarmForm(ruleSelector);
-  },
-
-  createGeofenceAlarmForm: function() {
-    var ruleSelector =  {
-      fieldLabel: 'Geofence',
-      store: Ext.getStore('GeofenceStore'),
-      width: 110,
-      queryMode: 'local',
-      anchor: '-4',
-      valueField: 'id',
-      name: 'rule',
-      displayField: 'name',
-      xtype: 'combobox',
-      forceSelection: true
-    };
-    return this.createAlarmForm(ruleSelector);
-  },
-
-  createAlarmForm: function(ruleSelector) {
-    var actions = [["email", "Email"], ["sms", "SMS"]];
-    return Ext.create('Ext.form.Panel', {
-      collapsible: false,
-      closable: false,
-      bodyStyle: 'padding: 5px',
-      flex: 1,
-      align: 'stretchmax',
-      width: '100%',
-      defaultType: 'textfield',
-      items: [
-        {xtype: 'hidden', name: 'category', value: 'geofence'},
-        ruleSelector,
-        {fieldLabel: 'Name', name: 'name', width: 110, anchor: '-4'},
-        {fieldLabel: 'Medium', store: actions, width: 110, queryMode: 'local', anchor: '-4',
-          valueField: 'id', name: 'medium', displayField: 'name', xtype: 'combobox', forceSelection: true},
-        {fieldLabel: 'Recipient', store: Ext.getStore('UserStore'), width: 110, queryMode: 'local', anchor: '-4',
-          valueField: 'id', name: 'recipient', displayField: 'login', xtype: 'combobox', forceSelection: true}
-      ]
-    });
-  },
-
-  createGeofenceForm: function() {
-    return Ext.create('Ext.form.Panel', {
-      collapsible: false,
-      closable: false,
-      bodyStyle: 'padding: 5px',
-      flex: 1,
-      align: 'stretchmax',
-      width: '100%',
-      defaultType: 'textfield',
-      items: [
-        {fieldLabel: 'Name', name: 'name', width: 110, anchor: '-4'}
-      ]
-    });
+    this.getMap().hideGeofences();
   },
 
   createFloatingWindow: function(title, contents, cancelCallback, saveCallback) {

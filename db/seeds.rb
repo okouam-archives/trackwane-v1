@@ -9,10 +9,10 @@ Account.delete_all
 
 # Accounts
 
-o1_account =  Factory(:account, :name => "0-One")
-demo_account =  Factory(:account, :name => "Demo")
-radio_account =  Factory(:account, :name => "Radio Ivoire")
-orange_account =  Factory(:account, :name => "Orange CI")
+o1_account = Factory(:account, :name => "0-One")
+demo_account = Factory(:account, :name => "Demo")
+radio_account = Factory(:account, :name => "Radio Ivoire")
+orange_account = Factory(:account, :name => "Orange CI")
 
 # Users
 
@@ -39,6 +39,11 @@ Group.create([
 # Devices
 
 Device.create([
+  {imei_number: 11111111, display_name: "BMW X6", account: o1_account, :group => Group.find_by_name("Alpha Team")},
+  {imei_number: 22222222, display_name: "Audi R8", account: o1_account, :group => Group.find_by_name("Alpha Team")},
+  {imei_number: 33333333, display_name: "Range rover avoque", account: o1_account, :group => Group.find_by_name("Alpha Team")},
+  {imei_number: 44444444, display_name: "ML 350 AMG", account: o1_account, :group => Group.find_by_name("Alpha Team")},
+  {imei_number: 66666666, display_name: "Porshe Cayenne", account: o1_account, :group => Group.find_by_name("Alpha Team")},
   {imei_number: 55676543, display_name: "Test Car 99XX99", account: o1_account, :group => Group.find_by_name("Alpha Team")},
   {imei_number: 1234567, display_name: "Ford Escort 695LD9232", account: o1_account, :group => Group.find_by_name("Alpha Team")},
   {imei_number: 345435006, display_name: "Rolls Royce 123JD9484", account: radio_account, :group => Group.find_by_name("Kappa Team")},
@@ -56,10 +61,10 @@ Device.create([
 # Places
 
 Place.create([
-	{name: "Test Place A", category: "Pressing", account: o1_account, longitude: -4.01296, latitude: 5.321768},
-	{name: "Test Place B", category: "Bar", account: o1_account, longitude: -4.008411, latitude: 5.310508},
-	{name: "Test Place C", category: "Hotel", account: o1_account, longitude: -4.00369, latitude: 5.333113},
-	{name: "Test Place D", category: "Entreprises", account: o1_account, longitude: -3.997618, latitude: 5.32696},
+{name: "Test Place A", category: "Pressing", account: o1_account, longitude: -4.01296, latitude: 5.321768},
+{name: "Test Place B", category: "Bar", account: o1_account, longitude: -4.008411, latitude: 5.310508},
+{name: "Test Place C", category: "Hotel", account: o1_account, longitude: -4.00369, latitude: 5.333113},
+{name: "Test Place D", category: "Entreprises", account: o1_account, longitude: -3.997618, latitude: 5.32696},
   {name: "225 Discothek", category: "Bar", account: orange_account, longitude: -4, latitude: 5.375726347198491},
   {name: "ABC", category: "Cafe ou maquis", account: orange_account, longitude: -5.36437, latitude: 5.85136},
   {name: "Afifco SA", category: "Cybercafe", account: demo_account, longitude: -4.0118781378174, latitude: 5.3383041670227},
@@ -70,28 +75,28 @@ Place.create([
   {name: "ABC", category: "Bar", account: radio_account, longitude: 2.353647, latitude: 6.3891554},
   {name: "Abatam", category: "Bar", account: radio_account, longitude: 1.25152, latitude: 6.14528},
   {name: "2D Oressing", category: "Pressing", account: o1_account, longitude: 1.27997, latitude: 6.15408},
-	{name: "3d Traitement de Bois", category: "Bar", account: o1_account, longitude: -4.24234, latitude: 5.234},
+{name: "3d Traitement de Bois", category: "Bar", account: o1_account, longitude: -4.24234, latitude: 5.234},
   {name: "2M Concepte", category: "Bar", account: o1_account, longitude: -3.23423, latitude: 5.234234}
 ])
 
 # Geofences
 
 inclusion_zone = Geofence.create({name: "Inclusion Zone", account: o1_account,
-	 coordinates: "POLYGON((5.348177 -4.024, 5.316387 -4.021769, 5.316387 -3.98778, 5.353647 -3.986063, 5.348177 -4.024))"})
+coordinates: "POLYGON((5.348177 -4.024, 5.316387 -4.021769, 5.316387 -3.98778, 5.353647 -3.986063, 5.348177 -4.024))"})
 
 exclusion_zone = Geofence.create({name: "Exclusion Zone", account: o1_account,
-	 coordinates: "POLYGON((5.338213 -4.003165, 5.329368 -4.011362, 5.327616 -3.990934, 5.339324 -3.992779, 5.338213 -4.003165))"})
+coordinates: "POLYGON((5.338213 -4.003165, 5.329368 -4.011362, 5.327616 -3.990934, 5.339324 -3.992779, 5.338213 -4.003165))"})
 
 # Geofence Alarms
 
 GeofenceAlarm.create([
-	{name: "Inclusion Zone Alarm", geofence: inclusion_zone, account: o1_account, category: "inclusion"},
-	{name: "Exclusion Zone Alarm", geofence: exclusion_zone, account: o1_account, category: "exclusion"}
+  {name: "Inclusion Zone Alarm", geofence: inclusion_zone, account: o1_account, category: "inclusion"},
+  {name: "Exclusion Zone Alarm", geofence: exclusion_zone, account: o1_account, category: "exclusion"}
 ])
 
 # Speed Speed Alarms
 
 SpeedAlarm.create([
-	{name: "Over 90 Alarm", account: o1_account, speed: 90},
-	{name: "Over 75 Alarm", account: o1_account, speed: 75}
+  {name: "Over 90 Alarm", account: o1_account, speed: 90},
+  {name: "Over 75 Alarm", account: o1_account, speed: 75}
 ])
