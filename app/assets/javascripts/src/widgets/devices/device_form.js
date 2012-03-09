@@ -1,6 +1,7 @@
 $(function() {
   Ext.define('Gowane.Widgets.DeviceForm', {
     extend: 'Ext.form.Panel',
+    alias: 'widget.device_form',
     collapsible: false,
     closable: false,
     bodyStyle: 'padding: 5px',

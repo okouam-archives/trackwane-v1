@@ -4,7 +4,7 @@ Ext.define('Gowane.controllers.Alarms', {
 
   stores: ['Gowane.stores.Geofences', 'Gowane.stores.SpeedAlarms', 'Gowane.stores.GeofenceAlarms', 'Gowane.stores.Users'],
 
-   mixins: {
+  mixins: {
     geofence_management: 'Gowane.Mixins.Controllers.GeofenceManagement',
     alarm_management: 'Gowane.Mixins.Controllers.AlarmManagement'
   },

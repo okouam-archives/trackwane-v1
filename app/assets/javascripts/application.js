@@ -5,6 +5,7 @@
 //= require ./lib/OpenLayers
 //= require ./lib/handlebars
 //= require ./lib/init
+//= require_tree ./src/locales
 //= require src/controllers/abstract_controller
 //= require_tree ./src/models
 //= require_tree ./src/collections

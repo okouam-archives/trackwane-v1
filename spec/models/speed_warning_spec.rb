@@ -7,7 +7,11 @@ describe SpeedWarning do
 		before(:all) do
 			@low_alarm = Factory(:speed_alarm, :speed => 100)
 			@high_alarm = Factory(:speed_alarm, :speed => 200)
-		end
+    end
+
+    it "does not consider geofence alarms" do
+      pending
+    end
 
 		context "and there are no triggered alarms" do
 			it "returns nothing" do

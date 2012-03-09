@@ -19,9 +19,7 @@ $(function() {
     columns: [
       {header : 'ID', sortable : true, dataIndex : 'id', width: 30},
       {header : 'Name', sortable : true, dataIndex : 'name', flex: 1},
-      {header : 'Speed', sortable : true, dataIndex : 'rule', flex: 1},
-      {header : 'Medium', sortable : true, dataIndex : 'medium', flex: 1},
-      {header : 'Recipient', sortable : true, dataIndex : 'recipient', flex: 1}
+      {header : 'Speed', sortable : true, dataIndex : 'speed', flex: 1}
     ]
   });
 

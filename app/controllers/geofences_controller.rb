@@ -10,12 +10,11 @@ class GeofencesController < ApplicationController
 
   def create
     geofence = Geofence.new(params.slice(*Geofence.column_names))
-    Rails.logger.info(session)
     geofence.account = Account.find(session[:account_id])
     if geofence.save
        render json: {success: true, results: [geofence.as_json]}
     else
-      render json: {success: false}
+      render json: {success: false, results: geofence.errors}
     end
   end
 

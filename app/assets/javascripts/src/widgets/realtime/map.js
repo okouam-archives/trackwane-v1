@@ -18,10 +18,10 @@ $(function() {
     },
 
     showDevices: function(devices) {
-      var new_devices = this.findDevicesWithoutFeature(devices);
-      this.createDeviceFeatures(new_devices);
-      this.positionDeviceFeatures(devices);
-      if (new_devices.length > 0) this.showDevicesFeatures();
+      var has_new_devices = this.hasNewDevices(devices);
+      this.clearDeviceFeatures();
+      this.createDeviceFeatures(devices);
+      if (has_new_devices) this.showDevicesFeatures();
     }
 
   });

@@ -20,9 +20,7 @@ $(function() {
       {header : 'ID', sortable : true, dataIndex : 'id', width: 30},
       {header : 'Name', sortable : true, dataIndex : 'name', flex: 1},
       {header : 'Type', sortable : true, dataIndex : 'category', flex: 1},
-      {header : 'Geofence', sortable : true, dataIndex : 'geofence', flex: 1},
-      {header : 'Medium', sortable : true, dataIndex : 'medium', flex: 1},
-      {header : 'Recipient', sortable : true, dataIndex : 'recipient', flex: 1}
+      {header : 'Geofence', sortable : true, dataIndex : 'geofence', flex: 1}
     ]
   });
 

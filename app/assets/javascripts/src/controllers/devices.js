@@ -2,6 +2,11 @@ Ext.define('Gowane.controllers.Devices', {
 
   extend: 'Gowane.controllers.AbstractController',
 
+  mixins: {
+    user_management: 'Gowane.Mixins.Controllers.DeviceManagement',
+    sidebar_editor: 'Gowane.Mixins.Controllers.SidebarEditor'
+  },
+
   stores: ['Gowane.stores.Devices', 'Gowane.stores.Accounts'],
 
   refs: [
@@ -9,13 +14,13 @@ Ext.define('Gowane.controllers.Devices', {
   ],
 
   events: {
-    'user_list': {
+    'full_device_list': {
       selectionchange: 'onDeviceSelect'
     },
-    '#btn_create_user': {
+    '#btn_create_device': {
       click: 'onCreateDevice'
     },
-    '#btn_delete_user': {
+    '#btn_delete_device': {
       click: 'onDeleteDevice'
     },
     '#btn_accept_changes': {
@@ -30,9 +35,7 @@ Ext.define('Gowane.controllers.Devices', {
 
   onDeviceSelect: function(item, selection) {
     this.selected_device = selection[0];
-    var form = Ext.widget('device_form');
-    form.loadRecord(this.selected_device);
-    this.showEditor(form, "Edit");
+    this.loadEditor(this.selected_device, 'device_form');
   },
 
   onCreateDevice: function() {
@@ -41,17 +44,13 @@ Ext.define('Gowane.controllers.Devices', {
 
   onDeleteDevice: function() {
     if (!this.selected_device) {
-      alert("Please select a device to remove.");
+      alert($.t("select_device_to_remove"));
     } else {
-      if (confirm("Are you sure you want to delete this device?")) {
+      if (confirm($.t("confirm_device_deletion"))) {
         this.deleteDevice(this.selected_device);
         this.showHelpSidebar("#introduction-template");
       }
     }
-  },
-
-  onCancelChanges: function() {
-    this.showHelpSidebar("#introduction-template")
   },
 
   onAcceptChanges: function() {
@@ -61,11 +60,15 @@ Ext.define('Gowane.controllers.Devices', {
   },
 
   onLaunch: function() {
-    this.callParent();
-    Ext.data.StoreManager.lookup('DeviceStore').load();
+    this.callParent(arguments);
+    this.refreshListing();
   },
 
   /* Private Methods. */
+
+  refreshListing: function() {
+    Ext.data.StoreManager.lookup('DeviceStore').load();
+  },
 
   findAvailableDeviceGroups: function() {
     return _.map(Ext.getStore('DeviceStore').getGroups(), function(item) {

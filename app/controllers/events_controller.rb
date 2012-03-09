@@ -2,14 +2,14 @@ class EventsController < ApplicationController
   before_filter :require_user, :except => [:create]
 
   def index
-    device_id = params[:device_id]
-		device = Device.find(device_id)
-    events = device.events
-		events = events.limit(params[:limit]) if params[:limit]
-		events = events.offset(params[:start]) if params[:start]
     respond_to do |format|
       format.html
       format.json do
+        device_id = params[:device_id]
+        device = Device.find(device_id)
+        events = device.events
+        events = events.limit(params[:limit]) if params[:limit]
+        events = events.offset(params[:start]) if params[:start]
         render json: {success: true, results: events, total: device.events.count}
       end
     end

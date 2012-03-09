@@ -1,14 +1,10 @@
 $(function() {
 
- var add_user =  Ext.create('Ext.Button', {id: "btn_create_user", text: "New User"
-  });
+ var add_user =  Ext.create('Ext.Button', {id: "btn_create_user", text: "New User"    });
 
-  var delete_user = Ext.create('Ext.Button', {id: "btn_delete_user", text: "Delete User"
-  });
+  var delete_user = Ext.create('Ext.Button', {id: "btn_delete_user", text: "Delete User"     });
 
-  var pager = {
-    xtype: 'pagingtoolbar', store: "UserStore", dock: 'bottom', displayInfo: true
-  };
+  var pager = {    xtype: 'pagingtoolbar', store: "UserStore", dock: 'bottom', displayInfo: true    };
 
   var toolbar = {xtype: 'toolbar', items:[add_user, delete_user]};
 

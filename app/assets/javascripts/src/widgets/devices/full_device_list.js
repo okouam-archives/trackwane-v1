@@ -2,13 +2,13 @@ $(function() {
 
   var add_button =  Ext.create('Ext.Button', {id: "btn_create_device", text: "New Device"});
 
-  var delete_button = Ext.create('Ext.Button', {id: "btn_create_device", text: "Delete Device"});
+  var delete_button = Ext.create('Ext.Button', {id: "btn_delete_device", text: "Delete Device"});
 
   var groupingFeature = Ext.create('Ext.grid.feature.Grouping',{groupHeaderTpl: '{name}'});
 
   var pager = {xtype: 'pagingtoolbar', store: "DeviceStore", dock: 'bottom', displayInfo: true};
 
-  var toolbar = {xtype: 'toolbar', items:[add_button, delete_button]};
+  var toolbar = {xtype: 'toolbar', items: [add_button, delete_button]};
 
   Ext.define('Gowane.Widgets.FullDeviceList', {
     extend: 'Ext.grid.Panel',

@@ -1,9 +1,5 @@
 Ext.define('Gowane.Mixins.Controllers.AccountManagement', {
 
-  selectAccount: function(selection) {
-    this.selected_client = selection;
-  },
-
   saveAccount: function(form, store) {
     if (form.isValid()) {
       var record = form.getRecord();

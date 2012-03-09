@@ -12,6 +12,10 @@ describe GeofenceWarning do
       @exclusion_alarm = Factory(:geofence_alarm, :account => account, :geofence => geofence_b, :category => "exclusion")
     end
 
+    it "does not consider triggered speed alarms" do
+      pending
+    end
+
     context "and there are no triggered alarms" do
       it "returns nothing" do
         event = Factory.build(:event, :latitude => 10, :longitude => 10)

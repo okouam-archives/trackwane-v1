@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(:version => 20120303122737) do
   create_table "geofences", :force => true do |t|
     t.column "name", :string
     t.column "coordinates", :text
-    t.column "category", :string
     t.column "account_id", :integer
     t.column "created_at", :datetime
     t.column "updated_at", :datetime

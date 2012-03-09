@@ -5,7 +5,8 @@ Ext.define('Gowane.Mixins.Maps.DeviceVisualization', {
   },
 
   clearDeviceFeatures: function() {
-    if (this.device_layer) this.device_layer.destroyAllFeatures();
+    this.ensureDeviceLayerIsAvailable();
+    this.device_layer.destroyFeatures();
   },
 
   createDeviceFeatures: function(devices) {
@@ -15,7 +16,7 @@ Ext.define('Gowane.Mixins.Maps.DeviceVisualization', {
      }.bind(this));
   },
 
-  findDevicesWithoutFeature: function(devices) {
+  hasNewDevices: function(devices) {
     this.ensureDeviceLayerIsAvailable();
     var new_devices = [];
     _.each(devices, function(device) {
@@ -27,8 +28,7 @@ Ext.define('Gowane.Mixins.Maps.DeviceVisualization', {
       }
       if (!isFeature) new_devices.push(device);
     }.bind(this));
-    console.log(new_devices.length + " new devices are being added do the device visualization map.");
-    return new_devices;
+    return new_devices.length > 0;
   },
 
   showDevicesFeatures: function() {
@@ -46,7 +46,7 @@ Ext.define('Gowane.Mixins.Maps.DeviceVisualization', {
       var details = el.find(".popup-details");
       details.toggle();
       popup.updateSize();
-    });
+    }.bind(this));
     this.map.addPopup(popup);
   },
 
@@ -58,24 +58,6 @@ Ext.define('Gowane.Mixins.Maps.DeviceVisualization', {
     var feature = new OpenLayers.Feature.Vector(point, device);
     this.device_layer.addFeatures([feature]);
     this.createDevicePopup(device, lonlat);
-  },
-
-  positionDeviceFeatures: function(devices) {
-    this.ensureDeviceLayerIsAvailable();
-    //_.each(this.device_popups, function(popup) {
-    //  this.map.addPopup(popup);
-    //}.bind(this));
-  },
-
-
-    moveDevice: function(device, features) {
-      this.ensureDeviceLayerIsAvailable();
-      var feature = _.find(features, function(item) {
-        return item.attributes.imei_number == device.imei_number;
-      });
-      var newCoordinates = this.projectForGoogleMaps(new OpenLayers.LonLat(device.longitude, device.latitude));
-      feature.move(newCoordinates);
-      return false;
-    }
+  }
 
 });
