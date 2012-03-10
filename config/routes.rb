@@ -7,7 +7,8 @@ Gowane::Application.routes.draw do
   resources :reports do
     collection do
       get :stop
-      get :gps
+      get :speed
+      get :events
       get :distance
     end
   end

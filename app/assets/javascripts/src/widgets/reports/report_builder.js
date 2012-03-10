@@ -20,7 +20,7 @@ $(function() {
         id: 'rangeType',
         typeAhead: true,
         queryMode: 'local',
-        store: 'ReportTypeStore',
+        store: 'ReportRangeStore',
         valueField: 'type',
         displayField: 'name',
         fieldLabel: 'Range Type'

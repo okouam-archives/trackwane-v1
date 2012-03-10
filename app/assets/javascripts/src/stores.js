@@ -8,16 +8,12 @@ $(function() {
     model: 'Gowane.models.Group', extend: 'Ext.data.Store', requires: 'Gowane.models.Group'
   });
 
-  Ext.define('Gowane.stores.GpsEvents', {
-    model: 'Gowane.models.GpsEvent', extend: 'Ext.data.Store', requires: 'Gowane.models.GpsEvent'
+  Ext.define('Gowane.stores.Events', {
+    model: 'Gowane.models.Event', extend: 'Ext.data.Store', requires: 'Gowane.models.Event'
   });
 
-  Ext.define('Gowane.stores.StopEvents', {
-    model: 'Gowane.models.StopEvent', extend: 'Ext.data.Store', requires: 'Gowane.models.StopEvent'
-  });
-
-  Ext.define('Gowane.stores.DistanceEvents', {
-    model: 'Gowane.models.DistanceEvent', extend: 'Ext.data.Store', requires: 'Gowane.models.DistanceEvent'
+  Ext.define('Gowane.stores.SpeedDataPoints', {
+    model: 'Gowane.models.SpeedDataPoint', extend: 'Ext.data.Store', requires: 'Gowane.models.SpeedDataPoint'
   });
 
   Ext.define('Gowane.stores.Geofences', {

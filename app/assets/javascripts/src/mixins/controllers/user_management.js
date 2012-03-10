@@ -9,8 +9,9 @@ Ext.define('Gowane.Mixins.Controllers.UserManagement', {
       } else {
         form.updateRecord(record);
       }
-      record.save();
-      component.close();
+      record.save({callback: function() {
+        record.commit();
+      }});
     }
   },
 

@@ -8,8 +8,9 @@ Ext.define('Gowane.Mixins.Controllers.AccountManagement', {
       } else {
         form.updateRecord(record);
       }
-      record.save();
-      component.close();
+      record.save({callback: function() {
+        record.commit();
+      }});
     }
   },
 

@@ -1,8 +1,8 @@
 $(function() {
 
-  var add_button =  Ext.create('Ext.Button', {id: "btn_create_device", text: "New Device"});
+  var add_button =  Ext.create('Ext.Button', {id: "btn_create_device", text: "New Vehicle"});
 
-  var delete_button = Ext.create('Ext.Button', {id: "btn_delete_device", text: "Delete Device"});
+  var delete_button = Ext.create('Ext.Button', {id: "btn_delete_device", text: "Delete Vehicles"});
 
   var groupingFeature = Ext.create('Ext.grid.feature.Grouping',{groupHeaderTpl: '{name}'});
 
@@ -16,8 +16,9 @@ $(function() {
     flex: 1,
     collapsible: false,
     stripeRows: true,
+    multiSelect: true,
     store: 'DeviceStore',
-    title: "Vehicules",
+    title: "Vehicles",
     features: [groupingFeature],
     dockedItems: [pager, toolbar],
     columns: [

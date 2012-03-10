@@ -7,12 +7,20 @@ class Event < ActiveRecord::Base
 
   def as_json(options)
     hash = super(options)
-    hash[:warnings] = {
-      device: {name: device.display_name, imei: device.imei_number, group: device.group.name},
-			speed: speed_warnings.empty? ? [] : speed_warnings.map{|warning| warning.as_json(options)},
-			geofence: geofence_warnings.empty? ? [] : geofence_warnings.map{|warning| warning.as_json(options)}
-		}
-		hash[:place] = place.try(:to_json)
+    if device
+      hash[:device] = {
+        name: device.display_name,
+        imei: device.imei_number,
+        group: device.group.name
+      }
+    end
+    unless speed_warnings.empty? && geofence_warnings.empty?
+      hash[:warnings] = {
+        speed: speed_warnings.empty? ? [] : speed_warnings.map{|warning| warning.as_json(options)},
+        geofence: geofence_warnings.empty? ? [] : geofence_warnings.map{|warning| warning.as_json(options)}
+      }
+    end
+		hash[:place] = place.try(:to_json) if place
     hash
   end
 

@@ -3,8 +3,10 @@
 //= require ./lib/backbone-min
 //= require ./lib/ext-all-debug.js
 //= require ./lib/OpenLayers
+//= require ./lib/highcharts.src
 //= require ./lib/handlebars
 //= require ./lib/init
+//= require ./lib/highcharts
 //= require_tree ./src/locales
 //= require src/controllers/abstract_controller
 //= require_tree ./src/models

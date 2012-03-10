@@ -34,8 +34,13 @@ Ext.define('Gowane.controllers.Devices', {
   /* Event Handlers. */
 
   onDeviceSelect: function(item, selection) {
-    this.selected_device = selection[0];
-    this.loadEditor(this.selected_device, 'device_form');
+    if (selection.length == 1) {
+      this.selected_devices = [selection[0]];
+      this.loadEditor(selection[0], 'device_form');
+    } else if (selection.length > 1) {
+      this.selected_devices = selection;
+      this.showHelpSidebar("#introduction-template");
+    }
   },
 
   onCreateDevice: function() {
@@ -43,11 +48,14 @@ Ext.define('Gowane.controllers.Devices', {
   },
 
   onDeleteDevice: function() {
-    if (!this.selected_device) {
-      alert($.t("select_device_to_remove"));
+    if (this.selected_devices.length < 1) {
+      alert($.t("select_devices_to_remove"));
     } else {
-      if (confirm($.t("confirm_device_deletion"))) {
-        this.deleteDevice(this.selected_device);
+      var msg = this.selected_devices.length > 1 ? $.t("confirm_devices_deletion") : $.t("confirm_device_deletion");
+      if (confirm(msg)) {
+        _.each(this.selected_devices, function(device) {
+          this.deleteDevice(device);
+        }.bind(this));
         this.showHelpSidebar("#introduction-template");
       }
     }
@@ -55,7 +63,8 @@ Ext.define('Gowane.controllers.Devices', {
 
   onAcceptChanges: function() {
     var form = this.getDynamic().query('form')[0].form;
-    this.saveDevice(form, Ext.getStore('Devices'), this.selected_account);
+    var store = Ext.data.StoreManager.lookup('DeviceStore');
+    this.saveDevice(form, store, $.App.account_id);
     this.showHelpSidebar("#introduction-template")
   },
 

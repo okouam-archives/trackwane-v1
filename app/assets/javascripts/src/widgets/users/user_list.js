@@ -2,7 +2,7 @@ $(function() {
 
  var add_user =  Ext.create('Ext.Button', {id: "btn_create_user", text: "New User"    });
 
-  var delete_user = Ext.create('Ext.Button', {id: "btn_delete_user", text: "Delete User"     });
+  var delete_user = Ext.create('Ext.Button', {id: "btn_delete_user", text: "Delete Users"     });
 
   var pager = {    xtype: 'pagingtoolbar', store: "UserStore", dock: 'bottom', displayInfo: true    };
 
@@ -14,7 +14,7 @@ $(function() {
     collapsible: false,
     stripeRows: true,
     store: 'UserStore',
-    title: "Utilisateurs",
+    title: "Users",
     dockedItems: [pager, toolbar],
     columns: [
       {header : 'ID', sortable : true, dataIndex : 'id', width: 30},

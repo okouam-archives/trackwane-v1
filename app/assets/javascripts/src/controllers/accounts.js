@@ -32,16 +32,24 @@ Ext.define('Gowane.controllers.Accounts', {
   },
 
   onAccountSelect: function(item, selection) {
-    this.selected_account = selection[0];
-    this.loadEditor(this.selected_account, 'account_form');
+    if (selection.length == 1) {
+      this.selected_accounts = [selection[0]];
+      this.loadEditor(selection[0], 'account_form');
+    } else if (selection.length > 1) {
+      this.selected_accounts = selection;
+      this.showHelpSidebar("#introduction-template");
+    }
   },
 
-  onDeleteAccount: function() {
-    if (!this.selected_account) {
-      alert($.t("select_account_to_remove"));
+  onDeleteUser: function() {
+    if (this.selected_accounts.length < 1) {
+      alert($.t("select_accounts_to_remove"));
     } else {
-      if (confirm($.t("confirm_account_deletion"))) {
-        this.deleteAccount(this.selected_account);
+      var msg = this.selected_accounts.length > 1 ? $.t("confirm_accounts_deletion") : $.t("confirm_account_deletion");
+      if (confirm(msg)) {
+        _.each(this.selected_accounts, function(account) {
+          this.deleteAccount(account);
+        }.bind(this));
         this.showHelpSidebar("#introduction-template");
       }
     }
@@ -49,7 +57,8 @@ Ext.define('Gowane.controllers.Accounts', {
 
   onAcceptChanges: function() {
     var form = this.getDynamic().query('form')[0].form;
-    this.saveAccount(form, Ext.getStore('Accounts'));
+    var store = Ext.data.StoreManager.lookup('AccountStore');
+    this.saveAccount(form, store);
     this.showHelpSidebar("#introduction-template")
   },
 

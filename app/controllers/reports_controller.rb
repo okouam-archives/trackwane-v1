@@ -13,4 +13,21 @@ class ReportsController < ApplicationController
     end
   end
 
+  def speed
+    results = Event.select("date, speed, devices.display_name").joins(:device)
+    render :json => results.all
+  end
+
+  def events
+
+  end
+
+  def distance
+
+  end
+
+  def stops
+
+  end
+
 end

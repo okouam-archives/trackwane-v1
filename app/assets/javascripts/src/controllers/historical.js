@@ -97,7 +97,7 @@ Ext.define('Gowane.controllers.Historical', {
       toDay: new Date()
     };
     datepicker.getForm().setValues(this.date_range);
-		var store = Ext.data.StoreManager.lookup('GpsEventStore');
+		var store = Ext.data.StoreManager.lookup('EventStore');
 		store.on(
 			{
 				'beforeload': function(store) {

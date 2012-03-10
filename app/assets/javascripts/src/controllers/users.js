@@ -35,21 +35,30 @@ Ext.define('Gowane.controllers.Users', {
 
   onAcceptChanges: function() {
     var form = this.getDynamic().query('form')[0].form;
-    this.saveUser(form, Ext.getStore('Users'), this.selected_account);
+    var store = Ext.data.StoreManager.lookup('UserStore');
+    this.saveUser(form, store, $.App.account_id);
     this.showHelpSidebar("#introduction-template")
   },
 
   onUserSelect: function(item, selection) {
-    this.selected_user = selection[0];
-    this.loadEditor(this.selected_user, 'user_form');
+    if (selection.length == 1) {
+      this.selected_users = [selection[0]];
+      this.loadEditor(selection[0], 'user_form');
+    } else if (selection.length > 1) {
+      this.selected_users = selection;
+      this.showHelpSidebar("#introduction-template");
+    }
   },
 
   onDeleteUser: function() {
-    if (!this.selected_user) {
-      alert($.t("select_user_to_remove"));
+    if (this.selected_users.length < 1) {
+      alert($.t("select_users_to_remove"));
     } else {
-      if (confirm($.t("confirm_user_deletion"))) {
-        this.deleteUser(this.selected_user);
+      var msg = this.selected_users.length > 1 ? $.t("confirm_users_deletion") : $.t("confirm_user_deletion");
+      if (confirm(msg)) {
+        _.each(this.selected_users, function(user) {
+          this.deleteUser(user);
+        }.bind(this));
         this.showHelpSidebar("#introduction-template");
       }
     }

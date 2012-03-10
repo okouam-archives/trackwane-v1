@@ -34,12 +34,12 @@
           layout : 'border',
           items : [
             { xtype: 'menu', region : 'north'},
-            { region : 'west',
-              width: 900, xtype: 'template_panel', template: "#introduction-template", split: true},
-            { xtype: 'tabpanel', region: 'center',
+            {region : 'center', xtype: 'panel', id: 'dynamic', layout: 'fit', items: [
+              {xtype: 'template_panel', template: "#introduction-template"}
+            ]},
+            { xtype: 'tabpanel', region: 'east', width: 300,
               items: [
                 { xtype: 'panel',
-                  flex: 1,
                   title: 'Report Builder',
                   layout: {type: 'vbox', pack: 'start', align: 'stretch'},
                   items: [
@@ -48,8 +48,7 @@
                     {xtype: 'selectable_device_list'}
                   ]
                  },
-                 { xtype: 'panel', title: 'Saved Reports'},
-                 { xtype: 'panel', title: 'Automatic Reports'}
+                 { xtype: 'panel', title: 'Your Reports'}
               ]
             }
           ]

@@ -4,7 +4,12 @@ Ext.define('Gowane.controllers.Reports', {
 
   stores: ['Gowane.stores.Devices'],
 
+  mixins: {
+    charting: 'Gowane.Mixins.Controllers.Charting'
+  },
+
   refs: [
+    {selector: '#dynamic', ref: 'dynamic'},
     {selector: 'date_selection', ref: 'datepicker'}
   ],
 
@@ -36,13 +41,13 @@ Ext.define('Gowane.controllers.Reports', {
     this.runReport();
   },
 
-  changeReportType: function() {
-    // Set the report type as an instance variable
+  changeReportType: function(combo, records) {
+    this.report_type = records[0].get("value");
     this.runReport();
   },
 
-  changeRangeType: function() {
-    // Set the range type as a instance variable
+  changeRangeType: function(combo, records) {
+    this.range_type = records[0].get("value");
     this.runReport();
   },
 
@@ -62,11 +67,38 @@ Ext.define('Gowane.controllers.Reports', {
   },
 
   runReport: function() {
-    // Make sure all the parameters for a report are set
-    // If not, then show alert message indicating which fields are missing
-    // Otherwise remove the template panel and replace it with the report
-    // At the top of the report should be 4 buttons: Export To HTML, Export To Excel, Save Report
-    // The report itself should be composed of two tabs, one showing the report as a graph and the other as a table
+    if (!this.validateReport()) return false;
+    this.showReport();
+  },
+
+  showReport: function() {
+    var reportParams = this.getReportParams();
+		var store = Ext.data.StoreManager.lookup('SpeedDataPointStore');
+		store.on(
+			{
+				'beforeload': function(store) {
+					var proxy = store.getProxy();
+					proxy.extraParams = reportParams;
+				}.bind(this),
+				'load': function(store, records) {
+          var report = Ext.widget('report_chart');
+          var results = Ext.widget('reports_results', {items: [report]});
+          var container = this.getDynamic();
+          container.removeAll();
+          container.add(results);
+          this.buildChart(records, reportParams, report.id);
+				}.bind(this)
+			}
+		);
+    store.load();
+  },
+
+  getReportParams: function() {
+    return {};
+  },
+
+  validateReport: function() {
+    return true;
   },
 
   init: function() {
@@ -82,6 +114,10 @@ Ext.define('Gowane.controllers.Reports', {
     Ext.create('Ext.data.ArrayStore', {fields: ['type', 'name'], storeId: "ReportTypeStore", data: [
       ["distance", "Distance Report"], ["speed", "Speed Report"], ["stop", "Stop Report"], ["alarm", "Alarm Report"]
     ]});
+    Ext.create('Ext.data.ArrayStore', {fields: ['type', 'name'], storeId: "ReportRangeStore", data: [
+      ["distance", "Today"], ["speed", "Yesterday"], ["stop", "Last Week"], ["alarm", "Last Month"]
+    ]});
+    Ext.create('Gowane.stores.SpeedDataPoints', {storeId: "SpeedDataPointStore"});
     Ext.create('Gowane.stores.Devices', {storeId: "DeviceStore"});
   },
 

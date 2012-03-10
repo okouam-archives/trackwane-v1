@@ -2,7 +2,7 @@ $(function() {
 
   var add_user =  Ext.create('Ext.Button', {id: "btn_create_account", text: $.t("new_account")});
 
-  var delete_user = Ext.create('Ext.Button', {id: "btn_delete_account", text: $.t("delete_account")});
+  var delete_user = Ext.create('Ext.Button', {id: "btn_delete_account", text: $.t("delete_accounts")});
 
   var toolbar = {xtype: 'toolbar', items:[add_user, delete_user]};
 
@@ -13,6 +13,7 @@ $(function() {
     alias: 'widget.account_list',
     collapsible: false,
     stripeRows: true,
+    multiSelect: true,
     store: 'AccountStore',
     title: $.t("accounts"),
     dockedItems: [pager, toolbar],
