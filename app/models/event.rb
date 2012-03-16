@@ -8,11 +8,9 @@ class Event < ActiveRecord::Base
   def as_json(options)
     hash = super(options)
     if device
-      hash[:device] = {
-        name: device.display_name,
-        imei: device.imei_number,
-        group: device.group.name
-      }
+      hash[:name] = device.display_name
+      hash[:imei] = device.imei_number
+      hash[:group] = device.group.name
     end
     unless speed_warnings.empty? && geofence_warnings.empty?
       hash[:warnings] = {

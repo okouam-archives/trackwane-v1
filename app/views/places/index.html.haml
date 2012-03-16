@@ -1,7 +1,5 @@
 :javascript
   $(function() {
-    $.App.help = "places";
-    $.App.account_id = #{session[:account_id]};
     Ext.application({
       name: 'Gowane',
       autoCreateViewport: false,
@@ -10,11 +8,9 @@
         new Ext.Viewport({
           layout : 'border',
           items : [
-            { xtype: 'menu', region : 'north'},
-            { region : 'west', width: 900, xtype: 'placesmap', split: true},
-            { xtype: 'sharedsidecolumn', region: 'center', layout: 'fit', layoutConfig: {align: 'stretch'},
-              items: [{xtype: 'summary_place_list', width: 300}]
-            }
+            { xtype: 'panel', contentEl: 'menu', region : 'north'},
+            { region : 'center', xtype: 'placesmap', split: false},
+            { xtype: 'panel', width: 300, region: 'east'}
           ]
         });
       }

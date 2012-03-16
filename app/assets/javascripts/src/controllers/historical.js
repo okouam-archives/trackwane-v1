@@ -2,7 +2,7 @@ Ext.define('Gowane.controllers.Historical', {
 
   extend: 'Gowane.controllers.AbstractController',
 
-  stores: ['Gowane.stores.Devices', 'Gowane.stores.Groups', 'Gowane.stores.GpsEvents'],
+  stores: ['Gowane.stores.Devices', 'Gowane.stores.Groups', 'Gowane.stores.Events'],
 
   mixins: {
     geofence_visualization: 'Gowane.Mixins.Controllers.GeofenceVisualization',
@@ -72,7 +72,7 @@ Ext.define('Gowane.controllers.Historical', {
   createStores: function() {
     Ext.create('Gowane.stores.Devices', {storeId: "DeviceStore"});
     Ext.create('Gowane.stores.Groups', {storeId: "GroupStore"});
-    Ext.create('Gowane.stores.GpsEvents', {storeId: "GpsEventStore"});
+    Ext.create('Gowane.stores.Events', {storeId: "EventStore"});
   },
 
   populateDeviceStore: function() {
@@ -123,7 +123,7 @@ Ext.define('Gowane.controllers.Historical', {
   },
 
   showDeviceHistory: function() {
-    Ext.data.StoreManager.lookup('GpsEventStore').load({
+    Ext.data.StoreManager.lookup('EventStore').load({
       params: {start: 0, limit: 25},
       callback: function() {
         this.getEvents().setTitle(this.selected_device.get("display_name") + " (" + this.selected_device.get("group_name") + ")");

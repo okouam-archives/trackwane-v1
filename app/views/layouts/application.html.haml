@@ -7,3 +7,32 @@
   = csrf_meta_tags
 %body
   = yield
+  #menu
+    %ul
+      %li{class: "#{params[:controller] == "map" && params[:action] == "realtime" ? "current" : ""}"}
+        %a{href: "/map/realtime"}
+          = image_tag "/assets/145-persondot.png"
+          Realtime
+      %li{class: "#{params[:controller] == "map" && params[:action] == "historical" ? "current" : ""}"}
+        %a{href: "/map/historical"}
+          = image_tag "/assets/103-map.png", style: "height: 20px"
+          Historical
+      %li{class: "#{params[:controller] == "reports" ? "current" : ""}"}
+        %a{href: "/reports"}
+          = image_tag "/assets/137-presentation_w.gif"
+          Reports
+      %li{class: "#{params[:controller] == "alarms" ? "current" : ""}"}
+        %a{href: "/alarms"}
+          = image_tag "/assets/139-flags.png"
+          Your Alarms
+      %li{class: "#{params[:controller] == "places" ? "current" : ""}"}
+        %a{href: "/places"}
+          = image_tag "/assets/60-signpost.png"
+          Your Places
+      %li
+        %a
+          = image_tag "/assets/157-wrench.png"
+          Administration
+      %li{style: "float: right"}
+        = image_tag "/assets/20-gear2.png"
+    %div{style: "clear: both"}

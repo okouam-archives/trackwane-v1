@@ -53,7 +53,6 @@ Ext.define('Gowane.Mixins.Maps.DeviceVisualization', {
   createDeviceFeature: function(device) {
     this.ensureDeviceLayerIsAvailable();
     var lonlat = this.mercatorCoordinates(device.longitude, device.latitude);
-    var style = new OpenLayers.Style({"default": {pointRadius: "6", fillColor: "#666666"}});
     var point = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
     var feature = new OpenLayers.Feature.Vector(point, device);
     this.device_layer.addFeatures([feature]);

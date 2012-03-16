@@ -7,17 +7,12 @@ $(function() {
     alias: 'widget.menu',
     border: false,
     tbar: [
-      {text: 'Temps réel', handler: function() { goto("/map/realtime") }}
-      ,'-',
-      {text: 'Historique', handler: function() { goto("/map/historical")}}
-      ,'-',
-      {text: 'Rapports', handler: function() { goto("/reports") }},
-      '-',
-      {text: 'Alarmes', handler: function() { goto("/alarms") }},
-      '-',
-      {text: "Points d'intéret", handler: function() { goto("/places") }},
-      '-',
-      {text: 'Administration', menu: [
+      {text: 'Temps réel', icon: "/assets/60-signpost.png", height: 35, width: 110, handler: function() { goto("/map/realtime") }},
+      {text: 'Historique', icon: "/assets/60-signpost.png", height: 35, width: 110, handler: function() { goto("/map/historical")}},
+      {text: 'Rapports', icon: "/assets/137-presentation.png", height: 35, width: 110, handler: function() { goto("/reports") }},
+      {text: 'Alarmes', icon: "/assets/60-signpost.png", height: 35, width: 110, handler: function() { goto("/alarms") }},
+      {text: "Points d'intéret", icon: "/assets/60-signpost.png", height: 35, width: 110, handler: function() { goto("/places") }},
+      {text: 'Administration', icon: "/assets/20-gear2.png", height: 35, width: 110, menu: [
         {text: 'Clients', handler: function() { goto("/accounts") }},
         {text: 'Utilisateurs', handler: function() { goto("/users") }},
         {text: 'Véhicules', handler: function() { goto("/devices") }}

@@ -16,6 +16,8 @@
 //= require_tree ./src/shared
 //= require_tree ./src/controllers
 //= require_tree ./src/widgets
+//= require_tree ./src/services
+//= require_tree ./src/views
 //= require ./lib/rails
 
 

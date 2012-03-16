@@ -137,12 +137,14 @@ Ext.define('Gowane.controllers.Alarms', {
   },
 
   onLaunch: function() {
-    this.callParent();
-    this.getMap().renderMap();
     Ext.data.StoreManager.lookup('GeofenceStore').load();
     Ext.data.StoreManager.lookup('GeofenceAlarmStore').load();
     Ext.data.StoreManager.lookup('SpeedAlarmStore').load();
     Ext.data.StoreManager.lookup('UserStore').load();
+    this.callParent();
+    this.pubsub = _.extend({}, Backbone.Events);
+    this.alarm_map = new App.Views.AlarmMap({el: "#alarm_map", pubsub: this.pubsub});
+    this.alarm_map.render();
   },
 
   createStores: function() {
@@ -153,8 +155,6 @@ Ext.define('Gowane.controllers.Alarms', {
   },
 
   closeGeofenceEditor: function() {
-    this.closeEditor();
-    this.getMap().hideGeofences();
   },
 
   createFloatingWindow: function(title, contents, cancelCallback, saveCallback) {

@@ -14,4 +14,5 @@ Ext.define('Gowane.Mixins.Cartography', {
     return this.projectForGoogleMaps(new OpenLayers.LonLat(longitude, latitude));
   }
 
+
 });

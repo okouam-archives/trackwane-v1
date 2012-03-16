@@ -1,0 +1,43 @@
+@mixin opaque-panel {
+  position: absolute; background-color: #333; opacity: 0.8; border-radius: 4px;
+  padding: 5px 10px; z-index: 10000; color: white
+}
+
+.x-panel, .x-panel-body-default {background-image: url(/assets/background.png)}
+
+#menu {border-top: 3px solid #333; background-color: #444; font-family: Arial, serif; font-size: 11px}
+#menu li {float: left; margin-right: 10px; padding: 5px 10px}
+#menu li.current {background-color: #333}
+#menu li a, .switcher a {position: relative; top: -5px; color: white; text-decoration: none; font-weight: bold}
+#menu li a img, .switcher a img {display: inline-block; margin-right: 3px; position: relative; top: 6px}
+#menu li a:hover {color: #ddd}
+
+.switcher {@include opaque-panel; bottom: 20px; cursor: pointer}
+.switcher a img {margin-right: 7px}
+.switcher.places {left: 10px}
+.switcher.geofences {left: 110px}
+.switcher.speed-alarms {left: 10px}
+.switcher.geofence-alarms {left: 180px}
+
+.wizard {@include opaque-panel; width: 300px; bottom: 300px; left: 200px; padding: 10px 15px; line-height: 16px}
+.wizard p {margin-top: 5px}
+.wizard .field {margin-top: 8px}
+.wizard .field label {margin-bottom: 3px; display: block}
+.wizard .field input[type="text"], .wizard .field select {padding: 5px; width: 100%}
+.wizard .next {float: right; margin-top: 15px}
+
+table.sidecolumn {width: 100%}
+table.sidecolumn {font-family: Arial; font-size: 11px}
+table.sidecolumn td {padding: 5px; line-height: 15px}
+
+fieldset label {font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px; margin-top: 10px}
+fieldset input {padding: 6px 10px; font-size: 13px; border: 1px solid #666}
+
+.action.panel {@include opaque-panel; left: 10px; bottom: 70px; height: 300px; width: 215px}
+.standalone.panel {@include opaque-panel; background-color: white; color: #333; opacity: 1; border: 1px solid #333; padding: 20px}
+
+#realtime-devices-wrapper {opacity: 1; right: 40px; top: 30px; position: absolute; background-color: rgba(0, 0, 0, 0.8);
+border-radius: 4px; padding: 5px 10px; z-index: 10000; color: white
+}
+.realtime-actions {width: 250px; height: 60px; position: absolute; left: -165px; top: -10px; display: none}
+.realtime-actions .action {@include opaque-panel; margin-right: 5px; display: inline-block; margin-top: 15px; position: static; text-decoration: none}

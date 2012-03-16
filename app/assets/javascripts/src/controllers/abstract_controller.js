@@ -2,34 +2,23 @@ Ext.define('Gowane.controllers.AbstractController', {
 
   extend: 'Ext.app.Controller',
 
-  commonRefs: [
-    {selector: 'viewport menu', ref: 'menu'},
-    {selector: 'menu combo', ref: 'accountSelector'}
-  ],
-
-  commonEvents: {
-    'menu combo': {
-      select: "changeAccount"
-    }
-  },
-
   constructor: function() {
-    this.refs = this.refs ? Ext.Array.merge(this.refs, this.commonRefs) : this.commonRefs;
-    this.events = this.events ? _.defaults(this.commonEvents, this.events) : this.commonEvents;
-    this.bindEvents();
     this.callParent(arguments);
   },
 
   init: function() {
     Ext.create('Gowane.stores.Accounts', {storeId: "AccountStore"});
-    this.control(this.events);
+    this.callParent(arguments);
+  },
+
+  constructor: function() {
+    this.bindEvents();
     this.callParent(arguments);
   },
 
   onLaunch: function() {
     this.callParent(arguments);
     Ext.data.StoreManager.lookup('AccountStore').load();
-    this.getAccountSelector().setValue($.App.account_id);
   },
 
   changeAccount: function(combo, records) {

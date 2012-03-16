@@ -1,5 +1,6 @@
 :javascript
   $(function() {
+  $.App = {};
     $.App.help = "historical";
     $.App.account_id = #{session[:account_id]};
     var button_toolbar = {xtype: 'toolbar', items:[
@@ -14,8 +15,8 @@
         new Ext.Viewport({
           layout : 'border',
           items : [
-            {xtype: 'menu', region : 'north'},
-            {region : 'west', width: 900, xtype: 'panel', split: true, layout: {type: 'vbox', pack: 'start', align: 'stretch'}, items: [
+            { xtype: 'panel', contentEl: 'menu', region : 'north'},
+            {region : 'center', xtype: 'panel', split: false, layout: {type: 'vbox', pack: 'start', align: 'stretch'}, items: [
               {xtype: 'historical_map', id: 'historical-map', flex: 6, dockedItems: [button_toolbar]},
               {xtype: 'full_gps_event_list', flex: 2},
               {xtype: 'panel', layout: 'hbox', height: 50, items: [
@@ -24,9 +25,9 @@
              		{xtype: 'slider', height: 20, margin: '7 0 0 0', flex: 10}
               ]}
             ]},
-            {region: 'center', xtype: 'sharedsidecolumn', flex: 1, layout: {type: 'vbox', pack: 'start', align: 'stretch'}, items: [
-              {xtype: "date_selection"},
-              {xtype: 'summary_device_list'}
+            {region: 'east', xtype: 'sharedsidecolumn', width: 300, flex: 1, layout: {type: 'vbox', pack: 'start', align: 'stretch'}, items: [
+              {xtype: "date_selection", width: 300},
+              {xtype: 'summary_device_list', width: 300}
             ]}
           ]
         });

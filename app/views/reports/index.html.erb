@@ -23,8 +23,6 @@
 
 <script type="text/javascript">
   $(function() {
-    $.App.help = "distance";
-    $.App.account_id = <%= @account_id %>;
     Ext.application({
       name: 'Gowane',
       autoCreateViewport: false,
@@ -33,7 +31,7 @@
         new Ext.Viewport({
           layout : 'border',
           items : [
-            { xtype: 'menu', region : 'north'},
+            { xtype: 'panel', contentEl: 'menu', region : 'north'},
             {region : 'center', xtype: 'panel', id: 'dynamic', layout: 'fit', items: [
               {xtype: 'template_panel', template: "#introduction-template"}
             ]},

@@ -3,3 +3,6 @@ Ext.define('Gowane.models.Device', {
   fields: ['account_id', 'imei_number', 'display_name', 'id', 'group_name'],
   proxy: {type: 'rest', format: 'json', url: '/devices', reader: {type: 'json', root: 'results'}}
 });
+
+App.Models.Device = Backbone.Model.extend({
+});
