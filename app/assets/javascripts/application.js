@@ -11,11 +11,11 @@
 //= require src/controllers/abstract_controller
 //= require_tree ./src/models
 //= require_tree ./src/collections
-//= require ./src/stores
-//= require_tree ./src/mixins
-//= require_tree ./src/shared
-//= require_tree ./src/controllers
-//= require_tree ./src/widgets
+//= require ./src/controllers/abstract_controller
+//= require ./src/controllers/realtime
+//= require ./src/controllers/historical
+//= require ./src/controllers/places
+//= require ./src/controllers/alarms
 //= require_tree ./src/services
 //= require_tree ./src/views
 //= require ./lib/rails

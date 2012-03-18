@@ -18,6 +18,13 @@ _.extend(App.Services.Cartography.prototype, {
     return this.projectForGoogleMaps(new OpenLayers.LonLat(longitude, latitude));
   },
 
+  degreeCoordinates: function(longitude, latitude) {
+    var coordinates = new OpenLayers.LonLat(longitude, latitude);
+    var sourceProjection = new OpenLayers.Projection("EPSG:900913");
+    var targetProjection = new OpenLayers.Projection("EPSG:4326");
+    return coordinates.transform(sourceProjection, targetProjection);
+  },
+
   createMap: function(el) {
     this.map = new OpenLayers.Map(el, {theme: null, controls: [], minZoomLevel: 5, maxZoomLevel: 12});
     var gmap = new OpenLayers.Layer.Google("Streets");

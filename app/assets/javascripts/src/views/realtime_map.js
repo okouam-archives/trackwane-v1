@@ -13,6 +13,9 @@ App.Views.RealtimeMap = Backbone.View.extend({
     this.pubsub.on("events:received", this.show.bind(this));
     OpenLayers.ImgPath = '/assets/OpenLayers/';
     OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+    this.pubsub.bind("event:selected", function(id) {
+      this.showFollowPanel(id);
+    }.bind(this))
   },
 
   firstShow: true,
@@ -28,7 +31,7 @@ App.Views.RealtimeMap = Backbone.View.extend({
     }
   },
 
-  showFollowPanel: function() {
+  showFollowPanel: function(id) {
     this.hidePanels();
     var panel = $("<div class='action panel'></div>").appendTo(this.$el);
     this.action_panel = new App.Views.FollowActionPanel({el: panel});
@@ -98,15 +101,16 @@ App.Views.RealtimeMap = Backbone.View.extend({
 
   show: function(events) {
     this.device_layer.destroyFeatures();
-    this.createFeatures(events);
+    this.events = events;
+    this.createFeatures();
   },
 
-  createFeatures: function(events) {
-    if (!events || events.size() < 1) return;
+  createFeatures: function() {
+    if (!this.events || this.events.size() < 1) return;
     _.each(this.map.popups, function(popup) {
       popup.destroy();
     });
-    events.each(function(event) {
+    this.events.each(function(event) {
       this.createFeature(event);
     }.bind(this));
     if (this.firstShow) {
@@ -131,10 +135,10 @@ App.Views.RealtimeMap = Backbone.View.extend({
     popup.autoSize = true;
     popup.backgroundColor = 'transparent';
     popup.events.register('mouseover', null, function(evt) {
-      $(evt.currentTarget).find(".realtime-actions").show();
+      $(evt.currentTarget).find(".realtime.actions").show();
     }.bind(this));
     popup.events.register('mouseout', null, function(evt) {
-      $(evt.currentTarget).find(".realtime-actions").hide();
+      $(evt.currentTarget).find(".realtime.actions").hide();
     }.bind(this));
     popup.events.register('click', null, function(evt) {
       var event = device.attributes;
@@ -158,7 +162,7 @@ App.Views.RealtimeMap = Backbone.View.extend({
     this.$el.empty();
     var cartography = new App.Services.Cartography();
     this.map = cartography.createMap(this.el);
-    this.device_layer = this.createLayer("devices");
+    this.device_layer = cartography.createLayer("devices");
     this.map.zoomTo(1);
     this.renderPlacesButton();
     this.renderGeofencesButton();

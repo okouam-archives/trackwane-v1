@@ -6,9 +6,9 @@ Ext.define('Gowane.controllers.Realtime', {
     this.callParent();
     setInterval(this.poll.bind(this), 3000);
     this.pubsub = _.extend({}, Backbone.Events);
-    this.realtime_events = new App.Views.RealtimeEvents({el: "#realtime_map", pubsub: this.pubsub});
-    this.realtime_map = new App.Views.RealtimeMap({el: "#realtime_map", pubsub: this.pubsub});
-    this.realtime_map.render();
+    this.realtime_events = new App.Views.RealtimeEvents({el: "#map", pubsub: this.pubsub});
+    this.map = new App.Views.RealtimeMap({el: "#map", pubsub: this.pubsub});
+    this.map.render();
   },
 
   poll: function() {

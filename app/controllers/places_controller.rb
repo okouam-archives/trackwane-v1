@@ -16,9 +16,9 @@ class PlacesController < ApplicationController
     place = Place.new(changes)
     place.account = Account.find(session[:account_id])
     if place.save
-      render json: {success: true, results: [place.as_json]}
+      render json: place.as_json
     else
-      render json: {success: false}
+      render json: place.errors, status: 400
     end
   end
 

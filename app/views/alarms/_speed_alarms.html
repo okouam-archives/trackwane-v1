@@ -14,3 +14,18 @@
    <input type="button" class="next" value="Accept" />
  </div>
 </script>
+
+<script id="speed-alarms-template" type="text/x-handlebars-template">
+  <h1 style="font-size: 11px; margin-left: 3px; margin-bottom: 2px">Speed Alarms</h1>
+  <table id="speed-alarms" class="sidecolumn">
+    {{#each models}}
+      <tr>
+        <td>
+          {{attributes.name}}
+        </td>
+      </tr>
+      {{/each}}
+  </table>
+</script>
+
+

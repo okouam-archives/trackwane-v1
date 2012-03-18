@@ -14,10 +14,10 @@
 
 .switcher {@include opaque-panel; bottom: 20px; cursor: pointer}
 .switcher a img {margin-right: 7px}
-.switcher.places {left: 10px}
-.switcher.geofences {left: 110px}
-.switcher.speed-alarms {left: 10px}
-.switcher.geofence-alarms {left: 180px}
+.switcher.places {left: 20px}
+.switcher.geofences {left: 125px}
+.switcher.speed-alarms {left: 20px}
+.switcher.geofence-alarms {left: 190px}
 
 .wizard {@include opaque-panel; width: 300px; bottom: 300px; left: 200px; padding: 10px 15px; line-height: 16px}
 .wizard p {margin-top: 5px}
@@ -29,15 +29,39 @@
 table.sidecolumn {width: 100%}
 table.sidecolumn {font-family: Arial; font-size: 11px}
 table.sidecolumn td {padding: 5px; line-height: 15px}
+table.sidecolumn a {color: white; text-decoration: none}
 
 fieldset label {font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px; margin-top: 10px}
-fieldset input {padding: 6px 10px; font-size: 13px; border: 1px solid #666}
+fieldset input, fieldset select {padding: 6px 10px; font-size: 13px; border: 1px solid #666; width: 100%}
 
-.action.panel {@include opaque-panel; left: 10px; bottom: 70px; height: 300px; width: 215px}
 .standalone.panel {@include opaque-panel; background-color: white; color: #333; opacity: 1; border: 1px solid #333; padding: 20px}
 
-#realtime-devices-wrapper {opacity: 1; right: 40px; top: 30px; position: absolute; background-color: rgba(0, 0, 0, 0.8);
+.map-listing {opacity: 1; right: 20px; top: 30px; position: absolute; background-color: rgba(0, 0, 0, 0.8);
 border-radius: 4px; padding: 5px 10px; z-index: 10000; color: white
 }
-.realtime-actions {width: 250px; height: 60px; position: absolute; left: -165px; top: -10px; display: none}
-.realtime-actions .action {@include opaque-panel; margin-right: 5px; display: inline-block; margin-top: 15px; position: static; text-decoration: none}
+
+.action.panel {@include opaque-panel; left: 20px; bottom: 70px; height: 310px; width: 220px}
+
+/* Map Actions */
+
+@mixin action-button {
+  position: absolute; background-color: #333; opacity: 0.8; border-radius: 4px; padding: 5px 10px; z-index: 10000; color: white;
+  position: static; text-decoration: none; margin-top: 15px; display: inline-block; margin-right: 5px
+}
+
+@mixin actions {
+  display: none; position: absolute; height: 60px;
+}
+
+.realtime.actions {@include actions; width: 250px; height: 60px; left: -165px; top: -10px}
+.places.actions {@include actions; width: 150px; left: -70px; top: -16px}
+.actions a {@include action-button}
+
+/* Map Popups */
+
+@mixin popup {cursor: pointer; border: 1px solid #333; font-size: 10px; padding: 3px; color: #222; background-color: white; margin-left: 10px}
+.places.popup {@include popup; margin-top: 6px}
+
+
+.map-listing.geofence-alarms {top: 200px; width: 150px}
+.map-listing.speed-alarms {width: 150px}

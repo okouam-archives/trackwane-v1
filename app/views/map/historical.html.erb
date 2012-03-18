@@ -1,19 +1,18 @@
-= render :partial => "speed_alarms"
-= render :partial => "geofence_alarms"
-
-:javascript
+<script>
   $(function() {
     Ext.application({
       name: 'Gowane',
       autoCreateViewport: false,
-      controllers: ['Gowane.controllers.Alarms'],
+      controllers: ['Gowane.controllers.Historical'],
       launch: function() {
         new Ext.Viewport({
-          layout : 'border', items : [
+          layout : 'border',
+          items : [
             {xtype: 'panel', contentEl: 'menu', region : 'north'},
-            {region : 'center', xtype: 'panel', id: "map", split: false}
+            {region : 'center', xtype: 'panel', id: "map"}
           ]
         });
       }
     });
   });
+</script>

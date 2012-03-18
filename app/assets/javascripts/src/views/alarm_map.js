@@ -22,29 +22,80 @@ App.Views.AlarmMap = Backbone.View.extend({
 
   toggleSpeedAlarmWizard: function() {
     if (this.wizards.any()) this.closeWizards();
-    this.openWizard("#speed-alarm-wizard-template");
+    var wizard = this.openWizard("#speed-alarm-wizard-template");
+    wizard.find(".next").on('click', function() {
+      this.saveSpeedAlarm();
+    }.bind(this));
     this.wizards.speed.is_open = true;
+  },
+
+  allowGeofencePositioning: function() {
+    if (!this.drawFeature) {
+      var cartography = new App.Services.Cartography();
+      cartography.map = this.map;
+      this.draw_layer = cartography.createLayer("drawing_layer");
+      this.map.addLayer(this.draw_layer);
+      this.drawFeature = new OpenLayers.Control.DrawFeature(this.draw_layer, OpenLayers.Handler.Polygon);
+      this.drawFeature.events.on({
+        featureadded: function() {
+          this.drawFeature.deactivate();
+          this.new_geofence = this.draw_layer.features[0].geometry;
+        }.bind(this)
+      });
+      this.map.addControl(this.drawFeature);
+    }
+    this.drawFeature.activate();
+  },
+
+  saveGeofenceAlarm: function() {
+    var name = $(".wizard .name").val();
+    var alarm_type = $(".wizard .alarm_type").val();
+    this.draw_layer.destroyFeatures();
+    this.drawFeature.deactivate();
+    var alarm = new App.Models.GeofenceAlarm();
+    alarm.save({name: name, type: alarm_type, coordinates: this.new_geofence}, {
+      success: function() {
+        this.new_geofence = null;
+        this.closeWizards();
+      },
+      error: function() {
+
+      }
+    });
+  },
+
+  saveSpeedAlarm: function() {
+    var name = $(".wizard .name").val();
+    var speed = $(".wizard .speed").val();
+    var alarm = new App.Models.SpeedAlarm();
+    alarm.save({name: name, speed: speed}, {
+      success: function() {
+        this.closeWizards();
+      },
+      error: function() {
+
+      }
+    });
   },
 
   toggleGeofenceAlarmWizard: function() {
     if (this.wizards.any()) this.closeWizards();
-    this.openWizard("#geofence-alarm-wizard-template");
+    var wizard = this.openWizard("#geofence-alarm-wizard-template");
+    wizard.find(".next").on('click', function() {
+      this.saveGeofenceAlarm();
+    }.bind(this));
     this.wizards.geofence.is_open = true;
+    this.allowGeofencePositioning();
   },
 
   closeWizards: function() {
     $(".wizard").remove();
   },
 
-  center: function(div) {
-    div.offset({top: (this.$el.height() / 2) - (div.height() / 2), left: (this.$el.width() / 2) - (div.width() / 2)});
-  },
-
   openWizard: function(template_id) {
     var source = $(template_id).html();
     var template = Handlebars.compile(source);
-    var wizard = $(template()).appendTo($(this.el));
-    this.center(wizard);
+    return $(template()).appendTo($(this.el));
   },
 
   render: function() {
