@@ -1,7 +1,7 @@
 App.Views.NewPlacePanel = Backbone.View.extend({
 
   events: {
-   "click .create": "createPlace"
+   "click button": "createPlace"
   },
 
   initialize: function(options) {
@@ -11,6 +11,14 @@ App.Views.NewPlacePanel = Backbone.View.extend({
   createPlace: function() {
     var name = this.$el.find("input").val();
     var category = this.$el.find("select").val();
+    if (name == "") {
+      alert("Please choose a name for this new place.");
+      return;
+    }
+    if (category == "") {
+      alert("Please select a category for this new place.");
+      return;
+    }
     var place = new App.Models.Place({name: name, category: category});
     this.pubsub.trigger("place:created", place);
   },

@@ -19,7 +19,7 @@ class GeofenceAlarmsController < ApplicationController
     if alarm.save
       render json: {success: true, results: [alarm.as_json]}
     else
-      render json: {success: false}
+      render json: alarm.errors, status: 400
     end
   end
 

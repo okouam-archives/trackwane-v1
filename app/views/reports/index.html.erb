@@ -1,25 +1,31 @@
-<script id="introduction-template" type="text/x-handlebars-template">
-  <div class="help">
-    <div style="width: 70%; margin: auto; margin-top: 100px"><h1>Reports</h1>
-    <p>You can <a href="#">run</a> several kinds of reports to track the activity of your vehicles.</p>
-    <p>This mini-guide will show you how
-    to <a href="#">build the report</a> you need by choosing the <a href="#">type of report</a>, as well as how to <a href="#">save</a> reports to
-    run them later and how to set up <a href="#">automatic sending of reports</a> to one or more people.</p>
-    <p>Once you've started creating reports, you can show this mini-guide at any time by clicking on the Help
-    button at the top right of your screen.</p>
-    <p style="text-align: center"><img src="/assets/stock-photo-14572303-sales-problem.jpg" /></p>
-  </div>
-  </div>
+<script id="presentation-template" type="text/x-handlebars-template">
+  <div class='presentation'>
+    <div id="chart" style="height: 100%"></div>
+  <div>
 </script>
 
-<style type="text/css">
-  .help p {margin-top: 3px}
-  .help {font-family: Arial; font-size: 12px; color: #434343; line-height: 18px}
-  .help h1 {font-size: 16px; margin-bottom: 5px}
-  .help h2 {font-size: 13px}
-  .help h3, .help h2, .help h1 {margin-top: 10px}
-  .help a {text-decoration: none; color: #6699cc}
-</style>
+<script id="devices-template" type="text/x-handlebars-template">
+  <div class='devices'>
+    <ul>
+    {{#each models}}
+      <li><input type="checkbox" /> {{attributes.display_name}}</li>
+    {{/each}}
+    </ul>
+  <button class="blue-button"><div>Run Report</div></button>
+  <div>
+</script>
+
+<script id="parameters-template" type="text/x-handlebars-template">
+    <div class='parameters'>
+     <fieldset>
+       <label>Report Type</label>
+       <select><option value="speed">Speed</option><option value="distance">Distance</option></select>
+    <label>From</label>
+       <input class="datepicker" type="text" />
+    <label>To</label>
+       <input class="datepicker" type="text" />
+      <div>
+</script>
 
 <script type="text/javascript">
   $(function() {
@@ -32,23 +38,7 @@
           layout : 'border',
           items : [
             { xtype: 'panel', contentEl: 'menu', region : 'north'},
-            {region : 'center', xtype: 'panel', id: 'dynamic', layout: 'fit', items: [
-              {xtype: 'template_panel', template: "#introduction-template"}
-            ]},
-            { xtype: 'tabpanel', region: 'east', width: 300,
-              items: [
-                { xtype: 'panel',
-                  title: 'Report Builder',
-                  layout: {type: 'vbox', pack: 'start', align: 'stretch'},
-                  items: [
-                    {xtype: 'report_builder'},
-                    {xtype: "date_selection"},
-                    {xtype: 'selectable_device_list'}
-                  ]
-                 },
-                 { xtype: 'panel', title: 'Your Reports'}
-              ]
-            }
+            {region : 'center', xtype: 'panel', id: 'canvas', layout: 'fit'}
           ]
         });
       }

@@ -17,9 +17,9 @@ class SpeedAlarmsController < ApplicationController
 		alarm = SpeedAlarm.new(changes)
     alarm.account = Account.find(session[:account_id])
     if alarm.save
-      render json: {success: true, results: [alarm.as_json]}
+      render json: alarm.as_json
     else
-      render json: {success: false}
+      render json: alarm.errors, status: 400
     end
   end
 

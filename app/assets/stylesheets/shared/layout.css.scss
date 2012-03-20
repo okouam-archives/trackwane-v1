@@ -1,9 +1,25 @@
+.blue-button {
+  border: 0 none;
+  cursor: pointer;
+  padding: 0;
+  background-color: transparent
+}
+
+.blue-button div {
+  background-color: #4D90FE;
+  background-image: -moz-linear-gradient(center top , #4D90FE, #4787ED);
+  border: 1px solid #3079ED;
+  border-radius: 2px 2px 2px 2px;
+  color: #FFFFFF;
+  padding: 4px;
+  margin: 0;
+  width: 80px;
+}
+
 @mixin opaque-panel {
   position: absolute; background-color: #333; opacity: 0.8; border-radius: 4px;
   padding: 5px 10px; z-index: 10000; color: white
 }
-
-.x-panel, .x-panel-body-default {background-image: url(/assets/background.png)}
 
 #menu {border-top: 3px solid #333; background-color: #444; font-family: Arial, serif; font-size: 11px}
 #menu li {float: left; margin-right: 10px; padding: 5px 10px}
@@ -12,6 +28,8 @@
 #menu li a img, .switcher a img {display: inline-block; margin-right: 3px; position: relative; top: 6px}
 #menu li a:hover {color: #ddd}
 
+#canvas .x-panel-body {background-image: url(/assets/map.gif)}
+
 .switcher {@include opaque-panel; bottom: 20px; cursor: pointer}
 .switcher a img {margin-right: 7px}
 .switcher.places {left: 20px}
@@ -19,7 +37,7 @@
 .switcher.speed-alarms {left: 20px}
 .switcher.geofence-alarms {left: 190px}
 
-.wizard {@include opaque-panel; width: 300px; bottom: 300px; left: 200px; padding: 10px 15px; line-height: 16px}
+.wizard {@include opaque-panel; width: 347px; bottom: 72px; left: 20px; padding: 10px 15px; line-height: 16px; padding-bottom: 20px}
 .wizard p {margin-top: 5px}
 .wizard .field {margin-top: 8px}
 .wizard .field label {margin-bottom: 3px; display: block}
@@ -62,6 +80,17 @@ border-radius: 4px; padding: 5px 10px; z-index: 10000; color: white
 @mixin popup {cursor: pointer; border: 1px solid #333; font-size: 10px; padding: 3px; color: #222; background-color: white; margin-left: 10px}
 .places.popup {@include popup; margin-top: 6px}
 
+.closelabel {float: right; cursor: pointer}
 
 .map-listing.geofence-alarms {top: 200px; width: 150px}
 .map-listing.speed-alarms {width: 150px}
+
+/* Others */
+
+.reports.index .devices {@include opaque-panel; width: 200px; top: 280px; right: 20px; padding-bottom: 10px}
+.reports.index .devices li {margin-top: 5px}
+.reports.index .devices button {margin-top: 15px; float: right}
+
+.reports.index .presentation {@include opaque-panel; border: 10px solid rgba(100, 100, 100, 0.8); background-color: white; height: 780px; width: 1000px; top: 30px; left: 20px; opacity: 1; color: black}
+.reports.index .parameters {@include opaque-panel; height: 230px; width: 200px; top: 30px; right: 20px}
+.reports.index .reports {@include opaque-panel; background-color: white; height: 200px; width: 200px; top: 430px; right: 20px; opacity: 1; color: black}

@@ -22,7 +22,8 @@
 </script>
 
 <script id="new-place-panel-template" type="text/x-handlebars-template">
-    <h1>New Place</h1>
+  <img class="closelabel" src="/assets/closelabel.png" />
+    <h1 style="margin-bottom: 5px">New Place</h1>
     <p>Please choose a name and category below for your new place and place it on the map.</p>
   <fieldset>
     <label>Name</label>
@@ -31,7 +32,7 @@
     <select id="place_category" name="place[category]">
       <option>Bar</option>
     </select>
-    <button class="create">Create</button>
+    <button style="float: right; margin-top: 20px" class="blue-button"><div>Accept</div></button>
   </fieldset>
 </script>
 

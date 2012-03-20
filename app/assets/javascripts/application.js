@@ -13,6 +13,7 @@
 //= require_tree ./src/collections
 //= require ./src/controllers/abstract_controller
 //= require ./src/controllers/realtime
+//= require ./src/controllers/reports
 //= require ./src/controllers/historical
 //= require ./src/controllers/places
 //= require ./src/controllers/alarms

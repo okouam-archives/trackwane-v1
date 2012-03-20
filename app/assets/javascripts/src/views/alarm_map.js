@@ -26,6 +26,9 @@ App.Views.AlarmMap = Backbone.View.extend({
     wizard.find(".next").on('click', function() {
       this.saveSpeedAlarm();
     }.bind(this));
+    wizard.find(".closelabel").on('click', function() {
+      this.closeWizards();
+    }.bind(this));
     this.wizards.speed.is_open = true;
   },
 
@@ -48,33 +51,42 @@ App.Views.AlarmMap = Backbone.View.extend({
   },
 
   saveGeofenceAlarm: function() {
-    var name = $(".wizard .name").val();
-    var alarm_type = $(".wizard .alarm_type").val();
+    var name = $("input[name='geofence_alarm[name]']").val();
+    var category = $("input[name='geofence_alarm[category]']").val();
     this.draw_layer.destroyFeatures();
     this.drawFeature.deactivate();
     var alarm = new App.Models.GeofenceAlarm();
-    alarm.save({name: name, type: alarm_type, coordinates: this.new_geofence}, {
+    var format = new OpenLayers.Format.WKT();
+    alarm.save({name: name, category: category, coordinates: format.extractGeometry(this.new_geofence)}, {
       success: function() {
         this.new_geofence = null;
         this.closeWizards();
-      },
+      }.bind(this),
       error: function() {
 
-      }
+      }.bind(this)
     });
   },
 
   saveSpeedAlarm: function() {
-    var name = $(".wizard .name").val();
-    var speed = $(".wizard .speed").val();
+    var name = $("input[name='speed_alarm[name]']").val();
+    if (name == "") {
+      alert("Please select a name for the speed alert.");
+      return;
+    }
+    var speed = $('input[name="speed_alarm[speed]"]').val();
+    if (speed == "") {
+      alert("Please select a speed for the speed alert.");
+      return;
+    }
     var alarm = new App.Models.SpeedAlarm();
     alarm.save({name: name, speed: speed}, {
       success: function() {
         this.closeWizards();
-      },
+      }.bind(this),
       error: function() {
 
-      }
+      }.bind(this)
     });
   },
 
@@ -83,6 +95,9 @@ App.Views.AlarmMap = Backbone.View.extend({
     var wizard = this.openWizard("#geofence-alarm-wizard-template");
     wizard.find(".next").on('click', function() {
       this.saveGeofenceAlarm();
+    }.bind(this));
+    wizard.find(".closelabel").on('click', function() {
+      this.closeWizards();
     }.bind(this));
     this.wizards.geofence.is_open = true;
     this.allowGeofencePositioning();

@@ -4,7 +4,7 @@ class CreateGeofenceAlarms < ActiveRecord::Migration
       t.references :account
       t.string :category
       t.string :name
-      t.references :geofence
+      t.string :coordinates
       t.timestamps
     end
   end
