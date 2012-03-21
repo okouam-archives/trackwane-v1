@@ -1,7 +1,6 @@
 !!!
 %head
   %title Gowane
-  = stylesheet_link_tag "login"
   = javascript_include_tag "application"
   = csrf_meta_tags
 %body
@@ -24,3 +23,25 @@
             - f.object.errors.full_messages.each do |msg|
               %li.error_message= msg
     .clear
+
+:css
+  body {color: #434343; margin: auto; text-align: center; background-image: url(/assets/map.png)}
+  button {margin-top: 10px; margin-left: 178px; margin-bottom: 5px}
+  input {width: 184px; padding: 5px; border: 1px solid #ccc; font-size: 12px}
+
+  .wrapper {margin: auto; margin-top: 200px; width: 415px}
+  .field_with_errors {display: inline-block}
+  .password {margin-top: 10px}
+
+  .form {float: right; text-align: left; color: white; font-weight: bold; font-family: Tahoma, Arial; font-size: 11px; border: 5px solid #666; background-color: rgba(50, 50, 50, 0.9); border-radius: 5px; padding: 14px 19px 8px 21px; width: 300px}
+  .form label {width: 70px; display: inline-block}
+
+  .errors {background-color: #f2dede; border: 1px solid #888; color: #B94A48; float: right; margin-top: 10px; width: 347px}
+  .errors ul {margin: 8px; padding-left: 0}
+  .errors li {list-style-type: none; font-family: Arial; font-size: 12px; text-align: center; font-weight: bold}
+
+  .blue-button {border: 0 none; cursor: pointer; padding: 0; background-color: transparent}
+
+  .blue-button div {background-color: #4D90FE; background-image: -moz-linear-gradient(center top , #4D90FE, #4787ED);
+    border: 1px solid #3079ED; border-radius: 2px 2px 2px 2px; color: #FFFFFF; padding: 4px; margin: 0; width: 80px
+  }
