@@ -1,11 +1,13 @@
 <script id="send-command-panel-template" type="text/x-handlebars-template">
+  <div>
   <fieldset>
     <label>SMS Command</label>
     <input type="text" />
     <label>Response</label>
     <div style="height: 100px">
+      {{response}}
     </div>
-    <button>Close</button>
-    <button>Send Message</button>
+    <button class="blue-button"><div>Send Message</div></button>
   </fieldset>
+  </div>
 </script>

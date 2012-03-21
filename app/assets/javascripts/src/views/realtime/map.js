@@ -7,7 +7,8 @@ App.Views.Realtime.Map = Backbone.View.extend({
   },
 
   center: function(event_id) {
-    console.debug("Centering on event", event_id);
+    var feature = this.device_layer.getFeatureById(event_id);
+    this.map.panTo(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y));
   },
 
   hideGeofences: function() {
@@ -86,9 +87,9 @@ App.Views.Realtime.Map = Backbone.View.extend({
       var event = device.attributes;
       var src = $(evt.explicitOriginalTarget);
       if (src.text() == "Send Command") {
-        this.trigger("action:send-command", event);
+        this.pubsub.trigger("action:send-command", event);
       } else if (src.text() == "Follow") {
-        this.trigger("action:follow", event);
+        this.pubsub.trigger("action:follow", event);
       }
     }.bind(this));
   },

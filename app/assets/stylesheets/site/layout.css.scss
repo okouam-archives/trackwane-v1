@@ -50,6 +50,8 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
   position: absolute; border: 10px solid rgba(100, 100, 100, 0.8); background-color: white; color: #434343
 }
 
+.map.realtime .send-command.panel > div {@include opaque-panel; position: absolute; left: 20px; bottom: 100px}
+.map.realtime .follow.panel > div {@include opaque-panel; position: absolute; left: 20px; bottom: 100px}
 .map.realtime .listing {@include opaque-panel; position: absolute; right: 20px; top: 20px}
 .map.realtime .listing a {text-decoration: none}
 .map.realtime .places.popup {background-color: #999}

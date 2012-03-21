@@ -5,6 +5,10 @@ App.Views.Realtime.FollowActionPanel = App.Views.Base.extend({
     this.template = Handlebars.compile($("#follow-panel-template").html());
   },
 
+  clear: function() {
+    this.$el.empty();
+  },
+
   render: function() {
     this.$el.html(this.template);
   }

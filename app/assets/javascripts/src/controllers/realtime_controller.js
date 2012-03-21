@@ -7,7 +7,8 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
     "action:send-command":    "onSendCommandAction",
     "action:follow":          "onFollowAction",
     "places:toggle":          "onTogglePlaces",
-    "geofence-alarms:toggle":       "onToggleGeofences"
+    "geofence-alarms:toggle": "onToggleGeofences",
+    "command:sent":           "onCommandSent"
   },
 
   initialize: function(options) {
@@ -16,7 +17,7 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
     this.listing = new App.Views.RealtimeEvents({el: "#canvas .listing", pubsub: this.pubsub});
     this.toolbar = new App.Views.Realtime.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
     this.follow_panel = new App.Views.Realtime.FollowActionPanel({el: "#canvas .follow.panel", pubsub: this.pubsub});
-    this.command_panel = new App.Views.Realtime.SendCommandActionPanel({el: "#canvas .send-action.panel", pubsub: this.pubsub});
+    this.command_panel = new App.Views.Realtime.SendCommandActionPanel({el: "#canvas .send-command.panel", pubsub: this.pubsub});
     this.map = new App.Views.Realtime.Map({el: "#map", pubsub: this.pubsub});
     this.map.render();
   },
@@ -58,14 +59,22 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
     this.follow_panel.render();
   },
 
-  onSendCommandAction: function(event) {
+  onSendCommandAction: function(event_id, device_name, msg) {
     this.hidePanels();
-    this.command_panel.render();
+    this.command_panel.render({response: msg, event_id: event_id, device_name: device_name});
+  },
+
+  onCommandSent: function(event_id, command) {
+    this.communicateWithDevice(event_id, function(response) {
+      var device_name = response.device_name;
+      var msg = response.msg;
+      this.pubsub.trigger("action:send-command", event_id, device_name, msg);
+    }.bind(this));
   },
 
   onFollowAction: function(event) {
     this.hidePanels();
-    this.follow_panel.render();
+    this.follow_panel.render(event);
   },
 
   onPanelClosing: function() {
@@ -73,7 +82,12 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
   },
 
   hidePanels: function() {
-    console.debug("hiding panels")
+    this.follow_panel.clear();
+    this.command_panel.clear();
+  },
+
+  communicateWithDevice: function(event_id, callback) {
+    callback({device_name: "TEST!!", msg: "FAKE RESPONSE"});
   },
 
   poll: function() {
