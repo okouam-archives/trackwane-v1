@@ -4,10 +4,6 @@ App.Services.Cartography = function(map) {
 
 _.extend(App.Services.Cartography.prototype, {
 
- /**
-   * Transforms a set of coordinates from WSG-84 to the Mercator projection used by Google
-   * @param coordinates The coordinates to be transformed
-   */
   projectForGoogleMaps: function(coordinates) {
     var sourceProjection = new OpenLayers.Projection("EPSG:4326");
     var targetProjection = new OpenLayers.Projection("EPSG:900913");
@@ -26,6 +22,8 @@ _.extend(App.Services.Cartography.prototype, {
   },
 
   createMap: function(el) {
+    OpenLayers.ImgPath = '/assets/OpenLayers/';
+    OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
     this.map = new OpenLayers.Map(el, {theme: null, controls: [], minZoomLevel: 5, maxZoomLevel: 12});
     var gmap = new OpenLayers.Layer.Google("Streets");
     this.map.addLayer(gmap);

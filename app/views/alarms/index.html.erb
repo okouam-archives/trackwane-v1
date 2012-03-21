@@ -1,0 +1,30 @@
+<%= render :partial => "speed_alarms" %>
+<%= render :partial => "new_speed_alarm" %>
+<%= render :partial => "geofence_alarms" %>
+<%= render :partial => "new_geofence_alarm" %>
+
+<div id="canvas">
+  <div id="map" style="width: 100%; height: 100%"></div>
+  <div id="alarm-listing" class="listing">
+    <div class="speed-alarms"></div>
+    <div class="geofence-alarms"></div>
+  </div>
+  <div id="new-speed-alarm-panel">
+    <div class="form"></div>
+    <div id="new-speed-alarm-button" class='switcher speed-alarms'>
+      <a href='#'><img style='height: 20px' src='/assets/103-map.png'>New Speed Alarm</a>
+    </div>
+  </div>
+  <div id="new-geofence-alarm-panel">
+    <div class="form"></div>
+    <div class='switcher geofence-alarms'>
+      <a href='#'><img style='height: 20px' src='/assets/103-map.png'>New Geofence Alarm</a>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    new App.Controllers.AlarmsController({el: "#canvas"});
+  });
+</script>

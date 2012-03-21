@@ -6,6 +6,14 @@ App.Views.Reports.Presentation = Backbone.View.extend({
 
   initialize: function(options) {
     this.pubsub = options.pubsub;
+    $(window).resize(this.onResize.bind(this));
+  },
+
+  onResize: function() {
+    var window_height = $(window).height();
+    var window_width = $(window).width();
+    this.$el.height(window_height - 160);
+    this.$el.width(window_width - 330);
   },
 
   onRunReport: function() {
@@ -166,8 +174,8 @@ App.Views.Reports.Presentation = Backbone.View.extend({
   render: function() {
     var source = $("#presentation-template").html();
     var template = Handlebars.compile(source);
-    var presentation = $(template()).appendTo("#canvas");
-    this.setElement(presentation);
+    this.$el.html(template());
+    this.onResize();
   }
 
 });

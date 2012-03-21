@@ -4,7 +4,6 @@ User.delete_all
 SpeedAlarm.delete_all
 GeofenceAlarm.delete_all
 Group.delete_all
-Geofence.delete_all
 Account.delete_all
 
 # Accounts
@@ -79,19 +78,11 @@ Place.create([
   {name: "2M Concepte", category: "Bar", account: o1_account, longitude: -3.23423, latitude: 5.234234}
 ])
 
-# Geofences
-
-inclusion_zone = Geofence.create({name: "Inclusion Zone", account: o1_account,
-coordinates: "POLYGON((5.348177 -4.024, 5.316387 -4.021769, 5.316387 -3.98778, 5.353647 -3.986063, 5.348177 -4.024))"})
-
-exclusion_zone = Geofence.create({name: "Exclusion Zone", account: o1_account,
-coordinates: "POLYGON((5.338213 -4.003165, 5.329368 -4.011362, 5.327616 -3.990934, 5.339324 -3.992779, 5.338213 -4.003165))"})
-
 # Geofence Alarms
 
 GeofenceAlarm.create([
-  {name: "Inclusion Zone Alarm", geofence: inclusion_zone, account: o1_account, category: "inclusion"},
-  {name: "Exclusion Zone Alarm", geofence: exclusion_zone, account: o1_account, category: "exclusion"}
+  {name: "Inclusion Zone Alarm", coordinates: "POLYGON((5.348177 -4.024, 5.316387 -4.021769, 5.316387 -3.98778, 5.353647 -3.986063, 5.348177 -4.024))", account: o1_account, category: "inclusion"},
+  {name: "Exclusion Zone Alarm", coordinates: "POLYGON((5.338213 -4.003165, 5.329368 -4.011362, 5.327616 -3.990934, 5.339324 -3.992779, 5.338213 -4.003165))", account: o1_account, category: "exclusion"}
 ])
 
 # Speed Speed Alarms

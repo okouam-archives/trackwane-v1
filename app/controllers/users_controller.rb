@@ -2,10 +2,10 @@ class UsersController < ApplicationController
 
   def index
     @account_id = session[:account_id]
+    @users = Account.find(@account_id).users
     respond_to do |format|
       format.html
       format.json do
-        @users = Account.find(@account_id).users
         render json: {success: true, results: @users}
       end
     end

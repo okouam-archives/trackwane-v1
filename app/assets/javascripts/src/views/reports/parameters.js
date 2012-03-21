@@ -11,7 +11,7 @@ App.Views.Reports.Parameters = Backbone.View.extend({
   render: function() {
     var source = $("#parameters-template").html();
     var template = Handlebars.compile(source);
-    var parameters = $(template()).appendTo("#canvas");
+    $(template()).appendTo(this.$el);
   }
 
 });

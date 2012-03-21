@@ -1,58 +1,22 @@
 <%=render :partial => "shared/popup" %>
+<%=render :partial => "place_popup" %>
+<%=render :partial => "map/realtime/device_listing" %>
+<%=render :partial => "map/realtime/follow_device" %>
+<%=render :partial => "map/realtime/send_command" %>
 
-<script id="realtime-device-template" type="text/x-handlebars-template">
-  <table id="realtime-devices" class="sidecolumn">
-    {{#each models}}
-      <tr>
-        <td>
-          <div style="display: inline-block; margin-left: 5px; width: 215px">
-            <a href="#" data-id="{{attributes.id}}" style="font-size: 11px; font-family: Verdana; font-weight: bold">{{attributes.name}}</a><br/>
-            <i style="font-size: 10px">{{attributes.address}} <br/>50m de Treichville Centre</i>
-          </div>
-          <div style="display: inline-block; width: 50px">
-            {{attributes.speed}} km/h<br/>
-            3.2L
-          </div>
-        </td>
-      </tr>
-      {{/each}}
-  </table>
-</script>
-
-<script id="follow-panel-template" type="text/x-handlebars-template">
-Details of the Car
-<button>Close</button>
-</script>
-
-
-<script id="send-command-panel-template" type="text/x-handlebars-template">
-<fieldset>
-  <label>SMS Command</label>
-  <input type="text" />
-  <label>Response</label>
-  <div style="height: 100px">
-
+<div id="canvas">
+  <div id="map"></div>
+  <div class="listing"></div>
+  <div class="follow panel"></div>
+  <div class="send-command panel"></div>
+  <div class="toolbar">
+    <div class='places button'><img src='/assets/103-map.png'><label>Places</label></div>
+    <div class='geofences button'><img src='/assets/103-map.png'><label>Geofences</label></div>
   </div>
-  <button>Close</button>
-  <button>Send Message</button>
-</fieldset>
-</script>
+</div>
 
 <script type="text/javascript">
   $(function() {
-    Ext.application({
-      name: 'Gowane',
-      autoCreateViewport: false,
-      controllers: ['Gowane.controllers.Realtime'],
-      launch: function() {
-        new Ext.Viewport({
-          layout : 'border',
-          items : [
-            {xtype: 'panel', contentEl: 'menu', region : 'north'},
-            {region : 'center', xtype: 'panel', id: "map"}
-          ]
-        });
-      }
-    });
+    new App.Controllers.RealtimeController({el: "#canvas"});
   });
 </script>

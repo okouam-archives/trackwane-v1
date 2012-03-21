@@ -1,0 +1,10 @@
+@mixin action-button {
+  background-color: #333; opacity: 0.8; border-radius: 4px; padding: 5px 10px 3px 10px; margin-left: 15px
+}
+
+.toolbar {position: absolute; bottom: 55px; font-weight: bold; z-index: 10000; color: white}
+.toolbar .button {@include action-button; display: inline-block}
+.toolbar > .button {margin-left: 20px}
+.toolbar .button * {cursor: pointer}
+.toolbar .button img {margin-right: 7px; height: 20px}
+.toolbar .button label {position: relative; top: -5px}

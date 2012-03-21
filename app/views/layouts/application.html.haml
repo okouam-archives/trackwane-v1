@@ -6,8 +6,7 @@
   %script{src: 'http://maps.google.com/maps/api/js?key=AIzaSyAWgN9SyQVm44Xz3YNSNLqGQao7wYKJvcc&sensor=false', type: "text/javascript"}
   = csrf_meta_tags
 %body{class: "#{params[:controller]} #{params[:action]}"}
-  = yield
-  #menu
+  %menu
     %ul
       %li{class: "#{params[:controller] == "map" && params[:action] == "realtime" ? "current" : ""}"}
         %a{href: "/map/realtime"}
@@ -17,22 +16,54 @@
         %a{href: "/map/historical"}
           = image_tag "/assets/103-map.png", style: "height: 20px"
           Historical
-      %li{class: "#{params[:controller] == "reports" ? "current" : ""}"}
-        %a{href: "/reports"}
+      %li{class: "#{params[:controller] == "reports" ? "current" : "reports submenu"}"}
+        %a
           = image_tag "/assets/137-presentation_w.gif"
           Reports
-      %li{class: "#{params[:controller] == "alarms" ? "current" : ""}"}
-        %a{href: "/alarms"}
+        %ul
+          %li
+            %a{href: "/reports"}
+              Your Reports
+          %li
+            %a{href: "/schedules"}
+              Report Schedule
+      %li{class: "#{params[:controller] == "alarms" ? "current" : "alarms submenu"}"}
+        %a
           = image_tag "/assets/139-flags.png"
-          Your Alarms
+          Alarms
+        %ul
+          %li
+            %a{href: "/alarms"}
+              Your Alarms
+          %li
+            %a{href: "/alerts"}
+              Alerts
       %li{class: "#{params[:controller] == "places" ? "current" : ""}"}
         %a{href: "/places"}
           = image_tag "/assets/60-signpost.png"
           Your Places
-      %li
+      %li.setup.submenu
         %a
           = image_tag "/assets/157-wrench.png"
           Administration
-      %li{style: "float: right"}
-        = image_tag "/assets/20-gear2.png"
+        %ul
+          %li
+            %a{href: "/users"}
+              Users
+          %li
+            %a{href: "/devices"}
+              Devices
+      %li.admin.submenu{style: "float: right"}
+        = image_tag "/assets/20-gear2.png", :style =>"position: relative; top: 6px"
+        %ul{style: "width: 150px"}
+          %li
+            %a{href: "/accounts"}
+              Accounts
+          %li
+            %a{href: "/users"}
+              Your settings
+          %li
+            %a{href: "/logout"}
+              Logout
     %div{style: "clear: both"}
+  = yield

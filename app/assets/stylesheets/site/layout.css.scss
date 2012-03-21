@@ -1,0 +1,81 @@
+body, html {height: 100%; width: 100%; font-size: 11px; font-family: tahoma, arial, verdana, sans-serif; overflow: hidden}
+h1 {margin-bottom: 6px; font-size: 12px}
+a {color: white}
+a:hover {color: orange}
+
+#canvas {width: 100%; height: 100%; background-image: url(/assets/map.png); position: absolute}
+#canvas #map {width: 100%; height: 100%}
+
+@mixin action-button {
+  position: absolute; background-color: #333; opacity: 0.8; border-radius: 4px; padding: 5px 10px; z-index: 10000; color: white;
+  position: static; text-decoration: none; margin-top: 15px; display: inline-block; margin-right: 5px
+}
+
+@mixin actions {
+  display: none; position: absolute; height: 60px;
+}
+
+.realtime.actions {@include actions; width: 250px; height: 60px; left: -165px; top: -10px}
+.places.actions {@include actions; width: 150px; left: -70px; top: -16px}
+.actions a {@include action-button}
+
+@mixin popup {cursor: pointer; border: 1px solid #333; font-size: 10px; padding: 3px; color: #222; background-color: white; margin-left: 10px}
+
+.places.popup {@include popup; margin-top: 6px}
+
+.closelabel {float: right; cursor: pointer}
+
+.map-listing.geofence-alarms {top: 200px; width: 150px}
+.map-listing.speed-alarms {width: 150px}
+
+@mixin opaque-panel {
+  background-color: #333; opacity: 0.8; border-radius: 4px; padding: 5px 10px 3px 10px; z-index: 10000; color: white
+}
+
+.wizard {@include opaque-panel; width: 347px; bottom: 72px; left: 20px; padding: 10px 15px; line-height: 16px; padding-bottom: 20px}
+.wizard p {margin-top: 5px}
+.wizard .field {margin-top: 8px}
+.wizard .field label {margin-bottom: 3px; display: block}
+.wizard .field input[type="text"], .wizard .field select {padding: 5px; width: 100%}
+.wizard .next {float: right; margin-top: 15px}
+
+.standalone.panel {@include opaque-panel; background-color: white; color: #333; opacity: 1; border: 1px solid #333; padding: 20px}
+.action.panel {@include opaque-panel; left: 20px; bottom: 70px; height: 310px; width: 220px}
+
+@mixin opaque-listing {opacity: 1; right: 20px; top: 30px;  background-color: rgba(50, 50, 50, 0.8);
+border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
+}
+
+@mixin white-panel {
+  position: absolute; border: 10px solid rgba(100, 100, 100, 0.8); background-color: white; color: #434343
+}
+
+.map.realtime .listing {@include opaque-panel; position: absolute; right: 20px; top: 20px}
+.map.realtime .listing a {text-decoration: none}
+.map.realtime .places.popup {background-color: #999}
+
+.alarms.index .listing {@include opaque-panel; position: absolute; right: 20px; top: 20px}
+
+.devices.index .listing {@include white-panel}
+.devices.index .listing table {width: 100%}
+.devices.index .listing th, .devices.index .listing td {padding: 5px; text-align: left; margin-left: 5px}
+.devices.index .editor {@include white-panel}
+
+.users.index .listing {@include white-panel}
+.users.index .listing table {width: 100%}
+.users.index .listing th, .users.index .listing td {padding: 5px; text-align: left; margin-left: 5px}
+.users.index .editor {@include white-panel}
+
+.places.index #new-place-panel {position: absolute; bottom: 100px; margin-left: 20px}
+.places.index .listing {@include opaque-listing; position: absolute; padding-bottom: 10px; padding: 0px 20px 10px 20px}
+.places.index .listing a {color: white; text-decoration: none}
+.places.index .listing a:hover {color: orange}
+.places.index .listing td {padding-bottom: 6px}
+
+.reports.index .sidebar {position: absolute; width: 200px; right: 40px; top: 280px}
+.reports.index .sidebar button {margin-top: 10px; font-weight: bold; font-size: 16px}
+.reports.index .sidebar button div {width: 210px}
+.reports.index .sidebar .listing {@include opaque-panel; width: 200px; padding-bottom: 10px}
+.reports.index .sidebar .listing li {margin-top: 5px; list-style-type: none}
+.reports.index .presentation {@include opaque-panel; position: absolute; border: 10px solid rgba(100, 100, 100, 0.8); background-color: white; height: 600px; width: 900px; top: 30px; left: 20px; opacity: 1; color: black}
+.reports.index .parameters {@include opaque-panel; position: absolute; height: 230px; width: 200px; top: 30px; right: 20px}

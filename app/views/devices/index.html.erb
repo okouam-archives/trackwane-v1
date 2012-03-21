@@ -1,39 +1,40 @@
-<script id="introduction-template" type="text/x-handlebars-template">
-  <div class="help">
-    <div style="width: 70%; margin: auto; margin-top: 100px"><h1>User Management</h1>
-      <p>You can <a href="#">run</a> several kinds of reports to track the activity of your vehicles.</p>
-      <p>This mini-guide will show you how
-      to <a href="#">build the report</a> you need by choosing the <a href="#">type of report</a>, as well as how to <a href="#">save</a> reports to
-      run them later and how to set up <a href="#">automatic sending of reports</a> to one or more people.</p>
-      <p>Once you've started creating reports, you can show this mini-guide at any time by clicking on the Help
-      button at the top right of your screen.</p>
-      <p style="text-align: center"><img src="/assets/stock-photo-14572303-sales-problem.jpg" /></p>
+<div id="canvas">
+    <div class="listing" style="float: left; margin: auto; margin-top: 100px; left: 80px; width: 800px;">
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>IMEI Number</th>
+          <th>Driver</th>
+          <th>Tracker ID</th>
+        </thead>
+      <% for device in @devices %>
+        <tr>
+          <td><%= device.display_name %></td>
+          <td><%= device.imei_number %></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <% end %>
+      </table>
     </div>
-  </div>
-</script>
+    <div class="editor" style=" float: left; width: 300px; margin: auto; margin-top: 100px; right: 20px">
+      <fieldset>
+        <label>Username</label>
+        <input type="text" />
+        <label>Email</label>
+        <input type="text" />
+        <label>Role</label>
+        <input type="text" />
+        <label>Password</label>
+        <input type="text" />
+        <label>Password Confirmation</label>
+        <input type="text" />
+      </fieldset>
+    </div>
+</div>
 
-<script type="text/javascript">
-  $.App.help = "users";
-  $.App.account_id = <%= @account_id %>;
+    <script type="text/javascript">
   $(function() {
-    Ext.application({
-      name: 'Gowane',
-      autoCreateViewport: false,
-      controllers: ['Gowane.controllers.Devices'],
-      launch: function() {
-        Ext.create('Gowane.stores.Devices', {storeId: "DeviceStore"});
-        Ext.create('Gowane.stores.Accounts', {storeId: "AccountStore"});
-        new Ext.Viewport({
-          layout : 'border',
-          items : [
-            {xtype: 'menu', region : 'north'},
-            {region : 'west', width: 400, xtype: 'panel', id: 'dynamic', split: true, layout: 'fit', items: [
-              {xtype: 'template_panel', template: "#introduction-template"}
-            ]},
-            {region : 'center', xtype: 'full_device_list', layout: 'fit', layoutConfig: {align: 'stretch'}}
-          ]
-        });
-      }
-    });
+
   });
 </script>

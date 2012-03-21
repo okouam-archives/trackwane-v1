@@ -6,6 +6,7 @@ FactoryGirl.define do
   factory :geofence_alarm do
     association :account
     name Factory.next :geofence_alarm_name
+    coordinates Forgery::Geospatial.square
   end
 end
 

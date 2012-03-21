@@ -26,9 +26,9 @@ App.Views.HistoricalMap = Backbone.View.extend({
   },
 
   hidePanels: function() {
-    if (this.action_panel) {
+    if (this.new_place_panel) {
       this.$el.find(".action.panel").remove();
-      this.action_panel.destroy();
+      this.new_place_panel.destroy();
     }
   },
 

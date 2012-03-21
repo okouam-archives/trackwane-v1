@@ -1,18 +1,9 @@
+<div id="canvas">
+  <div id="map"></div>
+</div>
+
 <script>
   $(function() {
-    Ext.application({
-      name: 'Gowane',
-      autoCreateViewport: false,
-      controllers: ['Gowane.controllers.Historical'],
-      launch: function() {
-        new Ext.Viewport({
-          layout : 'border',
-          items : [
-            {xtype: 'panel', contentEl: 'menu', region : 'north'},
-            {region : 'center', xtype: 'panel', id: "map"}
-          ]
-        });
-      }
-    });
+    var controller = new App.Controllers.HistoricalController({el: "#canvas"});
   });
 </script>

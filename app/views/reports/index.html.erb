@@ -1,47 +1,29 @@
-<script id="presentation-template" type="text/x-handlebars-template">
-  <div class='presentation'>
-    <div id="chart" style="height: 100%"></div>
-  <div>
-</script>
+<%= render :partial => "listing" %>
+<%= render :partial => "parameters" %>
+<%= render :partial => "presentation" %>
 
-<script id="devices-template" type="text/x-handlebars-template">
-  <div class='devices'>
-    <ul>
-    {{#each models}}
-      <li><input type="checkbox" /> {{attributes.display_name}}</li>
-    {{/each}}
-    </ul>
-  <button class="blue-button"><div>Run Report</div></button>
-  <div>
-</script>
-
-<script id="parameters-template" type="text/x-handlebars-template">
-    <div class='parameters'>
-     <fieldset>
-       <label>Report Type</label>
-       <select><option value="speed">Speed</option><option value="distance">Distance</option></select>
-    <label>From</label>
-       <input class="datepicker" type="text" />
-    <label>To</label>
-       <input class="datepicker" type="text" />
-      <div>
-</script>
+<div id="canvas">
+  <div class="presentation"></div>
+  <div class="parameters"></div>
+  <div class="sidebar">
+    <div class="listing"></div>
+    <button class="run blue-button"><div>Run Report</div></button>
+  </div>
+  <div class="toolbar">
+    <div class='button pdf'>
+      <img src='/assets/103-map.png'><label>Export PDF</label>
+    </div>
+    <div class='button excel'>
+      <img src='/assets/103-map.png'><label>Export Excel</label>
+    </div>
+    <div class='button data'>
+      <img src='/assets/103-map.png'><label>Show Data</label>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
   $(function() {
-    Ext.application({
-      name: 'Gowane',
-      autoCreateViewport: false,
-      controllers: ['Gowane.controllers.Reports'],
-      launch: function() {
-        new Ext.Viewport({
-          layout : 'border',
-          items : [
-            { xtype: 'panel', contentEl: 'menu', region : 'north'},
-            {region : 'center', xtype: 'panel', id: 'canvas', layout: 'fit'}
-          ]
-        });
-      }
-    });
+    var controller = new App.Controllers.ReportsController({el: "#canvas"});
   });
 </script>

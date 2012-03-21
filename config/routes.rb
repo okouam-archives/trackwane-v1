@@ -14,7 +14,7 @@ Gowane::Application.routes.draw do
   end
 
   resource :user_session
-  resources :accounts, :places, :alarms, :speed_alarms, :geofence_alarms, :events
+  resources :accounts, :places, :alarms, :speed_alarms, :geofence_alarms, :events, :schedules, :alerts
 
   resources :users do
     collection do
@@ -28,6 +28,8 @@ Gowane::Application.routes.draw do
     end
   end
 
+  match 'login'  => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout
   root :to => 'map#realtime'
 
 end

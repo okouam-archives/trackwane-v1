@@ -1,0 +1,19 @@
+menu, ul {padding: 0; margin: 0}
+menu {border-top: 3px solid #333; border-bottom: 1px solid #333; background-color: #444; font-family: Arial, serif; font-size: 11px}
+menu ul > li {float: left; margin-right: 10px; padding: 0 10px 8px 10px; list-style-type: none}
+menu ul > li.current {background-color: #333}
+menu ul > li ul {display: none; margin-top: 3px}
+
+menu li a {color: white; text-decoration: none; font-weight: bold}
+menu li a img {display: inline-block; margin-right: 3px; position: relative; top: 6px}
+menu li a:hover {color: orange}
+menu li ul {position: absolute}
+menu li:hover ul {display: block; position: absolute; z-index: 999999; width: 320px; top: 32px}
+menu li:hover ul li {background-color: #444; width: 130px; border: 1px solid #333; float: left; margin: 0; padding: 5px 5px 5px 5px}
+
+.submenu.admin ul li {width: 85px; position: relative; left: -65px}
+.submenu.admin ul li a {margin-left: 5px}
+.submenu.setup ul li {width: 60px; position: relative; left: -20px; text-align: center}
+.submenu.alarms ul li {width: 80px; position: relative; left: -50px; text-align: center}
+.submenu.reports ul li {width: 100px; position: relative; left: -70px; text-align: center}
+.submenu > a:hover {color: white; cursor: pointer}

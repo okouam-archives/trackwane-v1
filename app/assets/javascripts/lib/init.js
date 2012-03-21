@@ -1,9 +1,15 @@
 App = {
   Collections: {},
+  Controllers: {},
   Models: {},
   Views: {
-    Reports: {}
+    Reports: {},
+    Alarms: {},
+    Places: {},
+    Realtime: {},
+    Users: {},
+    Devices: {},
+    Accounts: {}
   },
   Services: {}
 };
-Ext.Loader.setConfig({enabled: true});

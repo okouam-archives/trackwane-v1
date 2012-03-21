@@ -1,4 +1,23 @@
-    <div id="x" class="standalone-panel" style=" width: 70%; margin: auto; margin-top: 100px; margin-left: 15%">
+<div id="canvas">
+    <div class="listing" style="float: left; margin: auto; margin-top: 100px; left: 80px; width: 800px;">
+      <table>
+        <thead>
+          <th>Login</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Last Login</th>
+        </thead>
+      <% for user in @users %>
+        <tr>
+          <td><%= user.login %></td>
+          <td><%= user.email %></td>
+          <td>Administrator</td>
+          <td>Never</td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+    <div class="editor" style=" float: left; width: 300px; margin: auto; margin-top: 100px; right: 20px">
       <fieldset>
         <label>Username</label>
         <input type="text" />
@@ -12,29 +31,10 @@
         <input type="text" />
       </fieldset>
     </div>
+</div>
 
-<script type="text/javascript">
+    <script type="text/javascript">
   $(function() {
-    Ext.application({
-      name: 'Gowane',
-      autoCreateViewport: false,
-      controllers: ['Gowane.controllers.Users'],
-      launch: function() {
-        Ext.create('Gowane.stores.Users', {
-          storeId: "UserStore"
-        });
-        Ext.create('Gowane.stores.Accounts', {
-          storeId: "AccountStore"
-        });
-        new Ext.Viewport({
-          layout : 'border',
-          items : [
-            {xtype: 'panel', contentEl: 'menu', region : 'north'},
-            {region : 'center', contentEl: "x", id: "editor", xtype: 'panel', split: false},
-            {region : 'east', id: "user_list", width: 400, xtype: 'panel'}
-          ]
-        });
-      }
-    });
+
   });
 </script>

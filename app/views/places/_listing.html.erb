@@ -1,0 +1,12 @@
+<script id="listing-template" type="text/x-handlebars-template">
+  <h1>Your Places</h1>
+  <table id="places" class="sidecolumn">
+    {{#each models}}
+      <tr>
+        <td>
+          <a data-id="{{attributes.id}}" href="#">{{attributes.name}}</a> ({{attributes.category}})
+        </td>
+      </tr>
+      {{/each}}
+  </table>
+</script>

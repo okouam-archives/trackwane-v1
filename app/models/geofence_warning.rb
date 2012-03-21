@@ -11,7 +11,7 @@ class GeofenceWarning < ActiveRecord::Base
 
 	def self.check(alarms, event)
 		triggered_alarms = alarms.find_all do |alarm|
-			zone = alarm.geofence.coordinates
+			zone = alarm.coordinates
 			alarm.category == "inclusion" ? within(event, zone) : !within(event, zone)
 		end
 		triggered_alarms = [triggered_alarms] if triggered_alarms.is_a? GeofenceAlarm

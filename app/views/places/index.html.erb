@@ -1,56 +1,18 @@
-<script id="place-template" type="text/x-handlebars-template">
-  <table id="places" class="sidecolumn">
-    {{#each models}}
-      <tr>
-        <td>
-          {{attributes.name}} ({{attributes.category}})
-        </td>
-      </tr>
-      {{/each}}
-  </table>
-</script>
+<%= render :partial => "listing" %>
+<%= render :partial => "new_place" %>
+<%= render :partial => "popup" %>
 
-<script id="place-popup-template" type="text/x-handlebars-template">
-	<div>
-    <div class="places popup">
-	    <b>{{name}}</b><br/>
-      <div class="places actions">
-        <a href="#" class="remove">Remove</a>
-      </div>
-    </div>
+<div id="canvas">
+  <div id="map"></div>
+  <div class="toolbar">
+    <div class='button'><img src='/assets/103-map.png'><label>New Place</label></div>
   </div>
-</script>
-
-<script id="new-place-panel-template" type="text/x-handlebars-template">
-  <img class="closelabel" src="/assets/closelabel.png" />
-    <h1 style="margin-bottom: 5px">New Place</h1>
-    <p>Please choose a name and category below for your new place and place it on the map.</p>
-  <fieldset>
-    <label>Name</label>
-    <input id="place_name" name="place[name]" type="text" />
-    <label>Category</label>
-    <select id="place_category" name="place[category]">
-      <option>Bar</option>
-    </select>
-    <button style="float: right; margin-top: 20px" class="blue-button"><div>Accept</div></button>
-  </fieldset>
-</script>
+  <div class="listing"></div>
+  <div id="new-place-panel"></div>
+</div>
 
 <script type="text/javascript">
   $(function() {
-    Ext.application({
-      name: 'Gowane',
-      autoCreateViewport: false,
-      controllers: ['Gowane.controllers.Places'],
-      launch: function() {
-        new Ext.Viewport({
-          layout : 'border',
-          items : [
-            {xtype: 'panel', contentEl: 'menu', region : 'north'},
-            { region : 'center', xtype: 'panel', id: "map", split: false}
-          ]
-        });
-      }
-    });
+    new App.Controllers.PlacesController({el: "#canvas"});
   });
 </script>

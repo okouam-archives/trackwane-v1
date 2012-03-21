@@ -1,19 +1,35 @@
-App.Services.Mapper = function() {};
+App.Services.Mapper = function() {
+  this.cartography = new App.Services.Cartography();
+};
 
 _.extend(App.Services.Mapper.prototype, {
 
- featureFromEvent: function(event, cartography) {
-  var lonlat = cartography.mercatorCoordinates(event.get("longitude"), event.get("latitude"));
-  var point = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
-  return new OpenLayers.Feature.Vector(point, event);
- },
+   featureFromEvent: function(event) {
+    return this.toFeature(event);
+   },
 
- featuresFromPlaces: function(places, cartography) {
+  toFeature: function(model, style) {
+    var lonlat = this.cartography.mercatorCoordinates(model.get("longitude"), model.get("latitude"));
+    var point = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
+    var feature = new OpenLayers.Feature.Vector(point, model);
+    feature.id = model.id;
+    if (style) feature.style = style;
+    else feature.style = {pointRadius: 6, fillColor: "#333", fillOpacity: 1, graphicName: "x", strokeColor: "#333"};
+    return feature;
+  },
 
- },
+  toPlaceFeatures: function(places) {
+    return places.map(function(place) {
+      return this.toFeature(place);
+    }.bind(this))
+   },
 
- featuresFromGeofences: function(geofences, cartography) {
-
- }
+   toGeofenceFeatures: function(geofences) {
+      var format = new OpenLayers.Format.WKT();
+      var features = geofences.map(function(geofence) {
+        return format.read(geofence.get("coordinates"));
+      });
+     return features;
+   }
 
 });
