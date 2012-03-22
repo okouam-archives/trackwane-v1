@@ -1,4 +1,4 @@
-App.Views.Devices = Backbone.View.extend({
+App.Views.Historical.Devices = Backbone.View.extend({
 
   initialize: function(options) {
     this.pubsub = options.pubsub;

@@ -16,7 +16,7 @@
         %a{href: "/map/historical"}
           = image_tag "/assets/103-map.png", style: "height: 20px"
           Historical
-      %li{class: "#{params[:controller] == "reports" ? "current" : "reports submenu"}"}
+      %li{class: "#{params[:controller] == "reports" ? "reports current submenu" : "reports submenu"}"}
         %a
           = image_tag "/assets/137-presentation_w.gif"
           Reports
@@ -27,7 +27,7 @@
           %li
             %a{href: "/schedules"}
               Report Schedule
-      %li{class: "#{params[:controller] == "alarms" ? "current" : "alarms submenu"}"}
+      %li{class: "#{params[:controller] == "alarms" ? "alarms current submenu" : "alarms submenu"}"}
         %a
           = image_tag "/assets/139-flags.png"
           Alarms
@@ -42,7 +42,7 @@
         %a{href: "/places"}
           = image_tag "/assets/60-signpost.png"
           Your Places
-      %li.setup.submenu
+      %li{class: "#{params[:controller] == "devices" || params[:controller] == "users" ? "setup submenu current" : "setup submenu"}"}
         %a
           = image_tag "/assets/157-wrench.png"
           Administration

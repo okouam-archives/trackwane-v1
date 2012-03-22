@@ -1,0 +1,19 @@
+<script id="editor-template" type="text/x-handlebars-template">
+  <fieldset>
+    <label>Name</label>
+    <input name="display_name" value="{{attributes.display_name}}" type="text" />
+    <label>IMEI Number</label>
+    <input name="imei_number" value="{{attributes.imei_number}}" type="text" />
+    <label>Driver</label>
+    <input value="{{attributes.driver}}" type="text" />
+    <label>Tracker ID</label>
+    <input value="{{attributes.tracker_id}}" type="text" />
+    {{#if attributes}}
+      <input  value="{{attributes.id}}" type="hidden" name="id" />
+      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="save blue-button"><div>Accept</div></button>
+      <button style="margin-top: 15px; margin-bottom: 5px; float: right; margin-right: 10px" class="delete blue-button"><div>Delete</div></button>
+    {{else}}
+      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="blue-button create"><div>Accept</div></button>
+    {{/if}}
+  </fieldset>
+</script>

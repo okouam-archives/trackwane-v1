@@ -58,20 +58,24 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 
 .alarms.index .listing {@include opaque-panel; position: absolute; right: 20px; top: 20px}
 
-.devices.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; left: 20px; width: 915px;}
+.devices.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; display: none; left: 20px; width: 915px;}
 .devices.index .listing table {width: 100%}
+.devices.index .listing tr {cursor: pointer}
+.devices.index .listing tr:hover td {color: orange}
 .devices.index .editor input {width: 220px}
-.devices.index .editor {@include white-panel; background-color: #373737; color: white; float: left; width: 260px; margin: auto; margin-top: 100px; right: 20px}
+.devices.index .editor {@include white-panel; background-color: #373737; color: white; display: none; float: left; width: 260px; margin: auto; margin-top: 100px; right: 20px}
 .devices.index .listing table td, .devices.index .listing table th {color: white; padding: 8px 15px 8px 15px; text-align: left}
 .devices.index .listing table thead tr:nth-child(odd) {background-color: #373737}
 .devices.index .listing table tr:nth-child(even) {background-color: #373737}
 .devices.index .listing table tr:nth-child(odd) {background-color: #313131}
 
-.users.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; left: 20px; width: 915px;}
+.users.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; left: 20px; width: 915px; display: none}
 .users.index .listing table {width: 100%}
 .users.index .editor input {width: 220px}
+.users.index .listing tr {cursor: pointer}
+.users.index .listing tr:hover td {color: orange}
 .users.index .listing th, .users.index .listing td {padding: 5px; text-align: left; margin-left: 5px}
-.users.index .editor {@include white-panel; background-color: #373737; color: white; float: left; width: 260px; margin: auto; margin-top: 100px; right: 20px}
+.users.index .editor {@include white-panel; background-color: #373737; color: white; float: left; display: none; width: 260px; margin: auto; margin-top: 100px; right: 20px}
 .users.index .listing table td, .users.index .listing table th {color: white; padding: 8px 15px 8px 15px }
 .users.index .listing table thead tr:nth-child(odd) {background-color: #373737}
 .users.index .listing table tr:nth-child(even) {background-color: #373737}

@@ -1,0 +1,20 @@
+<script id="editor-template" type="text/x-handlebars-template">
+      <fieldset>
+        <label>Username</label>
+        <input value="{{attributes.login}}" type="text" />
+        <label>Email</label>
+        <input value="{{attributes.email}}" type="text"  />
+        <label>Role</label>
+        <input type="text" />
+        <label >Password</label>
+        <input type="text" />
+        <label>Password Confirmation</label>
+        <input type="text" />
+       {{#if attributes}}
+          <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="blue-button save"><div>Accept</div></button>
+          <button style="margin-top: 15px; margin-bottom: 5px; float: right; margin-right: 10px" class="blue-button delete"><div>Delete</div></button>
+        {{else}}
+          <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="blue-button create"><div>Accept</div></button>
+        {{/if}}
+      </fieldset>
+  </script>

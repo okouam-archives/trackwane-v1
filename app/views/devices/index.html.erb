@@ -1,39 +1,16 @@
+<%= render :partial => "listing" %>
+<%= render :partial => "editor" %>
+
 <div id="canvas">
-    <div class="listing">
-      <table>
-        <thead>
-          <th>Name</th>
-          <th>IMEI Number</th>
-          <th>Driver</th>
-          <th>Tracker ID</th>
-        </thead>
-      <% for device in @devices %>
-        <tr>
-          <td><%= device.display_name %></td>
-          <td><%= device.imei_number %></td>
-          <td></td>
-          <td></td>
-        </tr>
-      <% end %>
-      </table>
-    </div>
-    <div class="editor">
-      <fieldset>
-        <label>Name</label>
-        <input type="text" />
-        <label>IMEI Number</label>
-        <input type="text" />
-        <label>Driver</label>
-        <input type="text" />
-        <label>Tracker ID</label>
-        <input type="text" />
-        <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="blue-button"><div>Accept</div></button>
-      </fieldset>
+    <div class="listing"></div>
+    <div class="editor"></div>
+    <div class="toolbar">
+      <div class='button'><img src='/assets/103-map.png'><label>New Device</label></div>
     </div>
 </div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
   $(function() {
-
+    new App.Controllers.DevicesController({el: "#canvas"});
   });
 </script>

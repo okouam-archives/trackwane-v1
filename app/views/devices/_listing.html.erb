@@ -1,0 +1,18 @@
+<script id="listing-template" type="text/x-handlebars-template">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>IMEI Number</th>
+      <th>Driver</th>
+      <th>Tracker ID</th>
+    </thead>
+  {{#each models}}
+    <tr data-id="{{attributes.id}}">
+      <td>{{attributes.display_name}}</td>
+      <td>{{attributes.imei_number}}</td>
+      <td></td>
+      <td></td>
+    </tr>
+  {{/each}}
+  </table>
+</script>

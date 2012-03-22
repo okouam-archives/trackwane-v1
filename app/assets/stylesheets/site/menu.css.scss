@@ -10,7 +10,6 @@ menu li a:hover {color: orange}
 menu li ul {position: absolute}
 menu li:hover ul {display: block; position: absolute; z-index: 999999; width: 320px; top: 32px}
 menu li:hover ul li {background-color: #444; width: 130px; border: 1px solid #333; float: left; margin: 0; padding: 5px 5px 5px 5px}
-
 .submenu.admin ul li {width: 85px; position: relative; left: -65px}
 .submenu.admin ul li a {margin-left: 5px}
 .submenu.setup ul li {width: 60px; position: relative; left: -20px; text-align: center}

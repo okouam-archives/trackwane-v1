@@ -9,7 +9,8 @@ App = {
     Realtime: {},
     Users: {},
     Devices: {},
-    Accounts: {}
+    Accounts: {},
+    Historical: {}
   },
   Services: {}
 };

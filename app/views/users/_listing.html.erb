@@ -1,0 +1,18 @@
+<script id="listing-template" type="text/x-handlebars-template">
+      <table>
+        <thead>
+          <th>Login</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Last Login</th>
+        </thead>
+  {{#each models}}
+    <tr data-id="{{attributes.id}}">
+          <td>{{attributes.email}}</td>
+          <td>{{attributes.login}}</td>
+          <td>Administrator</td>
+          <td>Never</td>
+        </tr>
+    {{/each}}
+      </table>
+</script>

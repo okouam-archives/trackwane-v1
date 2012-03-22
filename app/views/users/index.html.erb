@@ -1,41 +1,16 @@
+<%= render :partial => "listing" %>
+<%= render :partial => "editor" %>
+
 <div id="canvas">
-    <div class="listing">
-      <table>
-        <thead>
-          <th>Login</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Last Login</th>
-        </thead>
-      <% for user in @users %>
-        <tr>
-          <td><%= user.login %></td>
-          <td><%= user.email %></td>
-          <td>Administrator</td>
-          <td>Never</td>
-        </tr>
-      <% end %>
-      </table>
-    </div>
-    <div class="editor">
-      <fieldset>
-        <label>Username</label>
-        <input type="text" />
-        <label>Email</label>
-        <input type="text"  />
-        <label>Role</label>
-        <input type="text" />
-        <label>Password</label>
-        <input type="text" />
-        <label>Password Confirmation</label>
-        <input type="text" />
-        <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="blue-button"><div>Accept</div></button>
-      </fieldset>
+    <div class="listing"></div>
+    <div class="editor"></div>
+    <div class="toolbar">
+      <div class='button'><img src='/assets/103-map.png'><label>New User</label></div>
     </div>
 </div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
   $(function() {
-
+    new App.Controllers.UsersController({el: "#canvas"});
   });
 </script>
