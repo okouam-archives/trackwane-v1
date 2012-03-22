@@ -1,0 +1,16 @@
+<script id="listing-template" type="text/x-handlebars-template">
+  <table>
+      <thead>
+        <tr>
+          <th>Alarm</th>
+          <th>Destination</th>
+        </tr>
+      </thead>
+  {{#each models}}
+    <tr data-id="{{attributes.id}}">
+      <td>{{attributes.alarm_name}}</td>
+      <td>{{attributes.destination}}</td>
+    </tr>
+  {{/each}}
+  </table>
+</script>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120303122737) do
+ActiveRecord::Schema.define(:version => 20120322222258) do
 
   create_table "accounts", :force => true do |t|
     t.column "name", :string
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(:version => 20120303122737) do
     t.column "places_count", :integer, :default => 0
     t.column "users_count", :integer, :default => 0
     t.column "geofences_count", :integer, :default => 0
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+  end
+
+  create_table "alerts", :force => true do |t|
+    t.column "account_id", :integer
+    t.column "alertable_id", :integer
+    t.column "alertable_type", :string
+    t.column "destination", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
@@ -106,6 +115,16 @@ ActiveRecord::Schema.define(:version => 20120303122737) do
     t.column "country_id", :integer
     t.column "the_geom", :geometry, :srid => nil
     t.column "route_parameters", :string, :limit => 100
+  end
+
+  create_table "schedules", :force => true do |t|
+    t.column "account_id", :integer
+    t.column "report_id", :integer
+    t.column "email", :string
+    t.column "frequency", :string
+    t.column "format", :string
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
   create_table "sessions", :force => true do |t|

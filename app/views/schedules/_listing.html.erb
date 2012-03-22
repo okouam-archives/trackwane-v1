@@ -1,0 +1,20 @@
+<script id="listing-template" type="text/x-handlebars-template">
+  <table>
+    <thead>
+      <tr>
+        <th>Report</th>
+        <th>Format</th>
+        <th>Email</th>
+        <th>Frequency</th>
+      </tr>
+    </thead>
+  {{#each models}}
+    <tr data-id="{{attributes.id}}">
+      <td>{{attributes.report_name}}</td>
+      <td>{{attributes.format}}</td>
+      <td>{{attributes.email}}</td>
+      <td>{{attributes.frequency}}</td>
+    </tr>
+  {{/each}}
+  </table>
+</script>

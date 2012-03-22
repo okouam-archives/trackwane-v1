@@ -7,6 +7,8 @@ App = {
     Alarms: {},
     Places: {},
     Realtime: {},
+    Schedules: {},
+    Alerts: {},
     Users: {},
     Devices: {},
     Accounts: {},
