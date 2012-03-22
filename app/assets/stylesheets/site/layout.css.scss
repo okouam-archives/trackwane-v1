@@ -25,9 +25,6 @@ a:hover {color: orange}
 
 .closelabel {float: right; cursor: pointer}
 
-.map-listing.geofence-alarms {top: 200px; width: 150px}
-.map-listing.speed-alarms {width: 150px}
-
 @mixin opaque-panel {
   background-color: #333; opacity: 0.8; border-radius: 4px; padding: 5px 10px 3px 10px; z-index: 10000; color: white
 }
@@ -47,7 +44,7 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 }
 
 @mixin white-panel {
-  position: absolute; border: 10px solid rgba(100, 100, 100, 0.8); background-color: white; color: #434343
+  position: absolute; border: 5px solid #666; border-radius: 5px; background-color: white; color: #434343
 }
 
 .map.realtime .send-command.panel > div {@include opaque-panel; position: absolute; left: 20px; bottom: 100px}
@@ -81,16 +78,40 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 .users.index .listing table tr:nth-child(even) {background-color: #373737}
 .users.index .listing table tr:nth-child(odd) {background-color: #313131}
 
+.alerts.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; left: 20px; width: 915px}
+.alerts.index .listing table {width: 100%}
+.alerts.index .editor input {width: 220px}
+.alerts.index .listing tr {cursor: pointer}
+.alerts.index .listing tr:hover td {color: orange}
+.alerts.index .listing th, .users.index .listing td {padding: 5px; text-align: left; margin-left: 5px}
+.alerts.index .editor {@include white-panel; background-color: #373737; color: white; float: left; display: none; width: 260px; margin: auto; margin-top: 100px; right: 20px}
+.alerts.index .listing table td, .alerts.index .listing table th {color: white; padding: 8px 15px 8px 15px }
+.alerts.index .listing table thead tr:nth-child(odd) {background-color: #373737}
+.alerts.index .listing table tr:nth-child(even) {background-color: #373737}
+.alerts.index .listing table tr:nth-child(odd) {background-color: #313131}
+
+.schedules.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; left: 20px; width: 915px}
+.schedules.index .listing table {width: 100%}
+.schedules.index .editor input {width: 220px}
+.schedules.index .listing tr {cursor: pointer}
+.schedules.index .listing tr:hover td {color: orange}
+.schedules.index .listing th, .schedules.index .listing td {padding: 5px; text-align: left; margin-left: 5px}
+.schedules.index .editor {@include white-panel; background-color: #373737; color: white; float: left; display: none; width: 260px; margin: auto; margin-top: 100px; right: 20px}
+.schedules.index .listing table td, .schedules.index .listing table th {color: white; padding: 8px 15px 8px 15px }
+.schedules.index .listing table thead tr:nth-child(odd) {background-color: #373737}
+.schedules.index .listing table tr:nth-child(even) {background-color: #373737}
+.schedules.index .listing table tr:nth-child(odd) {background-color: #313131}
+
 .places.index #new-place-panel {position: absolute; bottom: 100px; margin-left: 20px}
-.places.index .listing {@include opaque-listing; position: absolute; padding-bottom: 10px; padding: 0px 20px 10px 20px}
+.places.index .listing {@include opaque-listing; border: 5px solid #666; border-radius: 5px; position: absolute; padding-bottom: 10px; padding: 0px 20px 10px 20px}
 .places.index .listing a {color: white; text-decoration: none}
 .places.index .listing a:hover {color: orange}
 .places.index .listing td {padding-bottom: 6px}
 
-.reports.index .sidebar {position: absolute; width: 200px; right: 40px; top: 280px}
+.reports.index .sidebar {position: absolute; width: 200px; right: 50px; top: 270px}
 .reports.index .sidebar button {margin-top: 10px; font-weight: bold; font-size: 16px}
-.reports.index .sidebar button div {width: 210px}
-.reports.index .sidebar .listing {@include opaque-panel; width: 200px; padding-bottom: 10px}
+.reports.index .sidebar button div {width: 220px}
+.reports.index .sidebar .listing {@include opaque-panel; width: 200px; margin-top: 8px; padding-bottom: 10px; border: 5px solid #666; border-radius: 5px}
 .reports.index .sidebar .listing li {margin-top: 5px; list-style-type: none}
-.reports.index .presentation {@include opaque-panel; position: absolute; border: 10px solid rgba(100, 100, 100, 0.8); background-color: white; height: 600px; width: 900px; top: 30px; left: 20px; opacity: 1; color: black}
-.reports.index .parameters {@include opaque-panel; position: absolute; height: 230px; width: 200px; top: 30px; right: 20px}
+.reports.index .presentation {@include opaque-panel; position: absolute; border: 5px solid #666; background-color: white; height: 600px; width: 900px; top: 20px; left: 20px; opacity: 1; color: black}
+.reports.index .parameters {@include opaque-panel; position: absolute; border: 5px solid #666; border-radius: 5px; height: 230px; width: 200px; top: 20px; right: 20px}

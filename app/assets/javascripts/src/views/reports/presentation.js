@@ -12,8 +12,8 @@ App.Views.Reports.Presentation = Backbone.View.extend({
   onResize: function() {
     var window_height = $(window).height();
     var window_width = $(window).width();
-    this.$el.height(window_height - 160);
-    this.$el.width(window_width - 330);
+    this.$el.height(window_height - 140);
+    this.$el.width(window_width - 320);
   },
 
   onRunReport: function() {

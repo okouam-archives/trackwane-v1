@@ -1,7 +1,11 @@
 App.Controllers.ReportsController = App.Controllers.Base.extend({
 
-  events: {
+  appEvents: {
     "report:run": "runReport"
+  },
+
+  events: {
+    "click .run": "onRunReport"
   },
 
   initialize: function(options) {
@@ -21,6 +25,10 @@ App.Controllers.ReportsController = App.Controllers.Base.extend({
       this.device_view.render();
     }.bind(this)});
 
+  },
+
+  onRunReport: function() {
+    this.pubsub.trigger("report:run");
   },
 
   runReport: function() {
