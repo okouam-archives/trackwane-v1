@@ -1,16 +1,18 @@
 <script id="editor-template" type="text/x-handlebars-template">
+  <a class="close" href="#" style="margin-right: 10px; position: relative; top: 5px">x</a>
       <fieldset>
         <label>Username</label>
-        <input value="{{attributes.login}}" type="text" />
+        <input value="{{attributes.login}}" name="login" type="text" />
         <label>Email</label>
-        <input value="{{attributes.email}}" type="text"  />
+        <input value="{{attributes.email}}" name="email" type="text"  />
         <label>Role</label>
-        <input type="text" />
+        <input type="text" name="role" />
         <label >Password</label>
-        <input type="text" />
+        <input type="text" name="password" />
         <label>Password Confirmation</label>
-        <input type="text" />
+        <input type="text" name="password_confirmation" />
        {{#if attributes}}
+          <input  value="{{attributes.id}}" type="hidden" name="id" />
           <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="blue-button save"><div>Accept</div></button>
           <button style="margin-top: 15px; margin-bottom: 5px; float: right; margin-right: 10px" class="blue-button delete"><div>Delete</div></button>
         {{else}}

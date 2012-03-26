@@ -39,10 +39,11 @@ class DevicesController < ApplicationController
   def persist(device, params)
     device.group = find_group(params)
     changes = params.slice(*Device.column_names)
+    device.account = Account.find(session[:account_id]) unless device.account
     if device.update_attributes(changes)
       render json: {success: true, results: [device.as_json(:computed => ["group_name"])]}
     else
-      render json: {success: false}
+      render json: device.errors, status: 400
     end
   end
 

@@ -34,11 +34,10 @@ App.Views.PlacesMap = App.Views.Base.extend({
         this.places.add(model);
         this.pubsub.trigger("places:received", this.places);
         this.stopEditing();
-        this.new_place_panel.close();
+        this.pubsub.trigger("place:creation:success");
       }.bind(this),
       error: function() {
         alert("failure");
-        this.new_place_panel.close();
         this.stopEditing();
       }.bind(this)
     });

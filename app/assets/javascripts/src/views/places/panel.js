@@ -2,12 +2,13 @@ App.Views.NewPlacePanel = App.Views.Base.extend({
 
   events: {
    "click button": "onCreatePlace",
-   "click .closelabel": "onClose"
+   "click a.close": "onClose"
   },
 
   appEvents: {
     "place:creation:cancel": "close",
-    "place:creation:start": "render"
+    "place:creation:start": "render",
+    "place:creation:success": "close"
   },
 
   initialize: function(options) {
@@ -26,8 +27,8 @@ App.Views.NewPlacePanel = App.Views.Base.extend({
   },
 
   onCreatePlace: function() {
-    var name = this.$el.find("input").val();
-    var category = this.$el.find("select").val();
+    var name = this.$el.find("#place_name").val();
+    var category = this.$el.find("#place_category").val();
     this.createPlace(name, category);
     return false;
   },

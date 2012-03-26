@@ -4,6 +4,7 @@
 //= require ./lib/OpenLayers
 //= require ./lib/handlebars
 //= require ./lib/highcharts
+//= require ./lib/jquery.timeago
 //= require ./src/app
 //= require_tree ./src/locales
 //= require_tree ./src/models

@@ -10,11 +10,13 @@ App.Views.Realtime.Toolbar = Backbone.View.extend({
     this.setElement(this.el);
   },
 
-  onClickPlaces: function() {
+  onClickPlaces: function(evt) {
+    $(evt.currentTarget).toggleClass("highlight");
     this.pubsub.trigger("places:toggle");
   },
 
-  onClickGeofenceAlarms: function() {
+  onClickGeofenceAlarms: function(evt) {
+    $(evt.currentTarget).toggleClass("highlight");
     this.pubsub.trigger("geofence-alarms:toggle");
   }
 

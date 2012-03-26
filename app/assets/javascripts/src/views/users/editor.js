@@ -4,7 +4,7 @@ App.Views.Users.Editor = App.Views.Base.extend({
     "click .create": "onCreate",
     "click .delete": "onDelete",
     "click .save": "onSave",
-    "click .closelabel": "onClose"
+    "click .close": "onClose"
   },
 
   onCreate: function() {

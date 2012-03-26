@@ -34,11 +34,12 @@ class UsersController < ApplicationController
   private
 
   def persist(user, params)
-    changes = params.slice(*User.column_names)
+    changes = params.slice('login', 'email', 'password', 'password_confirmation', 'role')
+    user.account = Account.find(session[:account_id]) unless user.account
     if user.update_attributes(changes)
       render json: {success: true, results: [user.as_json()]}
     else
-      render json: {success: false}
+      render json: user.errors, status: 400
     end
   end
 

@@ -7,9 +7,15 @@ App.Views.Users.Listing = App.Views.Base.extend({
     "click button.create": "onUserCreate"
   },
 
+  onResize: function() {
+    var window_width = $(window).width();
+    this.$el.width(window_width - 340);
+  },
+
   initialize: function(options) {
     this.pubsub = options.pubsub;
     this.prepareTemplates();
+    $(window).resize(this.onResize.bind(this));
   },
 
   onUsereSave: function() {
@@ -37,6 +43,7 @@ App.Views.Users.Listing = App.Views.Base.extend({
   render: function(users) {
     this.$el.html(this.template(users));
     this.$el.show();
+    this.onResize();
   }
 
 });

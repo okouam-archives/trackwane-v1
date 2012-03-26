@@ -1,6 +1,7 @@
 body, html {height: 100%; width: 100%; font-size: 11px; font-family: tahoma, arial, verdana, sans-serif; overflow: hidden}
 h1 {margin-bottom: 6px; font-size: 12px}
 a {color: white}
+a.close {text-decoration: none; font-weight: bold; color: white; font-size: 14px; float: right}
 a:hover {color: orange}
 
 #canvas {width: 100%; height: 100%; background-image: url(/assets/map.png); position: absolute}
@@ -26,15 +27,8 @@ a:hover {color: orange}
 .closelabel {float: right; cursor: pointer}
 
 @mixin opaque-panel {
-  background-color: #333; opacity: 0.8; border-radius: 4px; padding: 5px 10px 3px 10px; z-index: 10000; color: white
+  background-color: rgba(50, 50, 50, 0.9); border-radius: 4px; padding: 5px 10px 3px 10px; z-index: 10000; color: white
 }
-
-.wizard {@include opaque-panel; width: 347px; bottom: 72px; left: 20px; padding: 10px 15px; line-height: 16px; padding-bottom: 20px}
-.wizard p {margin-top: 5px}
-.wizard .field {margin-top: 8px}
-.wizard .field label {margin-bottom: 3px; display: block}
-.wizard .field input[type="text"], .wizard .field select {padding: 5px; width: 100%}
-.wizard .next {float: right; margin-top: 15px}
 
 .standalone.panel {@include opaque-panel; background-color: white; color: #333; opacity: 1; border: 1px solid #333; padding: 20px}
 .action.panel {@include opaque-panel; left: 20px; bottom: 70px; height: 310px; width: 220px}
@@ -53,7 +47,9 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 .map.realtime .listing a {text-decoration: none}
 .map.realtime .places.popup {background-color: #999}
 
-.alarms.index .listing {@include opaque-panel; position: absolute; right: 20px; top: 20px}
+.alarms.index .listing {@include opaque-panel; position: absolute; right: 20px; top: 20px; border: 5px solid #666; width: 200px; border-radius: 5px; padding-bottom: 10px; padding: 0px 20px 10px 20px}
+.alarms.index .listing a {text-decoration: none}
+.alarms.index .wizard {@include opaque-panel; position: absolute; left: 20px; bottom: 100px; width: 320px}
 
 .devices.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; display: none; left: 20px; width: 915px;}
 .devices.index .listing table {width: 100%}
@@ -61,6 +57,7 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 .devices.index .listing tr:hover td {color: orange}
 .devices.index .editor input {width: 220px}
 .devices.index .editor {@include white-panel; background-color: #373737; color: white; display: none; float: left; width: 260px; margin: auto; margin-top: 100px; right: 20px}
+.devices.index .editor label {font-size: 11px}
 .devices.index .listing table td, .devices.index .listing table th {color: white; padding: 8px 15px 8px 15px; text-align: left}
 .devices.index .listing table thead tr:nth-child(odd) {background-color: #373737}
 .devices.index .listing table tr:nth-child(even) {background-color: #373737}
@@ -73,6 +70,7 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 .users.index .listing tr:hover td {color: orange}
 .users.index .listing th, .users.index .listing td {padding: 5px; text-align: left; margin-left: 5px}
 .users.index .editor {@include white-panel; background-color: #373737; color: white; float: left; display: none; width: 260px; margin: auto; margin-top: 100px; right: 20px}
+.users.index .editor label {font-size: 11px}
 .users.index .listing table td, .users.index .listing table th {color: white; padding: 8px 15px 8px 15px }
 .users.index .listing table thead tr:nth-child(odd) {background-color: #373737}
 .users.index .listing table tr:nth-child(even) {background-color: #373737}
@@ -102,8 +100,9 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 .schedules.index .listing table tr:nth-child(even) {background-color: #373737}
 .schedules.index .listing table tr:nth-child(odd) {background-color: #313131}
 
-.places.index #new-place-panel {position: absolute; bottom: 100px; margin-left: 20px}
-.places.index .listing {@include opaque-listing; border: 5px solid #666; border-radius: 5px; position: absolute; padding-bottom: 10px; padding: 0px 20px 10px 20px}
+.places.index #new-place-panel {position: absolute; bottom: 100px; margin-left: 20px; z-index: 99999999}
+.places.index #new-place-panel .action.panel {height: 280px}
+.places.index .listing {@include opaque-listing; border: 5px solid #666; width: 200px; border-radius: 5px; position: absolute; padding-bottom: 10px; padding: 0px 20px 10px 20px}
 .places.index .listing a {color: white; text-decoration: none}
 .places.index .listing a:hover {color: orange}
 .places.index .listing td {padding-bottom: 6px}

@@ -58,9 +58,9 @@ App.Controllers.UsersController = App.Controllers.Base.extend({
   },
 
   onUserDeleted: function(user_id) {
-    var device = this.users.get(user_id);
-    this.users.remove(device);
-    device.destroy();
+    var user = this.users.get(user_id);
+    this.users.remove(user);
+    user.destroy();
     this.editor.close();
     this.listing.render(this.users);
   }

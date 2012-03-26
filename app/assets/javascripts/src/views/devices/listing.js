@@ -10,6 +10,12 @@ App.Views.Devices.Listing = App.Views.Base.extend({
   initialize: function(options) {
     this.pubsub = options.pubsub;
     this.prepareTemplates();
+    $(window).resize(this.onResize.bind(this));
+  },
+
+  onResize: function() {
+    var window_width = $(window).width();
+    this.$el.width(window_width - 340);
   },
 
   onDeviceSave: function() {
@@ -37,6 +43,7 @@ App.Views.Devices.Listing = App.Views.Base.extend({
   render: function(users) {
     this.$el.html(this.template(users));
     this.$el.show();
+    this.onResize();
   }
 
 });

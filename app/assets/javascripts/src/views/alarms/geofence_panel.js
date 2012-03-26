@@ -1,70 +1,36 @@
 App.Views.Alarms.GeofencePanel = App.Views.Base.extend({
 
   events: {
-    "click .switcher a": "onToggle",
-    "click .closelabel": "onClose",
-    "click .next": "onAccept"
-  },
-
-  appEvents: {
-    "speed:creating:start": "onClose",
-    "geofence:selected": "onGeofenceSelected"
+    "click .close": "onClose",
+    "click button": "onSave"
   },
 
   initialize: function(options) {
     this.pubsub = options.pubsub;
-    this.handleApplicationEvents();
+    var source = $("#geofence-alarm-wizard-template").html();
+    this.template = Handlebars.compile(source);
+  },
+
+  onSave: function() {
+    var name = $("input[name='geofence_alarm[name]']").val();
+    var category = $("select[name='geofence_alarm[category]']").val();
+    var alarm = new App.Models.GeofenceAlarm({name: name, category: category});
+    this.pubsub.trigger("geofence:created", alarm)
   },
 
   onClose: function() {
-    this.pubsub.trigger("geofence:creating:cancel");
-    this.close();
+    this.pubsub.trigger("geofence:closing")
   },
 
-  onAccept: function() {
-    this.save();
-  },
-
-  onGeofenceSelected: function(geofence) {
+  select: function(geofence) {
     this.geofence = geofence;
   },
 
   render: function() {
-    var source = $("#geofence-alarm-wizard-template").html();
-    var template = Handlebars.compile(source);
-    this.$el.find(".form").html(template());
-  },
-
-  onToggle: function() {
-    if (!this.open) {
-      this.pubsub.trigger("geofence:creating:start");
-      this.render();
-      this.open = true;
-    } else {
-      this.pubsub.trigger("geofence:creating:cancel");
-      this.close();
-    }
+    this.$el.html(this.template());
   },
 
   close: function() {
-    this.$el.find(".form").empty();
-    this.open = false;
-  },
-
-  save: function() {
-    var name = $("input[name='geofence_alarm[name]']").val();
-    var category = $("select[name='geofence_alarm[category]']").val();
-    var alarm = new App.Models.GeofenceAlarm();
-    alarm.save({name: name, category: category, coordinates: this.geofence}, {
-      success: function(model) {
-        this.pubsub.trigger("geofence-alarm:created", model);
-        this.close();
-      }.bind(this),
-      error: function(error) {
-        console.debug(error);
-        this.close();
-      }.bind(this)
-    });
+    this.$el.empty();
   }
-
 });

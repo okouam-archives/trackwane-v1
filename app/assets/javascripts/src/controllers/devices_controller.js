@@ -22,7 +22,6 @@ App.Controllers.DevicesController = App.Controllers.Base.extend({
   },
 
   onDevicesFetched: function(devices) {
-    console.debug(devices);
     this.devices = devices;
     this.listing.render(devices);
   },

@@ -17,13 +17,14 @@ class EventsController < ApplicationController
 
   def create
     data = params[:data]
-		if data.delete(:simulated)
+		if data.instance_of? String
+ 			payload = Parser.new.read(data)
+			event = payload[:event]
+			imei_number = payload[:imei_number]
+		else
+      data.delete(:simulated)
 			imei_number = data.delete(:imei_number)
 			event = Event.new(data)
-		else
-			payload = Parser.new.read(data)
-			event = payload.event
-			imei_number = payload.imei_number
 		end
     event.device = Device.find_by_imei_number(imei_number)
     if event.device
