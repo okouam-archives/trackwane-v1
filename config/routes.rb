@@ -28,6 +28,9 @@ Gowane::Application.routes.draw do
     end
   end
 
+  match 'platform' => 'pages#platform', :as => :platform
+  match 'competition' => 'pages#competition', :as => :competition
+  match 'company' => 'pages#company', :as => :company
   match 'login'  => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   root :to => 'map#realtime'

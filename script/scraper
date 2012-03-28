@@ -1,0 +1,51 @@
+#!/usr/bin/ruby
+
+require 'ruby-debug'
+require 'mechanize'
+require 'date'
+
+class Program
+
+  def initialize(agent)
+    @agent = agent
+  end
+
+  def login
+    page = @agent.get("http://fleetservice.0-one.net/login.php")
+    page.form.email = "AGEROUTE"
+    page.form.Password = "AG-001"
+    page.form.submit
+  end
+
+  def run(start_date, end_date)
+    login
+    start_date.upto(end_date) {|day| download(day)}
+  end
+
+  def download(day)
+    page = @agent.get("http://fleetservice.0-one.net/pos_report.php")
+    form = page.form
+    form.r_from_date = day
+    form.r_to_date = day
+    options = form.field("r_uin").options
+    options.each do |option|
+      next if option.text == "All Sub User Trackers"
+      next if option.text == "Sans"
+      next if option.text == "AGEROUTE"
+      puts option.text
+      option.select
+      csv = form.submit(form.button_with(:name => "r_save_to_csv"))
+      File.open("db/simulation/#{option.value}.csv", "a") do |file|
+      file << csv.body
+    end
+    puts day
+    end
+
+  end
+
+end
+
+agent = Mechanize.new
+start_date = Date.today << 1
+end_date = Date.today
+Program.new(agent).run(start_date, end_date)

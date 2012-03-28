@@ -1,10 +1,19 @@
 <script id="parameters-template" type="text/x-handlebars-template">
   <fieldset>
     <label>Report Type</label>
-    <select><option value="speed">Speed</option><option value="distance">Distance</option></select>
-    <label>From</label>
+    <select class="type">
+      <option value="Speed">Speed</option>
+      <option value="Alert">Alert</option>
+      <option value="Distance">Distance</option>
+      <option value="Stop">Stop</option>
+    </select>
+    <label>Date</label>
     <input class="datepicker" type="text" />
-    <label>To</label>
-    <input class="datepicker" type="text" />
+    <label>Period</label>
+    <select class="period">
+      <option value="DAY">Previous Day</option>
+      <option value="WEEK">Previous Week</option>
+      <option value="MONTH">Previous Month</option>
+    </select>
   </fieldset>
 </script>

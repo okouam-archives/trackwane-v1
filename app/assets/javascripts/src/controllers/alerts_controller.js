@@ -12,6 +12,22 @@ App.Controllers.AlertsController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
+    this.alarms = [];
+    var geofence_alarms = new App.Collections.GeofenceAlarms();
+    geofence_alarms.fetch({success: function() {
+      var attributes = geofence_alarms.map(function(alarm) {
+        console.debug(alarm);
+        return {id: alarm.id, name: alarm.get("name"), type: "GeofenceAlarm"};
+      });
+      this.alarms = _.union(this.alarms, attributes);
+    }.bind(this)});
+    var speed_alarms = new App.Collections.SpeedAlarms();
+    speed_alarms.fetch({success: function() {
+      var attributes = speed_alarms.map(function(alarm) {
+        return {id: alarm.id, name: alarm.get("name"), type: "SpeedAlarm"};
+      });
+      this.alarms = _.union(this.alarms, attributes);
+    }.bind(this)});
     this.listing = new App.Views.Alerts.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
     this.editor = new App.Views.Alerts.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
     this.toolbar = new App.Views.Alerts.Toolbar({pubsub: this.pubsub, el: "#canvas .toolbar"});
@@ -32,7 +48,7 @@ App.Controllers.AlertsController = App.Controllers.Base.extend({
 
   onAlertSelected: function(device_id) {
     var alert = this.alerts.get(device_id);
-    this.editor.render(alert);
+    this.editor.render({alert: alert, alarms: this.alarms});
   },
 
   onAlertCreated: function(attributes) {
@@ -46,7 +62,7 @@ App.Controllers.AlertsController = App.Controllers.Base.extend({
   },
 
   onAlertCreating: function() {
-    this.editor.render({});
+    this.editor.render({alarms: this.alarms});
   },
 
   onAlertSaved: function(attributes) {

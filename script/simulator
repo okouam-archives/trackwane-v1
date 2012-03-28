@@ -1,39 +1,46 @@
 #!/usr/bin/ruby
 
 require 'rest_client'
+require 'ccsv'
 
-Dir[File.expand_path(File.dirname(__FILE__) + '/../db/simulation/*.rb')].each do |events|
-	puts "Loading device file #{events}"
-	require events
+def run(filename)
+  imei_number = File.basename(filename, ".csv")
+  begin
+    is_header = true
+    Ccsv.foreach(filename) do |row|
+      if is_header
+        is_header = false
+        next
+      end
+      next if row[1] == /Date:/
+      next if row[0] =~ /Alarme:/
+      next if row[0] =~ /Total:/
+      event = {
+        date: row[1].gsub('"', ''),
+        imei_number: imei_number,
+        latitude: row[2].gsub('"', ''),
+        longitude: row[3].gsub('"', ''),
+        speed: row[4].gsub('"', ''),
+        gps_signal: row[5].gsub('"', ''),
+        heading: row[6].gsub('"', '')
+      }
+		 	RestClient.post "http://#{ARGV[0]}/events", {data: event}
+      print "."
+      sleep(5)
+    end
+  rescue Exception => e
+    puts "ERROR: #{filename}"
+    puts e
+  end
+
 end
-
-def run(imei_number, data)
-	counter = 0
-	while(1) do
-		data[:events].each do |event|
-			event = event.merge({:date => (data[:start_time].to_time + counter * data[:realtime_interval]).to_datetime}) unless event[:datetime]
-			event = event.merge({:gps_signal => 'A'}) unless event[:gps_signal]
-			event = event.merge({:speed => rand(100)}) unless event[:speed]
-			event = event.merge({:heading => rand(360)}) unless event[:heading]
-			event = event.merge({:imei_number => imei_number, :simulated => true})
-			params = {data: event}
-      puts ARGV[0]
-		 	RestClient.post "http://#{ARGV[0]}/events", params
-			puts "Sent event at lon: #{event[:longitude]} lat: #{event[:latitude]}"
-			counter += 1
-			sleep(data[:event_interval])
-		end
-	end
-end
-
-puts "#{SIMULATION.size} devices to be simulated have been found"
 
 threads = []
 
-SIMULATION.each_pair do |key, value|
+Dir[File.expand_path(File.dirname(__FILE__) + '/../db/simulation/*.csv')].each do |filename|
 	threads << Thread.start do
-		puts "Launching device with IMEI #{key}"
-		run(key, value)
+		puts "Reading data from #{filename}"
+		run(filename)
 	end
 end
 

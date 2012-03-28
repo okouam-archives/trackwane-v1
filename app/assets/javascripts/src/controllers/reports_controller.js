@@ -25,6 +25,7 @@ App.Controllers.ReportsController = App.Controllers.Base.extend({
       this.device_view.render();
     }.bind(this)});
 
+    $(".datepicker").datepicker();
   },
 
   onRunReport: function() {
@@ -33,7 +34,15 @@ App.Controllers.ReportsController = App.Controllers.Base.extend({
 
   runReport: function() {
     var parameters = this.parameters_view.getParameters();
+    if (parameters.date == "") {
+      alert("Please select a date");
+      return;
+    }
     var vehicles = this.device_view.getDevices();
+    if (vehicles.length < 1) {
+      alert("Please select one or more vehicles");
+      return;
+    }
     this.presentation_view.runReport(parameters, vehicles);
   }
 

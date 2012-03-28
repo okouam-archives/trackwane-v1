@@ -1,7 +1,7 @@
 <script id="devices-template" type="text/x-handlebars-template">
   <ul>
   {{#each models}}
-    <li><input type="checkbox" /> {{attributes.display_name}}</li>
+    <li><input class="device" type="checkbox" value="{{attributes.id}}" /> {{attributes.display_name}}</li>
   {{/each}}
   </ul>
 </script>

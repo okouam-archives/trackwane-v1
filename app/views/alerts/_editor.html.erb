@@ -1,9 +1,11 @@
 <script id="editor-template" type="text/x-handlebars-template">
   <fieldset>
-    <label>Alarm Type</label>
-    <input name="alarm_type" value="{{attributes.alarm_type}}" type="text" />
     <label>Alarm</label>
-    <input name="alarm_id" value="{{attributes.alarm_id}}" type="text" />
+    <select name="alertable_id" name="alertable_id">
+      {{#each alarms}}
+        <option value="{{id}}" data-type="{{type}}">{{name}}</option>
+      {{/each}}
+    </select>
     <label>Destination</label>
     <input name="destination" value="{{attributes.destination}}" type="text" />
     {{#if attributes}}

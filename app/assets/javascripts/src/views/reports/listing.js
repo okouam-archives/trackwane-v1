@@ -6,7 +6,11 @@ App.Views.Reports.Devices = Backbone.View.extend({
   },
 
   getDevices: function() {
-
+    var devices = [];
+    $("input.device:checked").each(function(i, item) {
+      devices.push($(item).val());
+    });
+    return devices;
   },
 
   render: function() {

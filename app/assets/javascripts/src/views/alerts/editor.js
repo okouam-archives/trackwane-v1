@@ -50,8 +50,9 @@ App.Views.Alerts.Editor = App.Views.Base.extend({
     this.template = Handlebars.compile(source);
   },
 
-  render: function(place) {
-    this.$el.html(this.template(place));
+  render: function(view_model) {
+    console.debug(view_model);
+    this.$el.html(this.template(view_model));
     this.$el.show();
   }
 

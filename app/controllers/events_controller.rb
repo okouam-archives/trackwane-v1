@@ -22,15 +22,16 @@ class EventsController < ApplicationController
 			event = payload[:event]
 			imei_number = payload[:imei_number]
 		else
-      data.delete(:simulated)
 			imei_number = data.delete(:imei_number)
 			event = Event.new(data)
 		end
     event.device = Device.find_by_imei_number(imei_number)
     if event.device
       event.save!
+      head :ok
+    else
+      render :text => "Unable to process event from IMEI #{imei_number} as it has not been properly setup", :status => 400
     end
-    head :ok
   end
 
 end

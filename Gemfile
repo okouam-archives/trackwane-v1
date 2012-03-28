@@ -19,6 +19,8 @@ gem 'rspec-rails'
 gem 'silent-postgres'
 gem 'forgery'
 gem 'factory_girl_rails'
+gem 'mechanize'
+gem 'ccsv'
 
 group :development, :test do
   gem 'itslog'
