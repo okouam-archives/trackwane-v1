@@ -20,18 +20,8 @@ App.Views.Reports.Presentation = Backbone.View.extend({
     this.pubsub.trigger("report:run");
   },
 
-  runReport: function(parameters, vehicles) {
-    $.ajax({
-      method: 'get',
-      url: "/reports/" + parameters.type.toLowerCase(),
-      data: {
-        vehicles: vehicles,
-        parameters: parameters
-      },
-      success: function(results) {
-        this["create" + parameters.type + "Chart"](results);
-      }.bind(this)
-    });
+  run: function(parameters, results) {
+    this["create" + parameters.type + "Chart"](results);
   },
 
   createDistanceChart: function(results) {

@@ -43,13 +43,21 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 
 .map.realtime .send-command.panel > div {@include opaque-panel; position: absolute; left: 20px; bottom: 100px}
 .map.realtime .follow.panel > div {@include opaque-panel; position: absolute; left: 20px; bottom: 100px}
-.map.realtime .listing {@include opaque-panel; position: absolute; right: 20px; top: 20px}
+.map.realtime .listing {@include opaque-panel; background-color: transparent; position: absolute; right: 20px; top: 20px; border: 5px solid #666; border-radius: 5px; padding: 0}
 .map.realtime .listing a {text-decoration: none}
 .map.realtime .places.popup {background-color: #999}
+.map.realtime .listing table tr:nth-child(even) {background-color: rgba(55, 55, 55, 0.95)}
+.map.realtime .listing table tr:nth-child(odd) {background-color: rgba(49, 49, 49, 0.95)}
+.map.realtime .listing table tr td div {padding: 5px}
 
-.alarms.index .listing {@include opaque-panel; position: absolute; right: 20px; top: 20px; border: 5px solid #666; width: 200px; border-radius: 5px; padding-bottom: 10px; padding: 0px 20px 10px 20px}
+.alarms.index .listing {z-index: 10000; position: absolute; right: 20px; top: 20px; width: 250px; padding: 0}
+.alarms.index .listing div {@include opaque-panel; background-color: transparent; padding: 0; margin-bottom: 10px; border: 5px solid #666; width: 200px; border-radius: 5px}
+.alarms.index .listing table {width: 100%}
+.alarms.index .listing table tr:nth-child(even) {background-color: rgba(55, 55, 55, 0.95)}
+.alarms.index .listing table tr:nth-child(odd) {background-color: rgba(49, 49, 49, 0.95)}
 .alarms.index .listing a {text-decoration: none}
 .alarms.index .wizard {@include opaque-panel; position: absolute; left: 20px; bottom: 100px; width: 320px}
+.alarms.index .listing td, .places.index .listing th {padding: 5px 6px; text-align: left; padding-left: 10px}
 
 .devices.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; display: none; left: 20px; width: 915px;}
 .devices.index .listing table {width: 100%}
@@ -102,15 +110,27 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 
 .places.index #new-place-panel {position: absolute; bottom: 100px; margin-left: 20px; z-index: 99999999}
 .places.index #new-place-panel .action.panel {height: 280px}
-.places.index .listing {@include opaque-listing; border: 5px solid #666; width: 200px; border-radius: 5px; position: absolute; padding-bottom: 10px; padding: 0px 20px 10px 20px}
+.places.index .sidepanel {@include opaque-listing; padding: 0; width: 200px; background-color: transparent; position: absolute}
+.places.index .listing {padding: 0; border: 5px solid #666; width: 200px; background-color: transparent; border-radius: 5px}
 .places.index .listing a {color: white; text-decoration: none}
+.places.index .listing a img {display: none}
+.places.index .listing tr:hover img {display: block}
 .places.index .listing a:hover {color: orange}
-.places.index .listing td {padding-bottom: 6px}
+.places.index .listing td, .places.index .listing th {padding: 5px 6px; text-align: left; padding-left: 10px}
+.places.index .listing table tr:nth-child(even) {background-color: rgba(55, 55, 55, 0.95)}
+.places.index .listing table tr:nth-child(odd) {background-color: rgba(49, 49, 49, 0.95)}
+.places.index .listing table {width: 100%}
 
-.reports.index .sidebar {position: absolute; width: 200px; right: 50px; top: 270px}
+.reports.index .sidebar {position: absolute; width: 200px; right: 50px; top: 240px}
 .reports.index .sidebar button {margin-top: 10px; font-weight: bold; font-size: 16px}
 .reports.index .sidebar button div {width: 220px}
-.reports.index .sidebar .listing {@include opaque-panel; width: 200px; margin-top: 8px; padding-bottom: 10px; border: 5px solid #666; border-radius: 5px}
+.reports.index .parameters input {width: 170px}
+.reports.index .parameters select {width: 182px}
+.reports.index .sidebar .listing {@include opaque-panel; background-color: transparent; width: 220px; padding: 0; border: 5px solid #666; border-radius: 5px; overflow-y: scroll}
 .reports.index .sidebar .listing li {margin-top: 5px; list-style-type: none}
 .reports.index .presentation {@include opaque-panel; position: absolute; border: 5px solid #666; background-color: white; height: 600px; width: 900px; top: 20px; left: 20px; opacity: 1; color: black}
-.reports.index .parameters {@include opaque-panel; position: absolute; border: 5px solid #666; border-radius: 5px; height: 230px; width: 200px; top: 20px; right: 20px}
+.reports.index .parameters {@include opaque-panel; position: absolute; border: 5px solid #666; border-radius: 5px; height: 190px; width: 200px; top: 20px; right: 20px}
+.reports.index .sidebar .listing li {padding: 5px; padding-left: 7px; margin: 0}
+.reports.index .sidebar .listing li input {position: relative; top: 2px; margin-right: 5px}
+.reports.index .sidebar .listing li:nth-child(even) {background-color: rgba(55, 55, 55, 0.95)}
+.reports.index .sidebar .listing li:nth-child(odd) {background-color: rgba(49, 49, 49, 0.95)}

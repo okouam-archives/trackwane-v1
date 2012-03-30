@@ -84,7 +84,7 @@ App.Views.Realtime.Map = Backbone.View.extend({
 
   createPopup: function(device, lonlat) {
     var popup_creator = new App.Services.PopupActionsCreator(this.map, "#popup-template");
-    var attributes = {timeago: jQuery.timeago(device.attributes.date), name: device.attributes.name};
+    var attributes = {name: device.attributes.name};
     var popup = popup_creator.build(attributes, lonlat, "event");
     popup.events.register('click', null, function(evt) {
       var event = device.attributes;

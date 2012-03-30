@@ -1,7 +1,10 @@
 App.Controllers.ReportsController = App.Controllers.Base.extend({
 
   appEvents: {
-    "report:run": "runReport"
+    "data:table": "onShowTable",
+    "data:chart": "onShowChart",
+    "export:pdf": "onExportPdf",
+    "export:excel": "onExportExcel"
   },
 
   events: {
@@ -28,11 +31,27 @@ App.Controllers.ReportsController = App.Controllers.Base.extend({
     $(".datepicker").datepicker();
   },
 
-  onRunReport: function() {
-    this.pubsub.trigger("report:run");
+  onShowTable: function() {
+    this.presentation_view.showTable();
   },
 
-  runReport: function() {
+  onShowChart: function() {
+    this.presentation_view.showChart();
+  },
+
+  onExportPdf: function() {
+    alert("Not yet implemented...");
+  },
+
+  onExportExcel: function() {
+    alert("Not yet implemented....")
+  },
+
+  onRunReport: function() {
+    this.run();
+  },
+
+  run: function() {
     var parameters = this.parameters_view.getParameters();
     if (parameters.date == "") {
       alert("Please select a date");
@@ -43,7 +62,17 @@ App.Controllers.ReportsController = App.Controllers.Base.extend({
       alert("Please select one or more vehicles");
       return;
     }
-    this.presentation_view.runReport(parameters, vehicles);
+    $.ajax({
+      method: 'get',
+      url: "/reports/" + parameters.type.toLowerCase(),
+      data: {
+        vehicles: vehicles,
+        parameters: parameters
+      },
+      success: function(results) {
+        this.presentation_view.run(parameters, results);
+      }.bind(this)
+    });
   }
 
 });

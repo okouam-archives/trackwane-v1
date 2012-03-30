@@ -1,9 +1,10 @@
 fieldset {border-width: 0}
-fieldset label {font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px; margin-top: 10px}
-fieldset input, fieldset select {padding: 6px 10px; font-size: 13px; border: 1px solid #666}
+fieldset label {font-weight: bold; font-size: 11px; display: block; margin-bottom: 5px; margin-top: 10px}
+fieldset select {padding: 3px 5px; font-size: 11px; border: 1px solid #666}
+fieldset input {padding: 3px 5px; font-size: 11px; border: 1px solid #666}
 
 .blue-button {border: 0 none; cursor: pointer; padding: 0; background-color: transparent}
 
 .blue-button div {background-color: #4D90FE; background-image: -moz-linear-gradient(center top , #4D90FE, #4787ED);
-  border: 1px solid #3079ED; border-radius: 2px 2px 2px 2px; color: #FFFFFF; padding: 4px; margin: 0; width: 80px
+  border: 3px solid #3079ED; font-weight: bold; border-radius: 3px; color: #FFFFFF; padding: 4px; margin: 0; width: 80px
 }
