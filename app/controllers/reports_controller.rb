@@ -16,9 +16,10 @@ class ReportsController < ApplicationController
   def speed
     date = params[:parameters][:date]
     period = params[:parameters][:period]
+    type = get_type(period)
     devices = params[:vehicles]
     sql = %{
-      SELECT * FROM speed_events
+      SELECT * FROM #{type}_speed_events
       WHERE period BETWEEN '#{date}'::date - INTERVAL '1 #{period}' AND '#{date}' AND device_id IN (#{devices.join(",")})
       ORDER BY period, device_id
     }
@@ -26,16 +27,24 @@ class ReportsController < ApplicationController
     render :json => results
   end
 
-  def events
+  def get_type(period)
+    case period
+      when 'MONTH' then 'monthly'
+      when 'DAY' then 'daily'
+      when 'WEEK' then 'weekly'
+    end
+  end
 
+  def events
   end
 
   def distance
     date = params[:parameters][:date]
     period = params[:parameters][:period]
+    type = get_type(period)
     devices = params[:vehicles]
     sql = %{
-      SELECT * FROM distance_events
+      SELECT * FROM #{type}_distance_events
       WHERE period BETWEEN '#{date}'::date - INTERVAL '1 #{period}' AND '#{date}' AND device_id IN (#{devices.join(",")})
       ORDER BY period, device_id
     }
@@ -48,7 +57,7 @@ class ReportsController < ApplicationController
     period = params[:parameters][:period]
     devices = params[:vehicles]
     sql = %{
-      SELECT * FROM alert_events
+      SELECT device_name, period, data_point FROM alert_events
       WHERE period BETWEEN '#{date}'::date - INTERVAL '1 #{period}' AND '#{date}' AND device_id IN (#{devices.join(",")})
       ORDER BY period, device_id
     }
@@ -61,7 +70,7 @@ class ReportsController < ApplicationController
     period = params[:parameters][:period]
     devices = params[:vehicles]
     sql = %{
-      SELECT * FROM stop_events
+      SELECT device_name, period, data_point FROM stop_events
       WHERE period BETWEEN '#{date}'::date - INTERVAL '1 #{period}' AND '#{date}' AND device_id IN (#{devices.join(",")})
       ORDER BY period, device_id
     }

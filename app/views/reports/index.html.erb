@@ -1,13 +1,26 @@
 <%= render :partial => "listing" %>
+<%= render :partial => "alert_table" %>
+<%= render :partial => "speed_table" %>
+<%= render :partial => "distance_table" %>
+<%= render :partial => "stop_table" %>
 <%= render :partial => "parameters" %>
 <%= render :partial => "presentation" %>
+<%= render :partial => "reports" %>
 
 <div id="canvas">
   <div class="presentation"></div>
-  <div class="parameters"></div>
   <div class="sidebar">
-    <div class="listing lionbars"></div>
-    <button class="run blue-button"><div>Run Report</div></button>
+    <div class="report-listing listing lionbars" style="display: none"></div>
+    <div class="parameters"></div>
+    <div class="device-listing listing lionbars"></div>
+    <div class="btn-group">
+          <button class="run btn primary">Run Report</button>
+          <button data-toggle="dropdown" class="btn primary dropdown-toggle"><span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a class="your-reports" href="#">Your Reports</a></li>
+            <li><a class="save-report" href="#">Save Report</a></li>
+          </ul>
+        </div>
   </div>
   <div class="toolbar">
     <div class='button pdf'>
@@ -16,10 +29,11 @@
     <div class='button excel'>
       <img src='/assets/103-map.png'><label>Export Excel</label>
     </div>
-    <div class='button data'>
+    <div class='button toggle'>
       <img src='/assets/103-map.png'><label>Show Data</label>
     </div>
   </div>
+  <div class="saved-report-details"></div>
 </div>
 
 <script type="text/javascript">

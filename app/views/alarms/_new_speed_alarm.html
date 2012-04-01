@@ -1,11 +1,14 @@
 <script id="speed-alarms-template" type="text/x-handlebars-template">
   <table id="speed-alarms" class="sidecolumn">
-    <tr><td><b>Speed Alarms</b></td></tr>
+    <thead>
+      <tr><th>Speed Alarms</th><th></th></tr>
+    </thead>
     {{#each models}}
       <tr>
-        <td>
-          {{attributes.name}}
+ <td>
+          <a data-id="{{attributes.id}}" class="select" href="#">{{attributes.name}}</a>
         </td>
+        <td style="width: 10px"><a data-id="{{attributes.id}}" class="remove" href="#"><img src="/assets/closelabel.png" /></a></td>
       </tr>
       {{/each}}
   </table>

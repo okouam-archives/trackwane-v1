@@ -12,6 +12,10 @@ class SpeedAlarmsController < ApplicationController
     end
   end
 
+  def show
+    render :json => SpeedAlarm.find(params[:id])
+  end
+
   def create
   	changes = params.slice(*SpeedAlarm.column_names)
 		alarm = SpeedAlarm.new(changes)

@@ -1,20 +1,25 @@
 App.Views.Alarms.Toolbar = App.Views.Base.extend({
 
   events: {
-    "click .new-speed-alarm.button": "onCreateSpeedAlarm",
-    "click .new-geofence-alarm.button": "onCreateGeofenceAlarm"
+    "click .speed.button": "onToggleSpeedAlarms",
+    "click .geofence.button": "onToggleGeofenceAlarms",
+    "click .clear.button": "clearAlarms"
   },
 
   initialize: function(options) {
     this.pubsub = options.pubsub;
   },
 
-  onCreateSpeedAlarm: function() {
-    this.pubsub.trigger("speed:creating:start");
+  clearAlarms: function() {
+    this.pubsub.trigger("alarms:clear");
   },
 
-  onCreateGeofenceAlarm: function() {
-    this.pubsub.trigger("geofence:creating:start")
+  onToggleSpeedAlarms: function() {
+    this.pubsub.trigger("speed-alarms:show");
+  },
+
+  onToggleGeofenceAlarms: function() {
+    this.pubsub.trigger("geofence-alarms:show")
   }
 
 });

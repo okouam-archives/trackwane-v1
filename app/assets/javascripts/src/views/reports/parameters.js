@@ -4,6 +4,10 @@ App.Views.Reports.Parameters = Backbone.View.extend({
     this.pubsub = options.pubsub;
   },
 
+  close: function() {
+    this.$el.hide();
+  },
+
   getParameters: function() {
     var type = $("select.type").val();
     var date = $("input.datepicker").val();

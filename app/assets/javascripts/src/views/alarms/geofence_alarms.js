@@ -1,5 +1,21 @@
 App.Views.GeofenceAlarms = Backbone.View.extend({
 
+  events: {
+    "click .remove": "onRemove",
+    "click .select": "onSelect"
+  },
+
+  onRemove: function(evt) {
+    var id = $(evt.currentTarget).data("id");
+    this.pubsub.trigger("geofence-alarm:deleted", id);
+  },
+
+  onSelect: function(evt) {
+    var id = $(evt.currentTarget).data("id");
+    this.pubsub.trigger("geofence-alarm:selected", id);
+  },
+
+
   initialize: function(options) {
     var source = $("#geofence-alarms-template").html();
     this.template = Handlebars.compile(source);
@@ -8,6 +24,7 @@ App.Views.GeofenceAlarms = Backbone.View.extend({
 
   render: function(alarms) {
     this.$el.html(this.template(alarms));
+    $(this.$el).lionbars();
   }
 
 });

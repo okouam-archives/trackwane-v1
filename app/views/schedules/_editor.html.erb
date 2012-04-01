@@ -1,19 +1,21 @@
 <script id="editor-template" type="text/x-handlebars-template">
   <fieldset>
-    <label>Report</label>
-    <input name="report_id" value="{{attributes.report_id}}" type="text" />
-    <label>Format</label>
-    <input name="format" value="{{attributes.format}}" type="text" />
-    <label>Email</label>
-    <input value="{{attributes.email}}" type="text" />
-    <label>Frequency</label>
-    <input value="{{attributes.frequency}}" type="text" />
-    {{#if attributes}}
-      <input  value="{{attributes.id}}" type="hidden" name="id" />
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="save blue-button"><div>Accept</div></button>
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right; margin-right: 10px" class="delete blue-button"><div>Delete</div></button>
-    {{else}}
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="blue-button create"><div>Accept</div></button>
-    {{/if}}
+    <label for="schedule_report_id">Report</label>
+    <input id="schedule_report_id" name="schedule[report_id]" value="{{attributes.report_id}}" type="text" />
+    <label for="schedule_format">Format</label>
+    <input id="schedule_format" name="schedule[format]" value="{{attributes.format}}" type="text" />
+    <label for="schedule_email">Email</label>
+    <input id="schedule_email" name="schedule[email]" value="{{attributes.email}}" type="text" />
+    <label for="schedule_frequency">Frequency</label>
+    <input id="schedule_frequency" name="schedule[frequency]" value="{{attributes.frequency}}" type="text" />
+    <div class="buttons">
+      {{#if attributes}}
+        <input value="{{attributes.id}}" type="hidden" name="id" />
+        <button class="btn save success">Accept</button>
+      {{else}}
+        <button class="btn success">Accept</button>
+      {{/if}}
+      <button class="remove btn">Cancel</button>
+    </div>
   </fieldset>
 </script>

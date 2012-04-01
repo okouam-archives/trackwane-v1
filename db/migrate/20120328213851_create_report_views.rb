@@ -5,19 +5,22 @@ class CreateReportViews < ActiveRecord::Migration
       WITH speed_events AS (
         SELECT
           events.device_id,
+          devices.display_name as device_name
           events.speed,
           events.date,
           date_trunc('hour'::text, events.date) + btrim(((15 * (date_part('minute'::text, events.date)::integer / 15))::text) || ' minutes'::text)::interval AS period
-        FROM events
+        FROM events events JOIN devices on devices.id = events.device_id
       )
       SELECT
         speed_events.device_id,
+        devices.display_name as device_name,
         speed_events.period,
         max(speed_events.speed) AS data_point
       FROM
         speed_events
       GROUP BY
         speed_events.device_id,
+        speed_events.device_name
         speed_events.period;
 
       CREATE OR REPLACE VIEW weekly_speed_events AS
@@ -62,20 +65,23 @@ class CreateReportViews < ActiveRecord::Migration
       WITH distance_events AS (
         SELECT
           events.device_id,
+          devices.name as device_name
           events.distance_delta,
           events.date,
           date_trunc('hour', events.date) + btrim(((15 * (date_part('minute', events.date)::integer / 15))::text) || ' minutes')::interval AS period
-        FROM events
+        FROM events JOIN devices ON events.device_id = devices.id
       )
       SELECT
-        distance_events.device_id,
-        distance_events.period,
-        sum(distance_events.distance_delta) AS data_point
+        device_id,
+        device_name
+        period,
+        sum(distance_events.distance_delta) AS value
       FROM
         distance_events
       GROUP BY
-        distance_events.device_id,
-        distance_events.period;
+        device_id,
+        device_name,
+        period;
 
       CREATE OR REPLACE VIEW weekly_distance_events AS
       WITH distance_events AS (
@@ -115,6 +121,7 @@ class CreateReportViews < ActiveRecord::Migration
         distance_events.device_id,
         distance_events.period;
     }
+    execute(sql)
   end
 
   def down

@@ -4,10 +4,13 @@ App.Controllers.UsersController = App.Controllers.Base.extend({
     "users:fetched": "onUsersFetched",
     "editor:closed": "onEditorClosed",
     "user:selected": "onUserSelected",
-    "user:creating": "onUserCreating",
     "user:created": "onUserCreated",
     "user:saved": "onUserSaved",
     "user:deleted": "onUserDeleted"
+  },
+
+  events: {
+    "click .new_user": "onNewUser"
   },
 
   initialize: function(options) {
@@ -39,18 +42,19 @@ App.Controllers.UsersController = App.Controllers.Base.extend({
     var user = new App.Models.User(attributes);
     user.save(null, {success: function(model) {
         this.users.add(model);
+        this.pubsub.trigger("users:fetched", this.users);
         this.editor.close();
       }.bind(this)
     });
   },
 
-  onUserCreating: function() {
+  onNewUser: function() {
     this.editor.render({});
   },
 
   onUserSaved: function(attributes) {
     var user = this.users.get(attributes.id);
-    user.save(attributes, {success: function() {
+    user.save(attributes, {success: function(model) {
         this.pubsub.trigger("users:fetched", this.users);
         this.editor.close();
       }.bind(this)

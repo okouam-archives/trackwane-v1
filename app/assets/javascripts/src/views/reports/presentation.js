@@ -13,15 +13,44 @@ App.Views.Reports.Presentation = Backbone.View.extend({
     var window_height = $(window).height();
     var window_width = $(window).width();
     this.$el.height(window_height - 140);
-    this.$el.width(window_width - 320);
+    this.$el.width(window_width - 260);
   },
 
   onRunReport: function() {
     this.pubsub.trigger("report:run");
   },
 
+  togglePresentation: function() {
+    if (this.table.is(":visible")) {
+      this.table.hide();
+      this.chart.show();
+    } else {
+      this.chart.hide();
+      this.table.show();
+    }
+  },
+
+  close: function() {
+    this.$el.hide();
+  },
+
   run: function(parameters, results) {
-    this["create" + parameters.type + "Chart"](results);
+    if (parameters.type == "Alert" || parameters.type == "Stop") {
+      this.createTable(parameters.type.toLowerCase(), results);
+      this.$el.find("#chart").hide();
+      this.$el.find("#table").show();
+    } else {
+      this["create" + parameters.type + "Chart"](results);
+      this.createTable(parameters.type.toLowerCase(), results);
+      this.table.hide();
+      this.chart.show();
+    }
+  },
+
+  createTable: function(type, results) {
+    var source = $("#" + type + "-table-template").html();
+    template = Handlebars.compile(source);
+    this.$el.find("#table").html(template(results));
   },
 
   createDistanceChart: function(results) {
@@ -31,17 +60,6 @@ App.Views.Reports.Presentation = Backbone.View.extend({
       title: {text: 'Vehicle Distance Covered'},
       xAxis: {type: 'datetime', dateTimeLabelFormats: {month: '%e. %b', year: '%b'}},
       yAxis: {title: {text: 'Distance (km)'}, min: 0},
-      series: data
-    });
-  },
-
-  createAlertChart: function(results) {
-    var data = this.parseDataPoints(results);
-    return new Highcharts.Chart({
-      chart: {renderTo: 'chart', type: 'spline'},
-      title: {text: 'Vehicle Alerts'},
-      xAxis: {type: 'datetime', dateTimeLabelFormats: {month: '%e. %b', year: '%b'}},
-      yAxis: {title: {text: 'Alert Count'}, min: 0},
       series: data
     });
   },
@@ -59,7 +77,7 @@ App.Views.Reports.Presentation = Backbone.View.extend({
 
   parseDataPoints: function(results) {
     var series = _.groupBy(results, function(item) {
-      return item.device_id;
+      return item.device_name;
     });
     return  _.map(_.keys(series), function(key) {
       return {
@@ -67,7 +85,7 @@ App.Views.Reports.Presentation = Backbone.View.extend({
         data: series[key].map(function(data_point) {
           var date = Date.parseString(data_point.period, "yyyy-MM-dd HH:mm:ss");
           var utc = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
-          var value = parseFloat(data_point.max_speed);
+          var value = parseFloat(data_point.value);
           return [utc,  value]
         })
       };
@@ -78,6 +96,9 @@ App.Views.Reports.Presentation = Backbone.View.extend({
     var source = $("#presentation-template").html();
     var template = Handlebars.compile(source);
     this.$el.html(template());
+
+    this.chart = this.$el.find("#chart");
+    this.table = this.$el.find("#table");
     this.onResize();
   }
 

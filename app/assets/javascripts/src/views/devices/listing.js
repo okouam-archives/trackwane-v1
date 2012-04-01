@@ -3,7 +3,7 @@ App.Views.Devices.Listing = App.Views.Base.extend({
   events: {
     "click tr" : "onDeviceSelect",
     "click button.save": "onDeviceSave",
-    "click button.delete": "onDeviceDelete",
+    "click a.remove": "onDeviceDelete",
     "click button.create": "onDeviceCreate"
   },
 
@@ -13,17 +13,26 @@ App.Views.Devices.Listing = App.Views.Base.extend({
     $(window).resize(this.onResize.bind(this));
   },
 
+  resize: function() {
+    var window_height = $(window).height();
+    var original_height = this.$el.height();
+    var max_height = window_height - 90;
+    if (original_height > max_height) this.$el.height(max_height);
+    else this.$el.height("auto");
+    $('.lionbars').lionbars();
+  },
+
   onResize: function() {
-    var window_width = $(window).width();
-    this.$el.width(window_width - 340);
+    this.render(this.devices);
   },
 
   onDeviceSave: function() {
     this.pubsub.trigger("device:saved");
   },
 
-  onDeviceDelete: function() {
-    this.pubsub.trigger("device:deleted");
+  onDeviceDelete: function(evt) {
+    var id = $(evt.currentTarget).data("id");
+    this.pubsub.trigger("device:deleted", id);
   },
 
   onDeviceSelect: function(evt) {
@@ -40,10 +49,11 @@ App.Views.Devices.Listing = App.Views.Base.extend({
     this.template = Handlebars.compile(source);
   },
 
-  render: function(users) {
-    this.$el.html(this.template(users));
+  render: function(devices) {
+    this.devices = devices;
+    this.$el.html(this.template(devices));
     this.$el.show();
-    this.onResize();
+    this.resize();
   }
 
 });

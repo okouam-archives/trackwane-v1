@@ -1,23 +1,14 @@
 <script id="geofence-alarm-wizard-template" type="text/x-handlebars-template">
- <div class='wizard'>
-   <a class="close" href="#">x</a>
+ <div>
    <h1>New Geofence Alarm</h1>
    <p>A geofence alarm is a warning that is sent when a vehicle enters or exits a given zone. You can choose to be notified
    via SMS or email when an alarm occurs.</p>
-   <div class="field">
-     <label>Alarm Name</label>
-     <input name="geofence_alarm[name]" type="text" />
-   </div>
-   <div class="field">
-     <label>Alarm Category</label>
-     <select name="geofence_alarm[category]">
-       <option>Inclusion - warn when device outside zone</option>
-       <option>Exclusion - warn when device inside zone</option>
-     </select>
-   </div>
-   <button class="blue-button next" value="Accept" style="position: relative; left: 3px">
-     <div>Accept</div>
-   </button>
+   <fieldset>
+     <label for="geofence_alarm_name">Alarm Name</label>
+     <input id="geofence_alarm_name" name="geofence_alarm[name]" type="text" />
+     <button class="success btn accept">Accept</button>
+     <button class="btn cancel">Cancel</button>
+   </fieldset>
  </div>
 </script>
 

@@ -2,9 +2,8 @@ App.Views.Alerts.Editor = App.Views.Base.extend({
 
   events: {
     "click .create": "onCreate",
-    "click .delete": "onDelete",
     "click .save": "onSave",
-    "click .closelabel": "onClose"
+    "click .cancel": "onCancel"
   },
 
   initialize: function(options) {
@@ -17,12 +16,7 @@ App.Views.Alerts.Editor = App.Views.Base.extend({
     this.pubsub.trigger("alert:created", attributes)
   },
 
-  onDelete: function() {
-    var attributes = this.formAttributes();
-    this.pubsub.trigger("alert:deleted", attributes)
-  },
-
-  onClose: function() {
+  onCancel: function() {
     this.close();
   },
 
@@ -38,10 +32,10 @@ App.Views.Alerts.Editor = App.Views.Base.extend({
 
   formAttributes: function() {
     var attributes = {};
-    this.$el.find("input, select").each(function(i, item) {
-      var key = $(item).attr("name");
-      if (key) attributes[key] = $(item).val();
-    });
+    var selected_alert = $("#alert_alertable_id option:selected");
+    attributes.alertable_type = selected_alert.data("type");
+    attributes.alertable_id = selected_alert.val();
+    attributes.destination = $("#alert_destination").val();
     return attributes;
   },
 

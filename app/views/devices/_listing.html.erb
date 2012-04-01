@@ -3,15 +3,13 @@
     <thead>
       <th>Name</th>
       <th>IMEI Number</th>
-      <th>Driver</th>
-      <th>Tracker ID</th>
+      <th></th>
     </thead>
   {{#each models}}
     <tr data-id="{{attributes.id}}">
       <td>{{attributes.display_name}}</td>
       <td>{{attributes.imei_number}}</td>
-      <td></td>
-      <td></td>
+      <td style="width: 10px"><a data-id="{{attributes.id}}" class="remove" href="#"><img src="/assets/closelabel.png" /></a></td>
     </tr>
   {{/each}}
   </table>

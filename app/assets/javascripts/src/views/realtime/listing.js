@@ -20,7 +20,7 @@ App.Views.RealtimeEvents = Backbone.View.extend({
     var original_height = this.$el.height();
     var max_height = window_height - 90;
     if (original_height > max_height) this.$el.height(max_height);
-    $('.lionbars').lionbars();
+    //$('.lionbars').lionbars();
   },
 
   render: function(events) {

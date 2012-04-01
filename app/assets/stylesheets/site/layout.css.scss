@@ -1,37 +1,61 @@
-body, html {height: 100%; width: 100%; font-size: 11px; font-family: tahoma, arial, verdana, sans-serif; overflow: hidden}
+/* General */
+
+* {font-size: 11px; font-family: tahoma, arial, verdana, sans-serif}
+input, select, .popup {color: #434343}
+body, html {height: 100%; width: 100%; overflow: hidden; color: white}
 h1 {margin-bottom: 6px; font-size: 12px}
-a {color: white}
+
+a {color: white; text-decoration: none}
 a.close {text-decoration: none; font-weight: bold; color: white; font-size: 14px; float: right}
 a:hover {color: orange}
 
 #canvas {width: 100%; height: 100%; background-image: url(/assets/map.png); position: absolute}
 #canvas #map {width: 100%; height: 100%}
 
+table {width: 100%}
+table thead tr {background-color: rgba(55, 55, 55, 0.95)}
+table tbody tr:nth-child(even) {background-color: rgba(55, 55, 55, 0.95)}
+table tbody tr:nth-child(odd) {background-color: rgba(49, 49, 49, 0.95)}
+table tbody tr a.remove img {display: none}
+table tbody tr:hover a.remove img {display: block}
+table th, table td {padding: 5px; padding-left: 10px; text-align: left}
+fieldset input {width: 190px}
+fieldset h1 {margin-bottom: 5px; margin-left: 10px}
+fieldset p {margin-left: 10px; margin-right: 10px; margin-bottom: 0}
+fieldset button {float: right; margin-top: 20px; margin-left: 10px}
+
+/* Mixins */
+
 @mixin action-button {
   position: absolute; background-color: #333; opacity: 0.8; border-radius: 4px; padding: 5px 10px; z-index: 10000; color: white;
   position: static; text-decoration: none; margin-top: 15px; display: inline-block; margin-right: 5px
 }
 
-@mixin actions {
-  display: none; position: absolute; height: 60px;
-}
+$opaque: rgba(50, 50, 50, 0.9);
+
+.panel {background-color: $opaque; border: 5px solid #666; border-radius: 5px; z-index: 10000; color: white; padding: 0}
+.scrollable-panel {@extend .panel; overflow-x: hidden; overflow-y: scroll}
+.positioned-panel {@extend .panel; position: absolute}
+.content-panel {@extend .panel; padding: 10px}
+.positioned-scrollable-panel {@extend .positioned-panel; overflow-x: hidden; overflow-y: scroll}
+.flush-right-first {right: 20px; top: 30px}
+
+@mixin opaque-panel {background-color: $opaque; border-radius: 4px; padding: 5px 10px 3px 10px; z-index: 10000}
+
+@mixin actions {display: none; position: absolute; height: 60px}
+
+@mixin popup {cursor: pointer; border: 1px solid #333; font-size: 10px; padding: 3px; color: #222; background-color: white; margin-left: 10px}
+
+/* Sections */
 
 .realtime.actions {@include actions; width: 250px; height: 60px; left: -165px; top: -10px}
 .places.actions {@include actions; width: 150px; left: -70px; top: -16px}
 .actions a {@include action-button}
 
-@mixin popup {cursor: pointer; border: 1px solid #333; font-size: 10px; padding: 3px; color: #222; background-color: white; margin-left: 10px}
-
 .places.popup {@include popup; margin-top: 6px}
 
-.closelabel {float: right; cursor: pointer}
-
-@mixin opaque-panel {
-  background-color: rgba(50, 50, 50, 0.9); border-radius: 4px; padding: 5px 10px 3px 10px; z-index: 10000; color: white
-}
-
 .standalone.panel {@include opaque-panel; background-color: white; color: #333; opacity: 1; border: 1px solid #333; padding: 20px}
-.action.panel {@include opaque-panel; left: 20px; bottom: 70px; height: 310px; width: 220px}
+.action {width: 220px}
 
 @mixin opaque-listing {opacity: 1; right: 20px; top: 30px;  background-color: rgba(50, 50, 50, 0.8);
 border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
@@ -42,95 +66,51 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 }
 
 .map.realtime .send-command.panel > div {@include opaque-panel; position: absolute; left: 20px; bottom: 100px}
-.map.realtime .follow.panel > div {@include opaque-panel; position: absolute; left: 20px; bottom: 100px}
-.map.realtime .listing {@include opaque-panel; background-color: transparent; position: absolute; right: 20px; top: 20px; border: 5px solid #666; border-radius: 5px; padding: 0}
-.map.realtime .listing a {text-decoration: none}
+.map.realtime .follow.panel > div {@extend .positioned-panel; left: 20px; bottom: 100px}
+.map.realtime .listing {@extend .positioned-scrollable-panel; @extend .flush-right-first}
 .map.realtime .places.popup {background-color: #999}
-.map.realtime .listing table tr:nth-child(even) {background-color: rgba(55, 55, 55, 0.95)}
-.map.realtime .listing table tr:nth-child(odd) {background-color: rgba(49, 49, 49, 0.95)}
 .map.realtime .listing table tr td div {padding: 5px}
 
-.alarms.index .listing {z-index: 10000; position: absolute; right: 20px; top: 20px; width: 250px; padding: 0}
-.alarms.index .listing div {@include opaque-panel; background-color: transparent; padding: 0; margin-bottom: 10px; border: 5px solid #666; width: 200px; border-radius: 5px}
-.alarms.index .listing table {width: 100%}
-.alarms.index .listing table tr:nth-child(even) {background-color: rgba(55, 55, 55, 0.95)}
-.alarms.index .listing table tr:nth-child(odd) {background-color: rgba(49, 49, 49, 0.95)}
-.alarms.index .listing a {text-decoration: none}
-.alarms.index .wizard {@include opaque-panel; position: absolute; left: 20px; bottom: 100px; width: 320px}
-.alarms.index .listing td, .places.index .listing th {padding: 5px 6px; text-align: left; padding-left: 10px}
+.alarms.index #new-speed-alarm-panel {position: absolute; right: 300px; z-index: 99999999; }
+.alarms.index #new-geofence-alarm-panel {position: absolute; right: 300px; z-index: 99999999; }
+.alarms.index #new-geofence-alarm-panel > div {@extend .content-panel; width: 220px}
+.alarms.index #new-speed-alarm-panel > div {@extend .content-panel; width: 220px}
 
-.devices.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; display: none; left: 20px; width: 915px;}
-.devices.index .listing table {width: 100%}
-.devices.index .listing tr {cursor: pointer}
-.devices.index .listing tr:hover td {color: orange}
-.devices.index .editor input {width: 220px}
-.devices.index .editor {@include white-panel; background-color: #373737; color: white; display: none; float: left; width: 260px; margin: auto; margin-top: 100px; right: 20px}
-.devices.index .editor label {font-size: 11px}
-.devices.index .listing table td, .devices.index .listing table th {color: white; padding: 8px 15px 8px 15px; text-align: left}
-.devices.index .listing table thead tr:nth-child(odd) {background-color: #373737}
-.devices.index .listing table tr:nth-child(even) {background-color: #373737}
-.devices.index .listing table tr:nth-child(odd) {background-color: #313131}
+.column {position: absolute; @extend .flush-right-first; z-index: 99999999}
+.column button {margin-top: 10px; margin-bottom: 10px}
+.column .listing {@extend .scrollable-panel; width: 100%}
+.column .listing tr  {cursor: pointer}
+.column .listing tr:hover td {color: orange}
 
-.users.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; left: 20px; width: 915px; display: none}
-.users.index .listing table {width: 100%}
-.users.index .editor input {width: 220px}
-.users.index .listing tr {cursor: pointer}
-.users.index .listing tr:hover td {color: orange}
-.users.index .listing th, .users.index .listing td {padding: 5px; text-align: left; margin-left: 5px}
-.users.index .editor {@include white-panel; background-color: #373737; color: white; float: left; display: none; width: 260px; margin: auto; margin-top: 100px; right: 20px}
-.users.index .editor label {font-size: 11px}
-.users.index .listing table td, .users.index .listing table th {color: white; padding: 8px 15px 8px 15px }
-.users.index .listing table thead tr:nth-child(odd) {background-color: #373737}
-.users.index .listing table tr:nth-child(even) {background-color: #373737}
-.users.index .listing table tr:nth-child(odd) {background-color: #313131}
+.editor  {@extend .positioned-panel; background-color: #373737; display: none; width: 250px; margin-top: 100px}
+.editor .buttons button {margin-top: 15px; margin-bottom: 5px; float: right}
+.editor input, .editor select {width: 220px}
 
-.alerts.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; left: 20px; width: 915px}
-.alerts.index .listing table {width: 100%}
-.alerts.index .editor input {width: 220px}
-.alerts.index .listing tr {cursor: pointer}
-.alerts.index .listing tr:hover td {color: orange}
-.alerts.index .listing th, .users.index .listing td {padding: 5px; text-align: left; margin-left: 5px}
-.alerts.index .editor {@include white-panel; background-color: #373737; color: white; float: left; display: none; width: 260px; margin: auto; margin-top: 100px; right: 20px}
-.alerts.index .listing table td, .alerts.index .listing table th {color: white; padding: 8px 15px 8px 15px }
-.alerts.index .listing table thead tr:nth-child(odd) {background-color: #373737}
-.alerts.index .listing table tr:nth-child(even) {background-color: #373737}
-.alerts.index .listing table tr:nth-child(odd) {background-color: #313131}
+.alerts.index .column {width: 315px}
+.schedules.index .column {width: 505px}
+.devices.index .column {width: 280px}
+.users.index .column {width: 380px}
+.alarms.index .column {width: 250px}
 
-.schedules.index .listing {@include white-panel; float: left; margin: auto; margin-top: 100px; left: 20px; width: 915px}
-.schedules.index .listing table {width: 100%}
-.schedules.index .editor input {width: 220px}
-.schedules.index .listing tr {cursor: pointer}
-.schedules.index .listing tr:hover td {color: orange}
-.schedules.index .listing th, .schedules.index .listing td {padding: 5px; text-align: left; margin-left: 5px}
-.schedules.index .editor {@include white-panel; background-color: #373737; color: white; float: left; display: none; width: 260px; margin: auto; margin-top: 100px; right: 20px}
-.schedules.index .listing table td, .schedules.index .listing table th {color: white; padding: 8px 15px 8px 15px }
-.schedules.index .listing table thead tr:nth-child(odd) {background-color: #373737}
-.schedules.index .listing table tr:nth-child(even) {background-color: #373737}
-.schedules.index .listing table tr:nth-child(odd) {background-color: #313131}
+.devices.index .editor {right: 310px}
+.users.index .editor {right: 410px}
+.alerts.index .editor {right: 350px}
+.schedules.index .editor {right: 540px}
 
-.places.index #new-place-panel {position: absolute; bottom: 100px; margin-left: 20px; z-index: 99999999}
-.places.index #new-place-panel .action.panel {height: 280px}
+.places.index #new-place-panel {position: absolute; right: 230px; z-index: 99999999; width: 250px}
+.places.index #new-place-panel > div {@extend .content-panel; height: 260px}
 .places.index .sidepanel {@include opaque-listing; padding: 0; width: 200px; background-color: transparent; position: absolute}
 .places.index .listing {padding: 0; border: 5px solid #666; width: 200px; background-color: transparent; border-radius: 5px}
-.places.index .listing a {color: white; text-decoration: none}
-.places.index .listing a img {display: none}
-.places.index .listing tr:hover img {display: block}
-.places.index .listing a:hover {color: orange}
-.places.index .listing td, .places.index .listing th {padding: 5px 6px; text-align: left; padding-left: 10px}
-.places.index .listing table tr:nth-child(even) {background-color: rgba(55, 55, 55, 0.95)}
-.places.index .listing table tr:nth-child(odd) {background-color: rgba(49, 49, 49, 0.95)}
-.places.index .listing table {width: 100%}
 
-.reports.index .sidebar {position: absolute; width: 200px; right: 50px; top: 240px}
-.reports.index .sidebar button {margin-top: 10px; font-weight: bold; font-size: 16px}
-.reports.index .sidebar button div {width: 220px}
+.reports.index #table {overflow-y: scroll}
+.reports.index #table tr {background-color: white}
+.reports.index .sidebar {position: absolute; width: 200px; right: 20px; top: 20px}
+.reports.index .sidebar button {margin-top: 10px; font-weight: bold; font-size: 13px}
 .reports.index .parameters input {width: 170px}
 .reports.index .parameters select {width: 182px}
-.reports.index .sidebar .listing {@include opaque-panel; background-color: transparent; width: 220px; padding: 0; border: 5px solid #666; border-radius: 5px; overflow-y: scroll}
+.reports.index .sidebar .listing {@extend .panel; width: 200px; padding: 0; overflow-y: scroll}
 .reports.index .sidebar .listing li {margin-top: 5px; list-style-type: none}
-.reports.index .presentation {@include opaque-panel; position: absolute; border: 5px solid #666; background-color: white; height: 600px; width: 900px; top: 20px; left: 20px; opacity: 1; color: black}
-.reports.index .parameters {@include opaque-panel; position: absolute; border: 5px solid #666; border-radius: 5px; height: 190px; width: 200px; top: 20px; right: 20px}
+.reports.index .presentation {@extend .positioned-panel; background-color: white; top: 20px; left: 20px; color: black}
+.reports.index .parameters {@extend .panel; height: 190px; width: 200px; margin-bottom: 10px}
 .reports.index .sidebar .listing li {padding: 5px; padding-left: 7px; margin: 0}
 .reports.index .sidebar .listing li input {position: relative; top: 2px; margin-right: 5px}
-.reports.index .sidebar .listing li:nth-child(even) {background-color: rgba(55, 55, 55, 0.95)}
-.reports.index .sidebar .listing li:nth-child(odd) {background-color: rgba(49, 49, 49, 0.95)}

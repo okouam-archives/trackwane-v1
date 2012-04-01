@@ -1,14 +1,15 @@
 App.Controllers.ReportsController = App.Controllers.Base.extend({
 
   appEvents: {
-    "data:table": "onShowTable",
-    "data:chart": "onShowChart",
+    "presentation:toggle": "onTogglePresentation",
     "export:pdf": "onExportPdf",
     "export:excel": "onExportExcel"
   },
 
   events: {
-    "click .run": "onRunReport"
+    "click .run": "onRunReport",
+    "click a.save-report": "onSaveReport",
+    "click a.your-reports": "onViewReports"
   },
 
   initialize: function(options) {
@@ -17,6 +18,7 @@ App.Controllers.ReportsController = App.Controllers.Base.extend({
     this.presentation_view = new App.Views.Reports.Presentation({el: "#canvas .presentation", pubsub: this.pubsub});
     this.parameters_view = new App.Views.Reports.Parameters({el: "#canvas .parameters", pubsub: this.pubsub});
     this.toolbar_view = new App.Views.Reports.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
+    this.new_report_view = new App.Views.Reports.NewReport({el: "#canvas .saved-report-details", pubsub: this.pubsub});
 
     this.presentation_view.render();
     this.parameters_view.render();
@@ -24,19 +26,37 @@ App.Controllers.ReportsController = App.Controllers.Base.extend({
 
     var devices = new App.Collections.Devices();
     devices.fetch({success: function(collection) {
-      this.device_view = new App.Views.Reports.Devices({el: "#canvas .listing", devices: collection, pubsub: this.pubsub});
+      this.device_view = new App.Views.Reports.Devices({el: "#canvas .device-listing", devices: collection, pubsub: this.pubsub});
       this.device_view.render();
     }.bind(this)});
 
-    $(".datepicker").datepicker();
+    var reports = new App.Collections.Reports();
+    reports.fetch({success: function(collection) {
+      this.reports_view = new App.Views.Reports.Reports({el: "#canvas .report-listing", pubsub: this.pubsub});
+      this.reports_view.render(collection);
+    }.bind(this)});
+
+    $(".datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+    $(".datepicker").datepicker('setDate', new Date());
   },
 
-  onShowTable: function() {
-    this.presentation_view.showTable();
+  onViewReports: function() {
+    this.presentation_view.close();
+    this.parameters_view.close();
+    this.device_view.close();
+    this.reports_view.render();
   },
 
-  onShowChart: function() {
-    this.presentation_view.showChart();
+  onSaveReport: function() {
+    this.presentation_view.close();
+    this.parameters_view.close();
+    this.device_view.close();
+    this.reports_view.render();
+    this.new_report_view.render();
+  },
+
+  onTogglePresentation: function() {
+    this.presentation_view.togglePresentation();
   },
 
   onExportPdf: function() {

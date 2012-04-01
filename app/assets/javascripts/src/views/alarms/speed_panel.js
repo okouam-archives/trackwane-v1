@@ -1,8 +1,8 @@
 App.Views.Alarms.SpeedPanel = App.Views.Base.extend({
 
   events: {
-    "click .close": "onClose",
-    "click button": "onSave"
+    "click .cancel": "onCancel",
+    "click .accept": "onAccept"
   },
 
   initialize: function(options) {
@@ -11,28 +11,26 @@ App.Views.Alarms.SpeedPanel = App.Views.Base.extend({
     this.template = Handlebars.compile(source);
   },
 
-  onClose: function() {
+  onCancel: function() {
     this.pubsub.trigger("speed:closing")
   },
 
-  render: function() {
+  render: function(offset) {
     this.$el.html(this.template());
+    if (offset) {
+      this.$el.css("top", offset - 200);
+    }
   },
 
   close: function() {
     this.$el.empty();
   },
 
-  onSave: function() {
-    this.pubsub.trigger("speed:created")
-  },
-
-  save: function() {
+  onAccept: function() {
     var name = $("input[name='speed_alarm[name]']").val();
     var speed = $('input[name="speed_alarm[speed]"]').val();
     var alarm = new App.Models.SpeedAlarm({speed: speed, name: name});
-    if (alarm.isValid()) this.pubsub.trigger("speed:created", alarm);
-    else alert("invalid model");
+    this.pubsub.trigger("speed:created", alarm)
   }
 
 });

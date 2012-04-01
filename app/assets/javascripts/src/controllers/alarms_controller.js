@@ -1,12 +1,19 @@
 App.Controllers.AlarmsController = App.Controllers.Base.extend({
 
   appEvents: {
-    "geofence:creating:start": "onCreateGeofenceAlarm",
-    "speed:creating:start": "onCreateSpeedAlarm",
+    "geofence:creating": "onCreatingGeofenceAlarm",
+    "speed:creating": "onCreatingSpeedAlarm",
     "geofence:created": "onGeofenceAlarmCreated",
     "speed:created": "onSpeedAlarmCreated",
     "speed:closing": "onClose",
-    "geofence:closing": "onClose"
+    "geofence:closing": "onClose",
+    "geofence-alarm:deleted": "onGeofenceAlarmDeleted",
+    "geofence-alarm:selected": "onGeofenceAlarmSelected",
+    "speed-alarm:deleted": "onSpeedAlarmDeleted",
+    "speed-alarm:selected": "onSpeedAlarmSelected",
+    "alarms:clear": "onClearAlarms",
+    "speed-alarms:show": "onShowSpeedAlarms",
+    "geofence-alarms:show": "onShowGeofenceAlarms"
   },
 
   initialize: function(options) {
@@ -17,47 +24,126 @@ App.Controllers.AlarmsController = App.Controllers.Base.extend({
     this.alarm_listing = new App.Views.Alarms.Listing({el: "#canvas .listing", pubsub: this.pubsub});
     this.toolbar = new App.Views.Alarms.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
     this.map.render();
+    this.fetchAlarms();
+  },
+
+  onShowGeofenceAlarms: function() {
+    this.map.clear();
+    new App.Collections.GeofenceAlarms().fetch({success: function(results) {
+      this.map.showAlarms(results);
+    }.bind(this)});
+  },
+
+  onShowSpeedAlarms: function() {
+    this.map.clear();
+    new App.Collections.SpeedAlarms().fetch({success: function(results) {
+      this.map.showAlarms(results);
+    }.bind(this)});
+  },
+
+  onClearAlarms: function() {
+    this.map.clear();
+  },
+
+  onGeofenceAlarmSelected: function(id) {
+    var model = new App.Models.GeofenceAlarm({id: id});
+    model.fetch({success: function(model) {
+        this.map.clear();
+        this.map.show(model.get("name"), model.get("coordinates"));
+      }.bind(this)
+    });
+  },
+
+  onSpeedAlarmDeleted: function(id) {
+    var model = new App.Models.SpeedAlarm({id: id});
+    model.destroy();
+    new App.Collections.SpeedAlarms().fetch({success: function(results) {
+      this.alarm_listing.addSpeedAlarm(results);
+    }.bind(this)});
+  },
+
+  onGeofenceAlarmDeleted: function(id) {
+    var model = new App.Models.GeofenceAlarm({id: id});
+    model.destroy();
+    new App.Collections.GeofenceAlarms().fetch({success: function(results) {
+      this.alarm_listing.addGeofenceAlarm(results);
+    }.bind(this)});
+  },
+
+  onSpeedAlarmSelected: function(id) {
+    var model = new App.Models.SpeedAlarm({id: id});
+    model.fetch({success: function(model) {
+       console.debug(model);
+      this.map.clear();
+        console.debug(model);
+        this.map.show(model.get("name"), model.get("coordinates"));
+      }.bind(this)
+    });
+  },
+
+  fetchAlarms: function() {
+    this.geofence_alarms = new App.Collections.GeofenceAlarms();
+    this.speed_alarms = new App.Collections.SpeedAlarms();
+    this.speed_alarms.fetch({success: function(results) {
+      this.alarm_listing.addSpeedAlarm(results);
+    }.bind(this)});
+    this.geofence_alarms.fetch({success: function(results) {
+      this.alarm_listing.addGeofenceAlarm(results);
+    }.bind(this)});
+  },
+
+  close: function() {
+    this.new_geofence_alarm_panel.close();
+    this.new_speed_alarm_panel.close();
+    this.map.stopEditing();
   },
 
   onClose: function() {
-    this.new_geofence_alarm_panel.close();
-    this.new_speed_alarm_panel.close();
+    this.close();
   },
 
   onSpeedAlarmCreated: function(alarm) {
+    var coordinates = this.map.getCoordinates();
+    alarm.set({coordinates: coordinates});
     alarm.save(null, {
       success: function() {
         this.new_speed_alarm_panel.close();
+        this.close();
+        this.speed_alarms.add(alarm);
+        this.alarm_listing.addSpeedAlarm(this.speed_alarms);
       }.bind(this),
       error: function() {
-        console.debug(error);
-        this.new_speed_alarm_panel.close();
+        this.close();
       }.bind(this)
     });
   },
 
   onGeofenceAlarmCreated: function(alarm) {
-    alarm.set("coordinates", this.map.getCoordinates());
+    var coordinates = this.map.getCoordinates();
+    alarm.set({coordinates: coordinates});
     alarm.save(null, {
       success: function() {
         this.new_geofence_alarm_panel.close();
         this.close();
+        this.geofence_alarms.add(alarm);
+        this.alarm_listing.addGeofenceAlarm(this.geofence_alarms);
       }.bind(this),
-      error: function(error) {
-        console.debug(error);
-        this.new_geofence_alarm_panel.close();
+      error: function() {
+        this.close();
       }.bind(this)
     });
   },
 
-  onCreateSpeedAlarm: function() {
+  onCreatingSpeedAlarm: function(evt) {
     this.new_geofence_alarm_panel.close();
-    this.new_speed_alarm_panel.render();
+    this.new_speed_alarm_panel.render(evt.screenY);
+    this.map.startEditing();
   },
 
-  onCreateGeofenceAlarm: function() {
+  onCreatingGeofenceAlarm: function(evt) {
     this.new_speed_alarm_panel.close();
-    this.new_geofence_alarm_panel.render();
+    this.new_geofence_alarm_panel.render(evt.screenY);
+    this.map.startEditing();
   }
 
 });

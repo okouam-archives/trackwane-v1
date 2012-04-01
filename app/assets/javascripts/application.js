@@ -6,6 +6,7 @@
 //= require ./lib/highcharts
 //= require ./lib/jquery-ui-1.8.18.custom.min
 //= require ./lib/date
+//= require ./lib/bootstrap-dropdown
 //= require ./lib/jquery.lionbars.0.3
 //= require ./src/app
 //= require_tree ./src/locales

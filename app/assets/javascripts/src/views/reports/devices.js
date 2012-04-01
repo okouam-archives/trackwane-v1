@@ -9,9 +9,17 @@ App.Views.Reports.Devices = Backbone.View.extend({
   },
 
   onResize: function() {
+    this.render();
+  },
+
+  resize: function() {
     var window_height = $(window).height();
     this.$el.height(window_height - 392);
     $('.lionbars').lionbars();
+  },
+
+  close: function() {
+    this.$el.hide();
   },
 
   getDevices: function() {
@@ -23,8 +31,8 @@ App.Views.Reports.Devices = Backbone.View.extend({
   },
 
   render: function() {
-    $(this.template(this.devices)).appendTo(this.$el);
-    this.onResize();
+    this.$el.html(this.template(this.devices));
+    this.resize();
   }
 
 });

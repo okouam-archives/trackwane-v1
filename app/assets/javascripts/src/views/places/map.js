@@ -1,18 +1,7 @@
 App.Views.PlacesMap = App.Views.Base.extend({
 
-  appEvents: {
-    "places:received": "show",
-    "place:created": "add",
-    'place:selected': "center",
-    "place:creation:cancel": "stopEditing",
-    "place:creation:start": "allowPlaceSelection"
-  },
-
   initialize: function(options) {
     this.pubsub = options.pubsub;
-    this.places = new App.Collections.Places();
-    this.geofences = new App.Collections.Geofences();
-    this.handleApplicationEvents();
   },
 
   allowPlaceSelection: function() {
@@ -22,37 +11,19 @@ App.Views.PlacesMap = App.Views.Base.extend({
 
   show: function(places) {
     this.place_layer.destroyFeatures();
-    this.places = places;
-    this.createFeatures();
-  },
-
-  add: function(place) {
-    var lonlat = this.place_selection_tool.getCoordinates();
-    place.setCoordinates(lonlat);
-    place.save(null, {
-      success: function(model) {
-        this.places.add(model);
-        this.pubsub.trigger("places:received", this.places);
-        this.stopEditing();
-        this.pubsub.trigger("place:creation:success");
-      }.bind(this),
-      error: function() {
-        alert("failure");
-        this.stopEditing();
-      }.bind(this)
-    });
+    this.createFeatures(places);
   },
 
   stopEditing: function() {
-    this.place_selection_tool.deactivate();
+    if (this.place_selection_tool) this.place_selection_tool.deactivate();
   },
 
-  createFeatures: function() {
-    if (!this.places || this.places.size() < 1) return;
+  createFeatures: function(places) {
+    if (!places || places.size() < 1) return;
     _.each(this.map.popups, function(popup) {
       popup.destroy();
     });
-    this.places.each(function(place) {
+    places.each(function(place) {
       this.createFeature(place);
     }.bind(this));
     if (!this.firstShow) {
@@ -75,17 +46,10 @@ App.Views.PlacesMap = App.Views.Base.extend({
       var id = place.id;
       var src = $(evt.explicitOriginalTarget);
       if (src.text() == "Remove") {
-        this.removePlace(id);
-        this.pubsub.trigger("place:removed", this.places);
+        this.pubsub.trigger("place:removed", id);
         popup.destroy();
       }
     }.bind(this));
-  },
-
-  removePlace: function(id) {
-    this.places.get(id).destroy();
-    var feature = this.place_layer.getFeatureById(id);
-    this.place_layer.removeFeatures([feature]);
   },
 
   center: function(id) {

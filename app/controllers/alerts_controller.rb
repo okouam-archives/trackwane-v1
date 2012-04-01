@@ -15,10 +15,11 @@ class AlertsController < ApplicationController
 
   def create
     alert = Alert.new(params.slice(*Alert.column_names))
+    alert.account_id = session[:account_id]
     if alert.save
-       render json: {success: true, results: [alert.as_json]}
+       render json: alert.as_json
     else
-      render json: {success: false, results: alert.errors}
+      render json: alert.errors
     end
   end
 

@@ -1,19 +1,21 @@
 <script id="editor-template" type="text/x-handlebars-template">
   <fieldset>
     <label>Alarm</label>
-    <select name="alertable_id" name="alertable_id">
+    <select id="alert_alertable_id" name="alert[alertable_id]">
       {{#each alarms}}
         <option value="{{id}}" data-type="{{type}}">{{name}}</option>
       {{/each}}
     </select>
     <label>Destination</label>
-    <input name="destination" value="{{attributes.destination}}" type="text" />
-    {{#if attributes}}
-      <input  value="{{attributes.id}}" type="hidden" name="id" />
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="save blue-button"><div>Accept</div></button>
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right; margin-right: 10px" class="delete blue-button"><div>Delete</div></button>
-    {{else}}
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="blue-button create"><div>Accept</div></button>
-    {{/if}}
+    <input name="alert[destination]" id="alert_destination" value="{{attributes.destination}}" type="text" />
+    <div class="buttons">
+      {{#if attributes}}
+        <input value="{{attributes.id}}" type="hidden" name="id" />
+        <button class="save btn success">Accept</button>
+      {{else}}
+        <button class="btn success create">Accept</button>
+      {{/if}}
+      <button class="cancel btn">Cancel</button>
+    </div>
   </fieldset>
 </script>

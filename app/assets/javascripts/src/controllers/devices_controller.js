@@ -10,6 +10,10 @@ App.Controllers.DevicesController = App.Controllers.Base.extend({
     "device:deleted": "onDeviceDeleted"
   },
 
+  events: {
+    "click .new_device": "onNewDevice"
+  },
+
   initialize: function(options) {
     this.init(options);
     this.listing = new App.Views.Devices.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
@@ -19,6 +23,10 @@ App.Controllers.DevicesController = App.Controllers.Base.extend({
         this.pubsub.trigger("devices:fetched", results);
       }.bind(this)
     });
+  },
+
+  onNewDevice: function() {
+    this.editor.render({});
   },
 
   onDevicesFetched: function(devices) {

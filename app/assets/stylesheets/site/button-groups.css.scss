@@ -1,0 +1,163 @@
+$black:             #000;
+$grayDark:          #333;
+$gray:              #555;
+$grayLight:         #999;
+$grayLighter:       #eee;
+$white:             #fff;
+$blue:              #049CDB;
+$blueDark:          #0064CD;
+$green:             #46a546;
+$red:               #9d261d;
+$yellow:            #ffc40d;
+$orange:            #f89406;
+$pink:              #c3325f;
+$purple:            #7a43b6;
+$zindexDropdown:        1000;
+
+@mixin gradient_vertical ($startColor: #555, $endColor: #333) {
+  background-color: $endColor;
+  background-image: -khtml-gradient(linear, left top, left bottom, from($startColor), to($endColor)); // Konqueror
+  background-image: -moz-linear-gradient(top, $startColor, $endColor); // FF 3.6+
+  background-image: -ms-linear-gradient(top, $startColor, $endColor); // IE10
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $startColor), color-stop(100%, $endColor)); // Safari 4+, Chrome 2+
+  background-image: -webkit-linear-gradient(top, $startColor, $endColor); // Safari 5.1+, Chrome 10+
+  background-image: -o-linear-gradient(top, $startColor, $endColor); // Opera 11.10
+  background-image: linear-gradient(top, $startColor, $endColor); // The standard
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$startColor}', endColorstr='#{$endColor}', GradientType=0); // IE9 and down
+}
+
+@mixin border-radius($radius: 5px) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin box-shadow($shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: $shadow;
+     -moz-box-shadow: $shadow;
+          box-shadow: $shadow;
+}
+
+@mixin opacity($opacity: 100) {filter: alpha(opacity=#{$opacity});  -moz-opacity: $opacity / 100; opacity: $opacity / 100}
+
+@mixin clearfix {
+  zoom: 1;
+  &:before,
+  &:after {         display: table;      *display: inline;      content: "";          zoom: 1;   }
+  &:after {         clear: both;                 }
+}
+
+.dropdown {            position: relative   }
+
+.caret {
+  display: inline-block; width: 0; height: 0; text-indent: -99999px; vertical-align: top;
+  border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid #000; @include opacity(30); content: "\2193";
+}
+.dropdown .caret {    margin-top: 8px;     margin-left: 2px;   }
+.dropdown:hover .caret {@include opacity(100)}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  z-index: $zindexDropdown;
+  float: left;
+  display: none; // none by default, but block on "open" of the menu
+  min-width: 160px;
+  max-width: 220px;
+  _width: 160px;
+  padding: 5px 0;
+  margin: 0; // override default ul
+  list-style: none;
+  background-color: $white;
+  border-color: #999;
+  border-color: rgba(0,0,0,.1);
+  border-style: solid;
+  border-width: 1px;
+  @include border-radius(0 0 5px 5px);
+  @include box-shadow(0 5px 10px rgba(0,0,0,.2));
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+  zoom: 1;
+
+  .divider {
+    height: 1px;
+    margin: 5px 1px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+    border-bottom: 1px solid $white;
+  }
+
+  a {
+    display: block;
+    padding: 2px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: $gray;
+    // Hover state
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+      @include gradient_vertical($blue, $blueDark);
+      $shadow: inset 0 1px 0 rgba(0,0,0,.075), inset 0 -1px rgba(0,0,0,.075);
+      @include box-shadow($shadow);
+    }
+  }
+}
+
+.dropdown.open {
+  .dropdown-toggle {color: $white; background: #ccc; background: rgba(0,0,0,.3)}
+  .dropdown-menu {display: block}
+}
+
+.btn-group {position: relative; @include clearfix; }
+
+.btn-group + .btn-group {margin-left: 5px;}
+
+.btn-toolbar {
+  .btn-group {display: inline-block; }
+}
+
+.btn-group .btn {position: relative; float: left; margin-left: -1px; @include border-radius(0)}
+
+.btn-group .btn:first-child {
+  margin-left: 0;
+     -webkit-border-top-left-radius: 4px;
+         -moz-border-radius-topleft: 4px;
+             border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+      -moz-border-radius-bottomleft: 4px;
+          border-bottom-left-radius: 4px;
+}
+
+.btn-group .btn:last-child,
+.btn-group .dropdown-toggle {
+     -webkit-border-top-right-radius: 4px;
+         -moz-border-radius-topright: 4px;
+             border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+      -moz-border-radius-bottomright: 4px;
+          border-bottom-right-radius: 4px;
+}
+
+.btn-group .btn:hover, .btn-group .btn:focus, .btn-group .btn:active {z-index: 2}
+
+.btn-group .dropdown-toggle {
+  padding-left: 8px; padding-right: 8px; $shadow: inset 1px 0 0 rgba(255,255,255,.125), 0 1px 2px rgba(0,0,0,.05); @include box-shadow($shadow);
+}
+
+.btn-group.open .dropdown-menu {
+  display: block; top: 30px; @include border-radius(5px);
+}
+.btn-group.open .dropdown-toggle {
+  background-image: none; $shadow: inset 0 1px 6px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05); @include box-shadow($shadow);
+}
+
+.btn .caret {margin-top: 6px; margin-left: 0}
+
+.primary, .danger, .info, .success {
+  .caret {border-top-color: #fff; @include opacity(75)}
+}

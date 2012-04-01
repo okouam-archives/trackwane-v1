@@ -4,14 +4,14 @@
           <th>Login</th>
           <th>Email</th>
           <th>Role</th>
-          <th>Last Login</th>
+          <th></th>
         </thead>
   {{#each models}}
     <tr data-id="{{attributes.id}}">
-          <td>{{attributes.email}}</td>
-          <td>{{attributes.login}}</td>
-          <td>Administrator</td>
-          <td>Never</td>
+          <td class="selectable">{{attributes.email}}</td>
+          <td class="selectable">{{attributes.login}}</td>
+          <td class="selectable">Administrator</td>
+          <td style="width: 10px"><a data-id="{{attributes.id}}"  class="remove" href="#"><img src="/assets/closelabel.png" /></a></td>
         </tr>
     {{/each}}
       </table>

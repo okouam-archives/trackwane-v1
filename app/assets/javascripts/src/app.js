@@ -16,3 +16,5 @@ App = {
   },
   Services: {}
 };
+
+$('.dropdown-toggle').dropdown();

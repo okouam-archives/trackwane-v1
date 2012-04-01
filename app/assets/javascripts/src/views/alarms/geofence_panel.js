@@ -1,8 +1,8 @@
 App.Views.Alarms.GeofencePanel = App.Views.Base.extend({
 
   events: {
-    "click .close": "onClose",
-    "click button": "onSave"
+    "click .cancel": "onCancel",
+    "click .accept": "onAccept"
   },
 
   initialize: function(options) {
@@ -11,14 +11,13 @@ App.Views.Alarms.GeofencePanel = App.Views.Base.extend({
     this.template = Handlebars.compile(source);
   },
 
-  onSave: function() {
+  onAccept: function() {
     var name = $("input[name='geofence_alarm[name]']").val();
-    var category = $("select[name='geofence_alarm[category]']").val();
-    var alarm = new App.Models.GeofenceAlarm({name: name, category: category});
+    var alarm = new App.Models.GeofenceAlarm({name: name});
     this.pubsub.trigger("geofence:created", alarm)
   },
 
-  onClose: function() {
+  onCancel: function() {
     this.pubsub.trigger("geofence:closing")
   },
 
@@ -26,8 +25,11 @@ App.Views.Alarms.GeofencePanel = App.Views.Base.extend({
     this.geofence = geofence;
   },
 
-  render: function() {
+  render: function(offset) {
     this.$el.html(this.template());
+    if (offset) {
+      this.$el.css("top", offset - 250);
+    }
   },
 
   close: function() {

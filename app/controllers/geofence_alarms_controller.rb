@@ -12,6 +12,10 @@ class GeofenceAlarmsController < ApplicationController
     end
   end
 
+  def show
+    render :json => GeofenceAlarm.find(params[:id])
+  end
+
   def create
   	changes = params.slice(*GeofenceAlarm.column_names)
 		alarm = GeofenceAlarm.new(changes)

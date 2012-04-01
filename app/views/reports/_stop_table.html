@@ -1,0 +1,24 @@
+<script id="stop-table-template" type="text/x-handlebars-template">
+  <table>
+    <thead>
+      <tr>
+        <th>Vehicle</th>
+        <th>Date</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Closest Place</th>
+        <th>Address</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each item}}
+        <tr>
+          <td>{{device_name}}</td>
+          <td>{period}}</td>
+          <td>{{data_point}}km</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>

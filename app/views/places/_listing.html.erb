@@ -8,10 +8,10 @@
     {{#each models}}
       <tr>
         <td>
-          <a data-id="{{attributes.id}}" href="#">{{attributes.name}}</a>
+          <a data-id="{{attributes.id}}" class="select" href="#">{{attributes.name}}</a>
         </td>
         <td>{{attributes.category}}</td>
-        <td style="width: 10px"><a href="#"><img src="/assets/closelabel.png" /></a></td>
+        <td style="width: 10px"><a class="remove" href="#" data-id="{{attributes.id}}"><img src="/assets/closelabel.png" /></a></td>
       </tr>
       {{/each}}
   </table>

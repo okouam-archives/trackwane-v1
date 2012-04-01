@@ -1,14 +1,8 @@
 App.Views.NewPlacePanel = App.Views.Base.extend({
 
   events: {
-   "click button": "onCreatePlace",
-   "click a.close": "onClose"
-  },
-
-  appEvents: {
-    "place:creation:cancel": "close",
-    "place:creation:start": "render",
-    "place:creation:success": "close"
+   "click button.accept": "onAccept",
+   "click button.cancel": "onCancel"
   },
 
   initialize: function(options) {
@@ -17,20 +11,22 @@ App.Views.NewPlacePanel = App.Views.Base.extend({
     this.handleApplicationEvents();
   },
 
-  render: function() {
+  render: function(offset) {
     this.$el.html(this.template);
+    if (offset) {
+      this.$el.css("top", offset - 200);
+    }
   },
 
-  onClose: function() {
-    this.pubsub.trigger("place:creation:cancelled");
-    this.close();
-  },
-
-  onCreatePlace: function() {
+  onAccept: function() {
     var name = this.$el.find("#place_name").val();
     var category = this.$el.find("#place_category").val();
     this.createPlace(name, category);
     return false;
+  },
+
+  onCancel: function() {
+    this.pubsub.trigger("new-place:cancel");
   },
 
   close: function() {

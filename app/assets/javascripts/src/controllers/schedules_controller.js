@@ -4,10 +4,13 @@ App.Controllers.SchedulesController = App.Controllers.Base.extend({
     "schedules:fetched": "onSchedulesFetched",
     "editor:closed": "onEditorClosed",
     "schedule:selected": "onScheduleSelected",
-    "schedule:creating": "onScheduleCreating",
     "schedule:created": "onScheduleCreated",
     "schedule:saved": "onScheduleSaved",
     "schedule:deleted": "onScheduleDeleted"
+  },
+
+  events: {
+    "click .new-schedule": "onNewSchedule"
   },
 
   initialize: function(options) {
@@ -45,7 +48,7 @@ App.Controllers.SchedulesController = App.Controllers.Base.extend({
     });
   },
 
-  onScheduleCreating: function() {
+  onNewSchedule: function() {
     this.editor.render({});
   },
 

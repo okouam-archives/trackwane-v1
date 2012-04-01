@@ -3,7 +3,7 @@ App.Views.Alerts.Listing = App.Views.Base.extend({
   events: {
     "click tr" : "onAlertSelect",
     "click button.save": "onAlertSave",
-    "click button.delete": "onAlertDelete",
+    "click button.remove": "onAlertRemove",
     "click button.create": "onAlertCreate"
   },
 
@@ -16,8 +16,9 @@ App.Views.Alerts.Listing = App.Views.Base.extend({
     this.pubsub.trigger("alert:saved");
   },
 
-  onAlertDelete: function() {
-    this.pubsub.trigger("alert:deleted");
+  onAlertRemove: function(evt) {
+    var id = $(evt.currentTarget).data("id");
+    this.pubsub.trigger("alert:deleted", id);
   },
 
   onAlertSelect: function(evt) {
@@ -37,6 +38,7 @@ App.Views.Alerts.Listing = App.Views.Base.extend({
   render: function(users) {
     this.$el.html(this.template(users));
     this.$el.show();
+    this.$el.lionbars();
   }
 
 });

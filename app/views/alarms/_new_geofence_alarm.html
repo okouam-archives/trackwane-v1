@@ -1,11 +1,14 @@
 <script id="geofence-alarms-template" type="text/x-handlebars-template">
   <table id="geofence-alarms" class="sidecolumn">
-    <tr><td><b>Geofence Alarms</b></td></tr>
+    <thead>
+      <tr><td><b>Geofence Alarms</b></td><th></th></tr>
+    </thead>
     {{#each models}}
       <tr>
         <td>
-          <a href="#">{{attributes.name}}</a>
+          <a data-id="{{attributes.id}}" class="select" href="#">{{attributes.name}}</a>
         </td>
+        <td  style="width: 10px"><a data-id="{{attributes.id}}" class="remove" href="#"><img src="/assets/closelabel.png" /></a></td>
       </tr>
       {{/each}}
   </table>

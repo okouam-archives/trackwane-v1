@@ -2,9 +2,8 @@ App.Views.Devices.Editor = App.Views.Base.extend({
 
   events: {
     "click .create": "onCreate",
-    "click .delete": "onDelete",
-    "click .save": "onSave",
-    "click .close": "onClose"
+    "click .cancel": "onClose",
+    "click .save": "onSave"
   },
 
   initialize: function(options) {

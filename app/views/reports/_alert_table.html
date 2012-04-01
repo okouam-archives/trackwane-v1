@@ -1,0 +1,20 @@
+<script id="alert-table-template" type="text/x-handlebars-template">
+  <table>
+    <thead>
+      <tr>
+        <th>Vehicle</th>
+        <th>Date</th>
+        <th>Alarm</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each item}}
+        <tr>
+          <td>{{device_name}}</td>
+          <td>{period}}</td>
+          <td>{{data_point}}km</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>

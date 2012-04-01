@@ -1,18 +1,13 @@
 App.Views.Places.Listing = App.Views.Base.extend({
 
-  appEvents: {
-    "places:received": "render",
-    "place:removed": "render"
-  },
-
   events: {
-    "click a": "select"
+    "click a.select": "onSelect",
+    "click a.remove": "onRemove"
   },
 
   initialize: function(options) {
     this.pubsub = options.pubsub;
     this.prepareTemplates();
-    this.handleApplicationEvents();
   },
 
   prepareTemplates: function() {
@@ -20,13 +15,19 @@ App.Views.Places.Listing = App.Views.Base.extend({
     this.template = Handlebars.compile(source);
   },
 
-  select: function(evt) {
+  onRemove: function(evt) {
+    var id = $(evt.currentTarget).data("id");
+    this.pubsub.trigger("place:removed", id);
+  },
+
+  onSelect: function(evt) {
     var id = $(evt.currentTarget).data("id");
     this.pubsub.trigger("place:selected", id);
   },
 
   render: function(places) {
     this.$el.html(this.template(places));
+
   }
 
 });
