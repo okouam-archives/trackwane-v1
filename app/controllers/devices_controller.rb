@@ -2,12 +2,11 @@ class DevicesController < ApplicationController
   before_filter :require_user
 
   def index
-    @devices = current_account.devices
+    gon.devices = current_account.devices
     respond_to do |format|
       format.html
       format.json do
-        results = @devices.as_json(:computed => ["group_name"])
-        render json: {success: true, results: results}
+        render json: gon.devices
       end
     end
   end
@@ -35,19 +34,13 @@ class DevicesController < ApplicationController
   private
 
   def persist(device, params)
-    device.group = find_group(params)
     changes = params.slice(*Device.column_names)
     device.account = current_account unless device.account
     if device.update_attributes(changes)
-      render json: {success: true, results: [device.as_json(:computed => ["group_name"])]}
+      render json: device
     else
       render json: device.errors, status: 400
     end
-  end
-
-  def find_group(params)
-    group_name = params.delete(:group_name) || "Default"
-    Group.find_or_create_by_name(name: group_name, account_id: params[:account_id])
   end
 
 end

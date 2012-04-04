@@ -1,29 +1,26 @@
 class GeofenceWarning < ActiveRecord::Base
+  extend Warning
   validates_presence_of :event, :geofence_alarm
   belongs_to :event
   belongs_to :geofence_alarm
 
 	def as_json(options)
 		hash = super(options)
-		hash["alarm_name"] = "NO NAME"# geofence_alarm.name
+		hash["alarm_name"] = geofence_alarm.name
 		hash
 	end
 
-	def self.check(alarms, event)
+	def self.check(alarms, previous_event, event)
 		triggered_alarms = alarms.find_all do |alarm|
-			zone = alarm.coordinates
-			alarm.category == "inclusion" ? within(event, zone) : !within(event, zone)
+			geofence_crossing?(alarm.coordinates, event, previous_event)
 		end
 		triggered_alarms = [triggered_alarms] if triggered_alarms.is_a? GeofenceAlarm
-		triggered_alarms ? triggered_alarms.map {|alarm| GeofenceWarning.new({geofence_alarm: alarm, event: event})} : []
+		triggered_alarms ? create_warnings(triggered_alarms, event) : []
 	end
 
-	def self.within(event, zone)
-		lon = event.longitude
-		lat = event.latitude
-		sql = "SELECT ST_Contains(ST_GeomFromEWKT('SRID=4326;#{zone}'), ST_GeomFromEWKT('SRID=4326;POINT(#{lat} #{lon})'))"
-		ActiveRecord::Base.connection.select_value(sql) == 't'
-	end
+  def self.create_warnings(alarms, event)
+    alarms.map {|alarm| GeofenceWarning.new({geofence_alarm: alarm, event: event})}
+  end
 
 end
 

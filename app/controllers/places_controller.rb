@@ -2,21 +2,20 @@ class PlacesController < ApplicationController
   before_filter :require_user
 
   def index
+    gon.places = current_account.places
     respond_to do |format|
       format.html
       format.json do
-        @places = current_account.places
-        render json: {success: true, results: @places}
+        render json: gon.places
       end
     end
   end
 
   def create
-    changes = params.slice(*Place.column_names)
-    place = Place.new(changes)
+    place = Place.new(params.slice(*Place.column_names))
     place.account = current_account
     if place.save
-      render json: place.as_json
+      render json: place
     else
       render json: place.errors, status: 400
     end

@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
     @accounts = Account.all
     respond_to do |format|
       format.html
-      format.json {render json: {success: true, results: @accounts}}
+      format.json {render json: @accounts}
     end
   end
 

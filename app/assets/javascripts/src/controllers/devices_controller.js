@@ -18,10 +18,7 @@ App.Controllers.DevicesController = App.Controllers.Base.extend({
     this.init(options);
     this.listing = new App.Views.Devices.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
     this.editor = new App.Views.Devices.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
-    new App.Collections.Devices().fetch({success: function(results) {
-        this.pubsub.trigger("devices:fetched", results);
-      }.bind(this)
-    });
+    this.pubsub.trigger("devices:fetched", new App.Collections.Devices(options.devices));
   },
 
   onNewDevice: function() {

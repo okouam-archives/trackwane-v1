@@ -10,7 +10,6 @@ class Event < ActiveRecord::Base
     if device
       hash[:name] = device.display_name
       hash[:imei] = device.imei_number
-      hash[:group] = device.group.name
     end
     unless speed_warnings.empty? && geofence_warnings.empty?
       hash[:warnings] = {

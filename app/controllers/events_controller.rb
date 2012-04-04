@@ -10,7 +10,7 @@ class EventsController < ApplicationController
         events = device.events
         events = events.limit(params[:limit]) if params[:limit]
         events = events.offset(params[:start]) if params[:start]
-        render json: {success: true, results: events, total: device.events.count}
+        render json: events
       end
     end
   end

@@ -4,7 +4,7 @@ class GeofencesController < ApplicationController
   def index
     @geofences = current_account.geofences
     respond_to do |format|
-      format.json {render json: {success: true, results: @geofences}}
+      format.json {render json: @geofences}
     end
   end
 
@@ -12,9 +12,9 @@ class GeofencesController < ApplicationController
     geofence = Geofence.new(params.slice(*Geofence.column_names))
     geofence.account = current_account
     if geofence.save
-       render json: {success: true, results: [geofence.as_json]}
+       render json: geofence.as_json
     else
-      render json: {success: false, results: geofence.errors}
+      render json: geofence.errors, status: 401
     end
   end
 

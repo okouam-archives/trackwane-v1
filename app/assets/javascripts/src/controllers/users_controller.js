@@ -17,10 +17,7 @@ App.Controllers.UsersController = App.Controllers.Base.extend({
     this.init(options);
     this.listing = new App.Views.Users.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
     this.editor = new App.Views.Users.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
-    new App.Collections.Users().fetch({success: function(results) {
-        this.pubsub.trigger("users:fetched", results);
-      }.bind(this)
-    });
+    this.pubsub.trigger("users:fetched", new App.Collections.Users(options.users));
   },
 
   onUsersFetched: function(users) {
@@ -53,7 +50,7 @@ App.Controllers.UsersController = App.Controllers.Base.extend({
 
   onUserSaved: function(attributes) {
     var user = this.users.get(attributes.id);
-    user.save(attributes, {success: function(model) {
+    user.save(attributes, {success: function() {
         this.pubsub.trigger("users:fetched", this.users);
         this.editor.close();
       }.bind(this)

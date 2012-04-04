@@ -7,7 +7,7 @@ class AlertsController < ApplicationController
       format.html
       format.json do
         results = @alerts
-        render json: {success: true, results: results}
+        render json: results
       end
     end
   end
@@ -16,7 +16,7 @@ class AlertsController < ApplicationController
     alert = Alert.new(params.slice(*Alert.column_names))
     alert.account = current_account
     if alert.save
-       render json: alert.as_json
+       render json: alert
     else
       render json: alert.errors
     end

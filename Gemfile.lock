@@ -97,6 +97,9 @@ GEM
     faker (1.0.1)
       i18n (~> 0.4)
     forgery (0.5.0)
+    gon (2.3.0)
+      actionpack (>= 2.3.0)
+      json
     haml (3.1.4)
     highline (1.6.11)
     hike (1.2.1)
@@ -224,6 +227,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   forgery
+  gon
   haml
   itslog
   jquery-rails

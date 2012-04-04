@@ -7,7 +7,6 @@ class Account < ActiveRecord::Base
   has_many :geofence_alarms
   has_many :speed_alarms
   has_many :users
-  has_many :groups
   has_many :alerts
   has_many :schedules
 end

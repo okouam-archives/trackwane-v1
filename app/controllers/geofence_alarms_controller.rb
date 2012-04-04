@@ -5,8 +5,7 @@ class GeofenceAlarmsController < ApplicationController
     respond_to do |format|
       format.html
       format.json  do
-        @alarms = current_account.geofence_alarms
-        render json: {success: true, results: @alarms}
+        render json: current_account.geofence_alarms
       end
     end
   end
@@ -20,7 +19,7 @@ class GeofenceAlarmsController < ApplicationController
 		alarm = GeofenceAlarm.new(changes)
     alarm.account = current_account
     if alarm.save
-      render json: {success: true, results: [alarm.as_json]}
+      render json: alarm
     else
       render json: alarm.errors, status: 400
     end

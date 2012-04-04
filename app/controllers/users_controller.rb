@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
+  before_filter :require_user
 
   def index
-    @users = current_account.users
+    gon.users = current_account.users
     respond_to do |format|
       format.html
       format.json do
-        render json: {success: true, results: @users}
+        render json: gon.users
       end
     end
   end
@@ -36,7 +37,7 @@ class UsersController < ApplicationController
     changes = params.slice('login', 'email', 'password', 'password_confirmation', 'role')
     user.account = current_account unless user.account
     if user.update_attributes(changes)
-      render json: user.as_json
+      render json: user
     else
       render json: user.errors, status: 400
     end

@@ -21,6 +21,7 @@ gem 'forgery'
 gem 'factory_girl_rails'
 gem 'mechanize'
 gem 'ccsv'
+gem 'gon'
 
 group :development, :test do
   gem 'itslog'

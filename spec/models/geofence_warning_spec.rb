@@ -6,30 +6,35 @@ describe GeofenceWarning do
 
     before(:all) do
 			account = Factory(:account)
-      geofence_a = Factory(:geofence, :account => account, coordinates: Forgery::Geospatial.square(0, 0, 1).as_text, :name => "A")
-      geofence_b = Factory(:geofence, :account => account, coordinates: Forgery::Geospatial.square(5, 5, 1).as_text, name: "B")
-      @inclusion_alarm = Factory(:geofence_alarm, :account => account, :geofence => geofence_a, :category => "inclusion")
-      @exclusion_alarm = Factory(:geofence_alarm, :account => account, :geofence => geofence_b, :category => "exclusion")
+      @alarm = Factory(:geofence_alarm, coordinates: Forgery::Geospatial.square(5, 5, 2).as_text,
+                       :account => account, :name => "B")
     end
 
-    it "does not consider triggered speed alarms" do
-      pending
-    end
-
-    context "and there are no triggered alarms" do
+    context "and both events occur outside the geofence" do
       it "returns nothing" do
+        previous_event = Factory.build(:event, :latitude => 15, :longitude => 15)
         event = Factory.build(:event, :latitude => 10, :longitude => 10)
-        warnings = GeofenceWarning.check([@inclusion_alarm], event)
+        warnings = GeofenceWarning.check([@alarm], previous_event, event)
         warnings.should be_empty
       end
     end
 
-    context "and there are triggered alarms" do
+    context "and both events occur inside the geofence" do
+      it "returns nothing" do
+        previous_event = Factory.build(:event, :latitude => 5, :longitude => 5)
+        event = Factory.build(:event, :latitude => 5.9, :longitude => 5.9)
+        warnings = GeofenceWarning.check([@alarm], previous_event, event)
+        warnings.should be_empty
+      end
+    end
+
+    context "and one event occurs inside the geofence while the other occurs outside" do
       it "creates geofence warnings" do
+        previous_event = Factory.build(:event, :latitude => 5, :longitude => 5)
         event = Factory.build(:event, :latitude => 0, :longitude => 0)
-        warnings = GeofenceWarning.check([@inclusion_alarm, @exclusion_alarm], event)
+        warnings = GeofenceWarning.check([@alarm], previous_event, event)
         warnings.should_not be_empty
-        warnings.size.should == 2
+        warnings.size.should == 1
       end
     end
 

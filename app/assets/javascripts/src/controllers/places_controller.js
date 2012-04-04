@@ -18,10 +18,7 @@ App.Controllers.PlacesController = App.Controllers.Base.extend({
     this.map.render();
     this.listing = new App.Views.Places.Listing({el: "#canvas .listing", pubsub: this.pubsub});
     this.new_place_panel = new App.Views.NewPlacePanel({el: "#new-place-panel", pubsub: this.pubsub});
-    var places = new App.Collections.Places();
-    places.fetch({success: function(results) {
-      this.render(results);
-    }.bind(this)});
+    this.render(new App.Collections.Places(options.places));
     this.isShowing = false;
   },
 
