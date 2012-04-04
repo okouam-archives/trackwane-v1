@@ -2,14 +2,13 @@ App.Views.Reports.Devices = Backbone.View.extend({
 
   initialize: function(options) {
     this.pubsub = options.pubsub;
-    this.devices = options.devices;
     var source = $("#devices-template").html();
     this.template = Handlebars.compile(source);
     $(window).resize(this.onResize.bind(this));
   },
 
   onResize: function() {
-    this.render();
+    this.render(this.devices);
   },
 
   resize: function() {
@@ -30,8 +29,10 @@ App.Views.Reports.Devices = Backbone.View.extend({
     return devices;
   },
 
-  render: function() {
-    this.$el.html(this.template(this.devices));
+  render: function(devices) {
+    this.$el.show();
+    this.devices = devices;
+    this.$el.html(this.template(devices));
     this.resize();
   }
 

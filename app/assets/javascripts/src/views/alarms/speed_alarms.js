@@ -6,8 +6,10 @@ App.Views.SpeedAlarms = Backbone.View.extend({
   },
 
   onRemove: function(evt) {
-    var id = $(evt.currentTarget).data("id");
-    this.pubsub.trigger("speed-alarm:deleted", id);
+    if (confirm("Are you sure you want to delete this speed alarm?")) {
+      var id = $(evt.currentTarget).data("id");
+      this.pubsub.trigger("speed-alarm:deleted", id);
+    }
   },
 
   onSelect: function(evt) {

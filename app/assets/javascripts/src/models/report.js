@@ -1,5 +1,5 @@
 App.Models.Report = Backbone.Model.extend({
 
-  urlRoot: "/report"
+  urlRoot: "/reports"
 
 });

@@ -17,8 +17,10 @@ App.Views.Alerts.Listing = App.Views.Base.extend({
   },
 
   onAlertRemove: function(evt) {
-    var id = $(evt.currentTarget).data("id");
-    this.pubsub.trigger("alert:deleted", id);
+    if (confirm("Are you sure you want to delete this alert?")) {
+      var id = $(evt.currentTarget).data("id");
+      this.pubsub.trigger("alert:deleted", id);
+    }
   },
 
   onAlertSelect: function(evt) {

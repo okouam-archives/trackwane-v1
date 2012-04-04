@@ -31,8 +31,10 @@ App.Views.Devices.Listing = App.Views.Base.extend({
   },
 
   onDeviceDelete: function(evt) {
-    var id = $(evt.currentTarget).data("id");
-    this.pubsub.trigger("device:deleted", id);
+    if (confirm("Are you sure you want to delete this device?")) {
+      var id = $(evt.currentTarget).data("id");
+      this.pubsub.trigger("device:deleted", id);
+    }
   },
 
   onDeviceSelect: function(evt) {

@@ -1,13 +1,12 @@
 <script id="editor-template" type="text/x-handlebars-template">
   <fieldset>
     <label for="schedule_report_id">Report</label>
-    <input id="schedule_report_id" name="schedule[report_id]" value="{{attributes.report_id}}" type="text" />
+    <select id="schedule_report_id" name="schedule[report_id]">
+    </select>
     <label for="schedule_format">Format</label>
     <input id="schedule_format" name="schedule[format]" value="{{attributes.format}}" type="text" />
     <label for="schedule_email">Email</label>
     <input id="schedule_email" name="schedule[email]" value="{{attributes.email}}" type="text" />
-    <label for="schedule_frequency">Frequency</label>
-    <input id="schedule_frequency" name="schedule[frequency]" value="{{attributes.frequency}}" type="text" />
     <div class="buttons">
       {{#if attributes}}
         <input value="{{attributes.id}}" type="hidden" name="id" />

@@ -5,7 +5,7 @@ class GeofenceWarning < ActiveRecord::Base
 
 	def as_json(options)
 		hash = super(options)
-		hash["alarm_name"] = geofence_alarm.name
+		hash["alarm_name"] = "NO NAME"# geofence_alarm.name
 		hash
 	end
 

@@ -5,7 +5,7 @@ class PlacesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @places = Account.find(session[:account_id]).places
+        @places = current_account.places
         render json: {success: true, results: @places}
       end
     end
@@ -14,7 +14,7 @@ class PlacesController < ApplicationController
   def create
     changes = params.slice(*Place.column_names)
     place = Place.new(changes)
-    place.account = Account.find(session[:account_id])
+    place.account = current_account
     if place.save
       render json: place.as_json
     else

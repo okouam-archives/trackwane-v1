@@ -18,7 +18,6 @@ App.Controllers.DevicesController = App.Controllers.Base.extend({
     this.init(options);
     this.listing = new App.Views.Devices.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
     this.editor = new App.Views.Devices.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
-    this.toolbar = new App.Views.Devices.Toolbar({pubsub: this.pubsub, el: "#canvas .toolbar"});
     new App.Collections.Devices().fetch({success: function(results) {
         this.pubsub.trigger("devices:fetched", results);
       }.bind(this)

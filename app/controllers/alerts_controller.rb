@@ -2,8 +2,7 @@ class AlertsController < ApplicationController
   before_filter :require_user
 
   def index
-    @account_id = session[:account_id]
-    @alerts = Account.find(@account_id).alerts
+    @alerts = current_account.alerts
     respond_to do |format|
       format.html
       format.json do
@@ -15,7 +14,7 @@ class AlertsController < ApplicationController
 
   def create
     alert = Alert.new(params.slice(*Alert.column_names))
-    alert.account_id = session[:account_id]
+    alert.account = current_account
     if alert.save
        render json: alert.as_json
     else

@@ -2,7 +2,6 @@ class AccountsController < ApplicationController
 
   def index
     @accounts = Account.all
-    @account_id = session[:account_id]
     respond_to do |format|
       format.html
       format.json {render json: {success: true, results: @accounts}}

@@ -5,7 +5,7 @@ class SpeedWarning < ActiveRecord::Base
 
 	def as_json(options)
 		hash = super(options)
-		hash["alarm_name"] = speed_alarm.name
+		hash["alarm_name"] = "NO NAME"# speed_alarm.name
 		hash
 	end
 

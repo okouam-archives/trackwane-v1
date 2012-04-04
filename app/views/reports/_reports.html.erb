@@ -1,3 +1,17 @@
 <script id="reports-template" type="text/x-handlebars-template">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+  {{#each models}}
+    <tr data-id="{{attributes.id}}">
+      <td><a href="#" class="show">{{attributes.name}}</a></td>
+      <td style="width: 10px"><a data-id="{{attributes.id}}"  class="remove" href="#"><img src="/assets/closelabel.png" /></a></td>
+    </tr>
+  {{/each}}
+  </table>
 </script>
 

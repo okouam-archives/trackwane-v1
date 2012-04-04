@@ -1,9 +1,14 @@
 class ApplicationController < ActionController::Base
   #before_filter :require_user
-  helper_method :current_user
+  helper_method :current_user, :current_account
   layout "application"
 
   private
+
+  def current_account
+    account_id = session[:account_id]
+    Account.find(account_id)
+  end
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)

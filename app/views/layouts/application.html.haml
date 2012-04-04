@@ -54,16 +54,22 @@
             %a{href: "/devices"}
               Devices
       %li.admin.submenu{style: "float: right"}
-        = image_tag "/assets/20-gear2.png", :style =>"position: relative; top: 6px"
+        = image_tag "/assets/20-gear2.png", :style =>"cursor: pointer; position: relative; top: 6px"
         %ul{style: "width: 150px"}
           %li
             %a{href: "/accounts"}
               Accounts
           %li
+            %a{href: "/account"}
+              Your Account
+          %li
             %a{href: "/users"}
-              Your settings
+              Your Profile
           %li
             %a{href: "/logout"}
               Logout
+      %li{style: "float: right; text-align: right; padding-right: 0"}
+        %span{style: "font-weight: bold; color: #6699cc; font-size: 13px; position: relative; top: 5px"}
+          = current_account.name
     %div{style: "clear: both"}
   = yield

@@ -111,6 +111,7 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 .reports.index .sidebar .listing {@extend .panel; width: 200px; padding: 0; overflow-y: scroll}
 .reports.index .sidebar .listing li {margin-top: 5px; list-style-type: none}
 .reports.index .presentation {@extend .positioned-panel; background-color: white; top: 20px; left: 20px; color: black}
+.reports.index .saved-report-details {@extend .positioned-panel; background-color: white; top: 20px; left: 20px; color: black}
 .reports.index .parameters {@extend .panel; height: 190px; width: 200px; margin-bottom: 10px}
 .reports.index .sidebar .listing li {padding: 5px; padding-left: 7px; margin: 0}
 .reports.index .sidebar .listing li input {position: relative; top: 2px; margin-right: 5px}

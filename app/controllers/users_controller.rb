@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    @account_id = session[:account_id]
-    @users = Account.find(@account_id).users
+    @users = current_account.users
     respond_to do |format|
       format.html
       format.json do
@@ -35,9 +34,9 @@ class UsersController < ApplicationController
 
   def persist(user, params)
     changes = params.slice('login', 'email', 'password', 'password_confirmation', 'role')
-    user.account = Account.find(session[:account_id]) unless user.account
+    user.account = current_account unless user.account
     if user.update_attributes(changes)
-      render json: {success: true, results: [user.as_json()]}
+      render json: user.as_json
     else
       render json: user.errors, status: 400
     end

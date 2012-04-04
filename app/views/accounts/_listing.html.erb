@@ -1,0 +1,30 @@
+<script id="listing-template" type="text/x-handlebars-template">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Contact</th>
+      <th>Telephone</th>
+      <th>Email</th>
+      <th>Standard Code</th>
+      <th>Manager Code</th>
+      <th></th>
+    </thead>
+    <tbody>
+      {{#each models}}
+        <tr data-id="{{attributes.id}}">
+          <td class="selectable">{{attributes.name}}</td>
+          <td class="selectable">{{attributes.contact}}</td>
+          <td class="selectable">{{attributes.telephone}}</td>
+          <td class="selectable">{{attributes.email}}</td>
+          <td>YSN20akz</td>
+          <td>D3ldsfOE2X</td>
+          <td style="width: 10px">
+            <a data-id="{{attributes.id}}"  class="remove" href="#">
+              <img src="/assets/closelabel.png" />
+            </a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>

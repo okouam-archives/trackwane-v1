@@ -93,6 +93,7 @@ App.Views.Reports.Presentation = Backbone.View.extend({
   },
 
   render: function() {
+    this.$el.show();
     var source = $("#presentation-template").html();
     var template = Handlebars.compile(source);
     this.$el.html(template());

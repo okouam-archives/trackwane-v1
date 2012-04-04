@@ -2,12 +2,8 @@ class ReportsController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html do
-        @account_id = session[:account_id]
-      end
       format.json do
-        account_id = session[:account_id]
-        @reports = Account.find(account_id).reports
+        @reports = current_account.reports
         render json: {success: true, results: @reports}
       end
     end
@@ -35,7 +31,17 @@ class ReportsController < ApplicationController
     end
   end
 
-  def events
+  def create
+    parameters = params[:parameters]
+    name = params[:name]
+    devices = params[:devices].join(",")
+    report = Report.new(name: name, category: parameters[:type], date: parameters[:date],
+                        period: parameters[:period], devices: devices, account_id: session[:account_id])
+    if report.save
+      render :json => report
+    else
+      render :json => report.errors
+    end
   end
 
   def distance

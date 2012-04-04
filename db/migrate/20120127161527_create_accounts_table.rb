@@ -9,6 +9,8 @@ class CreateAccountsTable < ActiveRecord::Migration
       t.integer :places_count, :default => 0
       t.integer :users_count, :default => 0
       t.integer :geofences_count, :default => 0
+      t.string :standard_code
+      t.string :manager_code
       t.timestamps
     end
   end

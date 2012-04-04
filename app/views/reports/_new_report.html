@@ -1,0 +1,22 @@
+<script id="new-report-template" type="text/x-handlebars-template">
+  <fieldset>
+    <label>Report Name</label>
+    <input id="report_name" name="report[name" type="text" />
+    <label>Report Type</label>
+    {{parameters.type}}
+    <label>Date</label>
+    {{parameters.date}}
+    <label>Period</label>
+    PREVIOUS {{parameters.period}}
+    <label>Devices</label>
+    <ul>
+      {{#each devices}}
+      <li>{{attributes.display_name}}</li>
+      {{/each}}
+    </ul>
+    <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn success accept"><div>Accept</div></button>
+    <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn cancel">Cancel</button>
+  </fieldset>
+  </fieldset>
+</script>
+

@@ -16,8 +16,10 @@ App.Views.Places.Listing = App.Views.Base.extend({
   },
 
   onRemove: function(evt) {
-    var id = $(evt.currentTarget).data("id");
-    this.pubsub.trigger("place:removed", id);
+    if (confirm("Are you sure you want to delete this place?")) {
+      var id = $(evt.currentTarget).data("id");
+      this.pubsub.trigger("place:removed", id);
+    }
   },
 
   onSelect: function(evt) {

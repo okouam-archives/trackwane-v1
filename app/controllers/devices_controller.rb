@@ -2,8 +2,7 @@ class DevicesController < ApplicationController
   before_filter :require_user
 
   def index
-    @account_id = session[:account_id]
-    @devices = Account.find(@account_id).devices
+    @devices = current_account.devices
     respond_to do |format|
       format.html
       format.json do
@@ -24,8 +23,7 @@ class DevicesController < ApplicationController
   end
 
   def poll
-    account_id = session[:account_id]
-    devices = Account.find(account_id).devices
+    devices = current_account.devices
     render :json => devices.map{|device| device.events.last}.compact
   end
 
@@ -39,7 +37,7 @@ class DevicesController < ApplicationController
   def persist(device, params)
     device.group = find_group(params)
     changes = params.slice(*Device.column_names)
-    device.account = Account.find(session[:account_id]) unless device.account
+    device.account = current_account unless device.account
     if device.update_attributes(changes)
       render json: {success: true, results: [device.as_json(:computed => ["group_name"])]}
     else

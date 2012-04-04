@@ -6,8 +6,10 @@ App.Views.GeofenceAlarms = Backbone.View.extend({
   },
 
   onRemove: function(evt) {
-    var id = $(evt.currentTarget).data("id");
-    this.pubsub.trigger("geofence-alarm:deleted", id);
+    if (confirm("Are you sure you want to delete this geofence alarm?")) {
+      var id = $(evt.currentTarget).data("id");
+      this.pubsub.trigger("geofence-alarm:deleted", id);
+    }
   },
 
   onSelect: function(evt) {

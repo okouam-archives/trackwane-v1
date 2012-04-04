@@ -2,8 +2,7 @@ class SchedulesController < ApplicationController
   before_filter :require_user
 
   def index
-    @account_id = session[:account_id]
-    @schedules = Account.find(@account_id).schedules
+    @schedules = current_account.schedules
     respond_to do |format|
       format.html
       format.json do

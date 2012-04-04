@@ -21,7 +21,7 @@ App.Controllers.AlarmsController = App.Controllers.Base.extend({
     this.map = new App.Views.AlarmMap({el: "#map", pubsub: this.pubsub});
     this.new_speed_alarm_panel = new App.Views.Alarms.SpeedPanel({el: "#canvas #new-speed-alarm-panel", pubsub: this.pubsub});
     this.new_geofence_alarm_panel = new App.Views.Alarms.GeofencePanel({el: "#canvas #new-geofence-alarm-panel", pubsub: this.pubsub});
-    this.alarm_listing = new App.Views.Alarms.Listing({el: "#canvas .listing", pubsub: this.pubsub});
+    this.alarm_listing = new App.Views.Alarms.Listing({el: "#canvas #alarm-listing", pubsub: this.pubsub});
     this.toolbar = new App.Views.Alarms.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
     this.map.render();
     this.fetchAlarms();

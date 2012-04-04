@@ -16,9 +16,12 @@ App.Views.Reports.Parameters = Backbone.View.extend({
   },
 
   render: function() {
+    this.$el.show();
     var source = $("#parameters-template").html();
     var template = Handlebars.compile(source);
-    $(template()).appendTo(this.$el);
+    this.$el.html(template());
+    $(".datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+    $(".datepicker").datepicker('setDate', new Date());
   }
 
 });

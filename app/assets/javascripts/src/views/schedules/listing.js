@@ -17,7 +17,9 @@ App.Views.Schedules.Listing = App.Views.Base.extend({
   },
 
   onScheduleDelete: function() {
-    this.pubsub.trigger("schedule:deleted");
+    if (confirm("Are you sure you want to delete this report schedule?")) {
+      this.pubsub.trigger("schedule:deleted");
+    }
   },
 
   onScheduleSelect: function(evt) {

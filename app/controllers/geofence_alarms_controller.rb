@@ -5,8 +5,7 @@ class GeofenceAlarmsController < ApplicationController
     respond_to do |format|
       format.html
       format.json  do
-				account = Account.find(session[:account_id])
-        @alarms = account.geofence_alarms
+        @alarms = current_account.geofence_alarms
         render json: {success: true, results: @alarms}
       end
     end
@@ -19,7 +18,7 @@ class GeofenceAlarmsController < ApplicationController
   def create
   	changes = params.slice(*GeofenceAlarm.column_names)
 		alarm = GeofenceAlarm.new(changes)
-    alarm.account = Account.find(session[:account_id])
+    alarm.account = current_account
     if alarm.save
       render json: {success: true, results: [alarm.as_json]}
     else

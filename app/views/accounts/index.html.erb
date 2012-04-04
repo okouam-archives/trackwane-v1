@@ -1,38 +1,16 @@
-<script id="introduction-template" type="text/x-handlebars-template">
-  <div class="help">
-    <div style="width: 70%; margin: auto; margin-top: 100px"><h1>User Management</h1>
-      <p>You can <a href="#">run</a> several kinds of reports to track the activity of your vehicles.</p>
-      <p>This mini-guide will show you how
-      to <a href="#">build the report</a> you need by choosing the <a href="#">type of report</a>, as well as how to <a href="#">save</a> reports to
-      run them later and how to set up <a href="#">automatic sending of reports</a> to one or more people.</p>
-      <p>Once you've started creating reports, you can show this mini-guide at any time by clicking on the Help
-      button at the top right of your screen.</p>
-      <p style="text-align: center"><img src="/assets/stock-photo-14572303-sales-problem.jpg" /></p>
-    </div>
-  </div>
-</script>
+<%= render :partial => "listing" %>
+<%= render :partial => "editor" %>
+
+<div id="canvas">
+ <div class="column">
+    <div class="listing lionbars"></div>
+    <button class="btn new_account primary" style="margin-top: 10px">New Account</button>
+ </div>
+ <div class="editor"></div>
+</div>
 
 <script type="text/javascript">
   $(function() {
-    $.App.help = "clients";
-    $.App.account_id = <%= @account_id %>;
-    Ext.application({
-      name: 'Gowane',
-      autoCreateViewport: false,
-      controllers: ['Gowane.controllers.Accounts'],
-      launch: function() {
-        Ext.create('Gowane.stores.Accounts', {storeId: "AccountStore"});
-        new Ext.Viewport({
-          layout : 'border',
-          items : [
-            {xtype: 'menu', region : 'north'},
-            {region : 'west', width: 400, xtype: 'panel', id: 'dynamic', split: true, layout: 'fit', items: [
-              {xtype: 'template_panel', template: "#introduction-template"}
-            ]},
-            {region : 'center', xtype: 'account_list', layout: 'fit', layoutConfig: {align: 'stretch'}}
-          ]
-        });
-      }
-    });
+    new App.Controllers.AccountsController({el: "#canvas"});
   });
 </script>

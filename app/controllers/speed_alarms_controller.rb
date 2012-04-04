@@ -5,8 +5,7 @@ class SpeedAlarmsController < ApplicationController
     respond_to do |format|
       format.html
       format.json  do
-				account = Account.find(session[:account_id])
-        @alarms = account.speed_alarms
+        @alarms = current_account.speed_alarms
         render json: {success: true, results: @alarms}
       end
     end
@@ -19,7 +18,7 @@ class SpeedAlarmsController < ApplicationController
   def create
   	changes = params.slice(*SpeedAlarm.column_names)
 		alarm = SpeedAlarm.new(changes)
-    alarm.account = Account.find(session[:account_id])
+    alarm.account = current_account
     if alarm.save
       render json: alarm.as_json
     else

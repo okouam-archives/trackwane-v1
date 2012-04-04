@@ -1,10 +1,10 @@
-App.Views.Users.Listing = App.Views.Base.extend({
+App.Views.Accounts.Listing = App.Views.Base.extend({
 
   events: {
-    "click tr td.selectable" : "onUserSelect",
-    "click button.save": "onUserSave",
-    "click .remove": "onUserDelete",
-    "click button.create": "onUserCreate"
+    "click tr td.selectable" : "onAccountSelect",
+    "click button.save": "onAccountSave",
+    "click .remove": "onAccountDelete",
+    "click button.create": "onAccountCreate"
   },
 
   initialize: function(options) {
@@ -26,24 +26,24 @@ App.Views.Users.Listing = App.Views.Base.extend({
     this.render(this.users);
   },
 
-  onUserSave: function() {
-    this.pubsub.trigger("user:saved");
+  onAccountSave: function() {
+    this.pubsub.trigger("account:saved");
   },
 
-  onUserDelete: function(evt) {
+  onAccountDelete: function(evt) {
     if (confirm("Are you sure you want to delete this user?")) {
       var id = $(evt.currentTarget).parents("tr").data("id");
-      this.pubsub.trigger("user:deleted", id);
+      this.pubsub.trigger("account:deleted", id);
     }
   },
 
-  onUserSelect: function(evt) {
+  onAccountSelect: function(evt) {
     var id = $(evt.currentTarget).parent("tr").data("id");
-    this.pubsub.trigger("user:selected", id);
+    this.pubsub.trigger("account:selected", id);
   },
 
-  onUserCreate: function() {
-    this.pubsub.trigger("user:created");
+  onAccountCreate: function() {
+    this.pubsub.trigger("account:created");
   },
 
   prepareTemplates: function() {
@@ -51,9 +51,9 @@ App.Views.Users.Listing = App.Views.Base.extend({
     this.template = Handlebars.compile(source);
   },
 
-  render: function(users) {
-    this.users = users;
-    this.$el.html(this.template(users));
+  render: function(accounts) {
+    this.accounts = accounts;
+    this.$el.html(this.template(accounts));
     this.$el.show();
     this.resize();
   }

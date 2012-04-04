@@ -17,7 +17,6 @@ App.Controllers.UsersController = App.Controllers.Base.extend({
     this.init(options);
     this.listing = new App.Views.Users.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
     this.editor = new App.Views.Users.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
-    this.toolbar = new App.Views.Users.Toolbar({pubsub: this.pubsub, el: "#canvas .toolbar"});
     new App.Collections.Users().fetch({success: function(results) {
         this.pubsub.trigger("users:fetched", results);
       }.bind(this)
