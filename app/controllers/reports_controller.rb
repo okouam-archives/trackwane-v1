@@ -2,6 +2,7 @@ class ReportsController < ApplicationController
 
   def index
     respond_to do |format|
+      format.html
       format.json do
         @reports = current_account.reports
         render json: {success: true, results: @reports}
