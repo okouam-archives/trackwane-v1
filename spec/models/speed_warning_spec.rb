@@ -4,7 +4,7 @@ describe SpeedWarning do
 
 	describe "when checking for triggered alarms" do
 		before(:each) do
-      @alarm = Factory(:speed_alarm, coordinates: Forgery::Geospatial.square(5, 5, 1).as_text, :speed => 100)
+      @alarm = FactoryGirl(:speed_alarm, coordinates: Forgery::Geospatial.square(5, 5, 1).as_text, :speed => 100)
     end
 		context "and the event occurs outside the geofence" do
       context "and the alarm is active" do
@@ -15,7 +15,7 @@ describe SpeedWarning do
           pending
         end
         it "returns nothing" do
-          event = Factory.build(:event, :latitude => 0, :longitude => 0, :speed => 50)
+          event = FactoryGirl.build(:event, :latitude => 0, :longitude => 0, :speed => 50)
           warnings = SpeedWarning.check([@alarm], event)
           warnings.should be_empty
         end
@@ -25,7 +25,7 @@ describe SpeedWarning do
             @alarm.is_active = false
         end
         it "returns nothing" do
-          event = Factory.build(:event, :latitude => 0, :longitude => 0, :speed => 50)
+          event = FactoryGirl.build(:event, :latitude => 0, :longitude => 0, :speed => 50)
           warnings = SpeedWarning.check([@alarm], event)
           warnings.should be_empty
         end
@@ -35,7 +35,7 @@ describe SpeedWarning do
       context "and the speed limit is breached" do
         context "and the alarm is inactive" do
           it "creates speed warnings" do
-            event = Factory.build(:event, :latitude => 2.5, :longitude => 3.5, :speed => 123)
+            event = FactoryGirl.build(:event, :latitude => 2.5, :longitude => 3.5, :speed => 123)
             warnings = SpeedWarning.check([@alarm], event)
             warnings.should_not be_empty
             warnings.size.should == 1
@@ -46,7 +46,7 @@ describe SpeedWarning do
         end
         context "and the alarm is active" do
            it "creates speed warnings" do
-            event = Factory.build(:event, :latitude => 2.5, :longitude => 3.5, :speed => 123)
+            event = FactoryGirl.build(:event, :latitude => 2.5, :longitude => 3.5, :speed => 123)
             warnings = SpeedWarning.check([@alarm], event)
             warnings.should_not be_empty
             warnings.size.should == 1
@@ -62,14 +62,14 @@ describe SpeedWarning do
             pending
           end
           it "returns nothing" do
-            event = Factory.build(:event, :latitude => 0, :longitude => 0, :speed => 50)
+            event = FactoryGirl.build(:event, :latitude => 0, :longitude => 0, :speed => 50)
             warnings = SpeedWarning.check([@alarm], event)
             warnings.should be_empty
           end
         end
         context "and the alarm is disactivated" do
           it "returns nothing" do
-            event = Factory.build(:event, :latitude => 0, :longitude => 0, :speed => 50)
+            event = FactoryGirl.build(:event, :latitude => 0, :longitude => 0, :speed => 50)
             warnings = SpeedWarning.check([@alarm], event)
             warnings.should be_empty
           end

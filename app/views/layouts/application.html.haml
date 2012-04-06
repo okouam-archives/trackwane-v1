@@ -57,14 +57,16 @@
       %li.admin.submenu{style: "float: right"}
         = image_tag "/assets/20-gear2.png", :style =>"cursor: pointer; position: relative; top: 6px"
         %ul{style: "width: 150px"}
+          - if current_user.role == "administrator"
+            %li
+              %a{href: "/accounts"}
+                Accounts
+          - if current_user.role != "standard"
+            %li
+              %a{href: "/account"}
+                Your Account
           %li
-            %a{href: "/accounts"}
-              Accounts
-          %li
-            %a{href: "/account"}
-              Your Account
-          %li
-            %a{href: "/users"}
+            %a{href: "/profile"}
               Your Profile
           %li
             %a{href: "/logout"}

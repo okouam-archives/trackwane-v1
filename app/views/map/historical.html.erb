@@ -1,9 +1,26 @@
+<%= render :partial => "map/historical/listing" %>
+<%= render :partial => "map/historical/events" %>
+
 <div id="canvas">
   <div id="map"></div>
+  <div class="column">
+    <div class="parameters">
+      <fieldset>
+      <label for="period">Period</label>
+      <input id="period" name="period" type="text" />
+      </fieldset>
+    </div>
+    <div class="listing"></div>
+  </div>
+  <div class="events"></div>
+  <div class="toolbar">
+    <div class='places button'><img src='/assets/103-map.png'><label>Places</label></div>
+    <div class='geofences button'><img src='/assets/103-map.png'><label>Geofences</label></div>
+  </div>
 </div>
 
 <script>
   $(function() {
-    var controller = new App.Controllers.HistoricalController({el: "#canvas"});
+    var controller = new App.Controllers.HistoricalController({el: "#canvas", devices: gon.devices});
   });
 </script>

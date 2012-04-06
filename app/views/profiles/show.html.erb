@@ -1,0 +1,27 @@
+<div id="canvas">
+  <div class="centered-panel">
+  <fieldset>
+    <label for="profile_language">Language</label>
+    <select name="profile[language]" id="profile_language">
+      <option value="en">English</option>
+      <option value="fr">Francais</option>
+    </select>
+    <% if current_user.role == "administrator" %>
+      <label for="profile_account">Account</label>
+      <select name="profile[account]" id="profile_account">
+      </select>
+    <% end %>
+    <label for="profile_password">Password</label>
+    <input id="profile_password" type="password" />
+    <label>Password Confirmation</label>
+    <input type="password" />
+    <button class="success btn accept">Accept</button>
+  </fieldset>
+    </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    new App.Controllers.ProfileController({el: "#canvas"});
+  });
+</script>

@@ -1,28 +1,33 @@
-App.Views.HistoricalMap = Backbone.View.extend({
-
-  events: {
-    "click .geofences.switcher": "toggleGeofences",
-    "click .places.switcher": "togglePlaces"
-  },
+App.Views.Historical.Map = Backbone.View.extend({
 
   initialize: function(options) {
     this.pubsub = options.pubsub;
-    this.places = new App.Collections.Places();
-    this.geofences = new App.Collections.Geofences();
     this.setElement(options.el);
-    this.pubsub.on("events:received", this.show.bind(this));
     OpenLayers.ImgPath = '/assets/OpenLayers/';
     OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+    this.load();
   },
 
-  firstShow: true,
+  render: function(events) {
+    this.event_layer.destroyFeatures();
+    this.createFeatures(events);
+  },
 
-  arePlacesVisible: false,
+  createFeatures: function(events) {
+    if (!events || events.size() < 1) return;
+    events.each(function(event) {
+      this.createFeature(event);
+    }.bind(this));
+    if (!this.initialized) {
+      this.initialized = true;
+      this.map.zoomToExtent(this.event_layer.getDataExtent());
+    }
+  },
 
-  areGeofencesVisible: false,
-
-  show: function() {
-
+  createFeature: function(event) {
+    var mapper = new App.Services.Mapper();
+    var feature = mapper.toFeature(event);
+    this.event_layer.addFeatures([feature]);
   },
 
   hidePanels: function() {
@@ -32,76 +37,42 @@ App.Views.HistoricalMap = Backbone.View.extend({
     }
   },
 
-  toggleGeofences: function() {
-    if (this.arePlacesVisible) {
-      this.hidePlaces();
+  showGeofences: function(geofences) {
+    if (!this.geofence_layer) {
+      var cartography = new App.Services.Cartography(this.map);
+      this.geofence_layer = cartography.createLayer("geofences");
     }
-    if (this.areGeofencesVisible) {
-      this.hideGeofences();
-    } else {
-      this.showGeofences();
-    }
-  },
-
-  togglePlaces: function() {
-    if (this.areGeofencesVisible) {
-      this.hideGeofences();
-    }
-    if (this.arePlacesVisible) {
-      this.hidePlaces();
-    } else {
-      this.showPlaces();
-    }
-  },
-
-  hideGeofences: function() {
-    this.areGeofencesVisible = false;
-    this.geofence_layer.destroyFeatures();
-  },
-
-  showGeofences: function() {
-    if (!this.geofence_layer) this.geofence_layer = this.createLayer("geofences");
-    this.areGeofencesVisible = true;
-    this.geofences.fetch({success: function(results) {
-      var mapper = new App.Services.Mapper();
-      var features = mapper.featuresFromGeofences(results, cartography);
-      this.geofence_layer.addFeatures(features);
-      }.bind(this)
-    });
+    var mapper = new App.Services.Mapper();
+    var features = mapper.toGeofenceFeatures(geofences);
+    this.geofence_layer.addFeatures(features);
   },
 
   hidePlaces: function() {
-    this.arePlacesVisible = false;
     this.place_layer.destroyFeatures();
+    this.removePopups("place");
   },
 
-  showPlaces: function() {
-    if (!this.place_layer) this.place_layer = this.createLayer("places");
-    this.arePlacesVisible = true;
-    this.places.fetch({success: function(results) {
-      var mapper = new App.Services.Mapper();
-      var features = mapper.featuresFromPlaces(results, cartography);
-      this.place_layer.addFeatures(features);
-      }.bind(this)
-    });
+  showPlaces: function(places) {
+    if (!this.place_layer) {
+      var cartography = new App.Services.Cartography(this.map);
+      this.place_layer = cartography.createLayer("places");
+    }
+    var mapper = new App.Services.Mapper();
+    var features = mapper.toPlaceFeatures(places);
+    this.place_layer.addFeatures(features);
+    if (!places || places.size() < 1) return;
+    this.removePopups("place");
+    places.each(function(place) {
+      this.createPlacePopup(place.attributes, place.getCoordinates());
+    }.bind(this));
   },
 
-    render: function() {
+  load: function() {
     this.$el.empty();
     var cartography = new App.Services.Cartography();
     this.map = cartography.createMap(this.el);
     this.event_layer = cartography.createLayer("events");
     this.map.zoomTo(1);
-    this.renderPlacesButton();
-    this.renderGeofencesButton();
-  },
-
-  renderPlacesButton: function() {
-    $(this.el).append("<div class='places switcher'><a><img style='height: 20px' src='/assets/103-map.png'>Places</a></div>")
-  },
-
-  renderGeofencesButton: function() {
-    $(this.el).append("<div class='geofences switcher'><a><img style='height: 20px' src='/assets/103-map.png'>Geofences</a></div>")
   }
 
 });

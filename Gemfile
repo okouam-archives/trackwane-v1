@@ -1,31 +1,36 @@
 source 'http://rubygems.org'
 
-gem 'rails', :git => "git://github.com/rails/rails.git", :tag => "v3.1.2"
+gem 'rails'
 gem 'pg'
 gem 'json'
-gem 'stomp'
 gem 'authlogic'
 gem 'jquery-rails'
 gem 'rgeo-activerecord'
 gem 'rgeo-geojson'
-gem 'database_cleaner'
 gem 'haml'
 gem 'faker'
 gem 'rest-client'
 gem 'capistrano'
-gem 'rspec'
 gem 'postgis_adapter', :git => 'https://github.com/dougcole/postgis_adapter.git'
-gem 'rspec-rails'
 gem 'silent-postgres'
 gem 'forgery'
-gem 'factory_girl_rails'
-gem 'mechanize'
 gem 'ccsv'
 gem 'gon'
 
 group :development, :test do
   gem 'itslog'
+  gem 'mechanize'
   gem 'ruby-debug19'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'rspec'
+  gem 'cucumber'
+  gem 'capybara-webkit'
+  gem 'rspec-rails'
+  gem 'cucumber-rails'
 end
 
 group :assets do

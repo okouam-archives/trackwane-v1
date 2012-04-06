@@ -21,11 +21,6 @@ class DevicesController < ApplicationController
     persist(device, params)
   end
 
-  def poll
-    devices = current_account.devices
-    render :json => devices.map{|device| device.events.last}.compact
-  end
-
   def destroy
     Device.find(params[:id]).destroy
     render json: {success: true}

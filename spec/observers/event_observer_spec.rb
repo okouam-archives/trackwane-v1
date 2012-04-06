@@ -39,10 +39,10 @@ describe EventObserver do
 
     context "and there was a previous event" do
       it "finds the distance covered since the last event" do
-        device = Factory(:device)
-        Factory(:event, :device => device, :longitude => 0, :latitude => 0)
+        device = FactoryGirl.create(:device)
+        FactoryGirl.create(:event, :device => device, :longitude => 0, :latitude => 0)
         device.reload
-        event = Factory.build(:event, :longitude => 0.005, :latitude => 0.000, :device => device)
+        event = FactoryGirl.build(:event, :longitude => 0.005, :latitude => 0.000, :device => device)
         observer = EventObserver.instance
         observer.before_save(event)
         event.distance_delta.should == 556.5974539663679
@@ -54,14 +54,14 @@ describe EventObserver do
   describe "when the event occurs next to a place" do
 
     before(:all) do
-      @account = Factory(:account, name: "0-One")
-      @device = Factory(:device, account: @account)
+      @account = FactoryGirl.create(:account, name: "0-One")
+      @device = FactoryGirl.create(:device, account: @account)
     end
 
     context "and the place is within 20m" do
       it "assigns the event to the place" do
-        place = Factory(:place, account: @account, longitude: -4.06390, latitude: 5.34670, :category => "Pubs")
-        event = Factory.build(:event, device: @device, longitude: -4.06393, latitude: 5.34676)
+        place = FactoryGirl.create(:place, account: @account, longitude: -4.06390, latitude: 5.34670, :category => "Pubs")
+        event = FactoryGirl.build(:event, device: @device, longitude: -4.06393, latitude: 5.34676)
         observer = EventObserver.instance
         observer.before_save(event)
         event.place.should == place
@@ -70,8 +70,8 @@ describe EventObserver do
 
     context "and the place is not within 20m" do
       it "does not assign the event to the place" do
-        Factory(:place, account: @account, longitude: -4.06390, latitude: 5.34670, :category => "Pubs")
-        event = Factory.build(:event, device: @device, longitude: 0.06393, latitude: 0.34676)
+        FactoryGirl.create(:place, account: @account, longitude: -4.06390, latitude: 5.34670, :category => "Pubs")
+        event = FactoryGirl.build(:event, device: @device, longitude: 0.06393, latitude: 0.34676)
         observer = EventObserver.instance
         observer.before_save(event)
         event.place.should be_nil

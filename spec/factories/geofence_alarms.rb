@@ -1,11 +1,7 @@
-Factory.sequence :geofence_alarm_name do |n|
-   "Geofence Alarm #{n}"
-end
-
 FactoryGirl.define do
   factory :geofence_alarm do
     association :account
-    name Factory.next :geofence_alarm_name
+    sequence(:name) {|n| "Geofence Alarm #{n}"}
     coordinates Forgery::Geospatial.square.to_s
   end
 end

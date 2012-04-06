@@ -1,0 +1,22 @@
+<script id="events-template" type="text/x-handlebars-template">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Address</th>
+        <th>Speed</th>
+        <th>Place</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each models}}
+        <tr>
+          <td>{{attributes.date}}</td>
+          <td>{{attributes.address}}</td>
+          <td>{{attributes.speed}}</td>
+          <td>{{attributes.place_id}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>

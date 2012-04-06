@@ -1,0 +1,18 @@
+<script id="devices-template" type="text/x-handlebars-template">
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <b>Vehicles</b>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each models}}
+      <tr>
+        <td><a data-id="{{attributes.id}}" href="#">{{attributes.display_name}}</a></td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</script>

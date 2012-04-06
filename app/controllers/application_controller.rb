@@ -25,8 +25,9 @@ class ApplicationController < ActionController::Base
     unless current_user
       redirect_to new_user_session_url
       false
+    else
+      gon.current_user = {role: current_user.role, account_id: current_account.id}
     end
-    gon.current_user = {role: current_user.role, account_id: current_account.id}
   end
 
   def require_no_user

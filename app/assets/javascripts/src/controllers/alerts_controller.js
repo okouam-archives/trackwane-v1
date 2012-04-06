@@ -15,28 +15,23 @@ App.Controllers.AlertsController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    this.alarms = [];
-    var geofence_alarms = new App.Collections.GeofenceAlarms();
-    geofence_alarms.fetch({success: function() {
-      var attributes = geofence_alarms.map(function(alarm) {
-        return {id: alarm.id, name: alarm.get("name"), type: "GeofenceAlarm"};
-      });
-      this.alarms = _.union(this.alarms, attributes);
-    }.bind(this)});
-    var speed_alarms = new App.Collections.SpeedAlarms();
-    speed_alarms.fetch({success: function() {
-      var attributes = speed_alarms.map(function(alarm) {
-        return {id: alarm.id, name: alarm.get("name"), type: "SpeedAlarm"};
-      });
-      this.alarms = _.union(this.alarms, attributes);
-    }.bind(this)});
+    this.alarms = this.getAvailableAlarms(options.geofence_alarms, options.speed_alarms);
     this.listing = new App.Views.Alerts.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
     this.editor = new App.Views.Alerts.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
     this.toolbar = new App.Views.Alerts.Toolbar({pubsub: this.pubsub, el: "#canvas .toolbar"});
-    this.alerts = new App.Collections.Alerts();
-    this.alerts.fetch({success: function(results) {
-        this.listing.render(results);
-      }.bind(this)
+    this.listing.render(new App.Collections.Alerts(options.alerts));
+  },
+
+  getAvailableAlarms: function(geofence_alarms, speed_alarms) {
+    var attributes = this.parseAlarms(new App.Collections.GeofenceAlarms(geofence_alarms), "GeofenceAlarm");
+    var alarms = _.union([], attributes);
+    attributes = this.parseAlarms(new App.Collections.SpeedAlarms(speed_alarms), "SpeedAlarm");
+    return _.union(alarms, attributes);
+  },
+
+  parseAlarms: function(alarms, type) {
+    alarms.map(function(alarm) {
+      return {id: alarm.id, name: alarm.get("name"), type: type};
     });
   },
 

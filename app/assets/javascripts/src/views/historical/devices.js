@@ -1,17 +1,23 @@
 App.Views.Historical.Devices = Backbone.View.extend({
 
+  events: {
+    "click a": "onDeviceSelect"
+  },
+
   initialize: function(options) {
     this.pubsub = options.pubsub;
-    var source = $("#device-template").html();
+    var source = $("#devices-template").html();
     this.template = Handlebars.compile(source);
   },
 
-  render: function(places) {
-    this.places = places;
-    if (!this.container) {
-      this.container = $("<div class='map-listing''><div>").appendTo(this.$el);
-    }
-    this.container.html(this.template(places));
+  onDeviceSelect: function(evt) {
+    this.pubsub.trigger("device:selected", $(evt.currentTarget).data("id"));
+  },
+
+  render: function(devices) {
+    this.devices = devices;
+    this.$el.html(this.template(devices));
+    this.$el.lionbars();
   }
 
 });

@@ -13,13 +13,14 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    setInterval(this.poll.bind(this), 3000);
-    this.listing = new App.Views.RealtimeEvents({el: "#canvas .listing", pubsub: this.pubsub});
+    setInterval(this.poll.bind(this), 10000);
+    this.listing = new App.Views.Realtime.Events({el: "#canvas .listing", pubsub: this.pubsub});
     this.toolbar = new App.Views.Realtime.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
     this.follow_panel = new App.Views.Realtime.FollowActionPanel({el: "#canvas .follow.panel", pubsub: this.pubsub});
     this.command_panel = new App.Views.Realtime.SendCommandActionPanel({el: "#canvas .send-command.panel", pubsub: this.pubsub});
     this.map = new App.Views.Realtime.Map({el: "#map", pubsub: this.pubsub});
     this.map.render();
+    this.onEventsReceived(new App.Collections.RealtimeEvents(options.events));
   },
 
   onToggleGeofences: function() {
@@ -91,8 +92,7 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
   },
 
   poll: function() {
-    var events = new App.Collections.RealtimeEvents();
-    events.fetch({success: function(results) {
+    new App.Collections.RealtimeEvents().fetch({success: function(results) {
       this.pubsub.trigger("events:received", results);
     }.bind(this)});
   }

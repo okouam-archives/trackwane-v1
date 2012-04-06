@@ -14,7 +14,17 @@ Gowane::Application.routes.draw do
   end
 
   resource :user_session
-  resources :accounts, :places, :alarms, :speed_alarms, :geofence_alarms, :events, :schedules, :alerts
+
+  resource :profile
+
+  resources :accounts do
+    collection do
+      get :current
+      post :current
+    end
+  end
+
+  resources :places, :alarms, :speed_alarms, :geofence_alarms, :devices, :schedules, :alerts
 
   resources :users do
     collection do
@@ -22,12 +32,13 @@ Gowane::Application.routes.draw do
     end
   end
 
-  resources :devices do
+  resources :events do
     collection do
-      get :poll
+      get :realtime
     end
   end
 
+  match 'account' => 'accounts#show', :as => :account
   match 'platform' => 'pages#platform', :as => :platform
   match 'competition' => 'pages#competition', :as => :competition
   match 'company' => 'pages#company', :as => :company

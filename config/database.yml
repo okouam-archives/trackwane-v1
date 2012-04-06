@@ -10,7 +10,7 @@ development: &development
   min_messages: warning
   template: template_gowane
 
-test:
+test: &test
   <<: *development
   database: gowane_test
 
@@ -21,3 +21,6 @@ production:
   username: deployment
   password: FireDrake[1981]
   
+
+cucumber:
+  <<: *test

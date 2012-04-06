@@ -1,0 +1,21 @@
+<div id="canvas">
+  <div class="centered-panel">
+  <fieldset>
+    <label for="account_name">Name</label>
+    <input type="text" value="<%= @account.name %>" />
+    <label for="account_name">Contact</label>
+    <input type="text" value="<%= @account.contact %>"/>
+    <label for="account_name">Telephone</label>
+    <input type="text" value="<%= @account.telephone %>" />
+    <label for="account_name">Email</label>
+    <input type="text" value="<%= @account.email %>" />
+    <button class="success btn accept">Accept</button>
+  </fieldset>
+    </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    new App.Controllers.AccountController({el: "#canvas"});
+  });
+</script>

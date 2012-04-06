@@ -8,6 +8,7 @@
 //= require ./lib/date
 //= require ./lib/bootstrap-dropdown
 //= require ./lib/jquery.lionbars.0.3
+//= require ./lib/jquery.validate
 //= require ./src/app
 //= require_tree ./src/locales
 //= require_tree ./src/models

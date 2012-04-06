@@ -1,4 +1,4 @@
-App.Models.RealtimeEvent = Backbone.Model.extend({
+App.Models.Event = Backbone.Model.extend({
 
   getCoordinates: function() {
     var cartography = new App.Services.Cartography();

@@ -11,6 +11,6 @@
 
 <script type="text/javascript">
   $(function() {
-    new App.Controllers.AlertsController({el: "#canvas"});
+    new App.Controllers.AlertsController({el: "#canvas", speed_alarms: gon.speed_alarms, geofence_alarms: gon.geofence_alarms, alerts: gon.alerts});
   });
 </script>

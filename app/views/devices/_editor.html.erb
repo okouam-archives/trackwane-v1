@@ -1,15 +1,17 @@
 <script id="editor-template" type="text/x-handlebars-template">
-  <fieldset>
-    <label>Name</label>
-    <input name="display_name" value="{{attributes.display_name}}" type="text" />
-    <label>IMEI Number</label>
-    <input name="imei_number" value="{{attributes.imei_number}}" type="text" />
-    {{#if attributes}}
-      <input  value="{{attributes.id}}" type="hidden" name="id" />
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="save success btn">Accept</button>
-    {{else}}
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn success create">Accept</button>
-    {{/if}}
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="cancel btn"><div>Cancel</div></button>
-  </fieldset>
+  <form>
+    <fieldset>
+      <label>Name</label>
+      <input name="display_name" value="{{attributes.display_name}}" type="text" />
+      <label>IMEI Number</label>
+      <input name="imei_number" value="{{attributes.imei_number}}" type="text" />
+      {{#if attributes}}
+        <input  value="{{attributes.id}}" type="hidden" name="id" />
+        <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="save success btn">Accept</button>
+      {{else}}
+        <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn success create">Accept</button>
+      {{/if}}
+        <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="cancel btn"><div>Cancel</div></button>
+    </fieldset>
+  </form>
 </script>

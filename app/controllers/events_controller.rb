@@ -5,14 +5,18 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
+        date = params[:date]
         device_id = params[:device_id]
         device = Device.find(device_id)
-        events = device.events
-        events = events.limit(params[:limit]) if params[:limit]
-        events = events.offset(params[:start]) if params[:start]
+        events = device.events.where("date_trunc('day', date) = DATE '#{date}'")
         render json: events
       end
     end
+  end
+
+  def realtime
+    devices = current_account.devices
+    render :json => devices.map {|device| device.events.last}.compact
   end
 
   def create

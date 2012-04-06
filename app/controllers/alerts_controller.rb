@@ -2,12 +2,13 @@ class AlertsController < ApplicationController
   before_filter :require_user
 
   def index
-    @alerts = current_account.alerts
+    gon.alerts = current_account.alerts
+    gon.speed_alarms = current_account.speed_alarms
+    gon.geofence_alarms = current_account.geofence_alarms
     respond_to do |format|
       format.html
       format.json do
-        results = @alerts
-        render json: results
+        render json: gon.alerts
       end
     end
   end

@@ -1,11 +1,19 @@
 class AccountsController < ApplicationController
 
   def index
-    @accounts = Account.all
+    gon.accounts = Account.all
     respond_to do |format|
       format.html
-      format.json {render json: @accounts}
+      format.json {render json: gon.accounts}
     end
+  end
+
+  def show
+    @account = current_account
+  end
+
+  def current
+    @account = current_account
   end
 
   def destroy

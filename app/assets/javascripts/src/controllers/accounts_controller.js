@@ -17,10 +17,7 @@ App.Controllers.AccountsController = App.Controllers.Base.extend({
     this.init(options);
     this.listing = new App.Views.Accounts.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
     this.editor = new App.Views.Accounts.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
-    new App.Collections.Accounts().fetch({success: function(results) {
-        this.pubsub.trigger("accounts:fetched", results);
-      }.bind(this)
-    });
+    this.pubsub.trigger("accounts:fetched", new App.Collections.Accounts(options.accounts));
   },
 
   onAccountsFetched: function(accounts) {
