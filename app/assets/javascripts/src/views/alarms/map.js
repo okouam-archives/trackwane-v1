@@ -55,7 +55,7 @@ App.Views.AlarmMap = App.Views.Base.extend({
 
   cancelEdit: function() {
     if (this.geofence_drawing_tool) this.geofence_drawing_tool.deactivate();
-    if (!this.layer) this.layer.destroyFeatures();
+    if (this.layer) this.layer.destroyFeatures();
   },
 
   render: function() {

@@ -6,7 +6,7 @@ class SpeedAlarmsController < ApplicationController
       format.html
       format.json  do
         @alarms = current_account.speed_alarms
-        render json: {success: true, results: @alarms}
+        render json: @alarms
       end
     end
   end

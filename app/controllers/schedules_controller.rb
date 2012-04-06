@@ -6,8 +6,7 @@ class SchedulesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        results = @schedules
-        render json: {success: true, results: results}
+        render json: @schedules
       end
     end
   end

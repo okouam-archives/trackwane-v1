@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
       format.html
       format.json do
         @reports = current_account.reports
-        render json: {success: true, results: @reports}
+        render json: @reports
       end
     end
   end
