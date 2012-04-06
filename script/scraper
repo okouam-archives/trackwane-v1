@@ -3,6 +3,9 @@
 require 'ruby-debug'
 require 'mechanize'
 require 'date'
+require 'active_support/all'
+require 'zip/zip'
+require 'zip/zipfilesystem'
 
 class Program
 
@@ -35,10 +38,15 @@ class Program
       puts option.text
       option.select
       csv = form.submit(form.button_with(:name => "r_save_to_csv"))
-      File.open("db/simulation/#{option.value}.csv", "a") do |file|
-      file << csv.body
-    end
-    puts day
+      File.open("db/simulation/#{option.value}.#{day}.csv", "a") do |file|
+        file << csv.body
+        archive = "db/simulation/#{option.value}.#{day}.csv.zip"
+        Zip::ZipFile.open(archive, Zip::ZipFile::CREATE) do |zipfile|
+          zipfile.add("#{option.value}.#{day}.csv", "db/simulation/#{option.value}.#{day}.csv")
+        end
+        File.delete(file)
+      end
+      puts day
     end
 
   end
@@ -46,6 +54,6 @@ class Program
 end
 
 agent = Mechanize.new
-start_date = Date.today << 1
+start_date = 1.week.ago.to_date
 end_date = Date.today
 Program.new(agent).run(start_date, end_date)

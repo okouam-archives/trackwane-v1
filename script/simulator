@@ -2,6 +2,17 @@
 
 require 'rest_client'
 require 'ccsv'
+require 'zip/zip'
+require 'zip/zipfilesystem'
+
+
+def unzip_file(file)
+  Zip::ZipFile.open(file) { |zip_file|
+    zip_file.each{|f|
+      zip_file.extract(f, "db/simulation/" + f.to_s)
+    }
+  }
+end
 
 def run(filename)
   imei_number = File.basename(filename, ".csv")
@@ -24,7 +35,7 @@ def run(filename)
         gps_signal: row[5].gsub('"', ''),
         heading: row[6].gsub('"', '')
       }
-		 	RestClient.post "http://#{ARGV[0]}/events", {data: event}
+RestClient.post "http://#{ARGV[0]}/events", {data: event}
       print "."
       sleep(5)
     end
@@ -37,11 +48,15 @@ end
 
 threads = []
 
-Dir[File.expand_path(File.dirname(__FILE__) + '/../db/simulation/*.csv')].each do |filename|
-	threads << Thread.start do
-		puts "Reading data from #{filename}"
-		run(filename)
-	end
+Dir[File.expand_path(File.dirname(__FILE__) + '/../db/simulation/*.zip')].each do |archive|
+  filename = archive.split('.')
+  csv_file = archive[0..archive.length()-5]
+  unzip_file(archive)
+  threads << Thread.start do
+    puts "Reading data from #{csv_file}"
+    run(csv_file)
+    File.delete(csv_file)
+  end
 end
 
 threads.each {|t| t.join}

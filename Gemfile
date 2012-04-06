@@ -16,6 +16,7 @@ gem 'silent-postgres'
 gem 'forgery'
 gem 'ccsv'
 gem 'gon'
+gem 'rubyzip'
 
 group :development, :test do
   gem 'itslog'
