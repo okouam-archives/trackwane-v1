@@ -1,8 +1,8 @@
 require 'capistrano/ext/multistage'
 require File.dirname(__FILE__) + '/boot'
 
-set :application, "gowane"
-set :repository,  "git@github.com:0-One/Gowane.git"
+set :application, "trackwane"
+set :repository,  "git@github.com:0-One/trackwane.git"
 set :scm, :git
 set :branch, :master
 set :stages, ["staging", "production"]
@@ -12,9 +12,9 @@ set :deploy_via, :remote_cache
 set :user, "deployment"
 set :ssh_options, { :forward_agent => true }
 set :rake, "/var/lib/gems/1.8/bin/rake"
-role :web, "galileo.codeifier.com"
-role :app, "galileo.codeifier.com"
-role :db,  "galileo.codeifier.com", :primary => true
+role :web, "trackwane.com"
+role :app, "trackwane.com"
+role :db,  "trackwane.com", :primary => true
 
 default_run_options[:pty] = true
 

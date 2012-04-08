@@ -1,1 +1,1 @@
-set :deploy_to, "/home/deployment/apps/gowane/staging"
+set :deploy_to, "/home/deployment/apps/trackwane/staging"

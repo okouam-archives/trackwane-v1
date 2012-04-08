@@ -1,4 +1,4 @@
-Gowane::Application.routes.draw do
+Trackwane::Application.routes.draw do
 
   match 'help/:section' => 'help#index'
   match 'map/realtime' => 'map#realtime'

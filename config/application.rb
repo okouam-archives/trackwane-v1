@@ -9,7 +9,7 @@ if defined?(Bundler)
    Bundler.require(:default, Rails.env)
 end
 
-module Gowane
+module Trackwane
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
