@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
 
   def require_no_user
     if current_user && current_account
-      redirect_to root_url
+      redirect_to login_url
       false
     end
   end

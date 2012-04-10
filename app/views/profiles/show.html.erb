@@ -1,5 +1,7 @@
 <div id="canvas">
   <div class="centered-panel">
+    <form method="post" action="/profile">
+      <input type="hidden" name="_method" value="put" />
   <fieldset>
     <label for="profile_language">Language</label>
     <select name="profile[language]" id="profile_language">
@@ -8,8 +10,7 @@
     </select>
     <% if current_user.role == "administrator" %>
       <label for="profile_account">Account</label>
-      <select name="profile[account]" id="profile_account">
-      </select>
+      <%= select_tag("profile[account]", options_from_collection_for_select(@accounts, "id", "name")) %>
     <% end %>
     <label for="profile_password">Password</label>
     <input id="profile_password" type="password" />
@@ -17,11 +18,6 @@
     <input type="password" />
     <button class="success btn accept">Accept</button>
   </fieldset>
+      </form>
     </div>
 </div>
-
-<script type="text/javascript">
-  $(function() {
-    new App.Controllers.ProfileController({el: "#canvas"});
-  });
-</script>

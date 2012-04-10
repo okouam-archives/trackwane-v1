@@ -14,7 +14,7 @@ _.extend(App.Services.Mapper.prototype, {
     var feature = new OpenLayers.Feature.Vector(point, model);
     feature.id = model.id;
     if (style) feature.style = style;
-    else feature.style = {pointRadius: 6, fillColor: "#333", fillOpacity: 1, graphicName: "x", strokeColor: "#333"};
+    else feature.style = {pointRadius: 10, externalGraphic: "/assets/arrow.png", rotation: model.get("heading")};
     return feature;
   },
 

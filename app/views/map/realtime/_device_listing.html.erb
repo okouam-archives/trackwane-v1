@@ -1,15 +1,13 @@
 <script id="realtime-device-template" type="text/x-handlebars-template">
   <table id="realtime-devices" class="sidecolumn">
     {{#each models}}
-      <tr>
+      <tr data-id="{{attributes.id}}">
         <td>
-          <div style="display: inline-block; width: 180px">
+          <img style="float: left; margin-top: 4px; margin-right: 10px; border: 1px solid #ccc" width="30" height="30" src="/assets/unknown.png" />
             <a href="#" data-id="{{attributes.id}}" style="font-size: 10px; font-family: Verdana; font-weight: bold">{{attributes.name}}</a><br/>
-            <i style="font-size: 10px">{{attributes.address}} <br/>50m de Treichville Centre</i>
-          </div>
-          <div style="display: inline-block; width: 70px">
-            {{attributes.speed}} km/h<br/>
-            3.2L
+            <i style="font-size: 10px" class="address">{{attributes.address}}</i>
+            <br/>
+            <i> Proche de Treichville Centre</i>
           </div>
         </td>
       </tr>

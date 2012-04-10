@@ -13,7 +13,7 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    setInterval(this.poll.bind(this), 10000);
+    setInterval(this.poll.bind(this), 20000);
     this.listing = new App.Views.Realtime.Events({el: "#canvas .listing", pubsub: this.pubsub});
     this.toolbar = new App.Views.Realtime.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
     this.follow_panel = new App.Views.Realtime.FollowActionPanel({el: "#canvas .follow.panel", pubsub: this.pubsub});

@@ -1,8 +1,8 @@
 class EventObserver < ActiveRecord::Observer
 
   def before_save(event)
-		previous_event = device.events.try(:last)
     device = event.device
+		previous_event = device.events.try(:last)
     account = device.account
     if previous_event
       event.geofence_warnings = GeofenceWarning.check(account.geofence_alarms, previous_event, event)

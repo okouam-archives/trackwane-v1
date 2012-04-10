@@ -34,7 +34,7 @@ class EventsController < ApplicationController
       event.save!
       head :ok
     else
-      render :text => "Unable to process event from IMEI #{imei_number} as it has not been properly setup", :status => 400
+      render :text => "Unable to process event from IMEI #{imei_number} as it has not been properly setup", :status => 412
     end
   end
 
