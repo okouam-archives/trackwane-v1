@@ -44,6 +44,6 @@ Trackwane::Application.routes.draw do
   match 'company' => 'pages#company', :as => :company
   match 'login'  => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
-  root :to => 'map#realtime'
+  root :to => 'user_sessions#new'
 
 end

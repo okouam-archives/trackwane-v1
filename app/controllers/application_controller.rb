@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  #before_filter :require_user
   helper_method :current_user, :current_account
   layout "application"
 
@@ -7,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def current_account
     account_id = session[:account_id]
-    Account.find(account_id)
+    account_id ? Account.find(account_id) : nil
   end
 
   def current_user_session
@@ -22,8 +21,8 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    unless current_user
-      redirect_to new_user_session_url
+    unless current_user && current_account
+      redirect_to root_url
       false
     else
       gon.current_user = {role: current_user.role, account_id: current_account.id}
@@ -31,8 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_no_user
-    if current_user
-      store_location
+    if current_user && current_account
       redirect_to root_url
       false
     end

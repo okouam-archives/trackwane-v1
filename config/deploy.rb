@@ -43,5 +43,5 @@ after 'deploy:update_code', 'bundler:bundle_new_release'
 
 after 'bundler:bundle_new_release' do
   run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
-  run "cd #{release_path}; RAILS_ENV=production rake gowane:assets"
+  run "cd #{release_path}; RAILS_ENV=production rake trackwane:assets"
 end

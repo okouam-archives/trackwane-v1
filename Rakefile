@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Gowane::Application.load_tasks
+Trackwane::Application.load_tasks

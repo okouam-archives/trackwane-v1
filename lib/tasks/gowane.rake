@@ -1,4 +1,4 @@
-namespace :gowane do
+namespace :trackwane do
 
   desc "Copies the non-fingerprinted image assets over to the public directory"
   task :assets => :environment  do
