@@ -12,9 +12,9 @@ set :deploy_via, :remote_cache
 set :user, "deployment"
 set :ssh_options, { :forward_agent => true }
 set :rake, "/var/lib/gems/1.8/bin/rake"
-role :web, "trackwane.com"
-role :app, "trackwane.com"
-role :db,  "trackwane.com", :primary => true
+role :web, "www.trackwane.com"
+role :app, "www.trackwane.com"
+role :db,  "www.trackwane.com", :primary => true
 
 default_run_options[:pty] = true
 
