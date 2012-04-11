@@ -18,6 +18,25 @@ _.extend(App.Services.Mapper.prototype, {
     return feature;
   },
 
+  toRealtimeFeature: function(model, style) {
+    var lonlat = this.cartography.mercatorCoordinates(model.get("longitude"), model.get("latitude"));
+    var point = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
+    var feature = new OpenLayers.Feature.Vector(point, model);
+    feature.id = model.id;
+    if (style) feature.style = style;
+    else feature.style = {
+      label: model.get("name"),
+      labelBackgroundColor: 'white',
+      labelBorderSize: "1px",
+      labelBorderColor: "#333333",
+      labelPadding: "3px",
+      labelYOffset: 15,
+      fontWeight: "bold",
+      pointRadius: 10, externalGraphic: "/assets/arrow.png", rotation: model.get("heading")
+    };
+    return feature;
+  },
+
   toPlaceFeatures: function(places) {
     return places.map(function(place) {
       return this.toFeature(place);

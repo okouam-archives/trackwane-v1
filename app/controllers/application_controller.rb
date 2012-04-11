@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   def require_user
     unless current_user && current_account
-      redirect_to root_url
+      redirect_to login_url
       false
     else
       gon.current_user = {role: current_user.role, account_id: current_account.id}

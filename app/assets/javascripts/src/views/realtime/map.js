@@ -77,8 +77,8 @@ App.Views.Realtime.Map = Backbone.View.extend({
 
   createFeature: function(event) {
     var mapper = new App.Services.Mapper();
-    var feature = mapper.toFeature(event);
-    this.createPopup(event, event.getCoordinates());
+    var feature = mapper.toRealtimeFeature(event);
+    //this.createPopup(event, event.getCoordinates());
     this.device_layer.addFeatures([feature]);
   },
 
