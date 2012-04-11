@@ -12,8 +12,13 @@ App.Views.Alerts.Editor = App.Views.Base.extend({
   },
 
   onCreate: function() {
-    var attributes = this.formAttributes();
-    this.pubsub.trigger("alert:created", attributes)
+    var callback = {
+      submitHandler: function() {
+        var attributes = this.formAttributes();
+        this.pubsub.trigger("alert:created", attributes)
+      }.bind(this)
+    };
+    this.$el.find("form").validate(_.extend(this.validation_rules, callback));
   },
 
   onCancel: function() {
@@ -21,8 +26,13 @@ App.Views.Alerts.Editor = App.Views.Base.extend({
   },
 
   onSave: function() {
-    var attributes = this.formAttributes();
-    this.pubsub.trigger("alert:saved", attributes)
+    var callback = {
+      submitHandler: function() {
+        var attributes = this.formAttributes();
+        this.pubsub.trigger("alert:saved", attributes)
+      }.bind(this)
+    };
+    this.$el.find("form").validate(_.extend(this.validation_rules, callback));
   },
 
   close: function() {

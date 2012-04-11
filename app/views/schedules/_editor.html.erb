@@ -1,20 +1,22 @@
 <script id="editor-template" type="text/x-handlebars-template">
-  <fieldset>
-    <label for="schedule_report_id">Report</label>
-    <select id="schedule_report_id" name="schedule[report_id]">
-    </select>
-    <label for="schedule_format">Format</label>
-    <input id="schedule_format" name="schedule[format]" value="{{attributes.format}}" type="text" />
-    <label for="schedule_email">Email</label>
-    <input id="schedule_email" name="schedule[email]" value="{{attributes.email}}" type="text" />
-    <div class="buttons">
-      {{#if attributes}}
-        <input value="{{attributes.id}}" type="hidden" name="id" />
-        <button class="btn save success">Accept</button>
-      {{else}}
-        <button class="btn success">Accept</button>
-      {{/if}}
-      <button class="remove btn">Cancel</button>
-    </div>
-  </fieldset>
+  <form>
+    <fieldset>
+      <label for="schedule_report_id">Report</label>
+      <select id="schedule_report_id" name="schedule[report_id]">
+      </select>
+      <label for="schedule_format">Format</label>
+      <input id="schedule_format" name="schedule[format]" value="{{attributes.format}}" type="text" />
+      <label for="schedule_email">Email</label>
+      <input id="schedule_email" name="schedule[email]" value="{{attributes.email}}" type="text" />
+      <div class="buttons">
+        {{#if attributes}}
+          <input value="{{attributes.id}}" type="hidden" name="id" />
+          <button class="btn save success">Accept</button>
+        {{else}}
+          <button class="btn success">Accept</button>
+        {{/if}}
+        <button class="remove btn">Cancel</button>
+      </div>
+    </fieldset>
+  </form>
 </script>

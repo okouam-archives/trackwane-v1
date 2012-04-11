@@ -4,7 +4,7 @@ App.Views.Schedules.Editor = App.Views.Base.extend({
     "click .create": "onCreate",
     "click .delete": "onDelete",
     "click .save": "onSave",
-    "click .closelabel": "onClose"
+    "click .cancel": "onClose"
   },
 
   initialize: function(options) {
@@ -13,8 +13,13 @@ App.Views.Schedules.Editor = App.Views.Base.extend({
   },
 
   onCreate: function() {
-    var attributes = this.formAttributes();
-    this.pubsub.trigger("schedule:created", attributes)
+    var callback = {
+      submitHandler: function() {
+        var attributes = this.formAttributes();
+        this.pubsub.trigger("schedule:created", attributes)
+      }.bind(this)
+    };
+    this.$el.find("form").validate(_.extend(App.Models.Schedule.validation_rules, callback));
   },
 
   onDelete: function() {
@@ -27,8 +32,13 @@ App.Views.Schedules.Editor = App.Views.Base.extend({
   },
 
   onSave: function() {
-    var attributes = this.formAttributes();
-    this.pubsub.trigger("schedule:saved", attributes)
+    var callback = {
+      submitHandler: function() {
+        var attributes = this.formAttributes();
+        this.pubsub.trigger("schedule:saved", attributes)
+      }.bind(this)
+    };
+    this.$el.find("form").validate(_.extend(App.Models.Schedule.validation_rules, callback));
   },
 
   close: function() {

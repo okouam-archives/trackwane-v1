@@ -12,9 +12,14 @@ App.Views.Alarms.GeofencePanel = App.Views.Base.extend({
   },
 
   onAccept: function() {
-    var name = $("input[name='geofence_alarm[name]']").val();
-    var alarm = new App.Models.GeofenceAlarm({name: name});
-    this.pubsub.trigger("geofence:created", alarm)
+    var callback = {
+      submitHandler: function() {
+        var name = $("input[name='geofence_alarm[name]']").val();
+        var alarm = new App.Models.GeofenceAlarm({name: name});
+        this.pubsub.trigger("geofence:created", alarm)
+      }.bind(this)
+    };
+    this.$el.find("form").validate(_.extend(App.Models.GeofenceAlarm.validation_rules, callback));
   },
 
   onCancel: function() {

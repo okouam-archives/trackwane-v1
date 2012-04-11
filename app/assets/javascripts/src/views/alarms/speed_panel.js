@@ -27,10 +27,15 @@ App.Views.Alarms.SpeedPanel = App.Views.Base.extend({
   },
 
   onAccept: function() {
-    var name = $("input[name='speed_alarm[name]']").val();
-    var speed = $('input[name="speed_alarm[speed]"]').val();
-    var alarm = new App.Models.SpeedAlarm({speed: speed, name: name});
-    this.pubsub.trigger("speed:created", alarm)
+    var callback = {
+      submitHandler: function() {
+        var name = $("input[name='speed_alarm[name]']").val();
+        var speed = $('input[name="speed_alarm[speed]"]').val();
+        var alarm = new App.Models.SpeedAlarm({speed: speed, name: name});
+        this.pubsub.trigger("speed:created", alarm)
+      }.bind(this)
+    };
+    this.$el.find("form").validate(_.extend(App.Models.SpeedPanel.validation_rules, callback));
   }
 
 });

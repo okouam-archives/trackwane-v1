@@ -1,6 +1,6 @@
 App.Views.Users.Editor = App.Views.Base.extend({
 
-  events: {
+ events: {
     "click .create": "onCreate",
     "click .delete": "onDelete",
     "click .save": "onSave",
@@ -8,8 +8,14 @@ App.Views.Users.Editor = App.Views.Base.extend({
   },
 
   onCreate: function() {
-    var attributes = this.formAttributes();
-    this.pubsub.trigger("user:created", attributes)
+   var callback = {
+      submitHandler: function() {
+        var attributes = this.formAttributes();
+        this.pubsub.trigger("user:created", attributes)
+      }.bind(this)
+    };
+    console.debug(App.Models.User.validation_rules);
+    this.$el.find("form").validate(_.extend(App.Models.User.validation_rules, callback));
   },
 
   onDelete: function() {
@@ -22,8 +28,13 @@ App.Views.Users.Editor = App.Views.Base.extend({
   },
 
   onSave: function() {
-    var attributes = this.formAttributes();
-    this.pubsub.trigger("user:saved", attributes)
+    var callback = {
+      submitHandler: function() {
+      var attributes = this.formAttributes();
+      this.pubsub.trigger("user:saved", attributes)
+      }.bind(this)
+    };
+    this.$el.find("form").validate(_.extend(App.Models.User.validation_rules, callback));
   },
 
   close: function() {

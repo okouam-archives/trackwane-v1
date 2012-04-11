@@ -19,10 +19,15 @@ App.Views.NewPlacePanel = App.Views.Base.extend({
   },
 
   onAccept: function() {
-    var name = this.$el.find("#place_name").val();
-    var category = this.$el.find("#place_category").val();
-    this.createPlace(name, category);
-    return false;
+   var callback = {
+      submitHandler: function() {
+        var name = this.$el.find("#place_name").val();
+        var category = this.$el.find("#place_category").val();
+        this.createPlace(name, category);
+        return false
+      }.bind(this)
+    };
+    this.$el.find("form").validate(_.extend(this.validation_rules, callback));
   },
 
   onCancel: function() {
@@ -34,14 +39,8 @@ App.Views.NewPlacePanel = App.Views.Base.extend({
   },
 
   createPlace: function(name, category) {
-    if (name == "") {
-      alert("Please choose a name for this new place.");
-    } else if (category == "") {
-      alert("Please select a category for this new place.");
-    } else {
-      var place = new App.Models.Place({name: name, category: category});
-      this.pubsub.trigger("place:created", place);
-    }
+    var place = new App.Models.Place({name: name, category: category});
+    this.pubsub.trigger("place:created", place);
   }
 
 });
