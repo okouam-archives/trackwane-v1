@@ -26,11 +26,9 @@ _.extend(App.Services.Mapper.prototype, {
     if (style) feature.style = style;
     else feature.style = {
       label: model.get("name"),
-      labelBackgroundColor: 'white',
-      labelBorderSize: "1px",
-      labelBorderColor: "#333333",
-      labelPadding: "3px",
-      labelYOffset: 15,
+      labelOutlineColor: 'white',
+      labelOutlineWidth: "4px",
+      labelYOffset: 17,
       fontWeight: "bold",
       pointRadius: 10, externalGraphic: "/assets/arrow.png", rotation: model.get("heading")
     };
