@@ -17,12 +17,13 @@ App.Views.AlarmMap = App.Views.Base.extend({
       var cartography = new App.Services.Cartography(this.map);
       this.layer = cartography.createLayer("coordinates");
     }
-    var format = new OpenLayers.Format.WKT();
     var features = [];
+    var mapper = new App.Services.Mapper();
     _.each(alarms.models, function(alarm) {
+      var name = alarm.get("name");
       var coordinates = alarm.get("coordinates");
-      if (coordinates) {
-        var feature = format.read(coordinates);
+      if (coordinates && name) {
+        var feature = mapper.toGeofenceFeature(name, coordinates);
         features.push(feature);
       }
     });
@@ -34,8 +35,8 @@ App.Views.AlarmMap = App.Views.Base.extend({
       var cartography = new App.Services.Cartography(this.map);
       this.layer = cartography.createLayer("coordinates");
     }
-    var format = new OpenLayers.Format.WKT();
-    var feature = format.read(coordinates);
+    var mapper = new App.Services.Mapper();
+    var feature = mapper.toGeofenceFeature(name, coordinates);
     this.layer.addFeatures([feature]);
   },
 

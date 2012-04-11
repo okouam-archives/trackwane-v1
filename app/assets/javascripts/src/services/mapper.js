@@ -29,14 +29,27 @@ _.extend(App.Services.Mapper.prototype, {
       externalGraphic: "/assets/arrow.png",
       rotation: model.get("heading")
     };
-    return this.toGraphicFeature(model, style);
+    var feature = this.toGraphicFeature(model, style);
+    feature.device_id = model.get("device_id");
+    return feature;
   },
 
-  toGraphicFeature: function(model, style) {
+  toDestinationFeature: function(model) {
+    var style = {
+      pointRadius: 5,
+      externalGraphic: "/assets/ajax-loader.gif"
+    };
+    var feature = this.toGraphicFeature(model, style, null);
+    feature.device_id = model.get("device_id");
+    feature.is_destination = true;
+    return feature;
+  },
+
+  toGraphicFeature: function(model, style, id) {
     var lonlat = this.cartography.mercatorCoordinates(model.get("longitude"), model.get("latitude"));
     var point = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
     var feature = new OpenLayers.Feature.Vector(point, model);
-    feature.id = model.id;
+    feature.id = id || model.id;
     feature.style = style;
     return feature;
   },
@@ -61,12 +74,30 @@ _.extend(App.Services.Mapper.prototype, {
     return this.toGraphicFeature(model, style);
   },
 
-   toGeofenceFeatures: function(geofences) {
-      var format = new OpenLayers.Format.WKT();
-      var features = geofences.map(function(geofence) {
-        return format.read(geofence.get("coordinates"));
-      });
-     return features;
-   }
+  toGeofenceFeature: function(name, coordinates) {
+    var format = new OpenLayers.Format.WKT();
+    var feature = format.read(coordinates);
+    feature.style = {
+      label: name,
+      labelOutlineColor: 'white',
+      labelOutlineWidth: "4px",
+      fontWeight: "bold",
+      fontColor: "#084a8c",
+      fillColor: "#ee9900",
+      fillOpacity: 0.3,
+      strokeOpacity: 1,
+      strokeWidth: 1,
+      strokeColor: "#ee9900"
+    };
+    return feature;
+  },
+
+  toGeofenceFeatures: function(geofences) {
+    return geofences.map(function(geofence) {
+      var coordinates = geofence.get("coordinates");
+      var name = geofence.get("name");
+      return this.toGeofenceFeature(name, coordinates);
+    }.bind(this));
+  }
 
 });
