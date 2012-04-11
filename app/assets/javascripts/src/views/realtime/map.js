@@ -27,10 +27,10 @@ App.Views.Realtime.Map = Backbone.View.extend({
 
   hidePlaces: function() {
     this.place_layer.destroyFeatures();
-    this.removePopups("place");
   },
 
   showPlaces: function(places) {
+    if (!places || places.size() < 1) return;
     if (!this.place_layer) {
       var cartography = new App.Services.Cartography(this.map);
       this.place_layer = cartography.createLayer("places");
@@ -38,16 +38,6 @@ App.Views.Realtime.Map = Backbone.View.extend({
     var mapper = new App.Services.Mapper();
     var features = mapper.toPlaceFeatures(places);
     this.place_layer.addFeatures(features);
-    if (!places || places.size() < 1) return;
-    this.removePopups("place");
-    places.each(function(place) {
-      this.createPlacePopup(place.attributes, place.getCoordinates());
-    }.bind(this));
-  },
-
- createPlacePopup: function(place, lonlat) {
-    var popup_creator = new App.Services.PopupActionsCreator(this.map, "#place-popup-template");
-    var popup = popup_creator.build(place, lonlat, "place");
   },
 
   show: function(events) {
@@ -55,17 +45,8 @@ App.Views.Realtime.Map = Backbone.View.extend({
     this.createFeatures(events);
   },
 
-  removePopups: function(tag) {
-    _.each(this.map.popups, function(popup) {
-      if (popup.tag && popup.tag == tag) {
-        popup.destroy();
-      }
-    }.bind(this));
-  },
-
   createFeatures: function(events) {
     if (!events || events.size() < 1) return;
-    this.removePopups("event");
     events.each(function(event) {
       this.createFeature(event);
     }.bind(this));
@@ -78,23 +59,7 @@ App.Views.Realtime.Map = Backbone.View.extend({
   createFeature: function(event) {
     var mapper = new App.Services.Mapper();
     var feature = mapper.toRealtimeFeature(event);
-    //this.createPopup(event, event.getCoordinates());
     this.device_layer.addFeatures([feature]);
-  },
-
-  createPopup: function(device, lonlat) {
-    var popup_creator = new App.Services.PopupActionsCreator(this.map, "#popup-template");
-    var attributes = {name: device.attributes.name};
-    var popup = popup_creator.build(attributes, lonlat, "event");
-    popup.events.register('click', null, function(evt) {
-      var event = device.attributes;
-      var src = $(evt.explicitOriginalTarget);
-      if (src.text() == "Send Command") {
-        this.pubsub.trigger("action:send-command", event);
-      } else if (src.text() == "Follow") {
-        this.pubsub.trigger("action:follow", event);
-      }
-    }.bind(this));
   },
 
   render: function() {

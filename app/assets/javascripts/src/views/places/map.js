@@ -20,9 +20,6 @@ App.Views.PlacesMap = App.Views.Base.extend({
 
   createFeatures: function(places) {
     if (!places || places.size() < 1) return;
-    _.each(this.map.popups, function(popup) {
-      popup.destroy();
-    });
     places.each(function(place) {
       this.createFeature(place);
     }.bind(this));
@@ -34,22 +31,8 @@ App.Views.PlacesMap = App.Views.Base.extend({
 
   createFeature: function(place) {
     var mapper = new App.Services.Mapper();
-    var feature = mapper.toFeature(place);
-    this.createPopup(place, place.getCoordinates());
+    var feature = mapper.toPlaceFeature(place);
     this.place_layer.addFeatures([feature]);
-  },
-
-  createPopup: function(place, lonlat) {
-    var popup_creator = new App.Services.PopupActionsCreator(this.map, "#place-popup-template");
-    var popup = popup_creator.build(place.attributes, lonlat);
-    popup.events.register('click', null, function(evt) {
-      var id = place.id;
-      var src = $(evt.explicitOriginalTarget);
-      if (src.text() == "Remove") {
-        this.pubsub.trigger("place:removed", id);
-        popup.destroy();
-      }
-    }.bind(this));
   },
 
   center: function(id) {

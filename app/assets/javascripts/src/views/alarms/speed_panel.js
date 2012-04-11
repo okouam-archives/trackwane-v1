@@ -35,7 +35,7 @@ App.Views.Alarms.SpeedPanel = App.Views.Base.extend({
         this.pubsub.trigger("speed:created", alarm)
       }.bind(this)
     };
-    this.$el.find("form").validate(_.extend(App.Models.SpeedPanel.validation_rules, callback));
+    this.$el.find("form").validate(_.extend(App.Models.SpeedAlarm.validation_rules, callback));
   }
 
 });
