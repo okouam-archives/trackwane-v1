@@ -3,58 +3,46 @@ Device.delete_all
 User.delete_all
 SpeedAlarm.delete_all
 GeofenceAlarm.delete_all
-Group.delete_all
 Account.delete_all
 
 # Accounts
 
-o1_account = Factory(:account, :name => "0-One")
-demo_account = Factory(:account, :name => "Demo")
-radio_account = Factory(:account, :name => "Radio Ivoire")
-orange_account = Factory(:account, :name => "Orange CI")
+o1_account = FactoryGirl.create(:account, :name => "0-One")
+demo_account = FactoryGirl.create(:account, :name => "Demo")
+radio_account = FactoryGirl.create(:account, :name => "Radio Ivoire")
+orange_account = FactoryGirl.create(:account, :name => "Orange CI")
 
 # Users
 
-Factory(:user, login: "okouam", password: "com99123", email: "olivier.kouame@gmail.com", account: o1_account)
-Factory(:user, login: "guest", password: "guest", account: demo_account)
-Factory(:user, login: "patrick.kouame", password: "changeme", email: "patrick.kouame@0-one.net", account: o1_account)
-Factory(:user, login: "sammy", account: radio_account)
-Factory(:user, login: "ralph", account: radio_account, role: "employee")
-Factory(:user, login: "tony", account: orange_account)
-Factory(:user, login: "patrick.tognisso", password: "changeme", email: "patrick.tognisso@0-one.net", account: o1_account)
-Factory(:user, login: "sam", account: demo_account, role: "employee")
-
-# Groups
-
-Group.create([
-  {name: "Alpha Team", account: o1_account},
-  {name: "Kappa Team", account: radio_account},
-  {name: "Gamma Team", account: radio_account},
-  {name: "Management", account: orange_account},
-  {name: "Technical Support", account: demo_account},
-  {name: "Sales", account: demo_account}
-])
+FactoryGirl.create(:user, login: "okouam", password: "com99123", email: "olivier.kouame@gmail.com", account: o1_account)
+FactoryGirl.create(:user, login: "guest", password: "guest", account: demo_account)
+FactoryGirl.create(:user, login: "patrick.kouame", password: "changeme", email: "patrick.kouame@0-one.net", account: o1_account)
+FactoryGirl.create(:user, login: "sammy", account: radio_account)
+FactoryGirl.create(:user, login: "ralph", account: radio_account, role: "employee")
+FactoryGirl.create(:user, login: "tony", account: orange_account)
+FactoryGirl.create(:user, login: "patrick.tognisso", password: "changeme", email: "patrick.tognisso@0-one.net", account: o1_account)
+FactoryGirl.create(:user, login: "sam", account: demo_account, role: "employee")
 
 # Devices
 
 Device.create([
-  {imei_number: 11111111, display_name: "BMW X6", account: o1_account, :group => Group.find_by_name("Alpha Team")},
-  {imei_number: 22222222, display_name: "Audi R8", account: o1_account, :group => Group.find_by_name("Alpha Team")},
-  {imei_number: 33333333, display_name: "Range rover avoque", account: o1_account, :group => Group.find_by_name("Alpha Team")},
-  {imei_number: 44444444, display_name: "ML 350 AMG", account: o1_account, :group => Group.find_by_name("Alpha Team")},
-  {imei_number: 66666666, display_name: "Porshe Cayenne", account: o1_account, :group => Group.find_by_name("Alpha Team")},
-  {imei_number: 55676543, display_name: "Test Car 99XX99", account: o1_account, :group => Group.find_by_name("Alpha Team")},
-  {imei_number: 1234567, display_name: "Ford Escort 695LD9232", account: o1_account, :group => Group.find_by_name("Alpha Team")},
-  {imei_number: 345435006, display_name: "Rolls Royce 123JD9484", account: radio_account, :group => Group.find_by_name("Kappa Team")},
-  {imei_number: 543677807, display_name: "Peugeot 512 5343FL93", account: radio_account, :group => Group.find_by_name("Kappa Team")},
-  {imei_number: 248234234, display_name: "Mitsubishi 5343FL93", account: radio_account, :group => Group.find_by_name("Gamma Team")},
-  {imei_number: 248234234, display_name: "Caterpillar 846FH3834", account: orange_account, :group => Group.find_by_name("Management")},
-  {imei_number: 657575675, display_name: "Nissan Focus 02937LK383", account: orange_account, :group => Group.find_by_name("Management")},
-  {imei_number: 248234234, display_name: "BMW Mini 3849DJD394", account: demo_account, :group => Group.find_by_name("Technical Support")},
-  {imei_number: 270110, display_name: "Fiat 34LFJ334", account: demo_account, :group => Group.find_by_name("Technical Support")},
-  {imei_number: 248234234, display_name: "Corvette 1102LP394", account: demo_account, :group => Group.find_by_name("Sales")},
-  {imei_number: 343580788, display_name: "Subaru 232", account: demo_account, :group => Group.find_by_name("Sales")},
-  {imei_number: 322509765, display_name: "Volkswagen 21KF334", account: orange_account, :group => Group.find_by_name("Management")}
+  {imei_number: 11111111, display_name: "BMW X6", account: o1_account},
+  {imei_number: 22222222, display_name: "Audi R8", account: o1_account},
+  {imei_number: 33333333, display_name: "Range rover avoque", account: o1_account},
+  {imei_number: 44444444, display_name: "ML 350 AMG", account: o1_account},
+  {imei_number: 66666666, display_name: "Porshe Cayenne", account: o1_account},
+  {imei_number: 55676543, display_name: "Test Car 99XX99", account: o1_account},
+  {imei_number: 1234567, display_name: "Ford Escort 695LD9232", account: o1_account},
+  {imei_number: 345435006, display_name: "Rolls Royce 123JD9484", account: radio_account},
+  {imei_number: 543677807, display_name: "Peugeot 512 5343FL93", account: radio_account},
+  {imei_number: 248234234, display_name: "Mitsubishi 5343FL93", account: radio_account},
+  {imei_number: 248234234, display_name: "Caterpillar 846FH3834", account: orange_account},
+  {imei_number: 657575675, display_name: "Nissan Focus 02937LK383", account: orange_account},
+  {imei_number: 248234234, display_name: "BMW Mini 3849DJD394", account: demo_account},
+  {imei_number: 270110, display_name: "Fiat 34LFJ334", account: demo_account},
+  {imei_number: 248234234, display_name: "Corvette 1102LP394", account: demo_account},
+  {imei_number: 343580788, display_name: "Subaru 232", account: demo_account},
+  {imei_number: 322509765, display_name: "Volkswagen 21KF334", account: orange_account}
 ])
 
 # Places
@@ -81,8 +69,8 @@ Place.create([
 # Geofence Alarms
 
 GeofenceAlarm.create([
-  {name: "Inclusion Zone Alarm", coordinates: "POLYGON((5.348177 -4.024, 5.316387 -4.021769, 5.316387 -3.98778, 5.353647 -3.986063, 5.348177 -4.024))", account: o1_account, category: "inclusion"},
-  {name: "Exclusion Zone Alarm", coordinates: "POLYGON((5.338213 -4.003165, 5.329368 -4.011362, 5.327616 -3.990934, 5.339324 -3.992779, 5.338213 -4.003165))", account: o1_account, category: "exclusion"}
+  {name: "Inclusion Zone Alarm", coordinates: "POLYGON((5.348177 -4.024, 5.316387 -4.021769, 5.316387 -3.98778, 5.353647 -3.986063, 5.348177 -4.024))", account: o1_account},
+  {name: "Exclusion Zone Alarm", coordinates: "POLYGON((5.338213 -4.003165, 5.329368 -4.011362, 5.327616 -3.990934, 5.339324 -3.992779, 5.338213 -4.003165))", account: o1_account}
 ])
 
 # Speed Speed Alarms
