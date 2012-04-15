@@ -29,17 +29,10 @@
           %li
             %a{href: "/schedules"}
               Report Schedule
-      %li{class: "#{params[:controller] == "alarms" ? "alarms current submenu" : "alarms submenu"}"}
-        %a
+      %li{class: "#{params[:controller] == "alarms" ? "current" : ""}"}
+        %a{href: "/alarms"}
           = image_tag "/assets/139-flags.png"
           Alarms
-        %ul
-          %li
-            %a{href: "/alarms"}
-              Your Alarms
-          %li
-            %a{href: "/alerts"}
-              Alerts
       %li{class: "#{params[:controller] == "places" ? "current" : ""}"}
         %a{href: "/places"}
           = image_tag "/assets/60-signpost.png"
