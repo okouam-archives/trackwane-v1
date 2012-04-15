@@ -20,7 +20,3 @@ production:
   database: trackwane_production
   username: deployment
   password: FireDrake[1981]
-  
-
-cucumber:
-  <<: *test

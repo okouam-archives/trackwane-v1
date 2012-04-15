@@ -14,11 +14,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def realtime
-    devices = current_account.devices
-    render :json => devices.map {|device| device.events.last}.compact
-  end
-
   def create
     data = params[:data]
 		if data.instance_of? String
@@ -31,6 +26,7 @@ class EventsController < ApplicationController
 		end
     event.device = Device.find_by_imei_number(imei_number)
     if event.device
+      event.date = DateTime.now unless event.date
       event.save!
       head :ok
     else

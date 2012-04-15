@@ -73,9 +73,7 @@ App.Controllers.AlarmsController = App.Controllers.Base.extend({
   onSpeedAlarmSelected: function(id) {
     var model = new App.Models.SpeedAlarm({id: id});
     model.fetch({success: function(model) {
-       console.debug(model);
       this.map.clear();
-        console.debug(model);
         this.map.show(model.get("name"), model.get("coordinates"));
       }.bind(this)
     });

@@ -46,10 +46,15 @@ _.extend(App.Services.Cartography.prototype, {
     });
   },
 
-  createLayer: function(name) {
+  createLayer: function(name, useClustering) {
     if (!this.map)
       throw "A layer cannot be created by the Cartography Service unless it has been assigned a map.";
-    var layer = new OpenLayers.Layer.Vector(name);
+    var layer;
+    if (useClustering)  {
+      layer = new OpenLayers.Layer.Vector(name, {strategies: [new OpenLayers.Strategy.Cluster()]});
+    } else {
+      layer = new OpenLayers.Layer.Vector(name);
+    }
     this.map.addLayer(layer);
     return layer;
   }

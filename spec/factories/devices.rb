@@ -3,7 +3,3 @@ FactoryGirl.define do
     association :account
   end
 end
-
-Factory.sequence :device_name do |n|
-   n
-end

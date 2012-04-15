@@ -28,7 +28,7 @@ App.Views.Realtime.Events = Backbone.View.extend({
   update: function(events) {
     events.each(function(event) {
       var attributes = event.attributes;
-      var entry = this.getDeviceTile(attributes.id);
+      var entry = this.getDeviceTile(attributes.device_id);
       var address = entry.find(".address");
       if (address.text() != attributes.address)
         address.html(attributes.address);
@@ -37,7 +37,7 @@ App.Views.Realtime.Events = Backbone.View.extend({
   },
 
   getDeviceTile: function(id) {
-    return this.$el.find("tr[data='" +id + "']");
+    return this.$el.find("tr[data='" + id + "']");
   },
 
   render: function(events) {

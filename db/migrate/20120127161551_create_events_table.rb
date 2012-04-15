@@ -10,7 +10,9 @@ class CreateEventsTable < ActiveRecord::Migration
       t.decimal :heading
       t.boolean :gps_signal
       t.references :place
+      t.integer :previous_event_id
       t.datetime :date
+      t.geometry :point
       t.decimal :distance_delta
     end
   end

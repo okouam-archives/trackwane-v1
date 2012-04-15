@@ -2,7 +2,6 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
 
   appEvents: {
     "event:selected":         "onEventSelected",
-    "events:received":        "onEventsReceived",
     "panel:closing":          "onPanelClosing",
     "action:send-command":    "onSendCommandAction",
     "action:follow":          "onFollowAction",
@@ -13,14 +12,13 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    setInterval(this.poll.bind(this), 20000);
     this.listing = new App.Views.Realtime.Events({el: "#canvas .listing", pubsub: this.pubsub});
     this.toolbar = new App.Views.Realtime.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
     this.follow_panel = new App.Views.Realtime.FollowActionPanel({el: "#canvas .follow.panel", pubsub: this.pubsub});
     this.command_panel = new App.Views.Realtime.SendCommandActionPanel({el: "#canvas .send-command.panel", pubsub: this.pubsub});
     this.map = new App.Views.Realtime.Map({el: "#map", pubsub: this.pubsub});
     this.map.render();
-    this.onEventsReceived(new App.Collections.RealtimeEvents(options.events));
+    this.showInitialPositions(new App.Collections.RealtimeEvents(options.events));
   },
 
   onToggleGeofences: function() {
@@ -49,9 +47,20 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
     }
   },
 
-  onEventsReceived: function(events) {
+  setupRealtimeTracking: function(events) {
+    var pusher = new Pusher('fee5deb878965544bd90');
+    events.each(function(event) {
+      var channel = pusher.subscribe(event.get("account_id") + '-' + event.get("device_id"));
+      channel.bind('event-received', function(data) {
+        this.map.showEvent(data);
+      }.bind(this));
+    }.bind(this));
+  },
+
+  showInitialPositions: function(events) {
     this.listing.render(events);
     this.map.show(events);
+    this.setupRealtimeTracking(events);
   },
 
   onEventSelected: function(event_id) {
@@ -89,12 +98,6 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
 
   communicateWithDevice: function(event_id, callback) {
     callback({device_name: "TEST!!", msg: "FAKE RESPONSE"});
-  },
-
-  poll: function() {
-    new App.Collections.RealtimeEvents().fetch({success: function(results) {
-      this.pubsub.trigger("events:received", results);
-    }.bind(this)});
   }
 
 });

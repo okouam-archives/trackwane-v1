@@ -16,6 +16,7 @@ gem 'silent-postgres'
 gem 'forgery'
 gem 'ccsv'
 gem 'gon'
+gem 'pusher'
 gem 'rubyzip'
 
 group :development, :test do
@@ -28,10 +29,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'rspec'
-  gem 'cucumber'
-  gem 'capybara-webkit'
   gem 'rspec-rails'
-  gem 'cucumber-rails'
 end
 
 group :assets do

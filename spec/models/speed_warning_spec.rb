@@ -4,7 +4,7 @@ describe SpeedWarning do
 
 	describe "when checking for triggered alarms" do
 		before(:each) do
-      @alarm = FactoryGirl(:speed_alarm, coordinates: Forgery::Geospatial.square(5, 5, 1).as_text, :speed => 100)
+      @alarm = FactoryGirl.create(:speed_alarm, coordinates: Forgery::Geospatial.square(5, 5, 1).as_text, :speed => 100)
     end
 		context "and the event occurs outside the geofence" do
       context "and the alarm is active" do

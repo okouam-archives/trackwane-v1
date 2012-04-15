@@ -10,6 +10,7 @@
 //= require ./lib/jquery.lionbars.0.3
 //= require ./lib/jquery.validate
 //= require ./src/app
+//= require ./src/logger
 //= require_tree ./src/locales
 //= require_tree ./src/models
 //= require_tree ./src/collections

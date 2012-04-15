@@ -4,10 +4,6 @@ App.Services.Mapper = function() {
 
 _.extend(App.Services.Mapper.prototype, {
 
-   featureFromEvent: function(event) {
-    return this.toFeature(event);
-   },
-
   toFeature: function(model, style) {
     var lonlat = this.cartography.mercatorCoordinates(model.get("longitude"), model.get("latitude"));
     var point = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
@@ -23,33 +19,32 @@ _.extend(App.Services.Mapper.prototype, {
       label: model.get("name"),
       labelOutlineColor: 'white',
       labelOutlineWidth: "4px",
-      labelYOffset: 17,
+      labelYOffset: 23,
       fontWeight: "bold",
-      pointRadius: 10,
-      externalGraphic: "/assets/arrow.png",
+      pointRadius: 20,
+      externalGraphic: "/assets/marker-coupe-red.png",
       rotation: model.get("heading")
     };
-    var feature = this.toGraphicFeature(model, style);
+    var feature =  this.toGraphicFeature(model.get("longitude"), model.get("latitude"), model, style, model.id);
     feature.device_id = model.get("device_id");
     return feature;
   },
 
-  toDestinationFeature: function(model) {
+  toDestinationFeature: function(model_data) {
     var style = {
       pointRadius: 5,
       externalGraphic: "/assets/ajax-loader.gif"
     };
-    var feature = this.toGraphicFeature(model, style, null);
-    feature.device_id = model.get("device_id");
-    feature.is_destination = true;
+    var feature = this.toGraphicFeature(model_data.longitude, model_data.latitude, model_data, style, model_data.id);
+    feature.device_id = model_data.device_id;
     return feature;
   },
 
-  toGraphicFeature: function(model, style, id) {
-    var lonlat = this.cartography.mercatorCoordinates(model.get("longitude"), model.get("latitude"));
+  toGraphicFeature: function(longitude, latitude, model, style, id) {
+    var lonlat = this.cartography.mercatorCoordinates(longitude, latitude);
     var point = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
     var feature = new OpenLayers.Feature.Vector(point, model);
-    feature.id = id || model.id;
+    feature.id = id;
     feature.style = style;
     return feature;
   },
@@ -71,7 +66,7 @@ _.extend(App.Services.Mapper.prototype, {
       pointRadius: 6,
       externalGraphic: "/assets/default/layout/tab-close-on.gif"
     };
-    return this.toGraphicFeature(model, style);
+    return this.toGraphicFeature(model.get("longitude"), model.get("latitude"), model, style, model.id);
   },
 
   toGeofenceFeature: function(name, coordinates) {

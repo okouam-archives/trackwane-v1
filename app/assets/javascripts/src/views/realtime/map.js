@@ -1,12 +1,13 @@
 App.Views.Realtime.Map = Backbone.View.extend({
 
-  destination_list: [],
+  destination_lookup: {},
 
   initialize: function(options) {
     this.pubsub = options.pubsub;
     this.places = new App.Collections.Places();
     this.geofences = new App.Collections.Geofences();
-    this.animator = new App.Services.Animator();
+    this.animator = new App.Services.Animator(this.removeDestination.bind(this));
+    this.animator.start(400);
     this.mapper = new App.Services.Mapper();
   },
 
@@ -34,64 +35,37 @@ App.Views.Realtime.Map = Backbone.View.extend({
     this.place_layer.addFeatures(features);
   },
 
-  removeDestinations: function() {
-    if (console) console.debug("[realtime map] Removing " + this.destination_list.length + " destination features.");
-    this.device_layer.destroyFeatures(this.destination_list);
-    this.destination_list = [];
+  removeDestination: function(device_id) {
+    var feature = this.destination_lookup[device_id];
+    if (!feature) throw new Error("Unable to locate destination feature for device " + device_id);
+    this.device_layer.destroyFeatures([this.destination_lookup[device_id]]);
   },
 
   show: function(events) {
-    if (this.initialized) {
-      this.moveFeatures(events);
-    } else {
-      this.createFeatures(events);
-      this.map.zoomToExtent(this.device_layer.getDataExtent());
-      this.initialized = true;
-    }
+    this.createFeatures(events);
+    this.map.zoomToExtent(this.device_layer.getDataExtent());
   },
 
-  moveFeatureAlongPath: function(device_id, cursor, paths) {
+  showEvent: function(event_data) {
+    var device_id = event_data.device_id;
+    var numPoints = 10;
+    var path = this.moveFeature(event_data, numPoints);
+    if (!path) return;
     var feature = this.device_layer.getFeatureBy("device_id", device_id);
-    var path = paths[device_id];
-    var next_coordinates = path[cursor];
-    feature.move(new OpenLayers.LonLat(next_coordinates.x, next_coordinates.y));
+    var animation = new App.Services.Animation(device_id, feature, path);
+    this.animator.add(animation);
   },
 
-  moveFeatures: function(events) {
-    var numPoints = 23;
-    var animationDelta = 500;
-    var paths = {};
-    events.each(function(event) {
-      var trajectory = this.moveFeature(event, numPoints);
-      if (trajectory) paths[event.get("device_id")] = trajectory;
-      else {
-        if (console) console.debug("[realtime map] Device " + event.get("device_id") + " has not moved.");
-      }
-    }.bind(this));
-    var devices = _.keys(paths);
-    var cursor = 0;
-    var animate = function() {
-      _.each(devices, function(device_id) {
-        this.moveFeatureAlongPath(device_id, cursor, paths);
-      }.bind(this));
-      cursor = cursor + 1;
-      if (cursor < numPoints) {
-        setTimeout(animate, animationDelta);
-      }
-      else {
-        this.removeDestinations();
-        if (console) console.debug("[animation] Finished animating devices");
-      }
-    }.bind(this);
-    setTimeout(animate, animationDelta);
-  },
-
-  moveFeature: function(event, numPoints) {
-    var feature = this.device_layer.getFeatureBy("device_id", event.get("device_id"));
-    var target = this.mapper.toDestinationFeature(event);
+  moveFeature: function(event_data, numPoints) {
+    var feature = this.device_layer.getFeatureBy("device_id", event_data.device_id);
+    var target = this.mapper.toDestinationFeature(event_data);
     var trajectory = this.animator.interpolate(feature.geometry, target.geometry, numPoints);
     if (trajectory) {
-      this.destination_list.push(target);
+      var angle = this.animator.path_angle(feature.geometry, target.geometry) + 180;
+      if (console) console.debug("Changing rotation from " + feature.style.rotation + " to " + angle);
+      feature.style.rotation = angle;
+      feature.layer.drawFeature(feature);
+      this.destination_lookup[event_data.device_id] = target;
       this.device_layer.addFeatures([target]);
     }
     return trajectory;
