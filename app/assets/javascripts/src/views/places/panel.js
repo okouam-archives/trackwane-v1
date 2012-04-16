@@ -27,7 +27,7 @@ Trackwane.Views.NewPlacePanel = Trackwane.Views.Base.extend({
         return false
       }.bind(this)
     };
-    this.$el.find("form").validate(_.extend(this.validation_rules, callback));
+    this.$el.find("form").validate(_.extend(App.Models.Place.validation_rules, callback));
   },
 
   onCancel: function() {

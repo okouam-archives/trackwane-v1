@@ -101,35 +101,45 @@ Trackwane.Controllers.AlarmsController = Trackwane.Controllers.Base.extend({
   },
 
   onSpeedAlarmCreated: function(alarm) {
-    var coordinates = this.map.getCoordinates();
-    alarm.set({coordinates: coordinates});
-    alarm.save(null, {
-      success: function() {
-        this.new_speed_alarm_panel.close();
-        this.close();
-        this.speed_alarms.add(alarm);
-        this.alarm_listing.addSpeedAlarm(this.speed_alarms);
-      }.bind(this),
-      error: function() {
-        this.close();
-      }.bind(this)
-    });
+    if (this.map.getCoordinates()) {
+      var coordinates = this.map.getCoordinates();
+      alarm.set({coordinates: coordinates});
+      alarm.save(null, {
+        success: function() {
+          this.new_speed_alarm_panel.close();
+          this.close();
+          this.speed_alarms.add(alarm);
+          this.alarm_listing.addSpeedAlarm(this.speed_alarms);
+        }.bind(this),
+        error: function() {
+          this.close();
+        }.bind(this)
+      });      
+    }
+    else {
+      alert("You must drawn on the map before saving");
+    }
   },
 
   onGeofenceAlarmCreated: function(alarm) {
-    var coordinates = this.map.getCoordinates();
-    alarm.set({coordinates: coordinates});
-    alarm.save(null, {
-      success: function() {
-        this.new_geofence_alarm_panel.close();
-        this.close();
-        this.geofence_alarms.add(alarm);
-        this.alarm_listing.addGeofenceAlarm(this.geofence_alarms);
-      }.bind(this),
-      error: function() {
-        this.close();
-      }.bind(this)
-    });
+    if (this.map.getCoordinates()) {
+      var coordinates = this.map.getCoordinates();
+      alarm.set({coordinates: coordinates});
+      alarm.save(null, {
+        success: function() {
+          this.new_geofence_alarm_panel.close();
+          this.close();
+          this.geofence_alarms.add(alarm);
+          this.alarm_listing.addGeofenceAlarm(this.geofence_alarms);
+        }.bind(this),
+        error: function() {
+          this.close();
+        }.bind(this)
+      });
+    }
+    else{
+      alert("You must drawn on the map before saving");
+    } 
   },
 
   onCreatingSpeedAlarm: function(evt) {
