@@ -19,6 +19,7 @@ _.extend(App.Services.GeofenceDrawingTool.prototype, {
   },
 
   getCoordinates: function() {
+    if (this.draw_layer.features.length < 1) return null
     var format = new OpenLayers.Format.WKT();
     return format.extractGeometry(this.draw_layer.features[0].geometry);
   },

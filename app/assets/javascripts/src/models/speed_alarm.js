@@ -13,7 +13,7 @@ App.Models.SpeedAlarm = Backbone.Model.extend({
       },
       "speed_alarm[speed]": {
         required: true,
-        digit: true
+        digits: true
       }
     },
     messages: {
