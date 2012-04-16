@@ -1,6 +1,6 @@
-App.Services.GeofenceDrawingTool = function(map) {
+Trackwane.Services.GeofenceDrawingTool = function(map) {
   this.map = map;
-  var cartography = new App.Services.Cartography(map);
+  var cartography = new Trackwane.Services.Cartography(map);
   this.draw_layer = cartography.createLayer("drawing_layer");
   this.map.addLayer(this.draw_layer);
   this.drawFeature = new OpenLayers.Control.DrawFeature(this.draw_layer, OpenLayers.Handler.Polygon);
@@ -12,7 +12,7 @@ App.Services.GeofenceDrawingTool = function(map) {
   this.map.addControl(this.drawFeature);
 };
 
-_.extend(App.Services.GeofenceDrawingTool.prototype, {
+_.extend(Trackwane.Services.GeofenceDrawingTool.prototype, {
 
   activate: function() {
     this.drawFeature.activate();

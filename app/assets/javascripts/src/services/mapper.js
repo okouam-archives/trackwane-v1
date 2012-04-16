@@ -1,8 +1,8 @@
-App.Services.Mapper = function() {
-  this.cartography = new App.Services.Cartography();
+Trackwane.Services.Mapper = function() {
+  this.cartography = new Trackwane.Services.Cartography();
 };
 
-_.extend(App.Services.Mapper.prototype, {
+_.extend(Trackwane.Services.Mapper.prototype, {
 
   toFeature: function(model, style) {
     var lonlat = this.cartography.mercatorCoordinates(model.get("longitude"), model.get("latitude"));

@@ -1,4 +1,4 @@
-App.Views.Schedules.Editor = App.Views.Base.extend({
+Trackwane.Views.Schedules.Editor = Trackwane.Views.Base.extend({
 
   events: {
     "click .create": "onCreate",
@@ -19,7 +19,7 @@ App.Views.Schedules.Editor = App.Views.Base.extend({
         this.pubsub.trigger("schedule:created", attributes)
       }.bind(this)
     };
-    this.$el.find("form").validate(_.extend(App.Models.Schedule.validation_rules, callback));
+    this.$el.find("form").validate(_.extend(Trackwane.Models.Schedule.validation_rules, callback));
   },
 
   onDelete: function() {
@@ -38,7 +38,7 @@ App.Views.Schedules.Editor = App.Views.Base.extend({
         this.pubsub.trigger("schedule:saved", attributes)
       }.bind(this)
     };
-    this.$el.find("form").validate(_.extend(App.Models.Schedule.validation_rules, callback));
+    this.$el.find("form").validate(_.extend(Trackwane.Models.Schedule.validation_rules, callback));
   },
 
   close: function() {

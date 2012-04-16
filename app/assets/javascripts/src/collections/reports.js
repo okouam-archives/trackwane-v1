@@ -1,6 +1,6 @@
-App.Collections.Reports = Backbone.Collection.extend({
+Trackwane.Collections.Reports = Backbone.Collection.extend({
 
-  model: App.Models.Report,
+  model: Trackwane.Models.Report,
 
   url: "/reports"
 

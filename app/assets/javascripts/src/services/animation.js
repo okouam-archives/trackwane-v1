@@ -1,4 +1,4 @@
-App.Services.Animation = function(device_id, feature, path) {
+Trackwane.Services.Animation = function(device_id, feature, path) {
   this.cursor = 0;
   this.feature = feature;
   this.device_id = device_id;
@@ -6,7 +6,7 @@ App.Services.Animation = function(device_id, feature, path) {
   this.finished = false;
 };
 
-_.extend(App.Services.Animation.prototype, {
+_.extend(Trackwane.Services.Animation.prototype, {
 
   execute: function(frame) {
     if (console) console.debug("[animator] Executing animation for device " +

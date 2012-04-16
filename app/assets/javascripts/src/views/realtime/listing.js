@@ -1,4 +1,4 @@
-App.Views.Realtime.Events = Backbone.View.extend({
+Trackwane.Views.Realtime.Events = Backbone.View.extend({
 
   events: {
     "click a": "onSelection"

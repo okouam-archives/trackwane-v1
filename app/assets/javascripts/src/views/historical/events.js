@@ -1,4 +1,4 @@
-App.Views.Historical.Events = Backbone.View.extend({
+Trackwane.Views.Historical.Events = Backbone.View.extend({
 
   initialize: function(options) {
     this.pubsub = options.pubsub;

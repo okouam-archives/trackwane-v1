@@ -1,4 +1,4 @@
-class App.Views.AlarmMap extends App.Views.Base
+class Trackwane.Views.AlarmMap extends Trackwane.Views.Base
 
   initialize: (options) ->
     @pubsub = options.pubsub
@@ -10,8 +10,8 @@ class App.Views.AlarmMap extends App.Views.Base
     @cancelEdit()
 
   showAlarms: (alarms) ->
-    @layer ?= new App.Services.Cartography(@map).createLayer("coordinates");
-    mapper = new App.Services.Mapper();
+    @layer ?= new Trackwane.Services.Cartography(@map).createLayer("coordinates");
+    mapper = new Trackwane.Services.Mapper();
     features = (@createFeature(mapper, alarm) for alarm in alarms.models)
     features = (feature for feature in features when feature)
     @layer.addFeatures(features)
@@ -22,15 +22,15 @@ class App.Views.AlarmMap extends App.Views.Base
     mapper.toGeofenceFeature(name, coordinates) if coordinates and name
 
   show: (name, coordinates) ->
-    @layer ?= new App.Services.Cartography(@map).createLayer("coordinates")
-    feature = new App.Services.Mapper().toGeofenceFeature(name, coordinates)
+    @layer ?= new Trackwane.Services.Cartography(@map).createLayer("coordinates")
+    feature = new Trackwane.Services.Mapper().toGeofenceFeature(name, coordinates)
     @layer.addFeatures([feature])
 
   clear: ->
     @layer.destroyFeatures() if @layer
 
   startEditing: ->
-    @geofence_drawing_tool ?= new App.Services.GeofenceDrawingTool(@map)
+    @geofence_drawing_tool ?= new Trackwane.Services.GeofenceDrawingTool(@map)
     @geofence_drawing_tool.activate()
 
   getCoordinates: ->
@@ -41,5 +41,5 @@ class App.Views.AlarmMap extends App.Views.Base
     @layer.destroyFeatures() if @layer
 
   render: ->
-    @map = new App.Services.Cartography().createMap(this.el)
+    @map = new Trackwane.Services.Cartography().createMap(this.el)
     @map.zoomTo(1)

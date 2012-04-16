@@ -1,4 +1,4 @@
-App.Controllers.AlarmsController = App.Controllers.Base.extend({
+Trackwane.Controllers.AlarmsController = Trackwane.Controllers.Base.extend({
 
   appEvents: {
     "geofence:creating": "onCreatingGeofenceAlarm",
@@ -18,25 +18,25 @@ App.Controllers.AlarmsController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    this.map = new App.Views.AlarmMap({el: "#map", pubsub: this.pubsub});
-    this.new_speed_alarm_panel = new App.Views.Alarms.SpeedPanel({el: "#canvas #new-speed-alarm-panel", pubsub: this.pubsub});
-    this.new_geofence_alarm_panel = new App.Views.Alarms.GeofencePanel({el: "#canvas #new-geofence-alarm-panel", pubsub: this.pubsub});
-    this.alarm_listing = new App.Views.Alarms.Listing({el: "#canvas #alarm-listing", pubsub: this.pubsub});
-    this.toolbar = new App.Views.Alarms.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
+    this.map = new Trackwane.Views.AlarmMap({el: "#map", pubsub: this.pubsub});
+    this.new_speed_alarm_panel = new Trackwane.Views.Alarms.SpeedPanel({el: "#canvas #new-speed-alarm-panel", pubsub: this.pubsub});
+    this.new_geofence_alarm_panel = new Trackwane.Views.Alarms.GeofencePanel({el: "#canvas #new-geofence-alarm-panel", pubsub: this.pubsub});
+    this.alarm_listing = new Trackwane.Views.Alarms.Listing({el: "#canvas #alarm-listing", pubsub: this.pubsub});
+    this.toolbar = new Trackwane.Views.Alarms.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
     this.map.render();
     this.fetchAlarms();
   },
 
   onShowGeofenceAlarms: function() {
     this.map.clear();
-    new App.Collections.GeofenceAlarms().fetch({success: function(results) {
+    new Trackwane.Collections.GeofenceAlarms().fetch({success: function(results) {
       this.map.showAlarms(results);
     }.bind(this)});
   },
 
   onShowSpeedAlarms: function() {
     this.map.clear();
-    new App.Collections.SpeedAlarms().fetch({success: function(results) {
+    new Trackwane.Collections.SpeedAlarms().fetch({success: function(results) {
       this.map.showAlarms(results);
     }.bind(this)});
   },
@@ -46,7 +46,7 @@ App.Controllers.AlarmsController = App.Controllers.Base.extend({
   },
 
   onGeofenceAlarmSelected: function(id) {
-    var model = new App.Models.GeofenceAlarm({id: id});
+    var model = new Trackwane.Models.GeofenceAlarm({id: id});
     model.fetch({success: function(model) {
         this.map.clear();
         this.map.show(model.get("name"), model.get("coordinates"));
@@ -55,23 +55,23 @@ App.Controllers.AlarmsController = App.Controllers.Base.extend({
   },
 
   onSpeedAlarmDeleted: function(id) {
-    var model = new App.Models.SpeedAlarm({id: id});
+    var model = new Trackwane.Models.SpeedAlarm({id: id});
     model.destroy();
-    new App.Collections.SpeedAlarms().fetch({success: function(results) {
+    new Trackwane.Collections.SpeedAlarms().fetch({success: function(results) {
       this.alarm_listing.addSpeedAlarm(results);
     }.bind(this)});
   },
 
   onGeofenceAlarmDeleted: function(id) {
-    var model = new App.Models.GeofenceAlarm({id: id});
+    var model = new Trackwane.Models.GeofenceAlarm({id: id});
     model.destroy();
-    new App.Collections.GeofenceAlarms().fetch({success: function(results) {
+    new Trackwane.Collections.GeofenceAlarms().fetch({success: function(results) {
       this.alarm_listing.addGeofenceAlarm(results);
     }.bind(this)});
   },
 
   onSpeedAlarmSelected: function(id) {
-    var model = new App.Models.SpeedAlarm({id: id});
+    var model = new Trackwane.Models.SpeedAlarm({id: id});
     model.fetch({success: function(model) {
       this.map.clear();
         this.map.show(model.get("name"), model.get("coordinates"));
@@ -80,8 +80,8 @@ App.Controllers.AlarmsController = App.Controllers.Base.extend({
   },
 
   fetchAlarms: function() {
-    this.geofence_alarms = new App.Collections.GeofenceAlarms();
-    this.speed_alarms = new App.Collections.SpeedAlarms();
+    this.geofence_alarms = new Trackwane.Collections.GeofenceAlarms();
+    this.speed_alarms = new Trackwane.Collections.SpeedAlarms();
     this.speed_alarms.fetch({success: function(results) {
       this.alarm_listing.addSpeedAlarm(results);
     }.bind(this)});

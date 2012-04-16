@@ -1,4 +1,4 @@
-App.Controllers.AccountController = App.Controllers.Base.extend({
+Trackwane.Controllers.AccountController = Trackwane.Controllers.Base.extend({
 
   events: {
     "click .accept": "onSave"

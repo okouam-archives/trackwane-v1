@@ -1,4 +1,4 @@
-App.Views.Base = Backbone.View.extend({
+Trackwane.Views.Base = Backbone.View.extend({
 
   handleApplicationEvents: function() {
     if (this.appEvents) {
@@ -11,7 +11,7 @@ App.Views.Base = Backbone.View.extend({
 
 });
 
-App.Controllers.Base = App.Views.Base.extend({
+Trackwane.Controllers.Base = Trackwane.Views.Base.extend({
 
   init: function() {
     this.pubsub = _.extend({}, Backbone.Events);

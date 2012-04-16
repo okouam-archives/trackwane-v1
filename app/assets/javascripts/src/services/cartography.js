@@ -1,8 +1,8 @@
-App.Services.Cartography = function(map) {
+Trackwane.Services.Cartography = function(map) {
   this.map = map;
 };
 
-_.extend(App.Services.Cartography.prototype, {
+_.extend(Trackwane.Services.Cartography.prototype, {
 
   projectForGoogleMaps: function(coordinates) {
     var sourceProjection = new OpenLayers.Projection("EPSG:4326");

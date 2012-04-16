@@ -1,4 +1,4 @@
-App.Views.Reports.Toolbar = Backbone.View.extend({
+Trackwane.Views.Reports.Toolbar = Backbone.View.extend({
 
   events: {
     "click .excel": "onExportExcel",

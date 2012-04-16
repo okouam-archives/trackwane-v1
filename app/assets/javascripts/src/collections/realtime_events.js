@@ -1,6 +1,6 @@
-App.Collections.RealtimeEvents = Backbone.Collection.extend({
+Trackwane.Collections.RealtimeEvents = Backbone.Collection.extend({
 
-  model: App.Models.Event,
+  model: Trackwane.Models.Event,
 
   url: "/events/realtime"
 

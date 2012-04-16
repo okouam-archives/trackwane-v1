@@ -1,4 +1,4 @@
-App.Views.Users.Editor = App.Views.Base.extend({
+Trackwane.Views.Users.Editor = Trackwane.Views.Base.extend({
 
  events: {
     "click .create": "onCreate",
@@ -14,8 +14,8 @@ App.Views.Users.Editor = App.Views.Base.extend({
         this.pubsub.trigger("user:created", attributes)
       }.bind(this)
     };
-    console.debug(App.Models.User.validation_rules);
-    this.$el.find("form").validate(_.extend(App.Models.User.validation_rules, callback));
+    console.debug(Trackwane.Models.User.validation_rules);
+    this.$el.find("form").validate(_.extend(Trackwane.Models.User.validation_rules, callback));
   },
 
   onDelete: function() {
@@ -34,7 +34,7 @@ App.Views.Users.Editor = App.Views.Base.extend({
       this.pubsub.trigger("user:saved", attributes)
       }.bind(this)
     };
-    this.$el.find("form").validate(_.extend(App.Models.User.validation_rules, callback));
+    this.$el.find("form").validate(_.extend(Trackwane.Models.User.validation_rules, callback));
   },
 
   close: function() {

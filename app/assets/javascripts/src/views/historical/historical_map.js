@@ -1,4 +1,4 @@
-App.Views.Historical.Map = Backbone.View.extend({
+Trackwane.Views.Historical.Map = Backbone.View.extend({
 
   initialize: function(options) {
     this.pubsub = options.pubsub;
@@ -25,7 +25,7 @@ App.Views.Historical.Map = Backbone.View.extend({
   },
 
   createFeature: function(event) {
-    var mapper = new App.Services.Mapper();
+    var mapper = new Trackwane.Services.Mapper();
     var feature = mapper.toFeature(event);
     this.event_layer.addFeatures([feature]);
   },
@@ -39,10 +39,10 @@ App.Views.Historical.Map = Backbone.View.extend({
 
   showGeofences: function(geofences) {
     if (!this.geofence_layer) {
-      var cartography = new App.Services.Cartography(this.map);
+      var cartography = new Trackwane.Services.Cartography(this.map);
       this.geofence_layer = cartography.createLayer("geofences");
     }
-    var mapper = new App.Services.Mapper();
+    var mapper = new Trackwane.Services.Mapper();
     var features = mapper.toGeofenceFeatures(geofences);
     this.geofence_layer.addFeatures(features);
   },
@@ -54,10 +54,10 @@ App.Views.Historical.Map = Backbone.View.extend({
 
   showPlaces: function(places) {
     if (!this.place_layer) {
-      var cartography = new App.Services.Cartography(this.map);
+      var cartography = new Trackwane.Services.Cartography(this.map);
       this.place_layer = cartography.createLayer("places");
     }
-    var mapper = new App.Services.Mapper();
+    var mapper = new Trackwane.Services.Mapper();
     var features = mapper.toPlaceFeatures(places);
     this.place_layer.addFeatures(features);
     if (!places || places.size() < 1) return;
@@ -69,7 +69,7 @@ App.Views.Historical.Map = Backbone.View.extend({
 
   load: function() {
     this.$el.empty();
-    var cartography = new App.Services.Cartography();
+    var cartography = new Trackwane.Services.Cartography();
     this.map = cartography.createMap(this.el);
     this.event_layer = cartography.createLayer("events");
     this.map.zoomTo(1);

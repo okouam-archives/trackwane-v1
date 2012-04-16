@@ -1,6 +1,6 @@
-App.Collections.HistoricalEvents = Backbone.Collection.extend({
+Trackwane.Collections.HistoricalEvents = Backbone.Collection.extend({
 
-  model: App.Models.Event,
+  model: Trackwane.Models.Event,
 
   url: "/events"
 

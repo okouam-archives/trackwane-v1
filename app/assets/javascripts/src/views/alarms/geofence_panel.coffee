@@ -1,4 +1,4 @@
-class App.Views.Alarms.GeofencePanel extends App.Views.Base
+class Trackwane.Views.Alarms.GeofencePanel extends Trackwane.Views.Base
 
   events:
     "click .cancel": "onCancel"
@@ -12,9 +12,9 @@ class App.Views.Alarms.GeofencePanel extends App.Views.Base
     callback =
       submitHandler: =>
         name = @$el.find("input[name='geofence_alarm[name]']").val()
-        alarm = new App.Models.GeofenceAlarm({name: name})
+        alarm = new Trackwane.Models.GeofenceAlarm({name: name})
         @pubsub.trigger("geofence:created", alarm)
-    @$el.find("form").validate(_.extend(App.Models.GeofenceAlarm.validation_rules, callback))
+    @$el.find("form").validate(_.extend(Trackwane.Models.GeofenceAlarm.validation_rules, callback))
     false
 
   onCancel: ->

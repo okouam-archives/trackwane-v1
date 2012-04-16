@@ -1,4 +1,4 @@
-App.Views.Realtime.Toolbar = Backbone.View.extend({
+Trackwane.Views.Realtime.Toolbar = Backbone.View.extend({
 
   events: {
     "click .places": "onClickPlaces",

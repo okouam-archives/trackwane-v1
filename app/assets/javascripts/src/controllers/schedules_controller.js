@@ -1,4 +1,4 @@
-App.Controllers.SchedulesController = App.Controllers.Base.extend({
+Trackwane.Controllers.SchedulesController = Trackwane.Controllers.Base.extend({
 
   appEvents: {
     "schedules:fetched": "onSchedulesFetched",
@@ -15,10 +15,10 @@ App.Controllers.SchedulesController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    this.listing = new App.Views.Schedules.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
-    this.editor = new App.Views.Schedules.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
-    this.toolbar = new App.Views.Schedules.Toolbar({pubsub: this.pubsub, el: "#canvas .toolbar"});
-    new App.Collections.Schedules().fetch({success: function(results) {
+    this.listing = new Trackwane.Views.Schedules.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
+    this.editor = new Trackwane.Views.Schedules.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
+    this.toolbar = new Trackwane.Views.Schedules.Toolbar({pubsub: this.pubsub, el: "#canvas .toolbar"});
+    new Trackwane.Collections.Schedules().fetch({success: function(results) {
         this.pubsub.trigger("schedules:fetched", results);
       }.bind(this)
     });
@@ -39,7 +39,7 @@ App.Controllers.SchedulesController = App.Controllers.Base.extend({
   },
 
   onScheduleCreated: function(attributes) {
-    var schedule = new App.Models.Schedule(attributes);
+    var schedule = new Trackwane.Models.Schedule(attributes);
     schedule.save(null, {success: function(model) {
         this.schedules.add(model);
         this.pubsub.trigger("schedules:fetched", this.schedules);

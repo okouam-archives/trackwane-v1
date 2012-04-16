@@ -1,9 +1,9 @@
-App.Services.PopupActionsCreator = function(map, template) {
+Trackwane.Services.PopupActionsCreator = function(map, template) {
   this.map = map;
   this.template = Handlebars.compile($(template).html());
 };
 
-_.extend(App.Services.PopupActionsCreator.prototype, {
+_.extend(Trackwane.Services.PopupActionsCreator.prototype, {
 
   build: function(attributes, lonlat, tag) {
     var popup = new OpenLayers.Popup(attributes.name, lonlat, new OpenLayers.Size(10,10), this.template(attributes), true);

@@ -1,4 +1,4 @@
-App.Views.Schedules.Toolbar = App.Views.Base.extend({
+Trackwane.Views.Schedules.Toolbar = Trackwane.Views.Base.extend({
 
   events: {
     "click .button": "onCreateSchedule"

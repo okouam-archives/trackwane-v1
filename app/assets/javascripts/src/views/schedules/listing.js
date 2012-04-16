@@ -1,4 +1,4 @@
-App.Views.Schedules.Listing = App.Views.Base.extend({
+Trackwane.Views.Schedules.Listing = Trackwane.Views.Base.extend({
 
   events: {
     "click tr" : "onScheduleSelect",

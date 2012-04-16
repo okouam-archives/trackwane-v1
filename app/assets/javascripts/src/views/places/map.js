@@ -1,11 +1,11 @@
-App.Views.PlacesMap = App.Views.Base.extend({
+Trackwane.Views.PlacesMap = Trackwane.Views.Base.extend({
 
   initialize: function(options) {
     this.pubsub = options.pubsub;
   },
 
   allowPlaceSelection: function() {
-    if (!this.place_selection_tool) this.place_selection_tool = new App.Services.PlaceSelectionTool(this.map);
+    if (!this.place_selection_tool) this.place_selection_tool = new Trackwane.Services.PlaceSelectionTool(this.map);
     this.place_selection_tool.activate();
   },
 
@@ -30,7 +30,7 @@ App.Views.PlacesMap = App.Views.Base.extend({
   },
 
   createFeature: function(place) {
-    var mapper = new App.Services.Mapper();
+    var mapper = new Trackwane.Services.Mapper();
     var feature = mapper.toPlaceFeature(place);
     this.place_layer.addFeatures([feature]);
   },
@@ -42,7 +42,7 @@ App.Views.PlacesMap = App.Views.Base.extend({
 
   render: function() {
     this.$el.empty();
-    var cartography = new App.Services.Cartography();
+    var cartography = new Trackwane.Services.Cartography();
     this.map = cartography.createMap(this.el);
     this.place_layer = cartography.createLayer("places");
     this.map.zoomTo(1);

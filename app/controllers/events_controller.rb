@@ -25,13 +25,20 @@ class EventsController < ApplicationController
 			event = Event.new(data)
 		end
     event.device = Device.find_by_imei_number(imei_number)
-    if event.device
-      event.date = DateTime.now unless event.date
-      event.save!
+
+    unless event.device
+      render :text => "Unable to process event from IMEI #{imei_number} as it has not been properly setup", :status => 412
+      return
+    end
+
+    event.date = DateTime.now unless event.date
+    success = event.save
+    if success
       head :ok
     else
-      render :text => "Unable to process event from IMEI #{imei_number} as it has not been properly setup", :status => 412
+      render :text => event.errors
     end
+
   end
 
 end

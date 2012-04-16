@@ -1,4 +1,4 @@
-class App.Views.SpeedAlarms extends Backbone.View
+class Trackwane.Views.SpeedAlarms extends Backbone.View
 
   events:
     "click .remove": "onRemove"

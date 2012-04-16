@@ -1,6 +1,6 @@
-App.Collections.GeofenceAlarms = Backbone.Collection.extend({
+Trackwane.Collections.GeofenceAlarms = Backbone.Collection.extend({
 
-  model: App.Models.GeofenceAlarm,
+  model: Trackwane.Models.GeofenceAlarm,
 
   url: "/geofence_alarms"
 

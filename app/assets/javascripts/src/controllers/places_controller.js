@@ -1,4 +1,4 @@
-App.Controllers.PlacesController = App.Controllers.Base.extend({
+Trackwane.Controllers.PlacesController = Trackwane.Controllers.Base.extend({
 
   events: {
     "click .toolbar .button": "onToggleNames",
@@ -14,11 +14,11 @@ App.Controllers.PlacesController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    this.map = new App.Views.PlacesMap({el: "#map", pubsub: this.pubsub});
+    this.map = new Trackwane.Views.PlacesMap({el: "#map", pubsub: this.pubsub});
     this.map.render();
-    this.listing = new App.Views.Places.Listing({el: "#canvas .listing", pubsub: this.pubsub});
-    this.new_place_panel = new App.Views.NewPlacePanel({el: "#new-place-panel", pubsub: this.pubsub});
-    this.render(new App.Collections.Places(options.places));
+    this.listing = new Trackwane.Views.Places.Listing({el: "#canvas .listing", pubsub: this.pubsub});
+    this.new_place_panel = new Trackwane.Views.NewPlacePanel({el: "#new-place-panel", pubsub: this.pubsub});
+    this.render(new Trackwane.Collections.Places(options.places));
     this.isShowing = false;
   },
 
@@ -31,7 +31,7 @@ App.Controllers.PlacesController = App.Controllers.Base.extend({
   },
 
   onRemovePlace: function(id) {
-    new App.Collections.Places().fetch({success: function(results) {
+    new Trackwane.Collections.Places().fetch({success: function(results) {
       results.get(id).destroy();
       this.render(results);
     }.bind(this)});
@@ -47,7 +47,7 @@ App.Controllers.PlacesController = App.Controllers.Base.extend({
     place.setCoordinates(lonlat);
     place.save(null, {
       success: function() {
-        new App.Collections.Places().fetch({success: function(results) {
+        new Trackwane.Collections.Places().fetch({success: function(results) {
           this.render(results);
         }.bind(this)});
         this.stopEditing();

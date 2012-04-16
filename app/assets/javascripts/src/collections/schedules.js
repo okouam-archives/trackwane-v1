@@ -1,6 +1,6 @@
-App.Collections.Schedules = Backbone.Collection.extend({
+Trackwane.Collections.Schedules = Backbone.Collection.extend({
 
-  model: App.Models.Schedule,
+  model: Trackwane.Models.Schedule,
 
   url: "/schedules"
 

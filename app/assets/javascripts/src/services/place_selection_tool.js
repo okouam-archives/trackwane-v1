@@ -1,6 +1,6 @@
-App.Services.PlaceSelectionTool = function(map) {
+Trackwane.Services.PlaceSelectionTool = function(map) {
   this.map = map;
-  this.cartography = new App.Services.Cartography(this.map);
+  this.cartography = new Trackwane.Services.Cartography(this.map);
   this.draw_layer = this.cartography.createLayer("drawing_layer");
   this.map.addLayer(this.draw_layer);
   this.drawFeature = new OpenLayers.Control.DrawFeature(this.draw_layer, OpenLayers.Handler.Point);
@@ -13,7 +13,7 @@ App.Services.PlaceSelectionTool = function(map) {
   this.map.addControl(this.drawFeature);
 };
 
-_.extend(App.Services.PlaceSelectionTool.prototype, {
+_.extend(Trackwane.Services.PlaceSelectionTool.prototype, {
 
   activate: function() {
     this.drawFeature.activate();

@@ -1,4 +1,4 @@
-App.Controllers.DevicesController = App.Controllers.Base.extend({
+Trackwane.Controllers.DevicesController = Trackwane.Controllers.Base.extend({
 
   appEvents: {
     "devices:fetched": "onDevicesFetched",
@@ -16,9 +16,9 @@ App.Controllers.DevicesController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    this.listing = new App.Views.Devices.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
-    this.editor = new App.Views.Devices.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
-    this.pubsub.trigger("devices:fetched", new App.Collections.Devices(options.devices));
+    this.listing = new Trackwane.Views.Devices.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
+    this.editor = new Trackwane.Views.Devices.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
+    this.pubsub.trigger("devices:fetched", new Trackwane.Collections.Devices(options.devices));
   },
 
   onNewDevice: function() {
@@ -40,7 +40,7 @@ App.Controllers.DevicesController = App.Controllers.Base.extend({
   },
 
   onDeviceCreated: function(attributes) {
-    var device = new App.Models.Device(attributes);
+    var device = new Trackwane.Models.Device(attributes);
     device.save(null, {success: function(model) {
         this.devices.add(model);
         this.pubsub.trigger("devices:fetched", this.devices);

@@ -1,4 +1,4 @@
-App.Views.Devices.Editor = App.Views.Base.extend({
+Trackwane.Views.Devices.Editor = Trackwane.Views.Base.extend({
 
   validation_rules: {
     debug: true,

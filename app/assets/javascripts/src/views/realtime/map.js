@@ -1,14 +1,14 @@
-App.Views.Realtime.Map = Backbone.View.extend({
+Trackwane.Views.Realtime.Map = Backbone.View.extend({
 
   destination_lookup: {},
 
   initialize: function(options) {
     this.pubsub = options.pubsub;
-    this.places = new App.Collections.Places();
-    this.geofences = new App.Collections.Geofences();
-    this.animator = new App.Services.Animator(this.removeDestination.bind(this));
+    this.places = new Trackwane.Collections.Places();
+    this.geofences = new Trackwane.Collections.Geofences();
+    this.animator = new Trackwane.Services.Animator(this.removeDestination.bind(this));
     this.animator.start(400);
-    this.mapper = new App.Services.Mapper();
+    this.mapper = new Trackwane.Services.Mapper();
   },
 
   center: function(event_id) {
@@ -52,7 +52,7 @@ App.Views.Realtime.Map = Backbone.View.extend({
     var path = this.moveFeature(event_data, numPoints);
     if (!path) return;
     var feature = this.device_layer.getFeatureBy("device_id", device_id);
-    var animation = new App.Services.Animation(device_id, feature, path);
+    var animation = new Trackwane.Services.Animation(device_id, feature, path);
     this.animator.add(animation);
   },
 
@@ -85,7 +85,7 @@ App.Views.Realtime.Map = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    var cartography = new App.Services.Cartography();
+    var cartography = new Trackwane.Services.Cartography();
     this.map = cartography.createMap(this.el);
     this.device_layer = cartography.createLayer("devices");
     this.geofence_layer = cartography.createLayer("geofences");

@@ -1,4 +1,4 @@
-class App.Views.GeofenceAlarms extends App.Views.Base
+class Trackwane.Views.GeofenceAlarms extends Trackwane.Views.Base
 
   events:
     "click .remove": "onRemove"

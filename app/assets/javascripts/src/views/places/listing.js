@@ -1,4 +1,4 @@
-App.Views.Places.Listing = App.Views.Base.extend({
+Trackwane.Views.Places.Listing = Trackwane.Views.Base.extend({
 
   events: {
     "click a.select": "onSelect",

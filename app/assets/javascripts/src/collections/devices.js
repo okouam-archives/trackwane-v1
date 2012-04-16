@@ -1,6 +1,6 @@
-App.Collections.Devices = Backbone.Collection.extend({
+Trackwane.Collections.Devices = Backbone.Collection.extend({
 
-  model: App.Models.Device,
+  model: Trackwane.Models.Device,
 
   url: "/devices"
 

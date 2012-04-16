@@ -1,10 +1,10 @@
-App.Services.Animator = function(onAnimationFinished) {
+Trackwane.Services.Animator = function(onAnimationFinished) {
   this.animations = [];
   this.frame = 0;
   this.onAnimationFinished = onAnimationFinished;
 };
 
-_.extend(App.Services.Animator.prototype, {
+_.extend(Trackwane.Services.Animator.prototype, {
 
   add: function(animation) {
     if (console) console.debug("[animator] Adding animation for device " + animation.device_id + " at frame " + this.frame);

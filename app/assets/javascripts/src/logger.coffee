@@ -1,6 +1,6 @@
 Array::remove = (v) -> $.grep @,(e)->e!=v
 
-class App.Logger
+class Trackwane.Logger
 
   @active: []
 
@@ -12,22 +12,22 @@ class App.Logger
     console?.error(arguments)
 
   warn: ->
-    console?.warn(arguments) if App.Logger.level > 1 && @isActive(@name)
+    console?.warn(arguments) if Trackwane.Logger.level > 1 && @isActive(@name)
 
   info: ->
-    console?.info(arguments) if App.Logger.level > 0 && @isActive(@name)
+    console?.info(arguments) if Trackwane.Logger.level > 0 && @isActive(@name)
 
   debug: ->
-    console?.debug(arguments) if App.Logger.level > -1 && @isActive(@name)
+    console?.debug(arguments) if Trackwane.Logger.level > -1 && @isActive(@name)
 
   isActive: (name) ->
-    name in App.Logger.active
+    name in Trackwane.Logger.active
 
   @get: (name) ->
-    new App.Logger(name)
+    new Trackwane.Logger(name)
 
   @on: (name) ->
-    App.Logger.active.push(name)
+    Trackwane.Logger.active.push(name)
 
   @off: (name) ->
-    @active = App.Logger.active.remove(name) if @isActive(name)
+    @active = Trackwane.Logger.active.remove(name) if @isActive(name)

@@ -1,4 +1,4 @@
-App.Controllers.UsersController = App.Controllers.Base.extend({
+Trackwane.Controllers.UsersController = Trackwane.Controllers.Base.extend({
 
   appEvents: {
     "users:fetched": "onUsersFetched",
@@ -15,9 +15,9 @@ App.Controllers.UsersController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    this.listing = new App.Views.Users.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
-    this.editor = new App.Views.Users.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
-    this.pubsub.trigger("users:fetched", new App.Collections.Users(options.users));
+    this.listing = new Trackwane.Views.Users.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
+    this.editor = new Trackwane.Views.Users.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
+    this.pubsub.trigger("users:fetched", new Trackwane.Collections.Users(options.users));
   },
 
   onUsersFetched: function(users) {
@@ -35,7 +35,7 @@ App.Controllers.UsersController = App.Controllers.Base.extend({
   },
 
   onUserCreated: function(attributes) {
-    var user = new App.Models.User(attributes);
+    var user = new Trackwane.Models.User(attributes);
     user.save(null, {success: function(model) {
         this.users.add(model);
         this.pubsub.trigger("users:fetched", this.users);

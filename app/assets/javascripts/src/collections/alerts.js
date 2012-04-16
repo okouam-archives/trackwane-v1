@@ -1,6 +1,6 @@
-App.Collections.Alerts = Backbone.Collection.extend({
+Trackwane.Collections.Alerts = Backbone.Collection.extend({
 
-  model: App.Models.Alert,
+  model: Trackwane.Models.Alert,
 
   url: "/alerts"
 

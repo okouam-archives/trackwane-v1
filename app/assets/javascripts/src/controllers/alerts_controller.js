@@ -1,4 +1,4 @@
-App.Controllers.AlertsController = App.Controllers.Base.extend({
+Trackwane.Controllers.AlertsController = Trackwane.Controllers.Base.extend({
 
   appEvents: {
     "alerts:fetched": "onAlertsFetched",
@@ -16,16 +16,16 @@ App.Controllers.AlertsController = App.Controllers.Base.extend({
   initialize: function(options) {
     this.init(options);
     this.alarms = this.getAvailableAlarms(options.geofence_alarms, options.speed_alarms);
-    this.listing = new App.Views.Alerts.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
-    this.editor = new App.Views.Alerts.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
-    this.toolbar = new App.Views.Alerts.Toolbar({pubsub: this.pubsub, el: "#canvas .toolbar"});
-    this.listing.render(new App.Collections.Alerts(options.alerts));
+    this.listing = new Trackwane.Views.Alerts.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
+    this.editor = new Trackwane.Views.Alerts.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
+    this.toolbar = new Trackwane.Views.Alerts.Toolbar({pubsub: this.pubsub, el: "#canvas .toolbar"});
+    this.listing.render(new Trackwane.Collections.Alerts(options.alerts));
   },
 
   getAvailableAlarms: function(geofence_alarms, speed_alarms) {
-    var attributes = this.parseAlarms(new App.Collections.GeofenceAlarms(geofence_alarms), "GeofenceAlarm");
+    var attributes = this.parseAlarms(new Trackwane.Collections.GeofenceAlarms(geofence_alarms), "GeofenceAlarm");
     var alarms = _.union([], attributes);
-    attributes = this.parseAlarms(new App.Collections.SpeedAlarms(speed_alarms), "SpeedAlarm");
+    attributes = this.parseAlarms(new Trackwane.Collections.SpeedAlarms(speed_alarms), "SpeedAlarm");
     return _.union(alarms, attributes);
   },
 
@@ -54,7 +54,7 @@ App.Controllers.AlertsController = App.Controllers.Base.extend({
   },
 
   onAlertCreated: function(attributes) {
-    var alert = new App.Models.Alert(attributes);
+    var alert = new Trackwane.Models.Alert(attributes);
     alert.save(null, {success: function(model) {
         this.alerts.add(model);
         this.listing.render(this.alerts);

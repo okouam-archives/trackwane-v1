@@ -1,4 +1,4 @@
-App.Controllers.ReportsController = App.Controllers.Base.extend({
+Trackwane.Controllers.ReportsController = Trackwane.Controllers.Base.extend({
 
   appEvents: {
     "presentation:toggle": "onTogglePresentation",
@@ -20,23 +20,23 @@ App.Controllers.ReportsController = App.Controllers.Base.extend({
   initialize: function(options) {
     this.init(options);
 
-    this.presentation_view = new App.Views.Reports.Presentation({el: "#canvas .presentation", pubsub: this.pubsub});
-    this.parameters_view = new App.Views.Reports.Parameters({el: "#canvas .parameters", pubsub: this.pubsub});
-    this.toolbar_view = new App.Views.Reports.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
-    this.new_report_view = new App.Views.Reports.NewReport({el: "#canvas .saved-report-details", pubsub: this.pubsub});
+    this.presentation_view = new Trackwane.Views.Reports.Presentation({el: "#canvas .presentation", pubsub: this.pubsub});
+    this.parameters_view = new Trackwane.Views.Reports.Parameters({el: "#canvas .parameters", pubsub: this.pubsub});
+    this.toolbar_view = new Trackwane.Views.Reports.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
+    this.new_report_view = new Trackwane.Views.Reports.NewReport({el: "#canvas .saved-report-details", pubsub: this.pubsub});
 
     this.presentation_view.render();
     this.parameters_view.render();
     this.toolbar_view.render();
 
-    this.devices = new App.Collections.Devices();
+    this.devices = new Trackwane.Collections.Devices();
     this.devices.fetch({success: function(collection) {
-      this.device_view = new App.Views.Reports.Devices({el: "#canvas .device-listing", pubsub: this.pubsub});
+      this.device_view = new Trackwane.Views.Reports.Devices({el: "#canvas .device-listing", pubsub: this.pubsub});
       this.device_view.render(collection);
     }.bind(this)});
 
-    this.reports_view = new App.Views.Reports.Reports({el: "#canvas .report-listing", pubsub: this.pubsub});
-    this.reports = new App.Collections.Reports();
+    this.reports_view = new Trackwane.Views.Reports.Reports({el: "#canvas .report-listing", pubsub: this.pubsub});
+    this.reports = new Trackwane.Collections.Reports();
   },
 
   onReportDelete: function(id) {
@@ -61,7 +61,7 @@ App.Controllers.ReportsController = App.Controllers.Base.extend({
     var device_ids = _.map(devices, function(device) {
       return device.id;
     });
-    var report = new App.Models.Report({parameters: parameters, devices: device_ids, name: name});
+    var report = new Trackwane.Models.Report({parameters: parameters, devices: device_ids, name: name});
     report.save(null, {
       success: function() {
         this.new_report_view.close();

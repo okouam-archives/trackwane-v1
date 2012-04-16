@@ -1,4 +1,4 @@
-App.Views.Reports.Parameters = Backbone.View.extend({
+Trackwane.Views.Reports.Parameters = Backbone.View.extend({
 
   initialize: function(options) {
     this.pubsub = options.pubsub;

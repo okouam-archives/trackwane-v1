@@ -1,4 +1,4 @@
-App.Views.Devices.Listing = App.Views.Base.extend({
+Trackwane.Views.Devices.Listing = Trackwane.Views.Base.extend({
 
   events: {
     "click tr" : "onDeviceSelect",

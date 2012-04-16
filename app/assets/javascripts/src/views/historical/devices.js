@@ -1,4 +1,4 @@
-App.Views.Historical.Devices = Backbone.View.extend({
+Trackwane.Views.Historical.Devices = Backbone.View.extend({
 
   events: {
     "click a": "onDeviceSelect"

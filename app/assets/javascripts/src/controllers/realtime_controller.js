@@ -1,4 +1,4 @@
-App.Controllers.RealtimeController = App.Controllers.Base.extend({
+Trackwane.Controllers.RealtimeController = Trackwane.Controllers.Base.extend({
 
   appEvents: {
     "event:selected":         "onEventSelected",
@@ -12,13 +12,13 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    this.listing = new App.Views.Realtime.Events({el: "#canvas .listing", pubsub: this.pubsub});
-    this.toolbar = new App.Views.Realtime.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
-    this.follow_panel = new App.Views.Realtime.FollowActionPanel({el: "#canvas .follow.panel", pubsub: this.pubsub});
-    this.command_panel = new App.Views.Realtime.SendCommandActionPanel({el: "#canvas .send-command.panel", pubsub: this.pubsub});
-    this.map = new App.Views.Realtime.Map({el: "#map", pubsub: this.pubsub});
+    this.listing = new Trackwane.Views.Realtime.Events({el: "#canvas .listing", pubsub: this.pubsub});
+    this.toolbar = new Trackwane.Views.Realtime.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
+    this.follow_panel = new Trackwane.Views.Realtime.FollowActionPanel({el: "#canvas .follow.panel", pubsub: this.pubsub});
+    this.command_panel = new Trackwane.Views.Realtime.SendCommandActionPanel({el: "#canvas .send-command.panel", pubsub: this.pubsub});
+    this.map = new Trackwane.Views.Realtime.Map({el: "#map", pubsub: this.pubsub});
     this.map.render();
-    this.showInitialPositions(new App.Collections.RealtimeEvents(options.events));
+    this.showInitialPositions(new Trackwane.Collections.RealtimeEvents(options.events));
   },
 
   onToggleGeofences: function() {
@@ -26,7 +26,7 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
       this.map.hideGeofences();
       this.showing_geofences = false;
     } else {
-      new App.Collections.GeofenceAlarms().fetch({success: function(results) {
+      new Trackwane.Collections.GeofenceAlarms().fetch({success: function(results) {
         this.map.showGeofences(results);
         this.showing_geofences = true;
         }.bind(this)
@@ -39,7 +39,7 @@ App.Controllers.RealtimeController = App.Controllers.Base.extend({
       this.map.hidePlaces();
       this.showing_places = false;
     } else {
-      new App.Collections.Places().fetch({success: function(results) {
+      new Trackwane.Collections.Places().fetch({success: function(results) {
         this.map.showPlaces(results);
         this.showing_places = true;
         }.bind(this)

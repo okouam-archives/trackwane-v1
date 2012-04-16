@@ -1,6 +1,6 @@
-App.Collections.SpeedAlarms = Backbone.Collection.extend({
+Trackwane.Collections.SpeedAlarms = Backbone.Collection.extend({
 
-  model: App.Models.SpeedAlarm,
+  model: Trackwane.Models.SpeedAlarm,
 
   url: "/speed_alarms"
 

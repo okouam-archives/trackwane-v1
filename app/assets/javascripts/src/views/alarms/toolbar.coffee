@@ -1,4 +1,4 @@
-App.Views.Alarms.Toolbar = App.Views.Base.extend({
+Trackwane.Views.Alarms.Toolbar = Trackwane.Views.Base.extend({
 
   events:
     "click .speed.button": "onToggleSpeedAlarms"

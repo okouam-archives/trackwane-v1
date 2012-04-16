@@ -1,4 +1,4 @@
-App.Views.Reports.Reports = Backbone.View.extend({
+Trackwane.Views.Reports.Reports = Backbone.View.extend({
 
   events: {
     "click a.remove": "onDeleteReport",

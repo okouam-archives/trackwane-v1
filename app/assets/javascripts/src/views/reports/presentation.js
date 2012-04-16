@@ -1,4 +1,4 @@
-App.Views.Reports.Presentation = Backbone.View.extend({
+Trackwane.Views.Reports.Presentation = Backbone.View.extend({
 
   events: {
     "click button": "onRunReport"

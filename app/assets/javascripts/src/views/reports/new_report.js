@@ -1,4 +1,4 @@
-App.Views.Reports.NewReport = Backbone.View.extend({
+Trackwane.Views.Reports.NewReport = Backbone.View.extend({
 
   events: {
     "click .cancel": "onCancel",

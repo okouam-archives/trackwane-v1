@@ -1,6 +1,6 @@
-App.Collections.Accounts = Backbone.Collection.extend({
+Trackwane.Collections.Accounts = Backbone.Collection.extend({
 
-  model: App.Models.Account,
+  model: Trackwane.Models.Account,
 
   url: "/accounts"
 

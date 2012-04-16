@@ -1,4 +1,4 @@
-App.Views.Realtime.SendCommandActionPanel = App.Views.Base.extend({
+Trackwane.Views.Realtime.SendCommandActionPanel = Trackwane.Views.Base.extend({
 
   events: {
     "click button": "onSendCommand"

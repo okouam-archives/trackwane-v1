@@ -1,4 +1,4 @@
-App.Views.Reports.Devices = Backbone.View.extend({
+Trackwane.Views.Reports.Devices = Backbone.View.extend({
 
   initialize: function(options) {
     this.pubsub = options.pubsub;

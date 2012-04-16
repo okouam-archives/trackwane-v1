@@ -1,6 +1,6 @@
-App.Collections.Places = Backbone.Collection.extend({
+Trackwane.Collections.Places = Backbone.Collection.extend({
 
-  model: App.Models.Place,
+  model: Trackwane.Models.Place,
 
   url: "/places"
 

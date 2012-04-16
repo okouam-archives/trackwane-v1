@@ -1,6 +1,6 @@
-App.Collections.Geofences = Backbone.Collection.extend({
+Trackwane.Collections.Geofences = Backbone.Collection.extend({
 
-  model: App.Models.Geofence,
+  model: Trackwane.Models.Geofence,
 
   url: "/geofences"
 

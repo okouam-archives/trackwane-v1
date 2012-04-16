@@ -1,4 +1,4 @@
-App.Views.NewPlacePanel = App.Views.Base.extend({
+Trackwane.Views.NewPlacePanel = Trackwane.Views.Base.extend({
 
   events: {
    "click button.accept": "onAccept",
@@ -39,7 +39,7 @@ App.Views.NewPlacePanel = App.Views.Base.extend({
   },
 
   createPlace: function(name, category) {
-    var place = new App.Models.Place({name: name, category: category});
+    var place = new Trackwane.Models.Place({name: name, category: category});
     this.pubsub.trigger("place:created", place);
   }
 

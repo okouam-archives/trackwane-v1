@@ -1,4 +1,4 @@
-App.Controllers.AccountsController = App.Controllers.Base.extend({
+Trackwane.Controllers.AccountsController = Trackwane.Controllers.Base.extend({
 
   appEvents: {
     "accounts:fetched": "onAccountsFetched",
@@ -15,9 +15,9 @@ App.Controllers.AccountsController = App.Controllers.Base.extend({
 
   initialize: function(options) {
     this.init(options);
-    this.listing = new App.Views.Accounts.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
-    this.editor = new App.Views.Accounts.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
-    this.pubsub.trigger("accounts:fetched", new App.Collections.Accounts(options.accounts));
+    this.listing = new Trackwane.Views.Accounts.Listing({pubsub: this.pubsub, el: "#canvas .listing"});
+    this.editor = new Trackwane.Views.Accounts.Editor({pubsub: this.pubsub, el: "#canvas .editor"});
+    this.pubsub.trigger("accounts:fetched", new Trackwane.Collections.Accounts(options.accounts));
   },
 
   onAccountsFetched: function(accounts) {
@@ -35,7 +35,7 @@ App.Controllers.AccountsController = App.Controllers.Base.extend({
   },
 
   onAccountCreated: function(attributes) {
-    var account = new App.Models.Account(attributes);
+    var account = new Trackwane.Models.Account(attributes);
     account.save(null, {success: function(model) {
         this.Accounts.add(model);
         this.pubsub.trigger("accounts:fetched", this.accounts);

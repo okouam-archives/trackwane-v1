@@ -1,4 +1,4 @@
-App.Views.Realtime.FollowActionPanel = App.Views.Base.extend({
+Trackwane.Views.Realtime.FollowActionPanel = Trackwane.Views.Base.extend({
 
   initialize: function(options) {
     this.pubsub = options.pubsub;

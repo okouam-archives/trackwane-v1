@@ -1,4 +1,4 @@
-window.App =
+window.Trackwane =
   Collections: {}
   Controllers: {}
   Models: {}
