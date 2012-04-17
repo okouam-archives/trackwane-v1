@@ -15,7 +15,6 @@ class Trackwane.Views.Alarms.GeofencePanel extends Trackwane.Views.Base
         alarm = new Trackwane.Models.GeofenceAlarm({name: name})
         @pubsub.trigger("geofence:created", alarm)
     @$el.find("form").validate(_.extend(Trackwane.Models.GeofenceAlarm.validation_rules, callback))
-    false
 
   onCancel: ->
     @pubsub.trigger("geofence:closing")

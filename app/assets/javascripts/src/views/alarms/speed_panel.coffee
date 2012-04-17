@@ -5,8 +5,8 @@ class Trackwane.Views.Alarms.SpeedPanel extends Trackwane.Views.Base
     "click .accept": "onAccept"
 
   initialize: (options) ->
-    @pubsub = options.pubsub;
-    @template = Handlebars.compile($("#speed-alarm-wizard-template").html());
+    @pubsub = options.pubsub
+    @template = Handlebars.compile($("#speed-alarm-wizard-template").html())
 
   onCancel: ->
     @pubsub.trigger("speed:closing")
