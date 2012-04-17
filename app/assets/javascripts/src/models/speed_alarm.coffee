@@ -9,7 +9,7 @@ class Trackwane.Models.SpeedAlarm extends Backbone.Model
         minlength: "3"
       "speed_alarm[speed]":
         required: true,
-        digit: true
+        digits: true
     messages:
       "speed_alarm[name]":
         required: "Please provide an speed name"

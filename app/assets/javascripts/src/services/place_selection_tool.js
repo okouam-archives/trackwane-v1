@@ -20,6 +20,7 @@ _.extend(Trackwane.Services.PlaceSelectionTool.prototype, {
   },
 
   getCoordinates: function() {
+    if (this.draw_layer.features.length < 1) return null
     return this.cartography.degreeCoordinates(this.point.x, this.point.y);
   },
 

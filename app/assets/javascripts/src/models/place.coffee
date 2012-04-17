@@ -15,7 +15,7 @@ class Trackwane.Models.Place extends Backbone.Model
     debug: true
     rules:
       "place[name]":
-        required: true
+        required: true,
         minlength: "3"
       "place[category]":
         required: true,

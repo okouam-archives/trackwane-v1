@@ -104,7 +104,6 @@ Trackwane.Controllers.AlarmsController = Trackwane.Controllers.Base.extend({
     var coordinates = this.map.getCoordinates();
     console.debug(coordinates);
     if (coordinates) {
-      var coordinates = this.map.getCoordinates();
       alarm.set({coordinates: coordinates});
       alarm.save(null, {
         success: function() {

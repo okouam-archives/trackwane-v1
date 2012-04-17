@@ -44,20 +44,24 @@ Trackwane.Controllers.PlacesController = Trackwane.Controllers.Base.extend({
 
   onPlaceCreated: function(place) {
     var lonlat = this.map.place_selection_tool.getCoordinates();
-    place.setCoordinates(lonlat);
-    place.save(null, {
-      success: function() {
-        new Trackwane.Collections.Places().fetch({success: function(results) {
-          this.render(results);
-        }.bind(this)});
-        this.stopEditing();
-      }.bind(this),
-      error: function() {
-        alert("failure");
-        this.stopEditing();
-      }.bind(this)
-    });
-    this.stopEditing();
+    if (lonlat) {
+      place.setCoordinates(lonlat);
+      place.save(null, {
+        success: function() {
+          new Trackwane.Collections.Places().fetch({success: function(results) {
+            this.render(results);
+          }.bind(this)});
+          this.stopEditing();
+        }.bind(this),
+        error: function() {
+          alert("failure");
+          this.stopEditing();
+        }.bind(this)
+      });      
+    }
+    else {
+      alert("You must drawn on the map before saving");
+    }
   },
 
   onNewPlaceCancel: function() {

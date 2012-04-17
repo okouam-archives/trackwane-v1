@@ -20,13 +20,13 @@ gem 'pusher'
 gem 'rubyzip'
 
 group :development, :test do
+  gem 'factory_girl_rails'
   gem 'itslog'
   gem 'mechanize'
   gem 'ruby-debug19'
 end
 
 group :test do
-  gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'rspec'
   gem 'rspec-rails'
