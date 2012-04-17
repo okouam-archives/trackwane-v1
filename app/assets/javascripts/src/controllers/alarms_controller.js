@@ -101,7 +101,9 @@ Trackwane.Controllers.AlarmsController = Trackwane.Controllers.Base.extend({
   },
 
   onSpeedAlarmCreated: function(alarm) {
-    if (this.map.getCoordinates()) {
+    var coordinates = this.map.getCoordinates();
+    console.debug(coordinates);
+    if (coordinates) {
       var coordinates = this.map.getCoordinates();
       alarm.set({coordinates: coordinates});
       alarm.save(null, {

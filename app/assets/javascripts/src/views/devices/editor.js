@@ -18,7 +18,7 @@ Trackwane.Views.Devices.Editor = Trackwane.Views.Base.extend({
         this.pubsub.trigger("device:created", attributes)
       }.bind(this)
     };
-    this.$el.find("form").validate(_.extend(App.Models.Device.validation_rules, callback));
+    this.$el.find("form").validate(_.extend(Trackwane.Models.Device.validation_rules, callback));
   },
 
   onDelete: function() {
@@ -37,7 +37,7 @@ Trackwane.Views.Devices.Editor = Trackwane.Views.Base.extend({
       this.pubsub.trigger("device:saved", attributes)
       }.bind(this)
     };
-    this.$el.find("form").validate(_.extend(App.Models.Device.validation_rules, callback));
+    this.$el.find("form").validate(_.extend(Trackwane.Models.Device.validation_rules, callback));
   },
 
   close: function() {

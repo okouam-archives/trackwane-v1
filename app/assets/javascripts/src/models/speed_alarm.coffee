@@ -3,7 +3,6 @@ class Trackwane.Models.SpeedAlarm extends Backbone.Model
   urlRoot: "/speed_alarms"
 
   @validation_rules:
-    debug: true
     rules:
       "speed_alarm[name]":
         required: true,

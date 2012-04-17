@@ -10,7 +10,7 @@ class Trackwane.Views.SpeedAlarms extends Backbone.View
     false
 
   onSelect: (evt) ->
-    this.pubsub.trigger("speed-alarm:selected", (evt.currentTarget).data("id"))
+    @pubsub.trigger("speed-alarm:selected", $(evt.currentTarget).data("id"))
     false
 
   initialize: (options) ->
