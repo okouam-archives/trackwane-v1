@@ -8,19 +8,19 @@
   <div class="column">
     <div id="alarm-listing">
       <div class="speed-alarms listing"></div>
-      <button class="speed btn primary">New Speed Alarm</button>
+      <button class="speed btn primary"><%= t("new") %> <%= t("speed_alarm") %></button>
       <div class="geofence-alarms listing"></div>
-      <button class="geofence btn primary">New Geofence Alarm</button>
+      <button class="geofence btn primary"><%= t("new") %> <%= t("geofence_alarm") %></button>
     </div>
   </div>
   <div id="new-speed-alarm-panel"></div>
   <div id="new-geofence-alarm-panel"></div>
   <div class="toolbar">
     <div class='button speed'>
-      <img src='/assets/103-map.png'><label>Show Speed Alarms</label>
+      <img src='/assets/103-map.png'><label><%= t("show") %> <%= t("speed_alarm") %></label>
     </div>
     <div class='button geofence'>
-      <img src='/assets/103-map.png'><label>Show Geofence Alarms</label>
+      <img src='/assets/103-map.png'><label><%= t("show") %> <%= t("geofence_alarm") %></label>
     </div>
     <div class='button clear'>
       <img src='/assets/103-map.png'><label>Clear Alarms</label>

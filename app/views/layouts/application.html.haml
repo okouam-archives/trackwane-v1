@@ -16,58 +16,58 @@
       %li{class: "#{params[:controller] == "map" && params[:action] == "realtime" ? "current" : ""}"}
         %a{href: "/map/realtime"}
           = image_tag "/assets/145-persondot.png"
-          = t(:realtime)
+          = t("menu.realtime")
       %li{class: "#{params[:controller] == "map" && params[:action] == "historical" ? "current" : ""}"}
         %a{href: "/map/historical"}
           = image_tag "/assets/103-map.png", style: "height: 20px"
-          = t(:historical)
+          = t("menu.historical")
       %li{class: "#{params[:controller] == "reports" ? "reports current submenu" : "reports submenu"}"}
         %a
           = image_tag "/assets/137-presentation_w.gif"
-          = t(:reports)
+          = t("menu.reports")
         %ul
           %li
             %a{href: "/reports"}
-              = t(:your_reports)
+              = t("menu.your_reports")
           %li
             %a{href: "/schedules"}
-              = t(:report_schedule)
+              = t("menu.report_schedule")
       %li{class: "#{params[:controller] == "alarms" ? "current" : ""}"}
         %a{href: "/alarms"}
           = image_tag "/assets/139-flags.png"
-          = t(:alarms)
+          = t("menu.alarms")
       %li{class: "#{params[:controller] == "places" ? "current" : ""}"}
         %a{href: "/places"}
           = image_tag "/assets/60-signpost.png"
-          = t(:your_places)
+          = t("menu.your_places")
       %li{class: "#{params[:controller] == "devices" || params[:controller] == "users" ? "setup submenu current" : "setup submenu"}"}
         %a
           = image_tag "/assets/157-wrench.png"
-          = t(:administration)
+          = t("menu.administration")
         %ul
           %li
             %a{href: "/users"}
-              Users
+              = t("menu.users")
           %li
             %a{href: "/devices"}
-              Devices
+              = t("menu.devices")
       %li.admin.submenu{style: "float: right"}
         = image_tag "/assets/20-gear2.png", :style =>"cursor: pointer; position: relative; top: 6px"
         %ul{style: "width: 150px"}
           - if current_user.role == "administrator"
             %li
               %a{href: "/accounts"}
-                Accounts
+                = t("menu.accounts")
           - if current_user.role != "standard"
             %li
               %a{href: "/account"}
-                Your Account
+                = t("menu.your_account")
           %li
             %a{href: "/profile"}
-              Your Profile
+              = t("menu.your_profile")
           %li
             %a{href: "/logout"}
-              Logout
+              = t("menu.logout")
       %li{style: "float: right; text-align: right; padding-right: 0"}
         %span{style: "font-weight: bold; color: #6699cc; font-size: 13px; position: relative; top: 5px"}
           = current_account.name

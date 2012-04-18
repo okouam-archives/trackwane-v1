@@ -1,23 +1,23 @@
 <script id="editor-template" type="text/x-handlebars-template">
   <fieldset>
-    <label for="account_name">Name</label>
+    <label for="account_name"><%= t("name") %></label>
     <input id="account_name" value="{{attributes.name}}" name="name" type="text" />
-    <label for="account_contact">Contact</label>
+    <label for="account_contact"><%= t("contact") %></label>
     <input id="account_contact" value="{{attributes.contact}}" name="contact" type="text"  />
-    <label for="account_telephone">Telephone</label>
+    <label for="account_telephone"><%= t("telephone") %></label>
     <input id="account_telephone" value="{{attributes.telephone}}" type="text" name="telephone" />
-    <label for="account_email">Email</label>
+    <label for="account_email"><%= t("email") %></label>
     <input id="account_email" value="{{attributes.email}}" type="text" name="email" />
-    <label for="account_email">Standard Code</label>
+    <label for="account_email"><%= t("standard_code") %></label>
     <input id="standard_code" value="{{attributes.standard_code}}" type="text" name="standard_code" />
-    <label for="account_manager_code">Manager Code</label>
+    <label for="account_manager_code"><%= t("manager_code") %></label>
     <input id="account_manager_code" value="{{attributes.account_manager_code}}" type="text" name="manager_code" />
     {{#if attributes}}
       <input  value="{{attributes.id}}" type="hidden" name="id" />
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn success save"><div>Accept</div></button>
+      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn success save"><div><%= t("accept") %></div></button>
     {{else}}
-      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn success create"><div>Accept</div></button>
+      <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn success create"><div><%= t("accept") %></div></button>
     {{/if}}
-    <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn cancel">Cancel</button>
+    <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn cancel"><%= t("cancel") %></button>
   </fieldset>
 </script>
