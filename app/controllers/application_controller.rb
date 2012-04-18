@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
       false
     else
-      gon.current_user = {role: current_user.role, account_id: current_account.id}
+      gon.current_user = {role: current_user.role, account_id: current_account.id, locale: I18n.locale}
     end
   end
 

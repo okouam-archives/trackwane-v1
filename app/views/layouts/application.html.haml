@@ -1,10 +1,13 @@
 !!!
 %head
   %title Trackwane
-  = stylesheet_link_tag    "application"
+  = stylesheet_link_tag "application"
+  = javascript_include_tag "libraries"
+  = include_gon
+  %script
+    $.locale = gon.current_user.locale
   = javascript_include_tag "application"
   = yield :scripts
-  = include_gon
   %script{src: 'http://maps.google.com/maps/api/js?key=AIzaSyAWgN9SyQVm44Xz3YNSNLqGQao7wYKJvcc&sensor=false', type: "text/javascript"}
   = csrf_meta_tags
 %body{class: "#{params[:controller]} #{params[:action]}"}
@@ -13,34 +16,34 @@
       %li{class: "#{params[:controller] == "map" && params[:action] == "realtime" ? "current" : ""}"}
         %a{href: "/map/realtime"}
           = image_tag "/assets/145-persondot.png"
-          Realtime
+          = t(:realtime)
       %li{class: "#{params[:controller] == "map" && params[:action] == "historical" ? "current" : ""}"}
         %a{href: "/map/historical"}
           = image_tag "/assets/103-map.png", style: "height: 20px"
-          Historical
+          = t(:historical)
       %li{class: "#{params[:controller] == "reports" ? "reports current submenu" : "reports submenu"}"}
         %a
           = image_tag "/assets/137-presentation_w.gif"
-          Reports
+          = t(:reports)
         %ul
           %li
             %a{href: "/reports"}
-              Your Reports
+              = t(:your_reports)
           %li
             %a{href: "/schedules"}
-              Report Schedule
+              = t(:report_schedule)
       %li{class: "#{params[:controller] == "alarms" ? "current" : ""}"}
         %a{href: "/alarms"}
           = image_tag "/assets/139-flags.png"
-          Alarms
+          = t(:alarms)
       %li{class: "#{params[:controller] == "places" ? "current" : ""}"}
         %a{href: "/places"}
           = image_tag "/assets/60-signpost.png"
-          Your Places
+          = t(:your_places)
       %li{class: "#{params[:controller] == "devices" || params[:controller] == "users" ? "setup submenu current" : "setup submenu"}"}
         %a
           = image_tag "/assets/157-wrench.png"
-          Administration
+          = t(:administration)
         %ul
           %li
             %a{href: "/users"}

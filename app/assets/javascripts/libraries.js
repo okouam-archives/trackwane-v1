@@ -1,0 +1,11 @@
+//= require ./lib/jquery-1.7.1.min
+//= require ./lib/underscore-min
+//= require ./lib/backbone-min
+//= require ./lib/OpenLayers
+//= require ./lib/handlebars
+//= require ./lib/highcharts
+//= require ./lib/jquery-ui-1.8.18.custom.min
+//= require ./lib/date
+//= require ./lib/bootstrap-dropdown
+//= require ./lib/jquery.lionbars.0.3
+//= require ./lib/jquery.validate

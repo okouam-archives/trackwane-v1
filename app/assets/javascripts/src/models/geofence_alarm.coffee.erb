@@ -10,5 +10,6 @@ class Trackwane.Models.GeofenceAlarm extends Backbone.Model
         minlength: "3"
     messages:
       "geofence_alarm[name]":
-        required: "Please provide an alarm name"
+        required: $.t("validation.missing_alarm_name")
         minLength: "The alarm name must be a least {0} characters long"
+
