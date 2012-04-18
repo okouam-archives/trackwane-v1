@@ -3,20 +3,20 @@
     <form method="post" action="/profile">
       <input type="hidden" name="_method" value="put" />
   <fieldset>
-    <label for="profile_language">Language</label>
+    <label for="profile_language"><%= t("language") %></label>
     <select name="profile[language]" id="profile_language">
       <option value="en">English</option>
-      <option value="fr">Francais</option>
+      <option value="fr">Français</option>
     </select>
     <% if current_user.role == "administrator" %>
-      <label for="profile_account">Account</label>
+      <label for="profile_account"><%= t("account") %></label>
       <%= select_tag("profile[account]", options_from_collection_for_select(@accounts, "id", "name")) %>
     <% end %>
-    <label for="profile_password">Password</label>
+    <label for="profile_password"><%= t("password") %></label>
     <input id="profile_password" type="password" />
-    <label>Password Confirmation</label>
+    <label><%= t("password_confirmation") %></label>
     <input type="password" />
-    <button class="success btn accept">Accept</button>
+    <button class="success btn accept"><%= t("accept") %></button>
   </fieldset>
       </form>
     </div>
