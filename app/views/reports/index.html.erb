@@ -14,25 +14,25 @@
     <div class="report-listing listing lionbars" style="display: none"></div>
     <div class="parameters"></div>
     <div class="device-listing listing lionbars"></div>
-    <button class="back btn" style="display: none">Back</button>
+    <button class="back btn" style="display: none"><%= t("report.back") %></button>
     <div class="btn-group">
-          <button class="run btn primary">Run Report</button>
+          <button class="run btn primary"><%= t("report.run_report") %></button>
           <button data-toggle="dropdown" class="btn primary dropdown-toggle"><span class="caret"></span></button>
           <ul class="dropdown-menu">
-            <li><a class="your-reports" href="#">Your Reports</a></li>
-            <li><a class="save-report" href="#">Save Report</a></li>
+            <li><a class="your-reports" href="#"><%= t("menu.your_reports") %></a></li>
+            <li><a class="save-report" href="#"><%= t("report.save_report") %></a></li>
           </ul>
         </div>
   </div>
   <div class="toolbar">
     <div class='button pdf'>
-      <img src='/assets/103-map.png'><label>Export PDF</label>
+      <img src='/assets/103-map.png'><label><%= t("report.export_pdf") %></label>
     </div>
     <div class='button excel'>
-      <img src='/assets/103-map.png'><label>Export Excel</label>
+      <img src='/assets/103-map.png'><label><%= t("report.export_excel") %></label>
     </div>
     <div class='button toggle'>
-      <img src='/assets/103-map.png'><label>Show Data</label>
+      <img src='/assets/103-map.png'><label><%= t("report.show_data") %></label>
     </div>
   </div>
   <div class="saved-report-details"></div>

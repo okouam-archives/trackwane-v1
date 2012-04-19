@@ -6,7 +6,7 @@
   <div class="column">
     <div class="parameters">
       <fieldset>
-      <label for="period">Period</label>
+      <label for="period"><%= t("historical.period") %></label>
       <input id="period" name="period" type="text" />
       </fieldset>
     </div>
@@ -14,8 +14,8 @@
   </div>
   <div class="events"></div>
   <div class="toolbar">
-    <div class='places button'><img src='/assets/103-map.png'><label>Places</label></div>
-    <div class='geofences button'><img src='/assets/103-map.png'><label>Geofences</label></div>
+    <div class='places button'><img src='/assets/103-map.png'><label><%= t("historical.places") %></label></div>
+    <div class='geofences button'><img src='/assets/103-map.png'><label><%= t("historical.geofences") %></label></div>
   </div>
 </div>
 

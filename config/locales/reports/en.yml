@@ -1,0 +1,24 @@
+en:
+  report:
+    vehicle: "Vehicle"
+    distance: "Distance"
+    back: "Back"
+    run_report: "Run Report"
+    save_report: "Save Report"
+    export_pdf: "Export PDF"
+    export_excel: "Export Excel"
+    show_data: "Show Data"
+    report_type: "Report Type"
+    report_name: "Report Name"
+    alert: "Alert"
+    stop: "Stop"
+    previous:
+      day: "Previous Day"
+      week: "Previous Week"
+      month: "Previous Month"
+    longitude: "Longitude"
+    latitude: "Latitude"
+    closest_place: "Closest Place"
+    duration: "Duration"
+    report: "Report"
+    

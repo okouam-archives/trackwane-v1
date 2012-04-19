@@ -22,8 +22,8 @@ class Trackwane.Models.Place extends Backbone.Model
         minlength: "3"
     messages:
       "place[name]":
-        required: "Please provide a place name"
-        minLength: "The place name must be a least {0} characters long"
+        required: $.t("validation_places.name_required")
+        minlength: $.t("validation_places.name_minlength")
       "place[category]":
-        required: "Please provide a category name"
-        minlength: "The category name must be a least {0} characters long"
+        required: $.t("validation_places.category_required")
+        minlength: $.t("validation_places.category_minlength")

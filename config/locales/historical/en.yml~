@@ -1,0 +1,9 @@
+en:
+  historical:
+    period: "Period"
+    geofences: "Geofences"
+    places: "Places"
+    vehicles: "Vehicles"
+    date: "Date"
+    address: "Address"
+    speed: "Speed"

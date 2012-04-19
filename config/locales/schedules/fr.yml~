@@ -1,0 +1,5 @@
+fr:
+  schedules:
+    format: "Format"
+    new_schedule: "Nouvelle Annexe"
+    frequency: "Frequency"

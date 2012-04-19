@@ -5,11 +5,11 @@
 <div id="canvas">
   <div id="map"></div>
   <div class="toolbar">
-    <div class='button'><img src='/assets/103-map.png'><label>Hide Place Names</label></div>
+    <div class='button'><img src='/assets/103-map.png'><label><%= t("places.hide_place_names") %></label></div>
   </div>
   <div class="sidepanel">
     <div class="listing"></div>
-    <button class="primary btn new-place" style="margin-top: 10px">New Place</button>
+    <button class="primary btn new-place" style="margin-top: 10px"><%= t("new") %> <%= t("places.place") %> </button>
   </div>
   <div id="new-place-panel"></div>
 </div>
