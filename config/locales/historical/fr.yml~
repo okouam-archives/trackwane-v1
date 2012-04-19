@@ -1,9 +1,0 @@
-fr:
-  historical:
-    period: "Période"
-    geofences: "Zones limitées"
-    places: "Lieux"
-    vehicles: "Véhicules"
-    date: "Date"
-    address: "Adresse"
-    speed: "Vitesse"
