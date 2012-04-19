@@ -1,19 +1,19 @@
 <script id="parameters-template" type="text/x-handlebars-template">
   <fieldset>
-    <label>Report Type</label>
+    <label><%= t("report.report_type") %></label>
     <select class="type">
-      <option value="Speed">Speed</option>
-      <option value="Alert">Alert</option>
-      <option value="Distance">Distance</option>
-      <option value="Stop">Stop</option>
+      <option value="Speed"><%= t("historical.speed") %></option>
+      <option value="Alert"><%= t("report.alert") %></option>
+      <option value="Distance"><%= t("report.distance") %></option>
+      <option value="Stop"><%= t("report.stop") %></option>
     </select>
-    <label>Date</label>
+    <label><%= t("historical.date") %></label>
     <input class="datepicker" type="text" />
-    <label>Period</label>
+    <label><%= t("historical.period") %></label>
     <select class="period">
-      <option value="DAY">Previous Day</option>
-      <option value="WEEK">Previous Week</option>
-      <option value="MONTH">Previous Month</option>
+      <option value="DAY"><%= t("report.previous.day") %></option>
+      <option value="WEEK"><%= t("report.previous.week") %> </option>
+      <option value="MONTH"><%= t("report.previous.month") %> </option>
     </select>
   </fieldset>
 </script>

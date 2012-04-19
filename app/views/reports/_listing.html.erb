@@ -1,6 +1,6 @@
 <script id="devices-template" type="text/x-handlebars-template">
   <ul>
-    <li><input type="checkbox" /><b>Vehicles</b></li>
+    <li><input type="checkbox" /><b><%= t("historical.vehicles") %></b></li>
   {{#each models}}
     <li><input class="device" type="checkbox" value="{{attributes.id}}" /> {{attributes.display_name}}</li>
   {{/each}}

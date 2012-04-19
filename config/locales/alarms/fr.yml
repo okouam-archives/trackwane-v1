@@ -1,7 +1,11 @@
 fr:
   speed_alarm: "Alarme de Vitesse"
+  speed_alarms: "Alarmes de Vitesse"
   geofence_alarm: "Alarme de Zone"
+  geofence_alarms: "Alarmes de Zone"
   speed_alarm_definition: "Une alarme de vitesse est un avertissement qui est envoyé quand un véhicule passe au-dessus d'une certaine vitesse. Vous pouvez choisir d'être averti par SMS ou E-mail lorsqu'une alarme est déclenchée."
   alarm_name: "Nom de l'Alarme"
   speed_limit: "Vitesse Limite"
   geofence_alarm_definition: "Une alarme de zone est un avertissement qui est envoyé lorsque le véhicule entre ou sort d'une zone donnée. Vous pouvez choisir d'être averti par SMS ou E-mail lorsqu'une alarme est déclenchée."
+  destinations: "Destinations"
+  alarm: "Alarme"

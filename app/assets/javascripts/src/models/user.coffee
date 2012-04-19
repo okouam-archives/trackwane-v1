@@ -10,16 +10,18 @@ class Trackwane.Models.User extends Backbone.Model
         minlength: "3"
       email:
         required: true
-        minlength: "5"
         email: true
+      password:
+        required: true
+        minlength: "5"
     messages:
       login:
-        required: "Please provide a login"
-        minLength: "The login must be a least {0} characters long"
+        required:  $.t("validation_users.login_required")
+        minlength: $.t("validation_users.login_minlength")
       email:
-        required: "Please provide an email"
-        minlength: "Please enter a valid email format"
+        required:  $.t("validation_users.email_required")
+        email:     $.t("validation_users.email_bad_format")
       password:
-        required: "Please provide a password"
-        minlength: "The password must be a least {0} characters long"
+        required:  $.t("validation_users.password_required")
+        minlength: $.t("validation_users.password_minlength")
 

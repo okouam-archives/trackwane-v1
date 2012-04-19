@@ -1,0 +1,6 @@
+en:
+  places:
+    place: "Place"
+    category: "Category"
+    hide_place_names: "Hide Place Names"
+    new_places_instruction: "Please choose a name and category below for your new place and place it on the map"

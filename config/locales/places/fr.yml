@@ -1,0 +1,7 @@
+fr:
+  places:
+    place: "Lieu"
+    category: "Catégorie"
+    hide_place_names: "Cacher les noms des Lieux"
+    new_places_instruction: "Veuillez choisir un nom et une catégorie ci-dessous pour votre nouveau lieu afin de le placer sur la carte"
+    
