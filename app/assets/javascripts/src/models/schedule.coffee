@@ -1,5 +1,7 @@
 class Trackwane.Models.Schedule extends Backbone.Model
 
+  urlRoot: "/schedules"
+
   @validation_rules:
     rules:
       "schedule[format]":
@@ -7,12 +9,11 @@ class Trackwane.Models.Schedule extends Backbone.Model
         minlength: "3"
       "schedule[email]":
         required: true,
-        minlength: "5",
         email: true
     messages:
       "schedule[format]":
-        required: "Please provide a format"
-        minLength: "The format must be a least {0} characters long"
+        required:  $.t("validation_schedules.format_required")
+        minlength: $.t("validation_schedules.format_minlength")
       "schedule[email]":
-        required: "Please provide an email"
-        minlength: "Please enter a valid email format"
+        required:  $.t("validation_schedules.email_required")
+        email:     $.t("validation_schedules.email_format")

@@ -1,0 +1,12 @@
+en:
+  speed_alarm: "Speed Alarm"
+  geofence_alarm: "Geofence Alarm"
+  speed_alarms: "Speed Alarms"
+  geofence_alarms: "Geofence Alarms"
+  speed_alarm_definition: "A speed alarm is a warning that is sent when a vehicle goes over a certain speed. You can choose to be notified
+   by SMS or email when an alarm occurs."
+  alarm_name: "Alarm Name"
+  speed_limit: "Speed Limit"
+  geofence_alarm_definition: "A geofence alarm  is a warning that is sent when the vehicle enters or leaves a defined area. You can choose to be notified by SMS or email when an alarm occurs."
+  destinations: "Destinations"
+  alarm: "Alarm"

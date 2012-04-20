@@ -37,7 +37,7 @@ Trackwane.Controllers.AccountsController = Trackwane.Controllers.Base.extend({
   onAccountCreated: function(attributes) {
     var account = new Trackwane.Models.Account(attributes);
     account.save(null, {success: function(model) {
-        this.Accounts.add(model);
+        this.accounts.add(model);
         this.pubsub.trigger("accounts:fetched", this.accounts);
         this.editor.close();
       }.bind(this)

@@ -1,15 +1,15 @@
 <div id="canvas">
   <div class="centered-panel">
   <fieldset>
-    <label for="account_name">Name</label>
+    <label for="account_name"><%= t("name") %></label>
     <input type="text" value="<%= @account.name %>" />
-    <label for="account_name">Contact</label>
+    <label for="account_name"><%= t("contact") %></label>
     <input type="text" value="<%= @account.contact %>"/>
-    <label for="account_name">Telephone</label>
+    <label for="account_name"><%= t("telephone") %></label>
     <input type="text" value="<%= @account.telephone %>" />
-    <label for="account_name">Email</label>
+    <label for="account_name"><%= t("email") %></label>
     <input type="text" value="<%= @account.email %>" />
-    <button class="success btn accept">Accept</button>
+    <button class="success btn accept"><%= t("accept") %></button>
   </fieldset>
     </div>
 </div>

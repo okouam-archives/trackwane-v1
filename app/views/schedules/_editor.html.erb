@@ -1,21 +1,21 @@
 <script id="editor-template" type="text/x-handlebars-template">
   <form>
     <fieldset>
-      <label for="schedule_report_id">Report</label>
+      <label for="schedule_report_id"><%= t("report.report") %></label>
       <select id="schedule_report_id" name="schedule[report_id]">
       </select>
-      <label for="schedule_format">Format</label>
+      <label for="schedule_format"><%= t("schedules.format") %></label>
       <input id="schedule_format" name="schedule[format]" value="{{attributes.format}}" type="text" />
-      <label for="schedule_email">Email</label>
+      <label for="schedule_email"><%= t("email") %></label>
       <input id="schedule_email" name="schedule[email]" value="{{attributes.email}}" type="text" />
       <div class="buttons">
         {{#if attributes}}
           <input value="{{attributes.id}}" type="hidden" name="id" />
-          <button class="btn save success">Accept</button>
+          <button class="btn save success"><%= t("accept") %></button>
         {{else}}
-          <button class="btn success">Accept</button>
+          <button class="btn success"><%= t("accept") %></button>
         {{/if}}
-        <button class="remove btn">Cancel</button>
+        <button class="remove btn"><%= t("cancel") %></button>
       </div>
     </fieldset>
   </form>

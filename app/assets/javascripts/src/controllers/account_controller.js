@@ -4,9 +4,6 @@ Trackwane.Controllers.AccountController = Trackwane.Controllers.Base.extend({
     "click .accept": "onSave"
   },
 
-  initialize: function() {
-  },
-
   onSave: function() {
     var attributes = this.formAttributes();
     var errors = this.validate(attributes);

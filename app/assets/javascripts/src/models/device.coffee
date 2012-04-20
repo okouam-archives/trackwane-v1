@@ -9,14 +9,14 @@ class Trackwane.Models.Device extends Backbone.Model
         minlength: "3"
       imei_number:
         required: true
-        minlength: 5
+        minlength: 2
         digits: true
     messages:
       display_name:
-        required: "Please provide a name for the device"
-        minLength: "The name of a device must be a least {0} characters long"
+        required:  $.t("validation_devices.display_name_required")
+        minlength: $.t("validation_devices.display_name_minlength")
       imei_number:
-        required: "Please provide a IMEI number for the device"
-        minlength: "The IMEI number of a device must be at least {0} digits long"
-        digits: "The IMEI number must be only digits"
+        required:  $.t("validation_devices.imei_number_required")
+        minlength: $.t("validation_devices.imei_number_minlength")
+        digits:    $.t("validation_devices.imei_number_digits")
 

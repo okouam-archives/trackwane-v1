@@ -1,16 +1,15 @@
 <script id="speed-alarm-wizard-template" type="text/x-handlebars-template">
  <div>
-   <h1>New Speed Alarm</h1>
-   <p>A speed alarm is a warning that is sent when a vehicle goes over a certain speed. You can choose to be notified
-   via SMS or email when an alarm occurs.</p>
+   <h1><%= t("new") %> <%= t("speed_alarm") %></h1>
+   <p><%= t("speed_alarm_definition") %></p>
    <form>
    <fieldset>
-     <label>Alarm Name</label>
+     <label><%= t("alarm_name") %></label>
      <input type="text" name="speed_alarm[name]" />
-     <label>Speed Limit</label>
+     <label><%= t("speed_limit") %></label>
      <input name="speed_alarm[speed]" type="text" />
-     <button class="success btn accept">Accept</button>
-     <button class="btn cancel">Cancel</button>
+     <button class="success btn accept"><%= t("accept") %></button>
+     <button class="btn cancel"><%= t("cancel") %></button>
    </fieldset>
    </form>
  </div>
