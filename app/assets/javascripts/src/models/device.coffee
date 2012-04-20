@@ -9,7 +9,7 @@ class Trackwane.Models.Device extends Backbone.Model
         minlength: "3"
       imei_number:
         required: true
-        minlength: 5
+        minlength: 2
         digits: true
     messages:
       display_name:

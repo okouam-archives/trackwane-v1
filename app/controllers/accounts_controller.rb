@@ -23,11 +23,24 @@ class AccountsController < ApplicationController
   end
 
   def create
-
+    client = Account.new
+    persist(client, params)
   end
 
   def update
+    client = Account.find(params[:id])
+    persist(client, params)
+  end
 
+  private
+
+  def persist(client, params)
+    changes = params.slice(*Account.column_names)
+    if client.update_attributes(changes)
+      render json: client
+    else
+      render json: client.errors, status: 401
+    end
   end
 
 end

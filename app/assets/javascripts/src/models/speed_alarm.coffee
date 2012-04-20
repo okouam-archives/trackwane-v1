@@ -13,7 +13,7 @@ class Trackwane.Models.SpeedAlarm extends Backbone.Model
     messages:
       "speed_alarm[name]":
         required:  $.t("validation_alarm.name_required")
-        minlength: $.t("validation_speed_alarm.name_minlength")
+        minlength: $.t("validation_alarm.name_minlength")
       "speed_alarm[speed]":
         required:  $.t("validation_alarm.speed_required")
-        digits:    $.t("validation_speed_alarm.speed_digits")
+        digits:    $.t("validation_alarm.speed_digits")
