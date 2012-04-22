@@ -35,8 +35,7 @@ class Trackwane.Views.Realtime.Map extends Backbone.View
     @device_layer.destroyFeatures([feature]);
 
   show: (events) ->
-    @createFeatures(events)
-    @map.zoomToExtent(@device_layer.getDataExtent())
+    events.each((event) => @createFeature(event)) if events and events.size() > 0
 
   showEvent: (event_data) ->
     numPoints = 10;
@@ -56,19 +55,16 @@ class Trackwane.Views.Realtime.Map extends Backbone.View
       @device_layer.addFeatures([target])
     route.getPoints(numPoints)
 
-  createFeatures: (events) ->
-    events.each((event) => @createFeature(event)) if events and events.size() > 0
-
   createFeature: (event)  ->
-    #event.toFeature()
     feature = @mapper.toRealtimeFeature(event)
     @device_layer.addFeatures([feature])
 
-  render:  ->
+  render: (extent, callback) ->
     @$el.empty()
     cartography = new Trackwane.Services.Cartography()
-    @map = cartography.createMap(@el)
+    @map = cartography.createMap(@el, callback)
     @device_layer = cartography.createLayer("devices")
     @geofence_layer = cartography.createLayer("geofences")
     @place_layer = cartography.createLayer("places")
-    @map.zoomTo(1)
+    bounds = OpenLayers.Bounds.fromExtent(extent);
+    @map.zoomToExtent(bounds)

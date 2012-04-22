@@ -21,13 +21,10 @@ class Trackwane.Views.Realtime.Events extends Backbone.View
     @$el.height(max_height) if (original_height > max_height)
     @$el.lionbars()
 
-  update: (events) ->
-    events.each((event) =>
-      attributes = event.attributes
-      entry = @getDeviceTile(attributes.device_id)
-      address = entry.find(".address")
-      address.html(attributes.address) if (address.text() != attributes.address)
-    )
+  update: (event) ->
+    entry = @getDeviceTile(event.device_id)
+    address = entry.find(".address")
+    address.html(event.address) if (address.text() != event.address)
 
   getDeviceTile: (id) ->
     @$el.find("tr[data='" + id + "']");

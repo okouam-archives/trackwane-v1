@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails'
 gem 'pg'
+gem 'geokit-rails3', :git => "https://github.com/jlecour/geokit-rails3.git"
 gem 'json'
 gem 'authlogic'
 gem 'jquery-rails'

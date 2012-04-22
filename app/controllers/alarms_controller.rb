@@ -3,7 +3,9 @@ class AlarmsController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html
+      format.html do
+        gon.extent = Event.extent(current_account.id)
+      end
     end
   end
 

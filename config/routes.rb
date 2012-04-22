@@ -24,7 +24,7 @@ Trackwane::Application.routes.draw do
     end
   end
 
-  resources :places, :alarms, :speed_alarms, :geofence_alarms, :devices, :schedules, :alerts
+  resources :places, :alarms, :speed_alarms, :geofence_alarms, :devices, :schedules
 
   resources :users do
     collection do

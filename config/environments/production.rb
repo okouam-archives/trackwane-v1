@@ -11,6 +11,8 @@ Trackwane::Application.configure do
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
 
+  config.active_record.observers = :event_observer
+
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
@@ -46,7 +48,8 @@ Trackwane::Application.configure do
   # config.assets.precompile += %w( search.js )
 
   # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
 
   # Enable threaded mode
   # config.threadsafe!

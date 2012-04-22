@@ -4,7 +4,9 @@ class PlacesController < ApplicationController
   def index
     gon.places = current_account.places
     respond_to do |format|
-      format.html
+      format.html do
+        gon.extent = Event.extent(current_account.id)
+      end
       format.json do
         render json: gon.places
       end

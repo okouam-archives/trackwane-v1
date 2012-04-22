@@ -4,6 +4,10 @@ describe Place do
 
   describe "when finding the closest place to a point" do
 
+    before(:all) do
+      Place.delete_all
+    end
+
     context "and there are no places in the database" do
       it "finds nothing" do
         Place.within(1000, 0, 0).should be_empty

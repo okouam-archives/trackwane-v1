@@ -40,6 +40,7 @@ class Trackwane.Views.AlarmMap extends Trackwane.Views.Base
     @geofence_drawing_tool.deactivate() if @geofence_drawing_tool
     @layer.destroyFeatures() if @layer
 
-  render: ->
-    @map = new Trackwane.Services.Cartography().createMap(this.el)
-    @map.zoomTo(1)
+  render: (extent) ->
+    @map = new Trackwane.Services.Cartography().createMap(@el)
+    bounds = OpenLayers.Bounds.fromExtent(extent);
+    @map.zoomToExtent(bounds)

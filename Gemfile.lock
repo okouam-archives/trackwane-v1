@@ -5,6 +5,14 @@ GIT
     postgis_adapter (0.8.1)
       nofxx-georuby
 
+GIT
+  remote: https://github.com/jlecour/geokit-rails3.git
+  revision: d8348d2da0e9b612757e1a1c58f76fada8609e9e
+  specs:
+    geokit-rails3 (0.1.5)
+      geokit (~> 1.5)
+      rails (~> 3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -76,6 +84,8 @@ GEM
     faker (1.0.1)
       i18n (~> 0.4)
     forgery (0.5.0)
+    geokit (1.6.5)
+      multi_json
     gon (2.3.0)
       actionpack (>= 2.3.0)
       json
@@ -228,6 +238,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   forgery
+  geokit-rails3!
   gon
   haml
   itslog

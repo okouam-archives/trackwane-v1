@@ -5,8 +5,8 @@ Trackwane.Services.Mapper = function() {
 _.extend(Trackwane.Services.Mapper.prototype, {
 
   toFeature: function(model, style) {
-    var lonlat = this.cartography.mercatorCoordinates(model.get("longitude"), model.get("latitude"));
-    var point = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
+    var point = OpenLayers.Geometry.Point(model.get("longitude"), model.get("latitude"));
+    point = OpenLayers.Projection.transform(point, new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
     var feature = new OpenLayers.Feature.Vector(point, model);
     feature.id = model.id;
     if (style) feature.style = style;
@@ -41,8 +41,8 @@ _.extend(Trackwane.Services.Mapper.prototype, {
   },
 
   toGraphicFeature: function(longitude, latitude, model, style, id) {
-    var lonlat = this.cartography.mercatorCoordinates(longitude, latitude);
-    var point = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
+    var point = new OpenLayers.Geometry.Point(longitude, latitude);
+    point = OpenLayers.Projection.transform(point, new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
     var feature = new OpenLayers.Feature.Vector(point, model);
     feature.id = id;
     feature.style = style;

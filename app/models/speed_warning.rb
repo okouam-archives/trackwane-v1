@@ -11,16 +11,20 @@ class SpeedWarning < ActiveRecord::Base
 	end
 
 	def self.check(alarms, event)
+    geofactory = RGeo::Geographic.spherical_factory
+    warnings = []
 		alarms.each do |alarm|
-			if within(alarm.coordinates, event) && alarm.speed < event.speed && !alarm.is_active
+      bounds = geofactory.parse_wkt(alarm.coordinates)
+			if within(event, bounds) && alarm.speed < event.speed && !alarm.is_active
         alarm.is_active = true
         alarm.save!
-        yield SpeedWarning.new({speed_alarm: alarm, event: event})
-      elsif outside(alarm.coordinates, event) && alarm.is_active
+        warnings << SpeedWarning.new({speed_alarm: alarm, event: event})
+      elsif outside(event, bounds) && alarm.is_active
         alarm.is_active = false
         alarm.save!
       end
     end
+    warnings
 	end
 
 end

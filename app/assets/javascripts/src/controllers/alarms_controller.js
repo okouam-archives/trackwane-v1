@@ -23,7 +23,7 @@ Trackwane.Controllers.AlarmsController = Trackwane.Controllers.Base.extend({
     this.new_geofence_alarm_panel = new Trackwane.Views.Alarms.GeofencePanel({el: "#canvas #new-geofence-alarm-panel", pubsub: this.pubsub});
     this.alarm_listing = new Trackwane.Views.Alarms.Listing({el: "#canvas #alarm-listing", pubsub: this.pubsub});
     this.toolbar = new Trackwane.Views.Alarms.Toolbar({el: "#canvas .toolbar", pubsub: this.pubsub});
-    this.map.render();
+    this.map.render(options.extent);
     this.fetchAlarms();
   },
 

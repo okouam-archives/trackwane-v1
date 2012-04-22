@@ -35,7 +35,7 @@ describe SpeedWarning do
       context "and the speed limit is breached" do
         context "and the alarm is inactive" do
           it "creates speed warnings" do
-            event = FactoryGirl.build(:event, :latitude => 2.5, :longitude => 3.5, :speed => 123)
+            event = FactoryGirl.build(:event, :latitude => 5, :longitude => 5, :speed => 123)
             warnings = SpeedWarning.check([@alarm], event)
             warnings.should_not be_empty
             warnings.size.should == 1
@@ -46,7 +46,7 @@ describe SpeedWarning do
         end
         context "and the alarm is active" do
            it "creates speed warnings" do
-            event = FactoryGirl.build(:event, :latitude => 2.5, :longitude => 3.5, :speed => 123)
+            event = FactoryGirl.build(:event, :latitude => 5, :longitude => 5, :speed => 123)
             warnings = SpeedWarning.check([@alarm], event)
             warnings.should_not be_empty
             warnings.size.should == 1
@@ -62,7 +62,7 @@ describe SpeedWarning do
             pending
           end
           it "returns nothing" do
-            event = FactoryGirl.build(:event, :latitude => 0, :longitude => 0, :speed => 50)
+            event = FactoryGirl.build(:event, :latitude => 5, :longitude => 5, :speed => 50)
             warnings = SpeedWarning.check([@alarm], event)
             warnings.should be_empty
           end

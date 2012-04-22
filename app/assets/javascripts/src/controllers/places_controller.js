@@ -15,7 +15,7 @@ Trackwane.Controllers.PlacesController = Trackwane.Controllers.Base.extend({
   initialize: function(options) {
     this.init(options);
     this.map = new Trackwane.Views.PlacesMap({el: "#map", pubsub: this.pubsub});
-    this.map.render();
+    this.map.render(options.extent);
     this.listing = new Trackwane.Views.Places.Listing({el: "#canvas .listing", pubsub: this.pubsub});
     this.new_place_panel = new Trackwane.Views.NewPlacePanel({el: "#new-place-panel", pubsub: this.pubsub});
     this.render(new Trackwane.Collections.Places(options.places));

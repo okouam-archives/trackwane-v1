@@ -40,12 +40,14 @@ Trackwane.Views.PlacesMap = Trackwane.Views.Base.extend({
     this.map.panTo(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y));
   },
 
-  render: function() {
+  render: function(extent) {
     this.$el.empty();
     var cartography = new Trackwane.Services.Cartography();
+    var bounds = OpenLayers.Bounds.fromExtent(extent);
     this.map = cartography.createMap(this.el);
     this.place_layer = cartography.createLayer("places");
-    this.map.zoomTo(1);
+    this.map.zoomToExtent(bounds);
+
   }
 
 });

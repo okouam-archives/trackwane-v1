@@ -11,8 +11,6 @@
 <div id="canvas">
   <div id="map"></div>
   <div class="listing lionbars"></div>
-  <div class="follow panel"></div>
-  <div class="send-command panel"></div>
   <div class="toolbar">
     <div class='places button'><img src='/assets/103-map.png'><label><%= t("historical.places") %></label></div>
     <div class='geofences button'><img src='/assets/103-map.png'><label><%= t("historical.geofences") %></label></div>
@@ -21,10 +19,11 @@
 
 <style type="text/css">
   .listing {position: inherit!important; width: 250px}
+  #canvas {background-image: none}
 </style>
 
 <script type="text/javascript">
   $(function() {
-    new Trackwane.Controllers.RealtimeController({el: "#canvas", events: gon.events});
+    new Trackwane.Controllers.RealtimeController({el: "#canvas", events: gon.events, extent: gon.extent});
   });
 </script>

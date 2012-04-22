@@ -24,7 +24,7 @@ describe EventObserver do
             event = FactoryGirl.build(:event, :longitude => 0.005, :latitude => 0.000, :device => device)
             observer = EventObserver.instance
             observer.before_save(event)
-            event.distance_delta.should == 556.5974539663679
+            event.distance_delta.should == 556.6
           end
         end
 
@@ -39,7 +39,6 @@ describe EventObserver do
           event = FactoryGirl.build(:event, longitude: -4.06395, latitude: 5.34676)
           observer = EventObserver.instance
           observer.before_save(event)
-          debugger
           event.address.should == "Rue P152"
         end
       end

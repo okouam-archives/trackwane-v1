@@ -5,6 +5,7 @@ class CreateSpeedAlarms < ActiveRecord::Migration
       t.decimal :speed
       t.string :name
       t.string :coordinates
+      t.boolean :is_active
       t.timestamps
     end
   end
