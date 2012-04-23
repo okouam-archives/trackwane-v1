@@ -8,9 +8,9 @@ class Trackwane.Route
   getAngle: ->
     dy = @end.y - @start.y
     dx = @end.x - @start.x
-    theta = Math.atan2(dy, dx)
+    theta = Math.atan2(dx, dy)
     theta *= 180 / Math.PI
-    theta + 180
+    theta - 90
 
   getPoints: (num) ->
     if @start.x is @end.x and @start.y is @end.y

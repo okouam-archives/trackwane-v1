@@ -4,7 +4,7 @@ class Trackwane.Services.Animator
 
   frame: 0
 
-  constructor: (@onAnimationFinished) ->
+  constructor: () ->
     @log = Trackwane.Logger.get("Animator")
 
   add: (animation) ->
@@ -27,7 +27,6 @@ class Trackwane.Services.Animator
         animation.execute(@frame)
         if animation.finished
           animationsToRemove.push(animation)
-          @onAnimationFinished(animation.device_id)
       _.each animationsToRemove, (animationToRemove) =>
         @animations = _.filter @animations, (animation) =>
           animation.device_id != animationToRemove.device_id

@@ -30,7 +30,31 @@ class Trackwane.Services.Cartography
   createLayer: (name, useClustering) ->
     throw "A layer cannot be created by the Cartography Service unless it has been assigned a map." unless @map
     if useClustering
-      layer = new OpenLayers.Layer.Vector(name, {strategies: [new OpenLayers.Strategy.Cluster()]})
+      formatting =
+        pointRadius: "${radius}"
+        label: "${counter}"
+        fillColor: "#397DB7"
+        fillOpacity: 0.9
+        strokeColor: "#1B4C7A"
+        strokeWidth: 2
+        fontColor: 'white'
+        fontWeight: 'bold'
+        strokeOpacity: 0.9
+      context =
+        radius: (feature) ->
+          return feature.cluster.length + 10
+        counter: (feature) ->
+          return feature.cluster.length
+      style = new OpenLayers.Style(formatting, context: context)
+      console.debug(style)
+      options =
+        strategies: [new OpenLayers.Strategy.Cluster({distance: 20, threshold: 2})]
+        styleMap: new OpenLayers.StyleMap
+          "default": style,
+          "select":
+            fillColor: "#8aeeef",
+            strokeColor: "#32a8a9"
+      layer = new OpenLayers.Layer.Vector(name, options)
     else
       layer = new OpenLayers.Layer.Vector(name)
     @map.addLayer(layer)

@@ -7,9 +7,9 @@ class Trackwane.Models.Place extends Backbone.Model
     lonlat = new OpenLayers.LonLat(this.get("longitude"), this.get("latitude"))
     cartography.projectForGoogleMaps(lonlat)
 
-  setCoordinates: (lonlat) ->
-    this.set("longitude", lonlat.lon)
-    this.set("latitude", lonlat.lat)
+  setCoordinates: (longitude, latitude) ->
+    this.set("longitude", longitude)
+    this.set("latitude", latitude)
 
   @validation_rules:
     debug: true

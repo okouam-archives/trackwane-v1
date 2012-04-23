@@ -32,10 +32,12 @@ class Trackwane.Views.Realtime.Map extends Backbone.View
   removeDestination: (device_id) ->
     feature = @destination_lookup[device_id]
     throw new Error("Unable to locate destination feature for device #{device_id}.") unless feature
-    @device_layer.destroyFeatures([feature]);
+    @beacon_layer.destroyFeatures([feature]);
 
   show: (events) ->
-    events.each((event) => @createFeature(event)) if events and events.size() > 0
+    if events and events.size() > 0
+      features = events.map((event) => @mapper.toRealtimeFeature(event))
+      @device_layer.addFeatures(features)
 
   showEvent: (event_data) ->
     numPoints = 10;
@@ -46,24 +48,24 @@ class Trackwane.Views.Realtime.Map extends Backbone.View
 
   moveFeature: (event_data, numPoints) ->
     feature = @device_layer.getFeatureBy("device_id", event_data.device_id)
-    target = @mapper.toDestinationFeature(event_data)
-    route = new Trackwane.Route(feature, target)
-    if route
-      console.debug "Changing rotation from #{feature.style.rotation} to #{route.getAngle()}." if console
-      feature.rotate(route.getAngle())
-      @destination_lookup[event_data.device_id] = target
-      @device_layer.addFeatures([target])
-    route.getPoints(numPoints)
-
-  createFeature: (event)  ->
-    feature = @mapper.toRealtimeFeature(event)
-    @device_layer.addFeatures([feature])
+    console.debug feature
+    if feature
+      target = @mapper.toDestinationFeature(event_data)
+      route = new Trackwane.Route(feature, target)
+      if route
+        feature.rotate(route.getAngle())
+        @destination_lookup[event_data.device_id] = target
+        @beacon_layer.addFeatures([target])
+      route.getPoints(numPoints)
+    else
+      undefined
 
   render: (extent, callback) ->
     @$el.empty()
     cartography = new Trackwane.Services.Cartography()
     @map = cartography.createMap(@el, callback)
-    @device_layer = cartography.createLayer("devices")
+    @device_layer = cartography.createLayer("devices", true)
+    @beacon_layer = cartography.createLayer("beacons")
     @geofence_layer = cartography.createLayer("geofences")
     @place_layer = cartography.createLayer("places")
     bounds = OpenLayers.Bounds.fromExtent(extent);

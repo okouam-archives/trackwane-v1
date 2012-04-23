@@ -44,8 +44,9 @@ Trackwane.Controllers.PlacesController = Trackwane.Controllers.Base.extend({
 
   onPlaceCreated: function(place) {
     var lonlat = this.map.place_selection_tool.getCoordinates();
+    console.debug(lonlat);
     if (lonlat) {
-      place.setCoordinates(lonlat);
+      place.setCoordinates(lonlat.x, lonlat.y);
       place.save(null, {
         success: function() {
           new Trackwane.Collections.Places().fetch({success: function(results) {

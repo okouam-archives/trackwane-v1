@@ -16,7 +16,9 @@ class Trackwane.Services.PlaceSelectionTool
     @drawFeature.activate()
 
   getCoordinates: () ->
-    @cartography.degreeCoordinates(@point.x, @point.y)
+    sourceProjection = new OpenLayers.Projection("EPSG:4326");
+    targetProjection = new OpenLayers.Projection("EPSG:900913");
+    @point.transform(sourceProjection, targetProjection)
 
   deactivate: () ->
     @draw_layer.destroyFeatures()
