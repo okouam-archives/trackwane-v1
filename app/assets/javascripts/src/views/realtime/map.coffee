@@ -1,12 +1,10 @@
 class Trackwane.Views.Realtime.Map extends Backbone.View
 
-  destination_lookup: {}
-
   initialize: (options) ->
     @pubsub = options.pubsub
     @places = new Trackwane.Collections.Places()
     @geofences = new Trackwane.Collections.Geofences()
-    @animator = new Trackwane.Services.Animator(@removeDestination.bind(this))
+    @animator = new Trackwane.Services.Animator()
     @animator.start(400)
     @mapper = new Trackwane.Services.Mapper()
 
@@ -29,11 +27,6 @@ class Trackwane.Views.Realtime.Map extends Backbone.View
       features = @mapper.toPlaceFeatures(places);
       @place_layer.addFeatures(features);
 
-  removeDestination: (device_id) ->
-    feature = @destination_lookup[device_id]
-    throw new Error("Unable to locate destination feature for device #{device_id}.") unless feature
-    @beacon_layer.destroyFeatures([feature]);
-
   show: (events) ->
     if events and events.size() > 0
       features = events.map((event) => @mapper.toRealtimeFeature(event))
@@ -48,14 +41,10 @@ class Trackwane.Views.Realtime.Map extends Backbone.View
 
   moveFeature: (event_data, numPoints) ->
     feature = @device_layer.getFeatureBy("device_id", event_data.device_id)
-    console.debug feature
     if feature
       target = @mapper.toDestinationFeature(event_data)
       route = new Trackwane.Route(feature, target)
-      if route
-        feature.rotate(route.getAngle())
-        @destination_lookup[event_data.device_id] = target
-        @beacon_layer.addFeatures([target])
+      feature.rotate(route.getAngle()) if route
       route.getPoints(numPoints)
     else
       undefined

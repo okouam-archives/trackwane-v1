@@ -46,7 +46,6 @@ class Trackwane.Services.Cartography
         counter: (feature) ->
           return feature.cluster.length
       style = new OpenLayers.Style(formatting, context: context)
-      console.debug(style)
       options =
         strategies: [new OpenLayers.Strategy.Cluster({distance: 20, threshold: 2})]
         styleMap: new OpenLayers.StyleMap
