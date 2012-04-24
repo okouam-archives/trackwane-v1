@@ -69,4 +69,5 @@ class Trackwane.Views.Realtime.Map extends Backbone.View
     @geofence_layer = cartography.createLayer("geofences")
     @place_layer = cartography.createLayer("places")
     bounds = OpenLayers.Bounds.fromExtent(extent);
-    @map.zoomToExtent(bounds)
+    if bounds
+      @map.zoomToExtent(bounds)
