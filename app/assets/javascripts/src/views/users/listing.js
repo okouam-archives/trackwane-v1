@@ -16,8 +16,8 @@ Trackwane.Views.Users.Listing = Trackwane.Views.Base.extend({
   resize: function() {
     var window_height = $(window).height();
     var original_height = this.$el.height();
-    var max_height = window_height - 90;
-    if (original_height > max_height) this.$el.height(max_height);
+    var max_height = window_height - 150;
+    if (original_height >= max_height) this.$el.height(max_height);
     else this.$el.height("auto");
     $('.lionbars').lionbars();
   },
