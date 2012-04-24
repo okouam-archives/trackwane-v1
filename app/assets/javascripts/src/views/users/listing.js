@@ -31,7 +31,7 @@ Trackwane.Views.Users.Listing = Trackwane.Views.Base.extend({
   },
 
   onUserDelete: function(evt) {
-    if (confirm("Are you sure you want to delete this user?")) {
+    if (confirm($.t("confirmation_users.delete"))) {
       var id = $(evt.currentTarget).parents("tr").data("id");
       this.pubsub.trigger("user:deleted", id);
     }

@@ -28,6 +28,15 @@ $.translations["fr"] =
     format_minlength: 'Le format doit comprendre au moins {0} caractères.'
     email_required: 'Veuillez entrer un email SVP'
     email_format: 'Veuillez entrer un email valide'
+  confirmation_devices:
+    delete: "Etes vous sûr de vouloir supprimer ce véhicule?"
+  confirmation_places:
+    delete: "Etes vous sûr de vouloir supprimer ce lieu?"
+  confirmation_accounts:
+    delete: "Etes vous sûr de vouloir supprimer ce compte?"
+  confirmation_users:
+    delete: "Etes vous sûr de vouloir supprimer cet utilisateur?"
+    
        
     
       

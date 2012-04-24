@@ -31,7 +31,7 @@ Trackwane.Views.Devices.Listing = Trackwane.Views.Base.extend({
   },
 
   onDeviceDelete: function(evt) {
-    if (confirm("Are you sure you want to delete this device?")) {
+    if (confirm($.t("confirmation_devices.delete"))) {
       var id = $(evt.currentTarget).data("id");
       this.pubsub.trigger("device:deleted", id);
     }
@@ -55,7 +55,7 @@ Trackwane.Views.Devices.Listing = Trackwane.Views.Base.extend({
     this.devices = devices;
     this.$el.html(this.template(devices));
     this.$el.show();
-    this.resize();
+    this.resize(); 
   }
 
 });

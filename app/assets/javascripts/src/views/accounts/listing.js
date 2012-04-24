@@ -31,7 +31,7 @@ Trackwane.Views.Accounts.Listing = Trackwane.Views.Base.extend({
   },
 
   onAccountDelete: function(evt) {
-    if (confirm("Are you sure you want to delete this user?")) {
+    if (confirm($.t("confirmation_accounts.delete"))) {
       var id = $(evt.currentTarget).parents("tr").data("id");
       this.pubsub.trigger("account:deleted", id);
     }
@@ -58,4 +58,4 @@ Trackwane.Views.Accounts.Listing = Trackwane.Views.Base.extend({
     this.resize();
   }
 
-});
+}); 

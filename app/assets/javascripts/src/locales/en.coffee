@@ -28,3 +28,11 @@ $.translations["en"] =
     format_minlength: 'The format must be a least {0} characters long'
     email_required: 'Please provide an email'
     email_format: 'Please enter a valid email format'
+  confirmation_devices:
+    delete: "Are you sure you want to delete this device?"
+  confirmation_places:
+    delete: "Are you sure you want to delete this place?"
+  confirmation_accounts:
+    delete: "Are you sure you want to delete this account?"
+  confirmation_users:
+    delete: "Are you sure you want to delete this users?"
