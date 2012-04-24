@@ -23,7 +23,7 @@ Trackwane.Views.Devices.Editor = Trackwane.Views.Base.extend({
 
   onDelete: function() {
     var attributes = this.formAttributes();
-    this.pubsub.trigger("device:deleted", attributes)
+    this.pubsub.trigger("device:deleted", attributes);
   },
 
   onClose: function() {

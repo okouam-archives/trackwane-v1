@@ -16,7 +16,7 @@ Trackwane.Views.Schedules.Editor = Trackwane.Views.Base.extend({
     var callback = {
       submitHandler: function() {
         var attributes = this.formAttributes();
-        this.pubsub.trigger("schedule:created", attributes)
+        this.pubsub.trigger("schedule:created", attributes);
       }.bind(this)
     };
     this.$el.find("form").validate(_.extend(Trackwane.Models.Schedule.validation_rules, callback));
@@ -24,7 +24,7 @@ Trackwane.Views.Schedules.Editor = Trackwane.Views.Base.extend({
 
   onDelete: function() {
     var attributes = this.formAttributes();
-    this.pubsub.trigger("schedule:deleted", attributes)
+    this.pubsub.trigger("schedule:deleted", attributes);
   },
 
   onClose: function() {
@@ -35,7 +35,7 @@ Trackwane.Views.Schedules.Editor = Trackwane.Views.Base.extend({
     var callback = {
       submitHandler: function() {
         var attributes = this.formAttributes();
-        this.pubsub.trigger("schedule:saved", attributes)
+        this.pubsub.trigger("schedule:saved", attributes);
       }.bind(this)
     };
     this.$el.find("form").validate(_.extend(Trackwane.Models.Schedule.validation_rules, callback));

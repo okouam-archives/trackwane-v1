@@ -9,12 +9,12 @@ Trackwane.Views.Accounts.Editor = Trackwane.Views.Base.extend({
 
   onCreate: function() {
     var attributes = this.formAttributes();
-    this.pubsub.trigger("account:created", attributes)
+    this.pubsub.trigger("account:created", attributes);
   },
 
   onDelete: function() {
     var attributes = this.formAttributes();
-    this.pubsub.trigger("account:deleted", attributes)
+    this.pubsub.trigger("account:deleted", attributes);
   },
 
   onClose: function() {
@@ -23,7 +23,7 @@ Trackwane.Views.Accounts.Editor = Trackwane.Views.Base.extend({
 
   onSave: function() {
     var attributes = this.formAttributes();
-    this.pubsub.trigger("account:saved", attributes)
+    this.pubsub.trigger("account:saved", attributes);
   },
 
   close: function() {

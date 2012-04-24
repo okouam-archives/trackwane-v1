@@ -11,7 +11,7 @@ Trackwane.Views.Users.Editor = Trackwane.Views.Base.extend({
    var callback = {
       submitHandler: function() {
         var attributes = this.formAttributes();
-        this.pubsub.trigger("user:created", attributes)
+        this.pubsub.trigger("user:created", attributes);
       }.bind(this)
     };
     console.debug(Trackwane.Models.User.validation_rules);
@@ -20,7 +20,7 @@ Trackwane.Views.Users.Editor = Trackwane.Views.Base.extend({
 
   onDelete: function() {
     var attributes = this.formAttributes();
-    this.pubsub.trigger("user:deleted", attributes)
+    this.pubsub.trigger("user:deleted", attributes);
   },
 
   onClose: function() {
@@ -31,7 +31,7 @@ Trackwane.Views.Users.Editor = Trackwane.Views.Base.extend({
     var callback = {
       submitHandler: function() {
       var attributes = this.formAttributes();
-      this.pubsub.trigger("user:saved", attributes)
+      this.pubsub.trigger("user:saved", attributes);
       }.bind(this)
     };
     this.$el.find("form").validate(_.extend(Trackwane.Models.User.validation_rules, callback));
