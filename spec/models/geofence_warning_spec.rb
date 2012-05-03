@@ -6,14 +6,15 @@ describe GeofenceWarning do
 
     before(:all) do
 			account = FactoryGirl.create(:account)
-      @alarm = FactoryGirl.create(:geofence_alarm, coordinates: Forgery::Geospatial.square(5, 5, 2).as_text,
-                       :account => account, :name => "B")
+      @geofactory = RGeo::Geographic.simple_mercator_factory(:srid => 4326)
+      bounds = Forgery::Geospatial.wkt_square("POINT(5 5)", 2)
+      @alarm = FactoryGirl.create(:geofence_alarm, bounds: bounds, :account => account, :name => "B")
     end
 
     context "and both events occur outside the geofence" do
       it "returns nothing" do
-        previous_event = FactoryGirl.build(:event, :latitude => 15, :longitude => 15)
-        event = FactoryGirl.build(:event, :latitude => 10, :longitude => 10)
+        previous_event = FactoryGirl.build(:event, :lonlat => @geofactory.point(15, 15))
+        event = FactoryGirl.build(:event, :lonlat => @geofactory.point(10, 10))
         warnings = GeofenceWarning.check([@alarm], previous_event, event)
         warnings.should be_empty
       end
@@ -21,8 +22,8 @@ describe GeofenceWarning do
 
     context "and both events occur inside the geofence" do
       it "returns nothing" do
-        previous_event = FactoryGirl.build(:event, :latitude => 5, :longitude => 5)
-        event = FactoryGirl.build(:event, :latitude => 5.9, :longitude => 5.9)
+        previous_event = FactoryGirl.build(:event, :lonlat => @geofactory.point(15, 15))
+        event = FactoryGirl.build(:event, :lonlat => @geofactory.point(5.9, 5.9))
         warnings = GeofenceWarning.check([@alarm], previous_event, event)
         warnings.should be_empty
       end
@@ -30,8 +31,8 @@ describe GeofenceWarning do
 
     context "and one event occurs inside the geofence while the other occurs outside" do
       it "creates geofence warnings" do
-        previous_event = FactoryGirl.build(:event, :latitude => 5, :longitude => 5)
-        event = FactoryGirl.build(:event, :latitude => 0, :longitude => 0)
+        previous_event = FactoryGirl.build(:event, :lonlat => @geofactory.point(5, 5))
+        event = FactoryGirl.build(:event, :lonlat => @geofactory.point(0, 0))
         warnings = GeofenceWarning.check([@alarm], previous_event, event)
         warnings.should_not be_empty
         warnings.size.should == 1

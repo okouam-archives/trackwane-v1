@@ -1,4 +1,4 @@
-Trackwane.Controllers.ReportsController = Trackwane.Controllers.Base.extend({
+Trackwane.Controllers.ReportsController = Trackwane.Core.Framework.Controller.extend({
 
   appEvents: {
     "presentation:toggle": "onTogglePresentation",

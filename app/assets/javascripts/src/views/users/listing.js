@@ -1,4 +1,4 @@
-Trackwane.Views.Users.Listing = Trackwane.Views.Base.extend({
+Trackwane.Views.Users.Listing = Trackwane.Core.Framework.View.extend({
 
   events: {
     "click tr td.selectable" : "onUserSelect",

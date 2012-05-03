@@ -11,12 +11,12 @@ describe Parser do
 
     it "correctly identifies the longitude" do
       result = @parser.read(@data)
-      result[:event].longitude.should == -4
+      result[:event].lonlat.lon.should == -4
     end
 
     it "correctly identifies the latitude" do
       result = @parser.read(@data)
-      result[:event].latitude.should == 5.4
+      result[:event].lonlat.lat.should == 5.4
     end
 
     it "correctly identifies the heading" do

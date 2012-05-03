@@ -2,6 +2,7 @@
 <%= render :partial => "map/historical/events" %>
 
 <div id="canvas">
+  <div style="float: left; width: 100px"></div>
   <div id="map"></div>
   <div class="column">
     <div class="parameters">
@@ -21,6 +22,6 @@
 
 <script>
   $(function() {
-    var controller = new Trackwane.Controllers.HistoricalController({el: "#canvas", devices: gon.devices});
+    new Trackwane.Controllers.HistoricalController({el: "#canvas", devices: gon.devices});
   });
 </script>

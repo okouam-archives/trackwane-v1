@@ -7,4 +7,19 @@ describe Device do
     device.save.should be_false
   end
 
+  it "cannot be saved without a display name" do
+    device = FactoryGirl.build(:device, :display_name => nil)
+    device.save.should be_false
+  end
+
+  it "cannot be saved without a imei number" do
+    device = FactoryGirl.build(:device, :imei_number => nil)
+    device.save.should be_false
+  end
+
+  it "can be saved" do
+    device = FactoryGirl.build(:device)
+    device.save.should be_true
+  end
+
 end

@@ -22,10 +22,13 @@ class EventsController < ApplicationController
 			imei_number = payload[:imei_number]
 		else
 			imei_number = data.delete(:imei_number)
+      longitude = data.delete(:longitude)
+      latitude = data.delete(:latitude)
 			event = Event.new(data)
-		end
+      geofactory = RGeo::Geographic::simple_mercator_factory
+      event.lonlat = geofactory.point(longitude, latitude)
+    end
     event.device = Device.find_by_imei_number(imei_number)
-
     unless event.device
       render :text => "Unable to process event from IMEI #{imei_number} as it has not been properly setup", :status => 412
       return

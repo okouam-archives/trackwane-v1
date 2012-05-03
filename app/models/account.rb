@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  validates_presence_of :name, :telephone, :contact, :email
+  validates_presence_of :name, :contact, :email
   has_many :devices
   has_many :geofences
   has_many :reports

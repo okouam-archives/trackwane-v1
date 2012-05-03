@@ -1,52 +1,64 @@
-class Trackwane.Controllers.RealtimeController extends Trackwane.Controllers.Base
+class Trackwane.Controllers.RealtimeController extends Trackwane.Core.Framework.Controller
+
+  Scope: Trackwane.Views.Realtime
 
   appEvents:
-    "event:selected":         "onEventSelected",
-    "places:toggle":          "onTogglePlaces",
-    "geofence-alarms:toggle": "onToggleGeofences",
+    "app:polygon-builder:activate": "onActivatePolygonBuilder"
+    "app:polygon-builder:clear": "onClearPolygonBuilder"
+    "app:point-builder:activate": "onActivatePointBuilder"
+    "app:point-builder:clear": "onClearPointBuilder"
+    "feature:show": "onFeatureShow"
+    "feature:hide": "onFeatureHide"
+    "feature:select": "onFeatureSelect"
+    "app:reset": "onAppReset"
 
-  initialize: (@options) ->
-    @init(@options)
-    @listing = new Trackwane.Views.Realtime.Events({el: "#canvas .listing", pubsub: @pubsub})
-    @toolbar = new Trackwane.Views.Realtime.Toolbar({el: "#canvas .toolbar", pubsub: @pubsub})
-    @map = new Trackwane.Views.Realtime.Map({el: "#map", pubsub: @pubsub});
-    @map.render(options.extent, (() => @showInitialPositions(new Trackwane.Collections.RealtimeEvents(@options.events))))
+  initialize: (options) ->
+    super(options)
+    @toolbar = new @Scope.Toolbar({el: "#canvas .listing.toolbar", pubsub: @pubsub})
+    @feature_panel = new @Scope.FeaturePanel({el: "#feature-panel", pubsub: @pubsub, places: options.places, speed_alarms: options.speed_alarms, geofence_alarms: options.geofence_alarms})
+    @map = new @Scope.Map({el: "#map", pubsub: @pubsub})
+    @tracker_panel = new @Scope.Trackers.Panel({el: "#tracker-panel", pubsub: @pubsub})
+    @render(options)
 
-  onToggleGeofences: () ->
-    if @showing_geofences
-      @map.hideGeofences()
-      @showing_geofences = false
-    else
-      callbacks =
-        success: (results) =>
-          @map.showGeofences(results)
-          @showing_geofences = true
-      new Trackwane.Collections.GeofenceAlarms().fetch(callbacks)
+  render: (options) ->
+    @feature_panel.render(options)
+    trackers = new Trackwane.Collections.RealtimeEvents(options.devices)
+    events = new Trackwane.Collections.RealtimeEvents(options.events)
+    @map.render(options.extent, (() => @showInitialPositions(trackers, events)))
 
-  onTogglePlaces: () ->
-    if @showing_places
-      @map.hidePlaces()
-      @showing_places = false
-    else
-      callbacks =
-        success: (results) =>
-          @map.showPlaces(results)
-          @showing_places = true
-      new Trackwane.Collections.Places().fetch(callbacks)
+  onFeatureSelect: (model) ->
+    @map.centerFeature(model)
 
-  setupRealtimeTracking: (events) ->
+  onFeatureShow: (model) ->
+    @map.showFeature(model)
+
+  onFeatureHide: (model) ->
+    @map.hideFeature(model)
+
+  onAppReset: () ->
+    @map.reset()
+
+  onClearPointBuilder: () ->
+    @map.clearPointBuilder()
+
+  onClearPolygonBuilder: () ->
+    @map.clearPolygonBuilder()
+
+  onActivatePolygonBuilder: () ->
+    @map.activatePolygonBuilder()
+
+  onActivatePointBuilder: () ->
+    @map.activatePointBuilder()
+
+  setupRealtimeTracking: (trackers) ->
     pusher = new Pusher('fee5deb878965544bd90')
-    events.each (event) =>
-      channel = pusher.subscribe("#{event.get("account_id")}-#{event.get("device_id")}")
-      channel.bind 'event-received', ((data) =>
-        @listing.update(data)
-        @map.showEvent(data))
+    trackers.each (tracker) =>
+      channel = pusher.subscribe("#{tracker.get("account_id")}-#{tracker.get("device_id")}")
+      channel.bind 'event-received', ((event) =>
+        @listing.update(event)
+        @map.showEvent(event))
 
-  showInitialPositions: (events) ->
-    @listing.render(events)
+  showInitialPositions: (trackers, events) ->
+    @tracker_panel.render(trackers)
     @map.show(events)
-    @setupRealtimeTracking(events)
-
-  onEventSelected: (event_id) ->
-    @map.center(event_id)
-
+    @setupRealtimeTracking(trackers)

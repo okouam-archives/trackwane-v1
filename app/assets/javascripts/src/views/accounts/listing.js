@@ -1,4 +1,4 @@
-Trackwane.Views.Accounts.Listing = Trackwane.Views.Base.extend({
+Trackwane.Views.Accounts.Listing = Trackwane.Core.Framework.View.extend({
 
   events: {
     "click tr td.selectable" : "onAccountSelect",

@@ -1,24 +1,40 @@
 class Trackwane.Models.Place extends Backbone.Model
 
-  urlRoot: "/places",
+  urlRoot: "/places"
 
-  getCoordinates: ->
-    cartography = new Trackwane.Services.Cartography()
-    lonlat = new OpenLayers.LonLat(this.get("longitude"), this.get("latitude"))
-    cartography.projectForGoogleMaps(lonlat)
+  initialize: (attributes) ->
+    format = new OpenLayers.Format.WKT();
+    feature = format.read(attributes.lonlat);
+    @geometry = OpenLayers.Projection.transform(feature.geometry, new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
 
-  setCoordinates: (longitude, latitude) ->
-    this.set("longitude", longitude)
-    this.set("latitude", latitude)
+  parse: (response) ->
+    format = new OpenLayers.Format.WKT();
+    feature = format.read(lonlat);
+    response.geometry = OpenLayers.Projection.transform(feature.geometry, new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+    response
+
+  toFeature: () ->
+    feature = new OpenLayers.Feature.Vector(@geometry, @attributes)
+    feature.style =
+      label: @get("name"),
+      labelOutlineColor: 'white',
+      labelOutlineWidth: "4px",
+      labelYOffset: 17,
+      fontWeight: "bold",
+      fontColor: "#084a8c",
+      pointRadius: 6,
+      externalGraphic: "/assets/default/layout/tab-close-on.gif"
+    feature.id = @id
+    feature
 
   @validation_rules:
     debug: true
     rules:
       "place[name]":
-        required: true,
+        required: true
         minlength: "3"
       "place[category]":
-        required: true,
+        required: true
         minlength: "3"
     messages:
       "place[name]":

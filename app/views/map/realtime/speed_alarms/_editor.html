@@ -1,0 +1,21 @@
+<script id="speed-alarm-editor-template" type="text/x-handlebars-template">
+ <div>
+   <h1><%= t("new") %> <%= t("speed_alarm") %></h1>
+   <p><%= t("speed_alarm_definition") %></p>
+   <form>
+   <fieldset>
+     <label><%= t("alarm_name") %></label>
+     <input type="text" name="speed_alarm[name]" />
+     <label><%= t("speed_limit") %></label>
+     <input name="speed_alarm[speed]" type="text" />
+     <button class="success btn accept"><%= t("accept") %></button>
+     <button class="btn cancel"><%= t("cancel") %></button>
+   </fieldset>
+   </form>
+ </div>
+</script>
+
+
+
+
+

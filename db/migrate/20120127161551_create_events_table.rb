@@ -3,8 +3,7 @@ class CreateEventsTable < ActiveRecord::Migration
     create_table :events do |t|
       t.references :device
       t.integer :status_code
-      t.decimal :latitude
-      t.decimal :longitude
+      t.point :lonlat, :srid => 4326, :null => false
       t.decimal :speed
       t.string :address
       t.decimal :heading

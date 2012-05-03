@@ -3,8 +3,7 @@ FactoryGirl.define do
     association :device
     heading {rand(360)}
     speed {rand(120)}
-    longitude Forgery::Geospatial.longitude
-    latitude Forgery::Geospatial.latitude
+    lonlat Forgery::Geospatial.wkt_point
     date DateTime.now
   end
 end

@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/dougcole/postgis_adapter.git
-  revision: a1b5f0a55c4335b104e8b165250dd9ca95aad598
-  specs:
-    postgis_adapter (0.8.1)
-      nofxx-georuby
-
-GIT
   remote: https://github.com/jlecour/geokit-rails3.git
   revision: d8348d2da0e9b612757e1a1c58f76fada8609e9e
   specs:
@@ -43,69 +36,97 @@ GEM
       activesupport (= 3.1.4)
       arel (~> 2.2.3)
       tzinfo (~> 0.3.29)
+    activerecord-postgis-adapter (0.4.3)
+      pg (>= 0.11.0)
+      rgeo-activerecord (~> 0.4.5)
     activeresource (3.1.4)
       activemodel (= 3.1.4)
       activesupport (= 3.1.4)
     activesupport (3.1.4)
       multi_json (~> 1.0)
+    addressable (2.2.8)
     archive-tar-minitar (0.5.2)
     arel (2.2.3)
     authlogic (3.1.0)
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
     builder (3.0.0)
-    capistrano (2.11.2)
+    capistrano (2.12.0)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     ccsv (0.1.2)
+    childprocess (0.3.2)
+      ffi (~> 1.0.6)
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
       railties (~> 3.1.0)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.2.0)
+    coffee-script-source (1.3.1)
     columnize (0.3.6)
     database_cleaner (0.7.2)
     diff-lcs (1.1.3)
-    domain_name (0.5.2)
+    domain_name (0.5.3)
       unf (~> 0.0.3)
     erubis (2.7.0)
     execjs (1.3.0)
       multi_json (~> 1.0)
-    factory_girl (3.0.0)
+    factory_girl (3.2.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (3.0.0)
-      factory_girl (~> 3.0.0)
+    factory_girl_rails (3.2.0)
+      factory_girl (~> 3.2.0)
       railties (>= 3.0.0)
     faker (1.0.1)
       i18n (~> 0.4)
+    faraday (0.8.0)
+      multipart-post (~> 1.1)
+    ffi (1.0.11)
+    ffi-geos (0.0.4)
+      ffi (~> 1.0.0)
     forgery (0.5.0)
     geokit (1.6.5)
       multi_json
-    gon (2.3.0)
+    gon (3.0.0)
       actionpack (>= 2.3.0)
       json
     haml (3.1.4)
+    hashie (1.2.0)
     highline (1.6.11)
     hike (1.2.1)
+    httpauth (0.1)
     i18n (0.6.0)
     itslog (0.6.1)
-    jquery-rails (1.0.19)
-      railties (~> 3.0)
-      thor (~> 0.14)
+    jasmine (1.1.2)
+      jasmine-core (>= 1.1.0)
+      rack (>= 1.1)
+      rspec (>= 1.3.1)
+      selenium-webdriver (>= 0.1.3)
+    jasmine-core (1.1.0)
+    jasmine-headless-webkit (0.8.4)
+      coffee-script
+      jasmine-core (~> 1.1)
+      multi_json
+      rainbow
+      sprockets (~> 2)
+    jasmine-rails (0.0.3)
+      jasmine
+      jasmine-headless-webkit
+      rails (>= 3.1.0)
     json (1.6.6)
     libv8 (3.3.10.4)
+    libwebsocket (0.1.3)
+      addressable
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
     mail (2.3.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mechanize (2.3)
+    mechanize (2.4)
       domain_name (~> 0.5, >= 0.5.1)
       mime-types (~> 1.17, >= 1.17.2)
       net-http-digest_auth (~> 1.1, >= 1.1.1)
@@ -114,7 +135,8 @@ GEM
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
     mime-types (1.18)
-    multi_json (1.2.0)
+    multi_json (1.3.2)
+    multipart-post (1.1.5)
     net-http-digest_auth (1.2)
     net-http-persistent (2.6)
     net-scp (1.0.4)
@@ -124,9 +146,31 @@ GEM
     net-ssh (2.3.0)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    nofxx-georuby (1.9.2)
     nokogiri (1.5.2)
     ntlm-http (0.1.1)
+    oauth (0.4.6)
+    oauth2 (0.6.1)
+      faraday (~> 0.7)
+      httpauth (~> 0.1)
+      multi_json (~> 1.3)
+    omniauth (1.1.0)
+      hashie (~> 1.2)
+      rack
+    omniauth-facebook (1.2.0)
+      omniauth-oauth2 (~> 1.0.0)
+    omniauth-linkedin (0.0.6)
+      omniauth-oauth (~> 1.0.0)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-oauth2 (1.0.2)
+      oauth2 (~> 0.6.0)
+      omniauth (~> 1.0)
+    omniauth-twitter (0.0.11)
+      multi_json (~> 1.3)
+      omniauth-oauth (~> 1.0)
+    omniauth-yahoo (0.0.3)
+      omniauth-oauth (~> 1.0)
     open4 (1.3.0)
     pg (0.13.2)
     polyglot (0.3.3)
@@ -158,18 +202,17 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (~> 0.14.6)
+    rainbow (1.1.4)
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rgeo (0.3.8)
-    rgeo-activerecord (0.4.3)
+    rgeo (0.3.12)
+    rgeo-activerecord (0.4.5)
       activerecord (>= 3.0.3)
       arel (>= 2.0.6)
-      rgeo (>= 0.3.4)
-    rgeo-geojson (0.2.3)
-      rgeo (>= 0.3.7)
+      rgeo (>= 0.3.10)
     rspec (2.9.0)
       rspec-core (~> 2.9.0)
       rspec-expectations (~> 2.9.0)
@@ -194,13 +237,19 @@ GEM
     ruby-hmac (0.4.0)
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
-    rubyzip (0.9.6.1)
-    sass (3.1.15)
+    rubyzip (0.9.8)
+    sass (3.1.16)
     sass-rails (3.1.6)
       actionpack (~> 3.1.0)
       railties (~> 3.1.0)
       sass (>= 3.1.10)
       tilt (~> 1.3.2)
+    selenium-webdriver (2.21.2)
+      childprocess (>= 0.2.5)
+      ffi (~> 1.0)
+      libwebsocket (~> 0.1.3)
+      multi_json (~> 1.0)
+      rubyzip
     signature (0.1.2)
       ruby-hmac
     silent-postgres (0.1.1)
@@ -208,14 +257,14 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    therubyracer (0.10.0)
+    therubyracer (0.10.1)
       libv8 (~> 3.3.10)
     thor (0.14.6)
     tilt (1.3.3)
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.32)
+    tzinfo (0.3.33)
     uglifier (1.2.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
@@ -230,6 +279,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgis-adapter
   authlogic
   capistrano
   ccsv
@@ -237,25 +287,28 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   faker
+  ffi
+  ffi-geos
   forgery
   geokit-rails3!
   gon
   haml
   itslog
-  jquery-rails
+  jasmine-rails
   json
   mechanize
+  omniauth
+  omniauth-facebook
+  omniauth-linkedin
+  omniauth-twitter
+  omniauth-yahoo
   pg
-  postgis_adapter!
   pusher
   rails
   rest-client
-  rgeo-activerecord
-  rgeo-geojson
   rspec
   rspec-rails
   ruby-debug19
-  rubyzip
   sass-rails (~> 3.1.5)
   silent-postgres
   therubyracer (>= 0.9.2)

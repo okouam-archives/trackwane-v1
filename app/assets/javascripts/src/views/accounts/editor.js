@@ -1,4 +1,4 @@
-Trackwane.Views.Accounts.Editor = Trackwane.Views.Base.extend({
+Trackwane.Views.Accounts.Editor = Trackwane.Core.Framework.View.extend({
 
   events: {
     "click .create": "onCreate",

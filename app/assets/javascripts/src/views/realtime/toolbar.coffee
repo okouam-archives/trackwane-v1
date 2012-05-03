@@ -1,4 +1,4 @@
-class Trackwane.Views.Realtime.Toolbar extends Backbone.View
+class Trackwane.Views.Realtime.Toolbar extends Trackwane.Core.Framework.View
 
   events:
     "click .places": "onClickPlaces"

@@ -1,4 +1,4 @@
-Trackwane.Controllers.PlacesController = Trackwane.Controllers.Base.extend({
+Trackwane.Controllers.PlacesController = Trackwane.Core.Framework.Controller.extend({
 
   events: {
     "click .toolbar .button": "onToggleNames",
@@ -19,7 +19,6 @@ Trackwane.Controllers.PlacesController = Trackwane.Controllers.Base.extend({
     this.listing = new Trackwane.Views.Places.Listing({el: "#canvas .listing", pubsub: this.pubsub});
     this.new_place_panel = new Trackwane.Views.NewPlacePanel({el: "#new-place-panel", pubsub: this.pubsub});
     this.render(new Trackwane.Collections.Places(options.places));
-    this.isShowing = false;
   },
 
   onPlaceSelected: function(id) {

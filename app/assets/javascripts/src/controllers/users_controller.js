@@ -1,4 +1,4 @@
-Trackwane.Controllers.UsersController = Trackwane.Controllers.Base.extend({
+Trackwane.Controllers.UsersController = Trackwane.Core.Framework.Controller.extend({
 
   appEvents: {
     "users:fetched": "onUsersFetched",

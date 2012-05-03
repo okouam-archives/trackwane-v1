@@ -1,0 +1,19 @@
+<script id="geofence-alarm-listing-template" type="text/x-handlebars-template">
+  <table id="geofence-alarms" class="sidecolumn">
+    <thead>
+      <tr>
+        <th><input type="checkbox" /></th>
+        <th><b><%= t("geofence_alarms") %></b></th>
+        <th></th></tr>
+    </thead>
+    {{#each models}}
+      <tr>
+        <td><input type="checkbox" /></td>
+        <td>
+          <a data-id="{{attributes.id}}" class="select" href="#">{{attributes.name}}</a>
+        </td>
+        <td  style="width: 10px"><a data-id="{{attributes.id}}" class="remove" href="#"><img src="/assets/closelabel.png" /></a></td>
+      </tr>
+      {{/each}}
+  </table>
+</script>

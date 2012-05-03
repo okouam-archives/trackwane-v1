@@ -1,4 +1,4 @@
-Trackwane.Controllers.AlertsController = Trackwane.Controllers.Base.extend({
+Trackwane.Controllers.AlertsController = Trackwane.Core.Framework.Controller.extend({
 
   appEvents: {
     "alerts:fetched": "onAlertsFetched",

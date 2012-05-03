@@ -1,4 +1,4 @@
-Trackwane.Controllers.SchedulesController = Trackwane.Controllers.Base.extend({
+Trackwane.Controllers.SchedulesController = Trackwane.Core.Framework.Controller.extend({
 
   appEvents: {
     "schedules:fetched": "onSchedulesFetched",

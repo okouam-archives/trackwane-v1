@@ -1,5 +1,7 @@
 Trackwane::Application.routes.draw do
 
+  mount JasmineRails::Engine => "/specs" unless Rails.env.production?
+
   match 'help/:section' => 'help#index'
   match 'map/realtime' => 'map#realtime'
   match 'map/historical' => 'map#historical'
@@ -24,7 +26,9 @@ Trackwane::Application.routes.draw do
     end
   end
 
-  resources :places, :alarms, :speed_alarms, :geofence_alarms, :devices, :schedules
+  resources :places, :alarms, :speed_alarms, :geofence_alarms, :devices, :schedules, :authentications
+
+  match '/auth/:provider/callback' => 'authentications#create'
 
   resources :users do
     collection do

@@ -1,0 +1,20 @@
+<script id="place-editor-template" type="text/x-handlebars-template">
+  <div>
+    <div style="padding: 0 10px">
+      <h1><%= t("new") %> <%= t("places.place") %></h1>
+      <p><%= t("places.new_places_instruction") %></p>
+    </div>
+    <form style="padding: 0">
+      <fieldset style="padding: 0 9px; margin-top: -10px">
+        <label for="place_name"><%= t("name") %></label>
+        <input id="place_name" name="place[name]" type="text" />
+        <label for="place_category"><%= t("places.category") %></label>
+        <input id="place_category" name="place[category]" type="text" />
+        <div style="margin-top: 5px">
+          <button class="success btn accept"><%= t("accept") %></button>
+          <button class="btn cancel"><%= t("cancel") %></button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</script>

@@ -1,4 +1,4 @@
-Trackwane.Controllers.DevicesController = Trackwane.Controllers.Base.extend({
+Trackwane.Controllers.DevicesController = Trackwane.Core.Framework.Controller.extend({
 
   appEvents: {
     "devices:fetched": "onDevicesFetched",

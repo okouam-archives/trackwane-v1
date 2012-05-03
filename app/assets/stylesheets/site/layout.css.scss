@@ -40,7 +40,7 @@ fieldset button {float: right; margin-top: 20px; margin-left: 10px}
 $opaque: rgba(50, 50, 50, 0.9);
 
 .panel {background-color: $opaque; border: 5px solid #666; border-radius: 5px; z-index: 10000; color: white; padding: 0}
-.scrollable-panel {@extend .panel; overflow-x: hidden; overflow-y: scroll}
+.scrollable-panel {overflow-x: hidden; overflow-y: scroll}
 .positioned-panel {@extend .panel; position: absolute}
 .content-panel {@extend .panel; padding: 10px}
 .positioned-scrollable-panel {@extend .positioned-panel; overflow-x: hidden; overflow-y: scroll}
@@ -72,9 +72,6 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
   position: absolute; border: 5px solid #666; border-radius: 5px; background-color: white; color: #434343
 }
 
-.map.realtime .send-command.panel > div {@include opaque-panel; position: absolute; left: 20px; bottom: 100px}
-.map.realtime .follow.panel > div {@extend .positioned-panel; left: 20px; bottom: 100px}
-.map.realtime .listing {@extend .positioned-scrollable-panel; @extend .flush-right-first}
 .map.realtime .places.popup {background-color: #999}
 .map.realtime .listing table tr td div {padding: 5px}
 
@@ -97,6 +94,7 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 .historical .parameters {@extend .panel; margin-bottom: 10px; font-weight: bold}
 .historical .parameters label {margin-top: 0}
 
+.map.realtime .column {width: 250px}
 .alerts.index .column {width: 315px}
 .schedules.index .column {width: 505px}
 .devices.index .column {width: 280px}

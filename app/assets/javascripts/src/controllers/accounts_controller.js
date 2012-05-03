@@ -1,4 +1,4 @@
-Trackwane.Controllers.AccountsController = Trackwane.Controllers.Base.extend({
+Trackwane.Controllers.AccountsController = Trackwane.Core.Framework.Controller.extend({
 
   appEvents: {
     "accounts:fetched": "onAccountsFetched",

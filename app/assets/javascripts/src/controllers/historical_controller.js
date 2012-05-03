@@ -1,4 +1,4 @@
-Trackwane.Controllers.HistoricalController = Trackwane.Controllers.Base.extend({
+Trackwane.Controllers.HistoricalController = Trackwane.Core.Framework.Controller.extend({
 
   appEvents: {
     "device:selected": "onDeviceSelected"

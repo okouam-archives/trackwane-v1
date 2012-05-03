@@ -2,6 +2,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe EventObserver do
 
+  before(:all) do
+    @geofactory = RGeo::Geographic.simple_mercator_factory(:srid => 4326)
+  end
+
   describe "before an event is saved " do
 
     context "and it's not the first event'" do
@@ -19,9 +23,9 @@ describe EventObserver do
         context "and there was a previous event" do
           it "finds the distance covered since the last event" do
             device = FactoryGirl.create(:device)
-            FactoryGirl.create(:event, :device => device, :longitude => 0, :latitude => 0)
+            FactoryGirl.create(:event, :device => device, :lonlat => @geofactory.point(0, 0))
             device.reload
-            event = FactoryGirl.build(:event, :longitude => 0.005, :latitude => 0.000, :device => device)
+            event = FactoryGirl.build(:event, :lonlat => @geofactory.point(0, 0.005), :device => device)
             observer = EventObserver.instance
             observer.before_save(event)
             event.distance_delta.should == 556.6
@@ -36,7 +40,7 @@ describe EventObserver do
 
       context "and there is a road within 10m" do
          it "find the correct address" do
-          event = FactoryGirl.build(:event, longitude: -4.06395, latitude: 5.34676)
+          event = FactoryGirl.build(:event, :lonlat => @geofactory.point(-4.06395, 0.534676))
           observer = EventObserver.instance
           observer.before_save(event)
           event.address.should == "Rue P152"
@@ -60,8 +64,8 @@ describe EventObserver do
 
       context "and the place is within 20m" do
         it "assigns the event to the place" do
-          place = FactoryGirl.create(:place, account: @account, longitude: -4.06390, latitude: 5.34670, :category => "Pubs")
-          event = FactoryGirl.build(:event, device: @device, longitude: -4.06393, latitude: 5.34676)
+          place = FactoryGirl.create(:place, account: @account, :lonlat => @geofactory.point(-4.06390, 5.34670), :category => "Pubs")
+          event = FactoryGirl.build(:event, device: @device, :lonlat => @geofactory.point(-4.06393, 5.34676))
           observer = EventObserver.instance
           observer.before_save(event)
           event.place.should == place
@@ -70,8 +74,8 @@ describe EventObserver do
 
       context "and the place is not within 20m" do
         it "does not assign the event to the place" do
-          FactoryGirl.create(:place, account: @account, longitude: -4.06390, latitude: 5.34670, :category => "Pubs")
-          event = FactoryGirl.build(:event, device: @device, longitude: 0.06393, latitude: 0.34676)
+          FactoryGirl.create(:place, account: @account, :lonlat => @geofactory.point(-4.06390, 5.34670), :category => "Pubs")
+          event = FactoryGirl.build(:event, device: @device, :lonlat => @geofactory.point(0.06393, 0.34676))
           observer = EventObserver.instance
           observer.before_save(event)
           event.place.should be_nil

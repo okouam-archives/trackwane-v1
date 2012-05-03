@@ -3,8 +3,7 @@ class CreatePlacesTable < ActiveRecord::Migration
       create_table :places do |t|
         t.string :name, :null => false
         t.string :category, :null => false
-        t.decimal :longitude, :null => false
-        t.decimal :latitude, :null => false
+        t.point :lonlat, :srid => 4326, :null => false
         t.references :account, :null => false
         t.timestamps
       end

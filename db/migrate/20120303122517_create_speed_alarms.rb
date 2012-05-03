@@ -4,8 +4,8 @@ class CreateSpeedAlarms < ActiveRecord::Migration
       t.references :account
       t.decimal :speed
       t.string :name
-      t.string :coordinates
-      t.boolean :is_active
+      t.string :destination
+      t.polygon :bounds, :srid => 4326, :null => false
       t.timestamps
     end
   end

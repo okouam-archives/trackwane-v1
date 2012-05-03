@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :geofence_alarm do
     association :account
     sequence(:name) {|n| "Geofence Alarm #{n}"}
-    coordinates Forgery::Geospatial.square.to_s
+    bounds Forgery::Geospatial.wkt_square
   end
 end
 

@@ -1,36 +1,50 @@
-class Trackwane.Views.Realtime.Map extends Backbone.View
+class Trackwane.Views.Realtime.Map extends Trackwane.Core.Framework.View
+  @include Trackwane.Core.Traits.Places
+  @include Trackwane.Core.Traits.Alarms
 
   initialize: (options) ->
-    @pubsub = options.pubsub
+    super(options)
     @places = new Trackwane.Collections.Places()
     @geofences = new Trackwane.Collections.Geofences()
-    @animator = new Trackwane.Services.Animator()
+    @animator = new Trackwane.Core.Helpers.Animator()
     @animator.start(400)
-    @mapper = new Trackwane.Services.Mapper()
+    @mapper = new Trackwane.Core.Helpers.Mapper()
 
-  center: (event_id) ->
+  showFeature: (model) ->
+    switch model.constructor.name
+      when "Place" then @showOnLayer("places", model)
+      when "Device" then @showOnLayer("trackers", model)
+      when "SpeedAlarm" then @showOnLayer("alarms", model)
+      when "GeofenceAlarm" then @showOnLayer("alarms", model)
+      else throw "Unknown feature type"
+
+  hideFeature: (model) ->
+    switch model.constructor.name
+      when "Place" then @hide("places", model.id)
+      when "Device" then @hide("trackers", model.id)
+      when "SpeedAlarm" then @hide("alarms", model.id)
+      when "GeofenceAlarm" then @hide("alarms", model.id)
+      else throw "Unknown feature type"
+
+  showOnLayer: (layer_name, model) ->
+    @map.getLayersByName(layer_name)[0].addFeatures([model.toFeature()])
+
+  hide: (layer_name, id) ->
+    console.debug(id)
+    layer = @map.getLayersByName(layer_name)[0]
+    console.debug(layer)
+    feature = layer.getFeaturesByAttribute("id", id)
+    console.debug(feature)
+    layer.destroyFeatures(feature)
+
+  centerFeature: (model) ->
     feature = @device_layer.getFeatureById(event_id)
-    @map.panTo feature.toLonLat()
-
-  hideGeofences:  ->
-    @geofence_layer.destroyFeatures()
-
-  showGeofences: (geofences) ->
-    features = @mapper.toGeofenceFeatures(geofences)
-    @geofence_layer.addFeatures(features)
-
-  hidePlaces: ->
-    @place_layer.destroyFeatures()
-
-  showPlaces: (places) ->
-    if places && places.size() > 0
-      features = @mapper.toPlaceFeatures(places);
-      @place_layer.addFeatures(features);
+    @map.panTo feature.toLonLat() if feature
 
   show: (events) ->
-    if events and events.size() > 0
+    if events.any()
       features = events.map((event) => @mapper.toRealtimeFeature(event))
-      @device_layer.addFeatures(features)
+      @map.getLayerByName("trackers").addFeatures(features)
 
   showEvent: (event_data) ->
     numPoints = 10;
@@ -51,12 +65,10 @@ class Trackwane.Views.Realtime.Map extends Backbone.View
 
   render: (extent, callback) ->
     @$el.empty()
-    cartography = new Trackwane.Services.Cartography()
-    @map = cartography.createMap(@el, callback)
-    @device_layer = cartography.createLayer("devices", true)
-    @beacon_layer = cartography.createLayer("beacons")
-    @geofence_layer = cartography.createLayer("geofences")
-    @place_layer = cartography.createLayer("places")
-    bounds = OpenLayers.Bounds.fromExtent(extent);
-    if bounds
-      @map.zoomToExtent(bounds)
+    @map = Trackwane.Core.Framework.RealtimeMap.create(@el, callback)
+    if extent
+      extent = OpenLayers.Bounds.fromExtent(extent)
+    else
+      extent = new OpenLayers.Bounds(-1928659.0974232, 202405.25087096,	 1202201.5807018, 1647982.329599);
+    @map.zoomToExtent(extent);
+

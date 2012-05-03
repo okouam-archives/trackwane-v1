@@ -19,6 +19,15 @@
         %button.blue-button
           %div
             Login
+        %div.icons
+          %a{href: "/auth/linkedin", style: "text-decoration: none; color: white"}
+            %img{src: asset_path("/assets/social-media-icons/linkedin.png")}
+          %a{href: "/auth/google", style: "text-decoration: none; color: white"}
+            %img{src: asset_path("/assets/social-media-icons/google.png")}
+          %a{href: "/auth/facebook", style: "text-decoration: none; color: white"}
+            %img{src: asset_path("/assets/social-media-icons/facebook.png")}
+          %a{href: "/auth/yahoo", style: "text-decoration: none; color: white"}
+            %img{src: asset_path("/assets/social-media-icons/yahoo.png")}
       .clear
       - if f.object.errors.any?
         %div.errors
@@ -28,6 +37,9 @@
     .clear
 
 :css
+  .icons {margin-top: 5px}
+  .icons a {margin-left: 5px}
+  .icons a img {height: 30px}
   body {color: #434343; margin: auto; text-align: center; background-image: url(/assets/map.png)}
   button {margin-top: 10px; margin-left: 178px; margin-bottom: 5px}
   input {width: 184px; padding: 5px; border: 1px solid #ccc; font-size: 12px}

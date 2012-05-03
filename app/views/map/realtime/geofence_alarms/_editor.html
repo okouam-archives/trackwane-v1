@@ -1,0 +1,22 @@
+<script id="geofence-alarm-editor-template" type="text/x-handlebars-template">
+ <div>
+   <h1><%= t("new") %> <%= t("geofence_alarm") %></h1>
+   <p><%= t("geofence_alarm_definition") %></p>
+   <form>
+   <fieldset>
+     <label for="geofence_alarm_name"><%= t("alarm_name") %></label>
+     <input id="geofence_alarm_name" name="geofence_alarm[name]" type="text" />
+     <label><%= t("destinations") %> <a href="#">(+)</a></label>
+     <input name="geofence_alarm[destination][]" type="text" value="john.smith@somewhere.com" onfocus="this.value=''"/>
+     <%= t("remove") %> 
+     <input name="geofence_alarm[destination][]" type="text" value="447843247808" onfocus="this.value=''"/>
+     <%= t("remove") %> 
+     <input name="geofence_alarm[destination][]" type="text" value="00225224095855" onfocus="this.value=''"/>
+     
+     <button class="success btn accept"><%= t("accept") %></button>
+     <button class="btn cancel"><%= t("cancel") %></button>
+   </fieldset>
+     </form>
+ </div>
+</script>
+

@@ -1,0 +1,17 @@
+<script id="tracker-editor-template" type="text/x-handlebars-template">
+  <form>
+    <fieldset>
+      <label><%= t("name") %></label>
+      <input name="display_name" value="{{attributes.display_name}}" type="text" />
+      <label><%= t("imei_number") %></label>
+      <input name="imei_number" value="{{attributes.imei_number}}" type="text" />
+      {{#if attributes}}
+        <input  value="{{attributes.id}}" type="hidden" name="id" />
+        <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="save success btn"><%= t("accept") %></button>
+      {{else}}
+        <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="btn success create"><%= t("accept") %></button>
+      {{/if}}
+        <button style="margin-top: 15px; margin-bottom: 5px; float: right" class="cancel btn"><div><%= t("cancel") %></div></button>
+    </fieldset>
+  </form>
+</script>

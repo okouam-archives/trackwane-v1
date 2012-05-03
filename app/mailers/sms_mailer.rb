@@ -1,4 +1,4 @@
-class AlertMailer < ActionMailer::Base
+class SmsMailer < ActionMailer::Base
   default :from => 'alerts@trackwane.com'
 
   def warning_email(alert)

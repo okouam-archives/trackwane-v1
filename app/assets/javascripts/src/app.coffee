@@ -2,17 +2,26 @@ window.Trackwane =
   Collections: {}
   Controllers: {}
   Models: {}
-  Services: {}
+  Core:
+    Controls: {}
+    Extensions: {}
+    Framework: {}
+    Helpers: {}
+    Traits: {}
+  Domain: {}
   Views:
     Reports: {}
-    Alarms: {}
-    Places: {}
-    Realtime: {}
-    Schedules: {}
-    Alerts: {}
+    Realtime:
+      Places: {}
+      GeofenceAlarms: {}
+      SpeedAlarms: {}
+      Trackers: {}
     Users: {}
-    Devices: {}
     Accounts: {}
     Historical: {}
 
 $('.dropdown-toggle').dropdown
+
+OpenLayers.ImgPath = '/assets/OpenLayers/'
+OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3
+

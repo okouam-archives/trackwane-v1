@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'active_record/connection_adapters/postgis_adapter/railtie'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -50,7 +51,7 @@ module Trackwane
     config.action_mailer.smtp_settings = {
       :address              => "smtp.gmail.com",
       :port                 => 587,
-      :domain               => 'trackwane.com',
+      :core               => 'trackwane.com',
       :user_name            => 'info@trackwane.com',
       :password             => 'Tsunami[1845]',
       :authentication       => 'plain',

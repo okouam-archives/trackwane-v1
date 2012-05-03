@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :geofence_warning do
-    association :geofence_alarm
+    association :alarm, :factory => :geofence_alarm
     association :event
   end
 end

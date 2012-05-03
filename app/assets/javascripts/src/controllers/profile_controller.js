@@ -1,4 +1,4 @@
-Trackwane.Controllers.ProfileController = Trackwane.Controllers.Base.extend({
+Trackwane.Controllers.ProfileController = Trackwane.Core.Framework.Controller.extend({
 
   initialize: function() {
   }

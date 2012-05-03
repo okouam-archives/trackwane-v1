@@ -32,25 +32,10 @@
           %li
             %a{href: "/schedules"}
               = t("menu.report_schedule")
-      %li{class: "#{params[:controller] == "alarms" ? "current" : ""}"}
-        %a{href: "/alarms"}
-          = image_tag "/assets/139-flags.png"
-          = t("menu.alarms")
-      %li{class: "#{params[:controller] == "places" ? "current" : ""}"}
-        %a{href: "/places"}
-          = image_tag "/assets/60-signpost.png"
-          = t("menu.your_places")
-      %li{class: "#{params[:controller] == "devices" || params[:controller] == "users" ? "setup submenu current" : "setup submenu"}"}
-        %a
-          = image_tag "/assets/157-wrench.png"
-          = t("menu.administration")
-        %ul
-          %li
-            %a{href: "/users"}
-              = t("menu.users")
-          %li
-            %a{href: "/devices"}
-              = t("menu.devices")
+        %li
+          %a{href: "/users"}
+            = image_tag "/assets/137-presentation_w.gif"
+            = t("menu.users")
       %li.admin.submenu{style: "float: right"}
         = image_tag "/assets/20-gear2.png", :style =>"cursor: pointer; position: relative; top: 6px"
         %ul{style: "width: 150px"}

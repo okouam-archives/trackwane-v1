@@ -1,4 +1,4 @@
-Trackwane.Controllers.AlarmsController = Trackwane.Controllers.Base.extend({
+Trackwane.Controllers.AlarmsController = Trackwane.Core.Framework.Controller.extend({
 
   appEvents: {
     "geofence:creating": "onCreatingGeofenceAlarm",

@@ -2,9 +2,9 @@ class Parser
 
   def read(data)
     fields = data.split(",")
+    geofactory = RGeo::Geographic::simple_mercator_factory
     event = Event.new({
-      :longitude => coordinates(fields[6], fields[7]),
-      :latitude => coordinates(fields[4], fields[5]),
+      :lonlat => geofactory.point(coordinates(fields[6], fields[7]), coordinates(fields[4], fields[5])),
       :heading => fields[9].to_f,
       :speed => fields[8].to_f,
       :date => merge_timestamp(date(fields[10]),time(fields[2].to_f)),
