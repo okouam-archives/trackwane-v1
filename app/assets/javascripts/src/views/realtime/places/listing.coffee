@@ -1,10 +1,6 @@
 class Trackwane.Views.Realtime.Places.Listing extends Trackwane.Core.Framework.View
   @include Trackwane.Core.Traits.Listing
 
-  own_events:
-    onChecked: "place:show"
-    om
-
   template_id: "#place-listing-template"
 
   events:
