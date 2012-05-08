@@ -1,1 +1,1 @@
-set :deploy_to, "/home/deployment/apps/trackwane/production"
+/etc/rails/trackwane/config/deploy/production.rb

@@ -14,7 +14,7 @@ orange_account = FactoryGirl.create(:account, :name => "Orange CI")
 
 # Users
 
-FactoryGirl.create(:user, login: "okouam", password: "com99123", email: "olivier.kouame@gmail.com", account: o1_account)
+FactoryGirl.create(:user, login: "okouam", password: "changeme", email: "olivier.kouame@gmail.com", account: o1_account)
 FactoryGirl.create(:user, login: "guest", password: "guest", account: demo_account)
 FactoryGirl.create(:user, login: "patrick.kouame", password: "changeme", email: "patrick.kouame@0-one.net", account: o1_account)
 FactoryGirl.create(:user, login: "sammy", account: radio_account)
