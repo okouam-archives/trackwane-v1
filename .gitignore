@@ -3,3 +3,9 @@
 /tmp
 .idea/
 .sass-cache/
+/config/deploy/*.rb
+/config/database.yml
+/config/initializers/geokit.rb
+/config/initializers/omniauth.rb
+/config/initializers/pusher.rb
+/config/initializers/secret_token.rb
