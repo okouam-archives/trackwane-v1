@@ -1,0 +1,20 @@
+development: &development
+  adapter: postgis
+  database: trackwane_development
+  host: development_host
+  username: development_username
+  password: development_password
+  timeout: 5000
+  encoding: utf8
+  min_messages: warning
+
+test:
+  <<: *development
+  database: trackwane_test
+
+production:
+  <<: *development
+  host: production_host
+  database: production_database
+  username: production_username
+  password: production_password
