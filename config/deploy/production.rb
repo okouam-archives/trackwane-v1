@@ -1,1 +1,0 @@
-/etc/rails/trackwane/config/deploy/production.rb
