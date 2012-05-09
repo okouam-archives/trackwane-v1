@@ -5,7 +5,6 @@
 .sass-cache/
 /config/deploy/*.rb
 /config/database.yml
-/config/deploy.rb
 /config/initializers/geokit.rb
 /config/initializers/omniauth.rb
 /config/initializers/pusher.rb
