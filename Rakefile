@@ -4,5 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Rake.application.options.trace = true
 Trackwane::Application.load_tasks
