@@ -37,9 +37,17 @@ namespace :configuration do
   task :symlinks, :roles => :app do
     run <<-CMD
       ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml
+    CMD
+    run <<-CMD
       ln -nfs #{shared_path}/config/initializers/geokit.rb #{release_path}/config/initializers/geokit.rb
+    CMD
+    run <<-CMD
       ln -nfs #{shared_path}/config/initializers/secret_token.rb #{release_path}/config/initializers/secret_token.rb
+    CMD
+    run <<-CMD
       ln -nfs #{shared_path}/config/initializers/omniauth.rb #{release_path}/config/initializers/omniauth.rb
+    CMD
+    run <<-CMD
       ln -nfs #{shared_path}/config/initializers/pusher.rb #{release_path}/config/initializers/pusher.rb
     CMD
   end
