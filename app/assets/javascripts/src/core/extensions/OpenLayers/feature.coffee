@@ -2,7 +2,7 @@ OpenLayers.Feature::toLonLat = ->
   new OpenLayers.LonLat(@geometry.x, @geometry.y)
 
 OpenLayers.Feature::followPath = (animator, path) ->
-  animation = new Trackwane.Services.Animation(@, path)
+  animation = new Trackwane.Core.Helpers.Animation(@, path)
   animator.add(animation)
 
 OpenLayers.Feature::rotate = (angle) ->

@@ -30,11 +30,8 @@ class Trackwane.Views.Realtime.Map extends Trackwane.Core.Framework.View
     @map.getLayersByName(layer_name)[0].addFeatures([model.toFeature()])
 
   hide: (layer_name, id) ->
-    console.debug(id)
     layer = @map.getLayersByName(layer_name)[0]
-    console.debug(layer)
     feature = layer.getFeaturesByAttribute("id", id)
-    console.debug(feature)
     layer.destroyFeatures(feature)
 
   centerFeature: (model) ->
@@ -43,25 +40,28 @@ class Trackwane.Views.Realtime.Map extends Trackwane.Core.Framework.View
 
   show: (events) ->
     if events.any()
-      features = events.map((event) => @mapper.toRealtimeFeature(event))
-      @map.getLayerByName("trackers").addFeatures(features)
+      features = events.map((event) => event.toFeature())
+      @getLayer("trackers").addFeatures(features)
 
   showEvent: (event_data) ->
     numPoints = 10;
     path = @moveFeature(event_data, numPoints);
     if path
-      feature = @device_layer.getFeatureBy("device_id", event_data.device_id)
+      feature = @getLayer("trackers").getFeatureBy("device_id", event_data.get("device_id"))
       feature.followPath(@animator, path)
 
-  moveFeature: (event_data, numPoints) ->
-    feature = @device_layer.getFeatureBy("device_id", event_data.device_id)
+  moveFeature: (event, numPoints) ->
+    feature = @getLayer("trackers").getFeatureBy("device_id", event.get("device_id"))
     if feature
-      target = @mapper.toDestinationFeature(event_data)
-      route = new Trackwane.Route(feature, target)
+      target = event.toFeature()
+      route = new Trackwane.Core.Helpers.Route(feature, target)
       feature.rotate(route.getAngle()) if route
       route.getPoints(numPoints)
     else
       undefined
+
+  getLayer: (name) ->
+    @map.getLayersByName(name)[0]
 
   render: (extent, callback) ->
     @$el.empty()
@@ -69,6 +69,6 @@ class Trackwane.Views.Realtime.Map extends Trackwane.Core.Framework.View
     if extent
       extent = OpenLayers.Bounds.fromExtent(extent)
     else
-      extent = new OpenLayers.Bounds(-1928659.0974232, 202405.25087096,	 1202201.5807018, 1647982.329599);
+      extent = new OpenLayers.Bounds(-1928659.0974232, 202405.25087096, 1202201.5807018, 1647982.329599);
     @map.zoomToExtent(extent);
 

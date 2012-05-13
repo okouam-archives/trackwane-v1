@@ -9,7 +9,7 @@ class Trackwane.Models.Place extends Backbone.Model
 
   parse: (response) ->
     format = new OpenLayers.Format.WKT();
-    feature = format.read(lonlat);
+    feature = format.read(response.lonlat);
     response.geometry = OpenLayers.Projection.transform(feature.geometry, new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
     response
 

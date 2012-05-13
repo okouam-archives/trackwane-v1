@@ -22,7 +22,7 @@ class Trackwane.Controllers.RealtimeController extends Trackwane.Core.Framework.
 
   render: (options) ->
     @feature_panel.render(options)
-    trackers = new Trackwane.Collections.RealtimeEvents(options.devices)
+    trackers = new Trackwane.Collections.Devices(options.devices)
     events = new Trackwane.Collections.RealtimeEvents(options.events)
     @map.render(options.extent, (() => @showInitialPositions(trackers, events)))
 
@@ -54,8 +54,8 @@ class Trackwane.Controllers.RealtimeController extends Trackwane.Core.Framework.
     pusher = new Pusher('fee5deb878965544bd90')
     trackers.each (tracker) =>
       channel = pusher.subscribe("#{tracker.get("account_id")}-#{tracker.get("device_id")}")
-      channel.bind 'event-received', ((event) =>
-        @listing.update(event)
+      channel.bind 'event-received', ((data) =>
+        event = new Trackwane.Models.Event(data)
         @map.showEvent(event))
 
   showInitialPositions: (trackers, events) ->

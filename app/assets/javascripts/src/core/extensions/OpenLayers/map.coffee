@@ -12,9 +12,9 @@ OpenLayers.Map::createFeatureLayer = (name, useClustering) ->
       strokeOpacity: 0.9
     context =
       radius: (feature) ->
-        return feature.cluster.length + 10
+        return feature.cluster?.length + 10
       counter: (feature) ->
-        return feature.cluster.length
+        return feature.cluster?.length
     style = new OpenLayers.Style(formatting, context: context)
     options =
       strategies: [new OpenLayers.Strategy.Cluster({distance: 20, threshold: 2})]

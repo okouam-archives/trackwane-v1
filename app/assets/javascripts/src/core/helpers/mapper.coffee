@@ -1,7 +1,6 @@
 class Trackwane.Core.Helpers.Mapper
 
   constructor: () ->
-    @cartography = new Trackwane.Core.Helpers.Cartography()
 
   toFeature: (model, style) ->
     point = OpenLayers.Geometry.Point(model.get("longitude"), model.get("latitude"));
@@ -15,20 +14,6 @@ class Trackwane.Core.Helpers.Mapper
         pointRadius: 10
         externalGraphic: "/assets/arrow.png"
         rotation: model.get("heading")
-    feature
-
-  toRealtimeFeature: (model) ->
-    style =
-      label: model.get("name")
-      labelOutlineColor: 'white'
-      labelOutlineWidth: "4px"
-      labelYOffset: 23
-      fontWeight: "bold"
-      pointRadius: 20
-      externalGraphic: "/assets/marker-coupe-red.png"
-      rotation: model.get("heading")
-    feature = @toGraphicFeature(model.get("longitude"), model.get("latitude"), model, style, model.id)
-    feature.device_id = model.get("device_id")
     feature
 
   toGraphicFeature: (longitude, latitude, model, style, id) ->

@@ -21,6 +21,7 @@ class Trackwane.Views.Realtime.Places.Panel extends Trackwane.Core.Framework.Vie
     @places = new Trackwane.Collections.Places(options.places)
 
   onFeatureCreated: (point) ->
+    console.debug(point)
     @editor.point = point
 
   onPlaceShow: (id) ->
