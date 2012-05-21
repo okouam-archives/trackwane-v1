@@ -11,50 +11,5 @@
   %script{src: 'http://maps.google.com/maps/api/js?key=AIzaSyAWgN9SyQVm44Xz3YNSNLqGQao7wYKJvcc&sensor=false', type: "text/javascript"}
   = csrf_meta_tags
 %body{class: "#{params[:controller]} #{params[:action]}"}
-  %menu
-    %ul
-      %li{class: "#{params[:controller] == "map" && params[:action] == "realtime" ? "current" : ""}"}
-        %a{href: "/map/realtime"}
-          = image_tag "/assets/145-persondot.png"
-          = t("menu.realtime")
-      %li{class: "#{params[:controller] == "map" && params[:action] == "historical" ? "current" : ""}"}
-        %a{href: "/map/historical"}
-          = image_tag "/assets/103-map.png", style: "height: 20px"
-          = t("menu.historical")
-      %li{class: "#{params[:controller] == "reports" ? "reports current submenu" : "reports submenu"}"}
-        %a
-          = image_tag "/assets/137-presentation_w.gif"
-          = t("menu.reports")
-        %ul
-          %li
-            %a{href: "/reports"}
-              = t("menu.your_reports")
-          %li
-            %a{href: "/schedules"}
-              = t("menu.report_schedule")
-        %li
-          %a{href: "/users"}
-            = image_tag "/assets/137-presentation_w.gif"
-            = t("menu.users")
-      %li.admin.submenu{style: "float: right"}
-        = image_tag "/assets/20-gear2.png", :style =>"cursor: pointer; position: relative; top: 6px"
-        %ul{style: "width: 150px"}
-          - if current_user.role == "administrator"
-            %li
-              %a{href: "/accounts"}
-                = t("menu.accounts")
-          - if current_user.role != "standard"
-            %li
-              %a{href: "/account"}
-                = t("menu.your_account")
-          %li
-            %a{href: "/profile"}
-              = t("menu.your_profile")
-          %li
-            %a{href: "/logout"}
-              = t("menu.logout")
-      %li{style: "float: right; text-align: right; padding-right: 0"}
-        %span{style: "font-weight: bold; color: #6699cc; font-size: 13px; position: relative; top: 5px"}
-          = current_account.name
-    %div{style: "clear: both"}
+
   = yield

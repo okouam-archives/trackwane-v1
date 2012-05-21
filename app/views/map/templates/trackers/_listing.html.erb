@@ -1,0 +1,23 @@
+<script id="tracker-listing-template" type="text/x-handlebars-template">
+  <table>
+    <tbody>
+      {{#each models}}
+        <tr data-id="{{attributes.id}}">
+          <td>
+            <a class="portrait" data-id="{{attributes.id}}" href="#">
+              <img src="/assets/unknown.png" />
+            </a>
+              <a class="name" href="#" data-id="{{attributes.id}}">{{attributes.display_name}}</a><br/>
+              <i style="font-size: 10px" class="address">Waiting...</i>
+              <br/>
+              <span class="status-indicator" style="display: block; width: 24px; margin-right: 10px;  float: left; background-color: red; border-radius: 5px;margin-top: 2px;  height: 5px"></span>
+              <a href="#" class="row-action info">Info</a>
+              <a href="#" class="row-action history">History</a>
+              <a href="#" class="row-action edit">Edit</a>
+              <a href="#" class="row-action delete">Delete</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>

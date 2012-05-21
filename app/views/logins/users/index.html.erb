@@ -1,0 +1,41 @@
+<div id="canvas">
+  <div id="viewport" style="height: 100%; width: 100%">
+      <div style="float: left; width: 100%; height: 100%; margin-left: -200px">
+        <div id="map"></div>
+      </div>
+      <div style="width: 200px; float: right; height: 100%; overflow-y: scroll; background-color: rgba(50, 50, 50, 0.9)">
+            <%= render :partial => "users/accounts" %>
+            <%= render :partial => "map/realtime/geofence_alarms/panel" %>
+            <%= render :partial => "map/realtime/speed_alarms/panel" %>
+            <%= render :partial => "map/realtime/places/panel" %>
+          <br/>
+          <br/>
+      </div>
+  </div>
+</div>
+
+<div id="menu">
+  <div class="pullout">
+    <a href="#" class="toggle">open</a>
+  </div>
+  <div class="options">
+    <table>
+      <tr>
+        <td><a href="#">Map</a></td>
+        <td><a href="#">Timelines</a></td>
+        <td><a href="#">Reports</a></td>
+        <td><a href="#">Users</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<style type="text/css">
+  #canvas {background-image: none}
+</style>
+
+<script type="text/javascript">
+  $(function() {
+    window.runtime = new Trackwane.Controllers.Users({el: "#canvas", events: gon.events, extent: gon.extent, geofence_alarms: gon.geofence_alarms, speed_alarms: gon.speed_alarms, devices: gon.devices, places: gon.places});
+  });
+</script>

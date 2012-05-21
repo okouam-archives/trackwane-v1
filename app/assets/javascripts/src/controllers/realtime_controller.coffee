@@ -18,11 +18,13 @@ class Trackwane.Controllers.RealtimeController extends Trackwane.Core.Framework.
     @feature_panel = new @Scope.FeaturePanel({el: "#feature-panel", pubsub: @pubsub, places: options.places, speed_alarms: options.speed_alarms, geofence_alarms: options.geofence_alarms})
     @map = new @Scope.Map({el: "#map", pubsub: @pubsub})
     @tracker_panel = new @Scope.Trackers.Panel({el: "#tracker-panel", pubsub: @pubsub})
+    @menu = new Trackwane.Views.Menu({el: "#menu", pubsub: @pubsub})
     @render(options)
 
   render: (options) ->
     @feature_panel.render(options)
     trackers = new Trackwane.Collections.Devices(options.devices)
+    console.debug(trackers)
     events = new Trackwane.Collections.RealtimeEvents(options.events)
     @map.render(options.extent, (() => @showInitialPositions(trackers, events)))
 
@@ -53,12 +55,16 @@ class Trackwane.Controllers.RealtimeController extends Trackwane.Core.Framework.
   setupRealtimeTracking: (trackers) ->
     pusher = new Pusher('fee5deb878965544bd90')
     trackers.each (tracker) =>
-      channel = pusher.subscribe("#{tracker.get("account_id")}-#{tracker.get("device_id")}")
-      channel.bind 'event-received', ((data) =>
+      channel = pusher.subscribe("#{tracker.get("account_id")}-#{tracker.id}")
+      channel.bind 'event-received', (data) =>
         event = new Trackwane.Models.Event(data)
-        @map.showEvent(event))
+        console.debug("websocket:event", event)
+        @tracker_panel.update(event)
+        @map.showEvent(event)
+
 
   showInitialPositions: (trackers, events) ->
+    console.debug(trackers)
     @tracker_panel.render(trackers)
     @map.show(events)
     @setupRealtimeTracking(trackers)

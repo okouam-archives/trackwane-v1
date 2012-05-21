@@ -1,0 +1,11 @@
+<%=render :partial => "map/templates/trackers/editor" %>
+<%=render :partial => "map/templates/trackers/listing" %>
+
+<div id="tracker-panel" class="sliding-panel" style="border-width: 0">
+  <div class="panel-header">
+    <a id="toggle-trackers" href="#" class="panel-title">GPS Trackers</a>
+    <a id="btn-new-tracker" class="panel-action" href="#">+</a>
+  </div>
+  <div id="trackers" class="listing" style="border-top: 3px solid #222"></div>
+  <div class="editor" style="position: absolute; top: 200px; right: 270px; padding: 10px"></div>
+</div>

@@ -1,0 +1,12 @@
+<%=render :partial => "map/templates/geofence_alarms/editor" %>
+<%=render :partial => "map/templates/geofence_alarms/listing" %>
+
+<div id="geofence-alarm-panel" class="sliding-panel">
+  <div class="panel-header">
+    <a class="panel-title" id="toggle-geofence-alarms" href="#">Geofence Alarms</a>
+    <input style="float: right; margin-right: 12px; position: relative; top: 1px" type="checkbox" />
+    <a id="btn-new-geofence-alarm" class="panel-action" href="#">+</a>
+  </div>
+  <div id="geofence-alarms" class="listing" style="border-top: 3px solid #222222; display: none"></div>
+  <div class="editor" style="position: absolute; top: 200px; right: 270px; padding: 10px"></div>
+</div>

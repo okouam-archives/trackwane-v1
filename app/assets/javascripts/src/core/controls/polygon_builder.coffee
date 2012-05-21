@@ -1,8 +1,7 @@
 class Trackwane.Core.Controls.PolygonBuilder
 
   constructor: (@map, @pubsub) ->
-    cartography = new Trackwane.Core.Helpers.Cartography(map)
-    @draw_layer = cartography.createLayer("drawing_layer")
+    @draw_layer = new OpenLayers.Layer.Vector("drawing_layer")
     @map.addLayer(@draw_layer)
     @drawFeature = new OpenLayers.Control.DrawFeature(@draw_layer, OpenLayers.Handler.Polygon)
     callbacks =

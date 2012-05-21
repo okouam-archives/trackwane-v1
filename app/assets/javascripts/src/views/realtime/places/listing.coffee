@@ -8,6 +8,20 @@ class Trackwane.Views.Realtime.Places.Listing extends Trackwane.Core.Framework.V
     "click a.remove": "onRemove"
     "click td input[type='checkbox']": "onToggle"
     "click th input[type='checkbox']": "onMasterToggle"
+    "click a.row-action.info": "onInfoAction"
+    "click a.row-action.delete": "onDeleteAction"
+    "click a.row-action.edit": "onEditAction"
+
+  onInfoAction: (evt) ->
+    alert "Not implemented"
+
+  onDeleteAction: (evt) ->
+    if confirm("Are you sure you want to delete this place?")
+      @publish("place:deleted", $(evt.currentTarget).parents("td").find(".name").data("id"))
+    false
+
+  onEditAction: (evt) ->
+    alert "Not implemented"
 
   changeVisibility: (id) ->
     if @isChecked(id)

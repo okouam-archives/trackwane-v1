@@ -4,6 +4,7 @@ class Trackwane.Views.Realtime.Places.Panel extends Trackwane.Core.Framework.Vie
 
   events:
     "click #btn-new-place": "onCreatePlace"
+    "click #toggle-places": "onShowHidePanel"
 
   appEvents:
     "place:selected": "onPlaceSelected"
@@ -20,8 +21,10 @@ class Trackwane.Views.Realtime.Places.Panel extends Trackwane.Core.Framework.Vie
     @editor = new @Scope.Editor({el: "#place-panel .editor", pubsub: @pubsub})
     @places = new Trackwane.Collections.Places(options.places)
 
+  onShowHidePanel: () ->
+    $(@$el).find(".listing").toggle('slow')
+
   onFeatureCreated: (point) ->
-    console.debug(point)
     @editor.point = point
 
   onPlaceShow: (id) ->

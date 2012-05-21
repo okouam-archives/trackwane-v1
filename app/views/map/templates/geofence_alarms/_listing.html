@@ -1,0 +1,18 @@
+<script id="geofence-alarm-listing-template" type="text/x-handlebars-template">
+  <table id="geofence-alarms" class="sidecolumn">
+    {{#each models}}
+      <tr>
+        <td>
+          <div style="border: 1px solid white; margin-top: 3px; display: inline-block; height: 22px; width: 22px; margin-right: 12px; padding: 0; background-color: #6699cc; float: left"></div>
+          <a data-id="{{attributes.id}}" class="name" href="#">{{attributes.name}}</a>
+          <br/>
+          <i style="font-size: 10px">Group Name</i><br/>
+          <span style="display: inline-block; width: 26px; text-align: center; margin-right: 6px">0</span>
+          <a href="#" class="row-action info">Info</a>
+          <a href="#" class="row-action delete">Delete</a>
+        </td>
+        <td style="width: 20px"><input type="checkbox" /></td>
+      </tr>
+      {{/each}}
+  </table>
+</script>

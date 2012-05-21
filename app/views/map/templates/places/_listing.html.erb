@@ -1,0 +1,20 @@
+<script id="place-listing-template" type="text/x-handlebars-template">
+  <table id="places" class="sidecolumn">
+    {{#each models}}
+      <tr>
+        <td>
+          <a href="#" class="portrait">
+            <img src="/assets/unknown.png" />
+          </a>
+          <a data-id="{{attributes.id}}" class="name" href="#">{{attributes.name}}</a>  <br/>
+          <i style="font-size: 10px">{{attributes.name}}</i><br/>
+          <span style="display: inline-block; width: 26px; text-align: center; margin-right: 6px">2</span>
+          <a href="#" class="row-action info">Info</a>
+          <a href="#" class="row-action edit">Edit</a>
+          <a href="#" class="row-action delete">Delete</a>
+       </td>
+        <td style="width: 20px"><input type="checkbox" /></td>
+      </tr>
+      {{/each}}
+  </table>
+</script>

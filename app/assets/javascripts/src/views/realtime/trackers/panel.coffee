@@ -4,6 +4,7 @@ class Trackwane.Views.Realtime.Trackers.Panel extends Trackwane.Core.Framework.V
 
   events:
     "click #btn-new-tracker": "onCreateTracker"
+    "click #toggle-trackers": "onShowHidePanel"
 
   appEvents:
     "tracker:selected": "onTrackerSelected"
@@ -16,8 +17,9 @@ class Trackwane.Views.Realtime.Trackers.Panel extends Trackwane.Core.Framework.V
     @listing = new @Scope.Listing({el: "#canvas #trackers", pubsub: @pubsub})
     @editor = new @Scope.Editor({el: "#tracker-panel .editor", pubsub: @pubsub})
 
-  onTrackerSelected: (event_id) ->
-    @pubsub.trigger("app:action")
+  onTrackerSelected: (device_id) ->
+    trackers = @trackers.where({"device_id": device_id})
+    @pubsub.trigger("feature:select", trackers[0])
 
   onCreateTracker: (evt) ->
     @pubsub.trigger("tracker:create")
@@ -33,9 +35,18 @@ class Trackwane.Views.Realtime.Trackers.Panel extends Trackwane.Core.Framework.V
         @render(@trackers)
     device.save(null, callbacks)
 
-  onTrackerDeleted: ->
+  onShowHidePanel: () ->
+    $(@$el).find(".listing").toggle('slow')
+    false
+
+  onTrackerDeleted: (id) ->
+    @trackers.get(id).destroy();
+    @render(@trackers)
 
   onTrackerSaved: ->
+
+  update: (event) ->
+    @listing.update(event)
 
   render: (trackers) ->
     @trackers = trackers;

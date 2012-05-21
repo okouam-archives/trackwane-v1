@@ -1,0 +1,12 @@
+<%=render :partial => "map/templates/speed_alarms/editor" %>
+<%=render :partial => "map/templates/speed_alarms/listing" %>
+
+<div id="speed-alarm-panel" class="sliding-panel">
+  <div class="panel-header">
+    <a href="#" class="panel-title" id="toggle-speed-alarms">Speed Alarms</a>
+    <input style="float: right; margin-right: 12px; position: relative; top: 1px" type="checkbox" />
+    <a id="btn-new-speed-alarm" class="panel-action" href="#">+</a>
+  </div>
+  <div id="speed-alarms" class="listing" style="display: none; border-top: 3px solid #222222;"></div>
+  <div class="editor" style="position: absolute; top: 200px; right: 270px; padding: 10px"></div>
+</div>

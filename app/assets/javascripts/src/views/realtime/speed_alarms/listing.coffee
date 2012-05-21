@@ -4,11 +4,19 @@ class Trackwane.Views.Realtime.SpeedAlarms.Listing extends Trackwane.Core.Framew
   template_id: "#speed-alarm-listing-template"
 
   events:
-    "click .remove": "onRemove"
-    "click .select": "onSelect"
+    "click a.row-action.info": "onInfoAction"
+    "click a.row-action.delete": "onDeleteAction"
 
   initialize: (options) ->
     super(options)
+
+  onInfoAction: (evt) ->
+    alert "Not implemented"
+
+  onDeleteAction: (evt) ->
+    if confirm("Are you sure you want to delete this speed alarm?")
+      @pubsub.trigger "speed-alarm:deleted", $(evt.currentTarget).parents("td").find(".name").data("id")
+    false
 
   onRemove: (evt) ->
     if confirm("Are you sure you want to delete this speed alarm?")
@@ -21,5 +29,4 @@ class Trackwane.Views.Realtime.SpeedAlarms.Listing extends Trackwane.Core.Framew
 
   render: (alarms) ->
     @$el.html(@template(alarms))
-    @$el.lionbars()
 

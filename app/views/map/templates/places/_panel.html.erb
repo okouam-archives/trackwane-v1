@@ -1,0 +1,12 @@
+<%=render :partial => "map/templates/places/editor" %>
+<%=render :partial => "map/templates/places/listing" %>
+
+<div id="place-panel" class="sliding-panel">
+  <div class="panel-header">
+    <a href="#" id="toggle-places" class="panel-title">Places</a>
+    <input style="float: right; margin-right: 12px; position: relative; top: 1px" type="checkbox" />
+    <a id="btn-new-place" class="panel-action" href="#">+</a>
+  </div>
+  <div class="listing" class="sidecolumn" style="display: none; border-top: 3px solid #222222;"></div>
+  <div class="editor" style="position: absolute; top: 200px; right: 270px; padding: 10px"></div>
+</div>

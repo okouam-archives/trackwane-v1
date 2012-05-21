@@ -16,6 +16,7 @@ label.error {
 }
 
 #canvas {width: 100%; height: 100%; background-image: url(/assets/map.png); position: absolute}
+#viewport > tbody > tr > td, #viewport > tbody > tr > th {padding: 0}
 #canvas #map {width: 100%; height: 100%}
 
 table {width: 100%}
@@ -40,8 +41,7 @@ fieldset button {float: right; margin-top: 20px; margin-left: 10px}
 $opaque: rgba(50, 50, 50, 0.9);
 
 .panel {background-color: $opaque; border: 5px solid #666; border-radius: 5px; z-index: 10000; color: white; padding: 0}
-.scrollable-panel {overflow-x: hidden; overflow-y: scroll}
-.positioned-panel {@extend .panel; position: absolute}
+.positioned-panel {@extend .panel}
 .content-panel {@extend .panel; padding: 10px}
 .positioned-scrollable-panel {@extend .positioned-panel; overflow-x: hidden; overflow-y: scroll}
 .flush-right-first {right: 20px; top: 30px}
@@ -53,15 +53,15 @@ $opaque: rgba(50, 50, 50, 0.9);
 
 @mixin popup {cursor: pointer; border: 1px solid #333; font-size: 10px; padding: 3px; color: #222; background-color: white; margin-left: 10px}
 
+.sliding-panel {background-color: rgba(50, 50, 50, 0.9); border-top: 3px solid #222222}
+
 /* Sections */
+
+.listing .portrait img {float: left; margin-top: 4px; margin-right: 10px; border: 1px solid #ccc; height: 22px; width: 22px}
+.listing .name {font-size: 10px; font-family: Verdana; font-weight: bold}
 
 .realtime.actions {@include actions; width: 250px; height: 60px; left: -165px; top: -10px}
 .places.actions {@include actions; width: 150px; left: -70px; top: -16px}
-.actions a {@include action-button}
-
-.places.popup {@include popup; margin-top: 6px}
-
-.standalone.panel {@include opaque-panel; background-color: white; color: #333; opacity: 1; border: 1px solid #333; padding: 20px}
 .action {width: 220px}
 
 @mixin opaque-listing {opacity: 1; right: 20px; top: 30px;  background-color: rgba(50, 50, 50, 0.8);
@@ -80,7 +80,6 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 .alarms.index #new-geofence-alarm-panel > div {@extend .content-panel; width: 220px}
 .alarms.index #new-speed-alarm-panel > div {@extend .content-panel; width: 220px}
 
-.column {position: absolute; @extend .flush-right-first; z-index: 99999999}
 .column button {margin-top: 10px; margin-bottom: 10px}
 .column .listing {@extend .scrollable-panel; width: 100%}
 .column .listing tr  {cursor: pointer}
@@ -89,38 +88,3 @@ border-radius: 4px; padding: 5px 10px; z-index: 99999999; color: white
 .editor  {@extend .positioned-panel; background-color: #373737; display: none; width: 250px; margin-top: 100px}
 .editor .buttons button {margin-top: 15px; margin-bottom: 5px; float: right}
 .editor input, .editor select {width: 220px}
-
-.historical .events {@extend .positioned-panel; left: 20px; bottom: 100px; width: 90%; max-height: 30%; overflow-y: scroll}
-.historical .parameters {@extend .panel; margin-bottom: 10px; font-weight: bold}
-.historical .parameters label {margin-top: 0}
-
-.map.realtime .column {width: 250px}
-.alerts.index .column {width: 315px}
-.schedules.index .column {width: 505px}
-.devices.index .column {width: 280px}
-.users.index .column {width: 380px}
-.alarms.index .column {width: 250px}
-
-.devices.index .editor {right: 310px}
-.users.index .editor {right: 410px}
-.alerts.index .editor {right: 350px}
-.schedules.index .editor {right: 540px}
-
-.places.index #new-place-panel {position: absolute; right: 230px; z-index: 99999999; width: 250px}
-.places.index #new-place-panel > div {@extend .content-panel; height: 260px}
-.places.index .sidepanel {@include opaque-listing; padding: 0; width: 200px; background-color: transparent; position: absolute}
-.places.index .listing {padding: 0; border: 5px solid #666; width: 200px; background-color: transparent; border-radius: 5px}
-
-.reports.index #table {overflow-y: scroll}
-.reports.index #table tr {background-color: white}
-.reports.index .sidebar {position: absolute; width: 200px; right: 20px; top: 20px}
-.reports.index .sidebar button {margin-top: 10px; font-weight: bold; font-size: 13px}
-.reports.index .parameters input {width: 170px}
-.reports.index .parameters select {width: 182px}
-.reports.index .sidebar .listing {@extend .panel; width: 200px; padding: 0; overflow-y: scroll}
-.reports.index .sidebar .listing li {margin-top: 5px; list-style-type: none}
-.reports.index .presentation {@extend .positioned-panel; background-color: white; top: 20px; left: 20px; color: black}
-.reports.index .saved-report-details {@extend .positioned-panel; background-color: white; top: 20px; left: 20px; color: black}
-.reports.index .parameters {@extend .panel; height: 190px; width: 200px; margin-bottom: 10px}
-.reports.index .sidebar .listing li {padding: 5px; padding-left: 7px; margin: 0}
-.reports.index .sidebar .listing li input {position: relative; top: 2px; margin-right: 5px}

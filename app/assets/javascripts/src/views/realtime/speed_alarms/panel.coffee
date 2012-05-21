@@ -4,6 +4,7 @@ class Trackwane.Views.Realtime.SpeedAlarms.Panel extends Trackwane.Core.Framewor
 
   events:
     "click #btn-new-speed-alarm": "onCreateSpeedAlarm"
+    "click #toggle-speed-alarms": "onShowHidePanel"
 
   appEvents:
     "speed-alarm:selected": "onSpeedAlarmSelected"
@@ -20,17 +21,29 @@ class Trackwane.Views.Realtime.SpeedAlarms.Panel extends Trackwane.Core.Framewor
     @editor = new @Scope.Editor({el: "#speed-alarm-panel .editor", pubsub: @pubsub})
     @speed_alarms = new Trackwane.Collections.SpeedAlarms(options.speed_alarms)
 
+  onShowHidePanel: () ->
+    $(@$el).find(".listing").toggle('slow')
+
   onSpeedAlarmSelected: (event_id) ->
     @pubsub.trigger("app:action")
 
   onFeatureCreated: (polygon) ->
     @editor.polygon = polygon
 
-  onSpeedAlarmDeleted: () ->
+  onSpeedAlarmDeleted: (id) ->
+    @speed_alarms.get(id).destroy();
+    @render()
 
   onSpeedAlarmSaved: () ->
 
-  onSpeedAlarmCreated: () ->
+  onSpeedAlarmCreated: (speed_alarm) ->
+    callbacks =
+      success: (model) =>
+        @speed_alarms.add(model)
+        @editor.close()
+        @onEditorClosing()
+        @render()
+    speed_alarm.save(null, callbacks)
 
   onCreateSpeedAlarm: (evt) ->
     @publish("app:polygon-builder:activate")

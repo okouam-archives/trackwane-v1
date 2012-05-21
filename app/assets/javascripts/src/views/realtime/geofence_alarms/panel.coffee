@@ -4,6 +4,7 @@ class Trackwane.Views.Realtime.GeofenceAlarms.Panel extends Trackwane.Core.Frame
 
   events:
     "click #btn-new-geofence-alarm": "onCreateGeofenceAlarm"
+    "click #toggle-geofence-alarms": "onShowHidePanel"
 
   appEvents:
     "event:select": "onSelectEvent"
@@ -18,6 +19,9 @@ class Trackwane.Views.Realtime.GeofenceAlarms.Panel extends Trackwane.Core.Frame
     @editor = new @Scope.Editor({el: "#geofence-alarm-panel .editor", pubsub: @pubsub})
     @geofence_alarms = new Trackwane.Collections.GeofenceAlarms(options.geofence_alarms)
 
+  onShowHidePanel: () ->
+    $(@$el).find(".listing").toggle('slow')
+
   onFeatureCreated: (polygon) ->
     @editor.polygon = polygon
 
@@ -30,7 +34,7 @@ class Trackwane.Views.Realtime.GeofenceAlarms.Panel extends Trackwane.Core.Frame
         @render()
     geofence_alarm.save(null, callbacks)
 
-  onGeofenceAlarmDeleted: () ->
+  onGeofenceAlarmDeleted: (id) ->
     @geofence_alarms.get(id).destroy();
     @render()
 

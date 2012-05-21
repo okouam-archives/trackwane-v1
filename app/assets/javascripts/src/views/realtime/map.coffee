@@ -4,8 +4,6 @@ class Trackwane.Views.Realtime.Map extends Trackwane.Core.Framework.View
 
   initialize: (options) ->
     super(options)
-    @places = new Trackwane.Collections.Places()
-    @geofences = new Trackwane.Collections.Geofences()
     @animator = new Trackwane.Core.Helpers.Animator()
     @animator.start(400)
     @mapper = new Trackwane.Core.Helpers.Mapper()
@@ -35,7 +33,7 @@ class Trackwane.Views.Realtime.Map extends Trackwane.Core.Framework.View
     layer.destroyFeatures(feature)
 
   centerFeature: (model) ->
-    feature = @device_layer.getFeatureById(event_id)
+    feature = @getLayer("trackers").getFeatureBy("device_id", model.get("device_id"))
     @map.panTo feature.toLonLat() if feature
 
   show: (events) ->
